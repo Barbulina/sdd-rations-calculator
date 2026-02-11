@@ -1,50 +1,135 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version Change: 1.4.0 → 1.5.0 (MINOR)
+Rationale: Clarified and consolidated principles, removed placeholder tokens, enhanced governance clarity
+
+Modified Principles:
+- I. Architectural Integrity: Consolidated description, removed placeholder
+- II. Testing Strategy: Consolidated description, removed placeholder
+- III. Methodology (Test-First): Consolidated description, removed placeholder
+- IV. Design & Implementation: Merged design tokens principle, removed placeholders
+- V. Availability & Resilience: Consolidated description, removed placeholder
+- VI. Quality Assurance: Merged integration testing and E2E principles
+
+Added Sections:
+- None (restructured existing content)
+
+Removed Sections:
+- Duplicate principle descriptions (consolidated into primary principles)
+
+Templates Status:
+- ✅ plan-template.md: Constitution Check section aligns with principles
+- ✅ spec-template.md: User story structure supports TDD workflow
+- ✅ tasks-template.md: Task organization supports hexagonal boundaries
+
+Follow-up TODOs:
+- None
+-->
+
+# Rations Calculator Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Architectural Integrity
+Next.js framework with Simplified Hexagonal Architecture following the flow: **UI/View → Hook → Use Case → Repository → Entity**. Uses TypeScript, ESLint, server-side rendering first, and App Router. API endpoints will also be implemented in Next.js. The Domain layer (`src/core/domain`) MUST remain isolated from infrastructure concerns—no framework imports, no UI logic, no direct database access.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rationale**: Hexagonal architecture ensures domain logic remains testable, portable, and independent of external dependencies. This enables true unit testing of business rules and facilitates future migrations or refactoring.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Testing Strategy
+Use the **Builder Pattern** to construct entities in tests, decoupling test suites from entity constructor changes. Builders provide fluent APIs for test data creation and enable easy fixture customization.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: Direct entity instantiation in tests creates brittle coupling. When entity constructors change (new required fields, validation rules), hundreds of test files break. Builders centralize this knowledge and provide default valid states.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Methodology (Test-First)
+TDD is mandatory: Tests written → User approved → Tests fail → Then implement. Follow the Red-Green-Refactor cycle strictly. No implementation code may be written before a failing test exists for that behavior.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Test-first development ensures requirements are understood before implementation begins, prevents scope creep, and guarantees test coverage. It also serves as executable documentation of intended behavior.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Design & Implementation
+All UI values MUST come from **Specify** via `tokens.json` following **Google's Material Design 3 (M3)** guidelines (color roles, elevation, type scales). These tokens are injected into `tailwind.config.ts`. Hardcoding hex values or pixel dimensions is forbidden. All UI will be built mobile-first and responsive, prioritizing touch interaction and Material M3 motion/spacing principles.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: Design tokens ensure visual consistency, enable theme switching, support accessibility (e.g., color contrast ratios), and allow designers to update the entire system without touching code. Mobile-first ensures optimal experience on the primary use case device.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Availability & Resilience
+The application MUST be **Offline First**. It must remain fully functional without internet access by caching assets and utilizing local persistence (IndexedDB/LocalStorage) via the Repository Pattern. Data synchronization must occur transparently when connectivity is restored.
+
+**Rationale**: Users in areas with unreliable connectivity or on mobile devices frequently experience network interruptions. Offline-first architecture ensures uninterrupted workflows and better user experience. The Repository Pattern abstracts persistence, allowing seamless switching between local and remote data sources.
+
+### VI. Quality Assurance
+**Integration Testing**: Focus on contract tests for new libraries, contract changes, inter-service communication, and shared schemas. Use integration tests to verify repository implementations against actual storage mechanisms (IndexedDB, API contracts).
+
+**E2E Testing**: Use Playwright to cover critical user flows with end-to-end tests, including offline capability verification. Focus on happy paths and essential user journeys rather than exhaustive scenario coverage.
+
+**Rationale**: Integration tests catch interface mismatches that unit tests miss. E2E tests validate the full stack in realistic conditions, especially critical for PWA offline behavior which cannot be validated through unit tests alone.
+
+## Technical Constraints
+
+**Technology Stack**:
+- **Framework**: Next.js with App Router (React Server Components)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS using Material Design 3 design tokens from Specify
+- **Data Access**: Repository Pattern is mandatory for all data operations
+- **Offline Storage**: IndexedDB (primary) and LocalStorage (configuration)
+- **Testing**: Vitest (unit/integration), Playwright (E2E)
+
+**Architecture Rules**:
+- Domain layer (`src/core/domain`) contains only pure TypeScript—no framework dependencies
+- Use Cases orchestrate domain logic and coordinate repositories
+- Repositories handle data persistence and caching for offline support
+- Infrastructure hooks (`src/infrastructure/hooks`) connect UI to Use Cases
+- No business logic in UI components—components only render and delegate to hooks
+
+**Performance Requirements**:
+- First Contentful Paint (FCP) < 1.5s on 3G
+- Time to Interactive (TTI) < 3.5s on 3G
+- Lighthouse PWA score ≥ 90
+- Offline functionality must work on first visit after initial load
+
+## Development Workflow
+
+**Feature Development Process**:
+1. Specification created via `/speckit.specify` command with prioritized user stories
+2. Implementation plan generated via `/speckit.plan` (research, data model, contracts)
+3. Tasks broken down via `/speckit.tasks` organized by user story for independent delivery
+4. Implementation proceeds via `/speckit.implement` following TDD cycle
+5. Quality verification via `/speckit.checklist` before PR submission
+
+**Code Review Requirements**:
+- All PRs must verify Hexagonal boundary compliance (no domain → infrastructure imports)
+- All PRs must confirm design token usage (no hardcoded colors/spacing)
+- All PRs must include tests written before implementation
+- Complexity introductions must be justified in the PR description
+
+**Quality Gates**:
+- Unit tests pass (domain and use case layers)
+- Integration tests pass (repository contracts)
+- E2E tests pass (critical user flows including offline)
+- Linting passes (ESLint + TypeScript strict mode)
+- No accessibility violations (automated checks)
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and conventions. All pull requests and code reviews MUST verify compliance with these principles. Any deviation or complexity introduction MUST be explicitly justified with documented rationale.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendment Process**: Constitution changes require:
+1. Documented proposal with rationale
+2. Impact analysis on existing codebase
+3. Migration plan for affected code
+4. Update to all dependent templates and documentation
+5. Version bump following semantic versioning
+
+**Versioning Policy**:
+- MAJOR: Backward-incompatible governance changes or principle removals
+- MINOR: New principles added or material expansions to existing principles
+- PATCH: Clarifications, wording improvements, non-semantic refinements
+
+**Compliance Review**: The constitution is reviewed during:
+- Feature specification phase (via Constitution Check in plan.md)
+- Pull request reviews (mandatory verification)
+- Quarterly architecture reviews
+- Before any major refactoring initiatives
+
+**AI Agent Guidance**: This file serves as the primary context for AI Agent (GitHub Copilot) guidance. All AI-assisted development must align with these principles. Use `.github/agents/` files for agent-specific workflow instructions.
+
+**Version**: 1.5.0 | **Ratified**: 2026-02-11 | **Last Amended**: 2026-02-11
