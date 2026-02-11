@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -23,6 +24,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <Providers>
+          <div className="fixed top-4 right-4 z-50">
+            <ThemeToggle />
+          </div>
           {children}
         </Providers>
       </body>

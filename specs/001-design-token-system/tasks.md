@@ -52,16 +52,16 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Create category-lacteal color token (light: #6750A4 M3 Primary 40, dark: #D0BCFF M3 Primary 80) in tokens.json
-- [ ] T014 [P] [US1] Create category-cereals-flours-pulses-legumes-tubers color token (light/dark M3 Secondary tones) in tokens.json
-- [ ] T015 [P] [US1] Create category-fruits color token (light/dark M3 Tertiary tones) in tokens.json
-- [ ] T016 [P] [US1] Create category-vegetables color token (light/dark M3 custom-extended-1 green tones) in tokens.json
-- [ ] T017 [P] [US1] Create category-oily-dry-fruits color token (light/dark M3 custom-extended-2 brown tones) in tokens.json
-- [ ] T018 [P] [US1] Create category-drinks color token (light/dark M3 custom-extended-3 blue tones) in tokens.json
-- [ ] T019 [P] [US1] Create category-others color token (light/dark M3 surface-variant gray tones) in tokens.json
-- [ ] T020 [US1] Run tokens:build script to transform category colors into Tailwind utility classes (bg-category-lacteal, text-category-fruits, etc.)
-- [ ] T021 [US1] Create token specimen page in src/app/design-tokens/page.tsx showing all category colors with hex values and M3 role labels
-- [ ] T022 [US1] Verify contrast validation passes for all 7 categories × 2 themes = 14 color tokens (4.5:1 minimum for normal text)
+- [X] T013 [P] [US1] Create category-lacteal color token (light: #6750A4 M3 Primary 40, dark: #D0BCFF M3 Primary 80) in tokens.json
+- [X] T014 [P] [US1] Create category-cereals-flours-pulses-legumes-tubers color token (light/dark M3 Secondary tones) in tokens.json
+- [X] T015 [P] [US1] Create category-fruits color token (light/dark M3 Tertiary tones) in tokens.json
+- [X] T016 [P] [US1] Create category-vegetables color token (light/dark M3 custom-extended-1 green tones) in tokens.json
+- [X] T017 [P] [US1] Create category-oily-dry-fruits color token (light/dark M3 custom-extended-2 brown tones) in tokens.json
+- [X] T018 [P] [US1] Create category-drinks color token (light/dark M3 custom-extended-3 blue tones) in tokens.json
+- [X] T019 [P] [US1] Create category-others color token (light/dark M3 surface-variant gray tones) in tokens.json
+- [X] T020 [US1] Run tokens:build script to transform category colors into Tailwind utility classes (bg-category-lacteal, text-category-fruits, etc.)
+- [X] T021 [US1] Create token specimen page in src/app/design-tokens/page.tsx showing all category colors with hex values and M3 role labels
+- [X] T022 [US1] Verify contrast validation passes for all 7 categories × 2 themes = 14 color tokens (4.5:1 minimum for normal text)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - all category colors display with distinct hues and pass WCAG AA
 
@@ -75,13 +75,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T023 [P] [US2] Create state-offline color token (light/dark M3 warning amber tones) in tokens.json
-- [ ] T024 [P] [US2] Create state-syncing color token (light/dark M3 info blue tones) in tokens.json
-- [ ] T025 [P] [US2] Create state-sync-error color token (light/dark M3 error red tones) in tokens.json
-- [ ] T026 [P] [US2] Create state-online color token (light/dark M3 success green tones) in tokens.json
-- [ ] T027 [US2] Run tokens:build script to transform state colors into Tailwind utility classes (bg-state-offline, text-state-syncing, etc.)
-- [ ] T028 [US2] Add state indicator examples to token specimen page in src/app/design-tokens/page.tsx showing offline/syncing/error/online badges
-- [ ] T029 [US2] Verify contrast validation passes for all 4 state colors × 2 themes = 8 color tokens
+- [X] T023 [P] [US2] Create state-offline color token (light/dark M3 warning amber tones) in tokens.json
+- [X] T024 [P] [US2] Create state-syncing color token (light/dark M3 info blue tones) in tokens.json
+- [X] T025 [P] [US2] Create state-sync-error color token (light/dark M3 error red tones) in tokens.json
+- [X] T026 [P] [US2] Create state-online color token (light/dark M3 success green tones) in tokens.json
+- [X] T027 [US2] Run tokens:build script to transform state colors into Tailwind utility classes (bg-state-offline, text-state-syncing, etc.)
+- [X] T028 [US2] Add state indicator examples to token specimen page in src/app/design-tokens/page.tsx showing offline/syncing/error/online badges
+- [X] T029 [US2] Verify contrast validation passes for all 4 state colors × 2 themes = 8 color tokens
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently - category colors and state indicators are fully functional
 
@@ -153,12 +153,12 @@
 
 - [ ] T064 [P] Generate design token documentation in docs/design-tokens.md using Style Dictionary formatter showing all token values and usage guidelines
 - [ ] T065 [P] Add TypeScript type definitions file in src/infrastructure/design-tokens/tailwind-tokens.d.ts for utility class type safety (per contracts/tailwind-tokens.d.ts)
-- [ ] T066 [P] Create theme toggle component in src/components/ThemeToggle.tsx using next-themes useTheme() hook
+- [X] T066 [P] Create theme toggle component in src/components/ThemeToggle.tsx using next-themes useTheme() hook
 - [ ] T067 Create integration test in tests/integration/design-tokens/token-schema.test.ts validating tokens.json against JSON schema
 - [ ] T068 Create integration test in tests/integration/design-tokens/contrast-validation.test.ts validating all color tokens meet WCAG AA (4.5:1 normal text, 3:1 large text)
 - [ ] T069 Create integration test in tests/integration/design-tokens/spacing-grid.test.ts validating all spacing tokens are multiples of 8px (except space-0)
 - [ ] T070 Create integration test in tests/integration/design-tokens/transformation.test.ts validating Style Dictionary transforms tokens.json → tailwind-tokens.js correctly
-- [ ] T071 Update README.md with design token system overview and link to quickstart.md
+- [X] T071 Update README.md with design token system overview and link to quickstart.md
 - [ ] T072 Run quickstart.md validation: verify designer export workflow and developer import workflow both complete in < 5 minutes
 - [ ] T073 Final validation: confirm all 50 tokens generated (7 categories × 2 themes + 4 states × 2 themes + 4 feedback × 2 themes + 12 typography + 10 spacing)
 

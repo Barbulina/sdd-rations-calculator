@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
-// Design tokens will be imported here after first build
-// import tokens from "./src/infrastructure/design-tokens/tailwind-tokens.js";
+// Import generated design tokens
+const tokens = require("./src/infrastructure/design-tokens/tailwind-tokens.js");
 
 const config: Config = {
   darkMode: 'class',
@@ -12,10 +12,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // Design tokens will be added here after npm run tokens:build
-      // colors: tokens?.colors || {},
-      // spacing: tokens?.spacing || {},
-      // fontSize: tokens?.fontSize || {},
+      colors: {
+        ...tokens,
+      },
+      spacing: {
+        ...tokens,
+      },
     },
   },
   plugins: [],
