@@ -22,6 +22,7 @@ Offline-first Progressive Web App for calculating and managing food rations with
 - **Category Colors**: Visual differentiation using design tokens
 - **Offline-First**: localStorage persistence with repository pattern
 - **Responsive**: Mobile-first design (320px+)
+- **Aliment Catalog**: Pre-defined database of 365+ food items with nutritional information
 
 ## Quick Start
 
@@ -52,18 +53,23 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 ### Using the App
 
 1. **View Rations**: Home page shows all rations with infinite scroll
-2. **Create Ration**: Click "+ Create" button
+2. **Browse Aliments**: Click "Browse Aliments" to view the food catalog
+   - Search by name (e.g., "manzana", "arroz")
+   - Filter by category (7 categories)
+   - View nutritional information (grams to carb, glycemic index)
+3. **Create Ration**: Click "+ Create" button
    - Select ration type (7 categories available)
    - Enter name, nutritional information
    - Optional: blood glucose index
    - Click "Save Ration"
-3. **View Categories**: Each ration displays with its category color
-4. **Toggle Theme**: Use theme toggle in top-right corner
+4. **View Categories**: Each ration displays with its category color
+5. **Toggle Theme**: Use theme toggle in top-right corner
 
 ### Features Overview
 
 - **Home Page** (`/`): List of all rations with infinite scroll
 - **Create Page** (`/create-ration`): Form to add new rations
+- **Aliment Browser** (`/aliment-browser`): Browse 365+ pre-defined food items with search and filter
 - **Design Tokens** (`/design-tokens`): View design token specimen page
 
 ## Design Token System

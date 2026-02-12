@@ -59,6 +59,20 @@ export default function HomePage() {
       <div className="container mx-auto max-w-4xl">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">My Rations</h1>
+          <div className="flex gap-2">
+            <Link
+              href="/aliment-browser"
+              className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition font-medium dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+            >
+              Browse Aliments
+            </Link>
+            <Link
+              href="/create-ration"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
+            >
+              + Create
+            </Link>
+          </div>
           <Link
             href="/create-ration"
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
