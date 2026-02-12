@@ -34,3 +34,8 @@ coverage/
 .nuxt/
 .svelte-kit/
 *.tsbuildinfo
+
+# Testing
+test-results/
+playwright-report/
+playwright/.cache/

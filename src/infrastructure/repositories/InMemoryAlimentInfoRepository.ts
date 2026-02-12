@@ -39,4 +39,8 @@ export class InMemoryAlimentInfoRepository implements AlimentInfoRepository {
   async findByName(name: string): Promise<AlimentInfo | undefined> {
     return this.catalog.find((aliment) => aliment.name === name);
   }
+
+  async count(): Promise<number> {
+    return this.catalog.length;
+  }
 }

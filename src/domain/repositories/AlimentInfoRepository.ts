@@ -34,4 +34,10 @@ export interface AlimentInfoRepository {
    * @returns The matching aliment or undefined if not found
    */
   findByName(name: string): Promise<AlimentInfo | undefined>;
+
+  /**
+   * Get the total count of aliments in the catalog
+   * @returns Total number of aliments
+   */
+  count(): Promise<number>;
 }
