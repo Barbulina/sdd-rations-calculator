@@ -159,6 +159,153 @@ export function AlimentAutocomplete() {
 }
 ```
 
+## Custom Aliments
+
+Users can now create custom aliments that supplement the pre-defined catalog.
+
+### Domain Layer
+- **CustomAliment** (`src/domain/models/CustomAliment.ts`): Custom aliment entity with validation
+- **CustomAlimentRepository** (`src/domain/repositories/CustomAlimentRepository.ts`): Repository interface for custom aliments
+- **CompositeAlimentRepository** (`src/domain/repositories/CompositeAlimentRepository.ts`): Merges catalog and custom aliments
+
+### Infrastructure Layer
+- **LocalStorageCustomAlimentRepository** (`src/infrastructure/repositories/LocalStorageCustomAlimentRepository.ts`): localStorage-based persistence
+
+### Application Layer
+- **CustomAlimentRepositoryContext** (`src/application/contexts/CustomAlimentRepositoryContext.tsx`): Dependency injection for custom repository
+- **useCompositeAliments** (`src/application/hooks/useCompositeAliments.ts`): Hook for accessing merged catalog
+
+### UI Components
+- `/aliment-browser/create` - Create custom aliment page
+- `/aliment-browser` - Browse merged catalog with "Custom" badges
+
+### Creating Custom Aliments
+
+```typescript
+'use client';
+
+import { useCustomAlimentRepository } from '@/src/application/contexts/CustomAlimentRepositoryContext';
+import { RationsType } from '@/src/domain/models/RationsType';
+
+export function CreateCustomAliment() {
+  const repository = useCustomAlimentRepository();
+
+  const handleSubmit = async () => {
+    const newAliment = await repository.save({
+      name: 'Homemade Granola',
+      type: RationsType.cereals_flours_pulses_legumes_tubers,
+      gramsToCarbohydrate: 15,
+      bloodGlucoseIndex: 55,
+    });
+    
+    // Aliment is automatically assigned:
+    // - id (UUID)
+    // - createdAt (timestamp)
+    // - isCustom: true
+  };
+}
+```
+
+### Using Composite Catalog
+
+```typescript
+'use client';
+
+import { useCompositeAliments } from '@/src/application/hooks/useCompositeAliments';
+
+export function AlimentBrowser() {
+  const compositeRepository = useCompositeAliments();
+  const [aliments, setAliments] = useState<UnifiedAliment[]>([]);
+
+  useEffect(() => {
+    // Returns catalog aliments + custom aliments
+    // Custom aliments appear first, sorted by createdAt DESC
+    compositeRepository.findAll().then(setAliments);
+  }, [compositeRepository]);
+
+  return (
+    <ul>
+      {aliments.map((aliment, index) => {
+        const isCustom = compositeRepository.isCustom(aliment);
+        return (
+          <li key={isCustom ? aliment.id : index}>
+            {aliment.name}
+            {isCustom && <span className="badge">Custom</span>}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+```
+
+### Custom Aliment CRUD Operations
+
+```typescript
+const repository = useCustomAlimentRepository();
+
+// Create
+const aliment = await repository.save({
+  name: 'Custom Food',
+  type: RationsType.others,
+  gramsToCarbohydrate: 20,
+});
+
+// Read
+const all = await repository.findAll(); // Sorted by createdAt DESC
+const found = await repository.findById(aliment.id);
+const search = await repository.search('custom');
+
+// Update
+const updated = await repository.update({
+  id: aliment.id,
+  name: 'Updated Name',
+  gramsToCarbohydrate: 25,
+});
+
+// Delete
+const deleted = await repository.delete(aliment.id); // returns boolean
+
+// Count
+const count = await repository.count();
+```
+
+### Data Persistence
+
+Custom aliments are stored in localStorage:
+- **Key**: `sdd-rations-calculator:custom-aliments`
+- **Format**: JSON array of CustomAliment objects
+- **Quota**: ~5-10MB (sufficient for hundreds of custom aliments)
+- **Offline**: Works completely offline, no backend required
+
+### Testing
+
+```typescript
+import { LocalStorageCustomAlimentRepository } from '@/src/infrastructure/repositories/LocalStorageCustomAlimentRepository';
+
+describe('CustomAlimentRepository', () => {
+  let repository: LocalStorageCustomAlimentRepository;
+
+  beforeEach(() => {
+    localStorage.clear();
+    repository = new LocalStorageCustomAlimentRepository();
+  });
+
+  it('should save custom aliment with generated ID', async () => {
+    const saved = await repository.save({
+      name: 'Test',
+      type: RationsType.fruits,
+      gramsToCarbohydrate: 100,
+    });
+
+    expect(saved.id).toBeDefined();
+    expect(saved.id).toMatch(/^[a-f0-9-]{36}$/); // UUID
+    expect(saved.isCustom).toBe(true);
+    expect(saved.createdAt).toBeInstanceOf(Date);
+  });
+});
+```
+
 ## Future Enhancements
 
 - Add pagination for `findAll()` and `search()` methods
@@ -167,6 +314,9 @@ export function AlimentAutocomplete() {
 - Add unit conversion helpers (grams ↔ rations)
 - Add favorites/recent aliments tracking
 - Export catalog as JSON/CSV
+- Cloud sync for custom aliments across devices
+- Import/export custom aliments (CSV/JSON)
+- Aliment templates for common custom foods
 
 ## Testing
 
