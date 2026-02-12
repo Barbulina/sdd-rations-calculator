@@ -1,12 +1,28 @@
 # Rations Calculator PWA
 
-Offline-first Progressive Web App for calculating food rations following Material Design 3 principles.
+Offline-first Progressive Web App for calculating and managing food rations with Material Design 3 principles.
 
 ## Project Status
 
-**Current Feature**: Design Token System (Branch: `001-design-token-system`)  
-**Phase**: Implementation complete - Polish phase in progress  
-**Completed**: Setup, Foundational infrastructure, Token definitions, Specimen page, Theme toggle
+**Current Feature**: Ration Menu Management (Branch: `002-ration-menu-management`)  
+**Phase**: Implementation complete  
+**Features**: Create rations, view list with infinite scroll, localStorage persistence, category colors
+
+## Features
+
+### ✅ Design Token System (001)
+- Material Design 3 color system with 7 category colors
+- WCAG AA contrast compliance
+- Light/dark theme support
+- Typography and spacing tokens
+
+### ✅ Ration Management (002)
+- **Create Rations**: Form-based data entry with validation
+- **View Rations**: List view with infinite scroll (10 items per batch)
+- **Category Colors**: Visual differentiation using design tokens
+- **Offline-First**: localStorage persistence with repository pattern
+- **Responsive**: Mobile-first design (320px+)
+- **Aliment Catalog**: Pre-defined database of 365+ food items with nutritional information
 
 ## Quick Start
 
@@ -18,31 +34,43 @@ Offline-first Progressive Web App for calculating food rations following Materia
 ### Installation
 
 ```bash
+# Install dependencies
 npm install
-```
 
-### Build Design Tokens
-
-Transform design tokens from `tokens.json` to Tailwind CSS configuration:
-
-```bash
+# Build design tokens
 npm run tokens:build
 ```
-
-This will:
-1. Validate token schema
-2. Check WCAG AA contrast ratios
-3. Generate `tailwind-tokens.js` and `css-variables.css`
 
 ### Development
 
 ```bash
+# Start development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-Visit [http://localhost:3000/design-tokens](http://localhost:3000/design-tokens) to view the design token specimen page.
+### Using the App
+
+1. **View Rations**: Home page shows all rations with infinite scroll
+2. **Browse Aliments**: Click "Browse Aliments" to view the food catalog
+   - Search by name (e.g., "manzana", "arroz")
+   - Filter by category (7 categories)
+   - View nutritional information (grams to carb, glycemic index)
+3. **Create Ration**: Click "+ Create" button
+   - Select ration type (7 categories available)
+   - Enter name, nutritional information
+   - Optional: blood glucose index
+   - Click "Save Ration"
+4. **View Categories**: Each ration displays with its category color
+5. **Toggle Theme**: Use theme toggle in top-right corner
+
+### Features Overview
+
+- **Home Page** (`/`): List of all rations with infinite scroll
+- **Create Page** (`/create-ration`): Form to add new rations
+- **Aliment Browser** (`/aliment-browser`): Browse 365+ pre-defined food items with search and filter
+- **Design Tokens** (`/design-tokens`): View design token specimen page
 
 ## Design Token System
 
