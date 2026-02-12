@@ -1,10 +1,10 @@
 # sdd-rations-calculator Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-02-11
+Auto-generated from all feature plans. Last updated: 2026-02-12
 
 ## Active Technologies
 
-- TypeScript 5.x (strict mode) + Next.js 14+ (App Router), Tailwind CSS 3.x, Specify (design token platform), style-dictionary (token transformation) (001-design-token-system)
+- TypeScript 5, React 19 + Next.js 15.1.6, next-themes 0.4.4, TailwindCSS 3.4.17 (002-ration-menu-management)
 
 ## Project Structure
 
@@ -19,11 +19,11 @@ npm test && npm run lint
 
 ## Code Style
 
-TypeScript 5.x (strict mode): Follow standard conventions
+TypeScript 5, React 19: Follow standard conventions
 
 ## Recent Changes
 
-- 001-design-token-system: Added TypeScript 5.x (strict mode) + Next.js 14+ (App Router), Tailwind CSS 3.x, Specify (design token platform), style-dictionary (token transformation)
+- 002-ration-menu-management: Added TypeScript 5, React 19 + Next.js 15.1.6, next-themes 0.4.4, TailwindCSS 3.4.17
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->
