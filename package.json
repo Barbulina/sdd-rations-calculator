@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "tokens:build": "tsx src/infrastructure/design-tokens/build-tokens.ts"
+    "tokens:build": "tsx src/infrastructure/design-tokens/build-tokens.ts",
+    "test:tokens": "tsx tests/integration/design-tokens/token-schema.test.ts && tsx tests/integration/design-tokens/contrast-validation.test.ts && tsx tests/integration/design-tokens/spacing-grid.test.ts && tsx tests/integration/design-tokens/transformation.test.ts",
+    "test:tokens:schema": "tsx tests/integration/design-tokens/token-schema.test.ts",
+    "test:tokens:contrast": "tsx tests/integration/design-tokens/contrast-validation.test.ts",
+    "test:tokens:spacing": "tsx tests/integration/design-tokens/spacing-grid.test.ts",
+    "test:tokens:transform": "tsx tests/integration/design-tokens/transformation.test.ts"
   },
   "dependencies": {
     "next": "^15.1.6",

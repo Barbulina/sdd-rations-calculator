@@ -95,33 +95,33 @@
 
 ### Implementation for User Story 3
 
-- [ ] T030 [P] [US3] Create heading-1 typography token (57px M3 Display Large) in tokens.json with fontSize, lineHeight, letterSpacing, fontWeight, fontFamily
-- [ ] T031 [P] [US3] Create heading-2 typography token (45px M3 Display Medium) in tokens.json
-- [ ] T032 [P] [US3] Create heading-3 typography token (36px M3 Display Small) in tokens.json
-- [ ] T033 [P] [US3] Create heading-4 typography token (32px M3 Headline Large) in tokens.json
-- [ ] T034 [P] [US3] Create heading-5 typography token (28px M3 Headline Medium) in tokens.json
-- [ ] T035 [P] [US3] Create heading-6 typography token (24px M3 Headline Small) in tokens.json
-- [ ] T036 [P] [US3] Create body-large typography token (16px M3 Body Large) in tokens.json
-- [ ] T037 [P] [US3] Create body-medium typography token (14px M3 Body Medium) in tokens.json
-- [ ] T038 [P] [US3] Create body-small typography token (12px M3 Body Small) in tokens.json
-- [ ] T039 [P] [US3] Create label-large typography token (14px M3 Label Large) in tokens.json
-- [ ] T040 [P] [US3] Create label-medium typography token (12px M3 Label Medium) in tokens.json
-- [ ] T041 [P] [US3] Create label-small typography token (11px M3 Label Small) in tokens.json
-- [ ] T042 [P] [US3] Create space-0 spacing token (0px / 0rem, gridFactor: 0) in tokens.json
-- [ ] T043 [P] [US3] Create space-1 spacing token (8px / 0.5rem, gridFactor: 1) in tokens.json
-- [ ] T044 [P] [US3] Create space-2 spacing token (16px / 1rem, gridFactor: 2) in tokens.json
-- [ ] T045 [P] [US3] Create space-3 spacing token (24px / 1.5rem, gridFactor: 3) in tokens.json
-- [ ] T046 [P] [US3] Create space-4 spacing token (32px / 2rem, gridFactor: 4) in tokens.json
-- [ ] T047 [P] [US3] Create space-5 spacing token (40px / 2.5rem, gridFactor: 5, min for 44px touch target) in tokens.json
-- [ ] T048 [P] [US3] Create space-6 spacing token (48px / 3rem, gridFactor: 6) in tokens.json
-- [ ] T049 [P] [US3] Create space-8 spacing token (64px / 4rem, gridFactor: 8) in tokens.json
-- [ ] T050 [P] [US3] Create space-10 spacing token (80px / 5rem, gridFactor: 10) in tokens.json
-- [ ] T051 [P] [US3] Create space-12 spacing token (96px / 6rem, gridFactor: 12) in tokens.json
-- [ ] T052 [US3] Run tokens:build script to transform typography and spacing tokens into Tailwind utility classes (text-heading-1, p-space-3, etc.)
-- [ ] T053 [US3] Add typography specimen to token page in src/app/design-tokens/page.tsx showing all 12 type scales with sample text
-- [ ] T054 [US3] Add spacing specimen to token page showing all 10 spacing values with visual grid alignment
-- [ ] T055 [US3] Verify 8px grid alignment validation passes for all spacing tokens (except space-0)
-- [ ] T056 [US3] Verify body text minimum font size ≥ 14px for mobile accessibility (body-medium and above)
+- [X] T030 [P] [US3] Create heading-1 typography token (57px M3 Display Large) in tokens.json with fontSize, lineHeight, letterSpacing, fontWeight, fontFamily
+- [X] T031 [P] [US3] Create heading-2 typography token (45px M3 Display Medium) in tokens.json
+- [X] T032 [P] [US3] Create heading-3 typography token (36px M3 Display Small) in tokens.json
+- [X] T033 [P] [US3] Create heading-4 typography token (32px M3 Headline Large) in tokens.json
+- [X] T034 [P] [US3] Create heading-5 typography token (28px M3 Headline Medium) in tokens.json
+- [X] T035 [P] [US3] Create heading-6 typography token (24px M3 Headline Small) in tokens.json
+- [X] T036 [P] [US3] Create body-large typography token (16px M3 Body Large) in tokens.json
+- [X] T037 [P] [US3] Create body-medium typography token (14px M3 Body Medium) in tokens.json
+- [X] T038 [P] [US3] Create body-small typography token (12px M3 Body Small) in tokens.json
+- [X] T039 [P] [US3] Create label-large typography token (14px M3 Label Large) in tokens.json
+- [X] T040 [P] [US3] Create label-medium typography token (12px M3 Label Medium) in tokens.json
+- [X] T041 [P] [US3] Create label-small typography token (11px M3 Label Small) in tokens.json
+- [X] T042 [P] [US3] Create space-0 spacing token (0px / 0rem, gridFactor: 0) in tokens.json
+- [X] T043 [P] [US3] Create space-1 spacing token (8px / 0.5rem, gridFactor: 1) in tokens.json
+- [X] T044 [P] [US3] Create space-2 spacing token (16px / 1rem, gridFactor: 2) in tokens.json
+- [X] T045 [P] [US3] Create space-3 spacing token (24px / 1.5rem, gridFactor: 3) in tokens.json
+- [X] T046 [P] [US3] Create space-4 spacing token (32px / 2rem, gridFactor: 4) in tokens.json
+- [X] T047 [P] [US3] Create space-5 spacing token (40px / 2.5rem, gridFactor: 5, min for 44px touch target) in tokens.json
+- [X] T048 [P] [US3] Create space-6 spacing token (48px / 3rem, gridFactor: 6) in tokens.json
+- [X] T049 [P] [US3] Create space-8 spacing token (64px / 4rem, gridFactor: 8) in tokens.json
+- [X] T050 [P] [US3] Create space-10 spacing token (80px / 5rem, gridFactor: 10) in tokens.json
+- [X] T051 [P] [US3] Create space-12 spacing token (96px / 6rem, gridFactor: 12) in tokens.json
+- [X] T052 [US3] Run tokens:build script to transform typography and spacing tokens into Tailwind utility classes (text-heading-1, p-space-3, etc.)
+- [X] T053 [US3] Add typography specimen to token page in src/app/design-tokens/page.tsx showing all 12 type scales with sample text
+- [X] T054 [US3] Add spacing specimen to token page showing all 10 spacing values with visual grid alignment
+- [X] T055 [US3] Verify 8px grid alignment validation passes for all spacing tokens (except space-0)
+- [X] T056 [US3] Verify body text minimum font size ≥ 14px for mobile accessibility (body-medium and above)
 
 **Checkpoint**: All core design tokens now functional - category colors, state indicators, typography, and spacing scales complete
 
@@ -135,13 +135,13 @@
 
 ### Implementation for User Story 4
 
-- [ ] T057 [P] [US4] Create feedback-success color token (light/dark M3 tertiary or success green tones) in tokens.json
-- [ ] T058 [P] [US4] Create feedback-warning color token (light/dark M3 warning amber tones) in tokens.json
-- [ ] T059 [P] [US4] Create feedback-error color token (light/dark M3 error red tones) in tokens.json
-- [ ] T060 [P] [US4] Create feedback-info color token (light/dark M3 info blue tones) in tokens.json
-- [ ] T061 [US4] Run tokens:build script to transform feedback colors into Tailwind utility classes (bg-feedback-success, text-feedback-error, etc.)
-- [ ] T062 [US4] Add feedback state examples to token specimen page in src/app/design-tokens/page.tsx showing success/warning/error/info alerts
-- [ ] T063 [US4] Verify contrast validation passes for all 4 feedback colors × 2 themes = 8 color tokens
+- [X] T057 [P] [US4] Create feedback-success color token (light/dark M3 tertiary or success green tones) in tokens.json
+- [X] T058 [P] [US4] Create feedback-warning color token (light/dark M3 warning amber tones) in tokens.json
+- [X] T059 [P] [US4] Create feedback-error color token (light/dark M3 error red tones) in tokens.json
+- [X] T060 [P] [US4] Create feedback-info color token (light/dark M3 info blue tones) in tokens.json
+- [X] T061 [US4] Run tokens:build script to transform feedback colors into Tailwind utility classes (bg-feedback-success, text-feedback-error, etc.)
+- [X] T062 [US4] Add feedback state examples to token specimen page in src/app/design-tokens/page.tsx showing success/warning/error/info alerts
+- [X] T063 [US4] Verify contrast validation passes for all 4 feedback colors × 2 themes = 8 color tokens
 
 **Checkpoint**: All user stories complete - full design token system implemented with 50 tokens total
 
@@ -151,16 +151,16 @@
 
 **Purpose**: Documentation, validation, and final quality checks affecting all user stories
 
-- [ ] T064 [P] Generate design token documentation in docs/design-tokens.md using Style Dictionary formatter showing all token values and usage guidelines
-- [ ] T065 [P] Add TypeScript type definitions file in src/infrastructure/design-tokens/tailwind-tokens.d.ts for utility class type safety (per contracts/tailwind-tokens.d.ts)
+- [X] T064 [P] Generate design token documentation in docs/design-tokens.md using Style Dictionary formatter showing all token values and usage guidelines
+- [X] T065 [P] Add TypeScript type definitions file in src/infrastructure/design-tokens/tailwind-tokens.d.ts for utility class type safety (per contracts/tailwind-tokens.d.ts)
 - [X] T066 [P] Create theme toggle component in src/components/ThemeToggle.tsx using next-themes useTheme() hook
-- [ ] T067 Create integration test in tests/integration/design-tokens/token-schema.test.ts validating tokens.json against JSON schema
-- [ ] T068 Create integration test in tests/integration/design-tokens/contrast-validation.test.ts validating all color tokens meet WCAG AA (4.5:1 normal text, 3:1 large text)
-- [ ] T069 Create integration test in tests/integration/design-tokens/spacing-grid.test.ts validating all spacing tokens are multiples of 8px (except space-0)
-- [ ] T070 Create integration test in tests/integration/design-tokens/transformation.test.ts validating Style Dictionary transforms tokens.json → tailwind-tokens.js correctly
+- [X] T067 Create integration test in tests/integration/design-tokens/token-schema.test.ts validating tokens.json against JSON schema
+- [X] T068 Create integration test in tests/integration/design-tokens/contrast-validation.test.ts validating all color tokens meet WCAG AA (4.5:1 normal text, 3:1 large text)
+- [X] T069 Create integration test in tests/integration/design-tokens/spacing-grid.test.ts validating all spacing tokens are multiples of 8px (except space-0)
+- [X] T070 Create integration test in tests/integration/design-tokens/transformation.test.ts validating Style Dictionary transforms tokens.json → tailwind-tokens.js correctly
 - [X] T071 Update README.md with design token system overview and link to quickstart.md
-- [ ] T072 Run quickstart.md validation: verify designer export workflow and developer import workflow both complete in < 5 minutes
-- [ ] T073 Final validation: confirm all 50 tokens generated (7 categories × 2 themes + 4 states × 2 themes + 4 feedback × 2 themes + 12 typography + 10 spacing)
+- [X] T072 Run quickstart.md validation: verify designer export workflow and developer import workflow both complete in < 5 minutes
+- [X] T073 Final validation: confirm all 50 tokens generated (7 categories × 2 themes + 4 states × 2 themes + 4 feedback × 2 themes + 12 typography + 10 spacing)
 
 ---
 
