@@ -161,38 +161,38 @@
 
 ### Tests First (RED)
 
-- [ ] T074 [US2] Write `tests/unit/menu-builder/useMenuBuilder.test.ts` - test initial state
-- [ ] T075 [P] [US2] Write tests for addItem() - creates MenuItem with UUID and rations
-- [ ] T076 [P] [US2] Write tests for addItem() with invalid weight (should throw or reject)
-- [ ] T077 [P] [US2] Write tests for removeItem() by ID
-- [ ] T078 [P] [US2] Write tests for updateItemWeight() - recalculates rations
-- [ ] T079 [P] [US3] Write tests for totalWeight auto-calculation
-- [ ] T080 [P] [US3] Write tests for totalRations auto-calculation
-- [ ] T081 [P] [US4] Write tests for clearItems()
-- [ ] T082 [P] [US4] Write tests for saveMenu() - calls repository.save()
-- [ ] T083 [P] [US4] Write tests for saveMenu() validation errors
-- [ ] T084 [US2] Run `npm test` → verify all hook tests fail (RED phase)
+- [X] T074 [US2] Write `tests/unit/menu-builder/useMenuBuilder.test.ts` - test initial state
+- [X] T075 [P] [US2] Write tests for addItem() - creates MenuItem with UUID and rations
+- [X] T076 [P] [US2] Write tests for addItem() with invalid weight (should throw or reject)
+- [X] T077 [P] [US2] Write tests for removeItem() by ID
+- [X] T078 [P] [US2] Write tests for updateItemWeight() - recalculates rations
+- [X] T079 [P] [US3] Write tests for totalWeight auto-calculation
+- [X] T080 [P] [US3] Write tests for totalRations auto-calculation
+- [X] T081 [P] [US4] Write tests for clearItems()
+- [X] T082 [P] [US4] Write tests for saveMenu() - calls repository.save()
+- [X] T083 [P] [US4] Write tests for saveMenu() validation errors
+- [X] T084 [US2] Run `npm test` → verify all hook tests fail (RED phase) - confirmed module not found
 
 ### Implementation (GREEN)
 
-- [ ] T085 [US2] Create `src/application/hooks/useMenuBuilder.ts` with hook scaffold
-- [ ] T086 [US2] Implement items state: useState<MenuItem[]>([])
-- [ ] T087 [US2] Implement addItem() function - validate weight, create MenuItem, append to array
-- [ ] T088 [US2] Implement removeItem() function - filter by ID
-- [ ] T089 [US2] Implement updateItemWeight() - map over items, find by ID, recalculate rations
-- [ ] T090 [US3] Implement totalWeight with useMemo - sum of item.weightGrams
-- [ ] T091 [US3] Implement totalRations with useMemo - sum of item.rations, toFixed(2)
-- [ ] T092 [US4] Implement clearItems() - setItems([])
-- [ ] T093 [US4] Implement saveMenu() - validate, create Menu, call repository.save()
-- [ ] T094 [US4] Implement isLoading state for async operations
-- [ ] T095 [US4] Implement error state for error messages
-- [ ] T096 [US4] Implement clearError() function
-- [ ] T097 [US2] Run `npm test` → verify all hook tests pass (GREEN phase)
+- [X] T085 [US2] Create `src/application/hooks/useMenuBuilder.ts` with hook scaffold
+- [X] T086 [US2] Implement items state: useState<MenuItem[]>([])
+- [X] T087 [US2] Implement addItem() function - validate weight, create MenuItem, append to array
+- [X] T088 [US2] Implement removeItem() function - filter by ID
+- [X] T089 [US2] Implement updateItemWeight() - map over items, find by ID, recalculate rations
+- [X] T090 [US3] Implement totalWeight with useMemo - sum of item.weightGrams
+- [X] T091 [US3] Implement totalRations with useMemo - sum of item.rations, toFixed(2)
+- [X] T092 [US4] Implement clearItems() - setItems([])
+- [X] T093 [US4] Implement saveMenu() - validate, create Menu, call repository.save()
+- [X] T094 [US4] Implement isLoading state for async operations
+- [X] T095 [US4] Implement error state for error messages
+- [X] T096 [US4] Implement clearError() function
+- [X] T097 [US2] Run `npm test` → verify all hook tests pass (GREEN phase)
 
 ### Refactor
 
-- [ ] T098 [US2] Refactor validation logic if needed
-- [ ] T099 [US2] Run `npm test` → ensure tests still pass after refactoring
+- [X] T098 [US2] Refactor validation logic if needed - no refactoring needed
+- [X] T099 [US2] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 
