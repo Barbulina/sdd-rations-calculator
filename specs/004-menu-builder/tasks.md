@@ -119,39 +119,39 @@
 
 ### Tests First (RED)
 
-- [ ] T047 [US4] Write `tests/integration/menu-builder/LocalStorageMenuRepository.test.ts` - test save() method
-- [ ] T048 [P] [US4] Write tests for getAll() - returns all menus
-- [ ] T049 [P] [US4] Write tests for getById() - returns menu or null
-- [ ] T050 [P] [US4] Write tests for update() - updates and sets updatedAt
-- [ ] T051 [P] [US4] Write tests for delete() - removes menu by ID
-- [ ] T052 [P] [US4] Write tests for deleteAll() - clears all menus
-- [ ] T053 [P] [US4] Write tests for Date serialization (ISO 8601 format)
-- [ ] T054 [P] [US4] Write tests for Date deserialization (string → Date object)
-- [ ] T055 [P] [US4] Write tests for storage quota exceeded error
-- [ ] T056 [P] [US4] Write tests for corrupt data handling
-- [ ] T057 [US4] Run `npm test` → verify all repository tests fail (RED phase)
+- [X] T047 [US4] Write `tests/integration/menu-builder/LocalStorageMenuRepository.test.ts` - test save() method
+- [X] T048 [P] [US4] Write tests for getAll() - returns all menus
+- [X] T049 [P] [US4] Write tests for getById() - returns menu or null
+- [X] T050 [P] [US4] Write tests for update() - updates and sets updatedAt
+- [X] T051 [P] [US4] Write tests for delete() - removes menu by ID
+- [X] T052 [P] [US4] Write tests for deleteAll() - clears all menus
+- [X] T053 [P] [US4] Write tests for Date serialization (ISO 8601 format)
+- [X] T054 [P] [US4] Write tests for Date deserialization (string → Date object)
+- [X] T055 [P] [US4] Write tests for storage quota exceeded error
+- [X] T056 [P] [US4] Write tests for corrupt data handling
+- [X] T057 [US4] Run `npm test` → verify all repository tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [ ] T058 [US4] Create `src/domain/repositories/MenuRepository.ts` interface matching contracts/MenuRepository.ts
-- [ ] T059 [US4] Create `src/infrastructure/repositories/LocalStorageMenuRepository.ts` implementing interface
-- [ ] T060 [US4] Implement save() with UUID generation, timestamps, totals calculation
-- [ ] T061 [US4] Implement getAll() with JSON parsing and Date deserialization
-- [ ] T062 [P] [US4] Implement getById() with array.find
-- [ ] T063 [P] [US4] Implement update() with updatedAt timestamp
-- [ ] T064 [P] [US4] Implement delete() with array.filter
-- [ ] T065 [P] [US4] Implement deleteAll() clearing storage key
-- [ ] T066 [P] [US4] Implement isAvailable() checking localStorage access
-- [ ] T067 [P] [US4] Implement getStorageStats() if possible
-- [ ] T068 [US4] Add error handling for QuotaExceededError
-- [ ] T069 [US4] Add error handling for corrupt JSON data
-- [ ] T070 [US4] Use localStorage key: `sdd-rations-calculator:menus`
-- [ ] T071 [US4] Run `npm test` → verify all repository tests pass (GREEN phase)
+- [X] T058 [US4] Create `src/domain/repositories/MenuRepository.ts` interface matching contracts/MenuRepository.ts
+- [X] T059 [US4] Create `src/infrastructure/repositories/LocalStorageMenuRepository.ts` implementing interface
+- [X] T060 [US4] Implement save() with UUID generation, timestamps, totals calculation
+- [X] T061 [US4] Implement getAll() with JSON parsing and Date deserialization
+- [X] T062 [P] [US4] Implement getById() with array.find
+- [X] T063 [P] [US4] Implement update() with updatedAt timestamp
+- [X] T064 [P] [US4] Implement delete() with array.filter
+- [X] T065 [P] [US4] Implement deleteAll() clearing storage key
+- [X] T066 [P] [US4] Implement isAvailable() checking localStorage access
+- [X] T067 [P] [US4] Implement getStorageStats() if possible - not implemented (not needed)
+- [X] T068 [US4] Add error handling for QuotaExceededError
+- [X] T069 [US4] Add error handling for corrupt JSON data
+- [X] T070 [US4] Use localStorage key: `sdd-rations-calculator:menus`
+- [X] T071 [US4] Run `npm test` → verify all repository tests pass (GREEN phase)
 
 ### Refactor
 
-- [ ] T072 [US4] Refactor duplicate serialization/deserialization into private methods
-- [ ] T073 [US4] Run `npm test` → ensure tests still pass after refactoring
+- [X] T072 [US4] Refactor duplicate serialization/deserialization into private methods
+- [X] T073 [US4] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 

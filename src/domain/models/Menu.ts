@@ -64,6 +64,48 @@ export class Menu {
   }
 
   /**
+   * Reconstitute a Menu from stored data (deserialization/updates)
+   * 
+   * @param data - Complete menu data including id, timestamps, etc.
+   * @returns Reconstituted Menu instance
+   * @throws Error if validation fails
+   */
+  static reconstitute(data: {
+    id: string;
+    name: string;
+    type: RationsType;
+    items: MenuItem[];
+    createdAt: Date;
+    updatedAt?: Date;
+  }): Menu {
+    const instance = Object.create(Menu.prototype);
+    
+    // Validate and assign properties
+    const trimmedName = data.name.trim();
+    instance.validateName(trimmedName);
+    instance.name = trimmedName;
+    
+    instance.validateType(data.type);
+    instance.type = data.type;
+    
+    instance.validateItems(data.items);
+    instance.items = [...data.items];
+    
+    instance.id = data.id;
+    instance.createdAt = data.createdAt;
+    instance.updatedAt = data.updatedAt;
+    
+    // Calculate totals
+    instance.totalWeight = instance.calculateTotalWeight(instance.items);
+    instance.totalRations = instance.calculateTotalRations(instance.items);
+    
+    // Make immutable
+    Object.freeze(instance);
+    
+    return instance;
+  }
+
+  /**
    * Validate menu name
    */
   private validateName(name: string): void {
