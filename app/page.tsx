@@ -73,6 +73,12 @@ export default function HomePage() {
               + Create
             </Link>
           </div>
+          <Link
+            href="/create-ration"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
+          >
+            + Create
+          </Link>
         </div>
 
         {/* Loading State */}
