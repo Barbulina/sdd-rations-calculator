@@ -13,7 +13,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <RationRepositoryProvider>
         <AlimentInfoRepositoryProvider>
           <CustomAlimentRepositoryProvider>
-            <MenuRepositoryProvider repository={new LocalStorageMenuRepository()}>
+            <MenuRepositoryProvider
+              repository={new LocalStorageMenuRepository()}
+            >
               {children}
             </MenuRepositoryProvider>
           </CustomAlimentRepositoryProvider>
