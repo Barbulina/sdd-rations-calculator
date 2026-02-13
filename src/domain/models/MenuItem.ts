@@ -3,8 +3,8 @@
  * Represents a single aliment in a menu with its weight and calculated rations.
  */
 
-import type { AlimentInfo } from './AlimentInfo';
-import type { CustomAliment } from './CustomAliment';
+import type { AlimentInfo } from "./AlimentInfo";
+import type { CustomAliment } from "./CustomAliment";
 
 export class MenuItem {
   readonly id: string;
@@ -14,7 +14,7 @@ export class MenuItem {
 
   /**
    * Create a new MenuItem
-   * 
+   *
    * @param aliment - Aliment from catalog or custom aliments
    * @param weight Grams - Weight in grams (must be > 0 and <= 10000)
    * @throws Error if weight is invalid
@@ -33,7 +33,10 @@ export class MenuItem {
     this.weightGrams = weightGrams;
 
     // Calculate rations
-    this.rations = this.calculateRations(weightGrams, aliment.gramsToCarbohydrate);
+    this.rations = this.calculateRations(
+      weightGrams,
+      aliment.gramsToCarbohydrate,
+    );
 
     // Make properties immutable
     Object.freeze(this);
@@ -44,18 +47,21 @@ export class MenuItem {
    */
   private validateWeight(weightGrams: number): void {
     if (weightGrams <= 0) {
-      throw new Error('Weight must be greater than 0');
+      throw new Error("Weight must be greater than 0");
     }
 
     if (weightGrams > 10000) {
-      throw new Error('Weight cannot exceed 10000g');
+      throw new Error("Weight cannot exceed 10000g");
     }
   }
 
   /**
    * Calculate rations with 2 decimal precision
    */
-  private calculateRations(weightGrams: number, gramsToCarbohydrate: number): number {
+  private calculateRations(
+    weightGrams: number,
+    gramsToCarbohydrate: number,
+  ): number {
     const raw = weightGrams / gramsToCarbohydrate;
     return Number(raw.toFixed(2));
   }

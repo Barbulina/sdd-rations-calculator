@@ -3,7 +3,7 @@
  * Contract for menu persistence operations
  */
 
-import type { Menu } from '../../../specs/004-menu-builder/contracts/types';
+import type { Menu } from "../../../specs/004-menu-builder/contracts/types";
 
 export interface MenuRepository {
   /**

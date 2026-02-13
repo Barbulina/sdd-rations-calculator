@@ -3,15 +3,15 @@
  * Follows the builder pattern for test fixtures
  */
 
-import type { AlimentInfo } from '@/src/domain/models/AlimentInfo';
-import type { MenuItem } from '../../../specs/004-menu-builder/contracts/types';
+import type { AlimentInfo } from "@/src/domain/models/AlimentInfo";
+import type { MenuItem } from "../../../specs/004-menu-builder/contracts/types";
 
 /**
  * Default aliment for testing
  */
 const defaultAliment: AlimentInfo = {
-  name: 'manzana',
-  type: 'frutas',
+  name: "manzana",
+  type: "frutas",
   gramsToCarbohydrate: 110,
   bloodGlucoseIndex: 38,
 };
@@ -20,7 +20,7 @@ const defaultAliment: AlimentInfo = {
  * MenuItemBuilder - fluent interface for creating test MenuItem fixtures
  */
 export class MenuItemBuilder {
-  private id: string = 'test-uuid-1234';
+  private id: string = "test-uuid-1234";
   private aliment: AlimentInfo = defaultAliment;
   private weightGrams: number = 150;
   private rations: number = 1.36;
@@ -39,7 +39,9 @@ export class MenuItemBuilder {
   withAliment(aliment: AlimentInfo): this {
     this.aliment = aliment;
     // Recalculate rations based on weight and new aliment
-    this.rations = Number((this.weightGrams / aliment.gramsToCarbohydrate).toFixed(2));
+    this.rations = Number(
+      (this.weightGrams / aliment.gramsToCarbohydrate).toFixed(2),
+    );
     return this;
   }
 
@@ -49,7 +51,9 @@ export class MenuItemBuilder {
   withWeight(weightGrams: number): this {
     this.weightGrams = weightGrams;
     // Recalculate rations based on new weight
-    this.rations = Number((weightGrams / this.aliment.gramsToCarbohydrate).toFixed(2));
+    this.rations = Number(
+      (weightGrams / this.aliment.gramsToCarbohydrate).toFixed(2),
+    );
     return this;
   }
 
@@ -109,7 +113,7 @@ export class MenuItemBuilder {
  */
 export function createMenuItem(overrides?: Partial<MenuItem>): MenuItem {
   return {
-    id: 'test-uuid-1234',
+    id: "test-uuid-1234",
     aliment: defaultAliment,
     weightGrams: 150,
     rations: 1.36,
@@ -120,10 +124,12 @@ export function createMenuItem(overrides?: Partial<MenuItem>): MenuItem {
 /**
  * Helper function to create a default aliment
  */
-export function createTestAliment(overrides?: Partial<AlimentInfo>): AlimentInfo {
+export function createTestAliment(
+  overrides?: Partial<AlimentInfo>,
+): AlimentInfo {
   return {
-    name: 'manzana',
-    type: 'frutas',
+    name: "manzana",
+    type: "frutas",
     gramsToCarbohydrate: 110,
     bloodGlucoseIndex: 38,
     ...overrides,

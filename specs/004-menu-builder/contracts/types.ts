@@ -1,13 +1,13 @@
 /**
  * Menu Builder Type Definitions
- * 
+ *
  * Core types for the Menu Builder feature.
  * These types define the structure of menus and menu items.
  */
 
-import type { RationsType } from '@/domain/models/RationsType';
-import type { AlimentInfo } from '@/domain/models/AlimentInfo';
-import type { CustomAliment } from '@/domain/models/CustomAliment';
+import type { RationsType } from "@/domain/models/RationsType";
+import type { AlimentInfo } from "@/domain/models/AlimentInfo";
+import type { CustomAliment } from "@/domain/models/CustomAliment";
 
 /**
  * MenuItem represents a single aliment in a menu with its weight and calculated rations.

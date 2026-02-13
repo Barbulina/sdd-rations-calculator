@@ -202,22 +202,22 @@
 
 ### Tests First (RED)
 
-- [ ] T100 [US4] Write `tests/integration/menu-builder/MenuRepositoryContext.test.ts` - test context provider
-- [ ] T101 [P] [US4] Write tests for useMenuRepository() hook throws if no provider
-- [ ] T102 [US4] Run `npm test` → verify context tests fail (RED phase)
+- [X] T100 [US4] Write `tests/integration/menu-builder/MenuRepositoryContext.test.tsx` - test context provider
+- [X] T101 [P] [US4] Write tests for useMenuRepository() hook throws if no provider
+- [X] T102 [US4] Run `npm test` → verify context tests fail (RED phase) - confirmed module not found
 
 ### Implementation (GREEN)
 
-- [ ] T103 [US4] Create `src/application/contexts/MenuRepositoryContext.tsx` with provider and hook
-- [ ] T104 [US4] Implement MenuRepositoryProvider component wrapping children
-- [ ] T105 [US4] Implement useMenuRepository() hook with useContext
-- [ ] T106 [US4] Add error throw if hook used outside provider
-- [ ] T107 [US4] Update `app/providers.tsx` to include MenuRepositoryProvider
-- [ ] T108 [US4] Run `npm test` → verify context tests pass (GREEN phase)
+- [X] T103 [US4] Create `src/application/contexts/MenuRepositoryContext.tsx` with provider and hook
+- [X] T104 [US4] Implement MenuRepositoryProvider component wrapping children
+- [X] T105 [US4] Implement useMenuRepository() hook with useContext
+- [X] T106 [US4] Add error throw if hook used outside provider
+- [X] T107 [US4] Update `app/providers.tsx` to include MenuRepositoryProvider with LocalStorageMenuRepository
+- [X] T108 [US4] Run `npm test` → verify context tests pass (GREEN phase)
 
 ### Refactor
 
-- [ ] T109 [US4] No refactoring needed - context is simple
+- [X] T109 [US4] No refactoring needed - context is simple
 - [ ] T110 [US4] Run `npm test` → ensure tests still pass
 
 ---

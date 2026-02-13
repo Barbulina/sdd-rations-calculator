@@ -3,11 +3,11 @@
  * Implements MenuRepository interface using browser localStorage
  */
 
-import type { MenuRepository } from '@/src/domain/repositories/MenuRepository';
-import type { Menu } from '../../../specs/004-menu-builder/contracts/types';
-import { LocalStorageAdapter } from '../storage/LocalStorageAdapter';
+import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
+import type { Menu } from "../../../specs/004-menu-builder/contracts/types";
+import { LocalStorageAdapter } from "../storage/LocalStorageAdapter";
 
-const STORAGE_KEY = 'menus';
+const STORAGE_KEY = "menus";
 
 export class LocalStorageMenuRepository implements MenuRepository {
   private adapter: LocalStorageAdapter;
@@ -30,24 +30,24 @@ export class LocalStorageMenuRepository implements MenuRepository {
   async getAll(): Promise<Menu[]> {
     try {
       const data = this.adapter.getItem<any[]>(STORAGE_KEY);
-      
+
       if (!data || !Array.isArray(data)) {
         return [];
       }
 
       // Deserialize and validate menus
       return data
-        .map(item => this.deserializeMenu(item))
+        .map((item) => this.deserializeMenu(item))
         .filter((menu): menu is Menu => menu !== null);
     } catch (error) {
-      console.error('Failed to retrieve menus:', error);
+      console.error("Failed to retrieve menus:", error);
       return [];
     }
   }
 
   async getById(id: string): Promise<Menu | null> {
     const menus = await this.getAll();
-    return menus.find(menu => menu.id === id) || null;
+    return menus.find((menu) => menu.id === id) || null;
   }
 
   async save(menu: Menu): Promise<Menu> {
@@ -55,17 +55,20 @@ export class LocalStorageMenuRepository implements MenuRepository {
       try {
         const menus = await this.getAll();
         menus.push(menu);
-        
-        const success = this.adapter.setItem(STORAGE_KEY, menus.map(m => this.serializeMenu(m)));
-        
+
+        const success = this.adapter.setItem(
+          STORAGE_KEY,
+          menus.map((m) => this.serializeMenu(m)),
+        );
+
         if (!success) {
-          throw new Error('Storage quota exceeded. Please delete old menus.');
+          throw new Error("Storage quota exceeded. Please delete old menus.");
         }
-        
+
         return menu;
       } catch (error: any) {
-        if (error.name === 'QuotaExceededError') {
-          throw new Error('Storage quota exceeded. Please delete old menus.');
+        if (error.name === "QuotaExceededError") {
+          throw new Error("Storage quota exceeded. Please delete old menus.");
         }
         throw error;
       }
@@ -75,10 +78,10 @@ export class LocalStorageMenuRepository implements MenuRepository {
   async update(menu: Menu): Promise<Menu> {
     return this.queueOperation(async () => {
       const menus = await this.getAll();
-      const index = menus.findIndex(m => m.id === menu.id);
+      const index = menus.findIndex((m) => m.id === menu.id);
 
       if (index === -1) {
-        throw new Error('Menu not found');
+        throw new Error("Menu not found");
       }
 
       // Set updatedAt timestamp
@@ -88,11 +91,14 @@ export class LocalStorageMenuRepository implements MenuRepository {
       };
 
       menus[index] = updatedMenu;
-      
-      const success = this.adapter.setItem(STORAGE_KEY, menus.map(m => this.serializeMenu(m)));
-      
+
+      const success = this.adapter.setItem(
+        STORAGE_KEY,
+        menus.map((m) => this.serializeMenu(m)),
+      );
+
       if (!success) {
-        throw new Error('Storage quota exceeded. Please delete old menus.');
+        throw new Error("Storage quota exceeded. Please delete old menus.");
       }
 
       return updatedMenu;
@@ -102,12 +108,15 @@ export class LocalStorageMenuRepository implements MenuRepository {
   async delete(id: string): Promise<void> {
     return this.queueOperation(async () => {
       const menus = await this.getAll();
-      const filtered = menus.filter(menu => menu.id !== id);
-      
+      const filtered = menus.filter((menu) => menu.id !== id);
+
       if (filtered.length === 0) {
         this.adapter.removeItem(STORAGE_KEY);
       } else {
-        this.adapter.setItem(STORAGE_KEY, filtered.map(m => this.serializeMenu(m)));
+        this.adapter.setItem(
+          STORAGE_KEY,
+          filtered.map((m) => this.serializeMenu(m)),
+        );
       }
     });
   }
@@ -139,7 +148,7 @@ export class LocalStorageMenuRepository implements MenuRepository {
   private deserializeMenu(data: any): Menu | null {
     try {
       // Validate required fields
-      if (!data || typeof data !== 'object') {
+      if (!data || typeof data !== "object") {
         return null;
       }
 
@@ -153,7 +162,7 @@ export class LocalStorageMenuRepository implements MenuRepository {
         updatedAt: data.updatedAt ? new Date(data.updatedAt) : undefined,
       };
     } catch (error) {
-      console.error('Failed to deserialize menu:', error);
+      console.error("Failed to deserialize menu:", error);
       return null;
     }
   }

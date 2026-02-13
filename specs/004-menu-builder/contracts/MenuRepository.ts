@@ -1,15 +1,15 @@
 /**
  * Menu Repository Interface
- * 
+ *
  * Defines the contract for menu persistence.
  * Implementations must handle serialization, validation, and error handling.
  */
 
-import type { Menu, CreateMenuDTO, UpdateMenuDTO } from './types';
+import type { Menu, CreateMenuDTO, UpdateMenuDTO } from "./types";
 
 /**
  * Repository interface for menu persistence operations.
- * 
+ *
  * Implementations:
  * - LocalStorageMenuRepository: Stores menus in browser localStorage
  * - (Future) ServerMenuRepository: Stores menus on remote server
@@ -17,10 +17,10 @@ import type { Menu, CreateMenuDTO, UpdateMenuDTO } from './types';
 export interface MenuRepository {
   /**
    * Retrieve all menus.
-   * 
+   *
    * @returns Promise resolving to array of menus (empty array if none)
    * @throws Error if storage is corrupted or unavailable
-   * 
+   *
    * @example
    * const menus = await repository.getAll();
    * console.log(`Found ${menus.length} menus`);
@@ -29,11 +29,11 @@ export interface MenuRepository {
 
   /**
    * Retrieve a single menu by ID.
-   * 
+   *
    * @param id - Menu UUID
    * @returns Promise resolving to menu or null if not found
    * @throws Error if storage is corrupted or unavailable
-   * 
+   *
    * @example
    * const menu = await repository.getById('uuid-1234');
    * if (menu) {
@@ -44,23 +44,23 @@ export interface MenuRepository {
 
   /**
    * Save a new menu or update an existing one.
-   * 
+   *
    * For new menus:
    * - Generates UUID if not provided
    * - Sets createdAt timestamp
    * - Calculates totals
-   * 
+   *
    * For updates:
    * - Sets updatedAt timestamp
    * - Recalculates totals
    * - Preserves createdAt
-   * 
+   *
    * @param menuData - Menu creation DTO
    * @returns Promise resolving to saved menu with generated fields
    * @throws ValidationError if menu data is invalid
    * @throws QuotaExceededError if storage is full
    * @throws Error if storage is unavailable
-   * 
+   *
    * @example
    * const menu = await repository.save({
    *   name: 'Breakfast',
@@ -73,14 +73,14 @@ export interface MenuRepository {
 
   /**
    * Update an existing menu.
-   * 
+   *
    * @param menuData - Update DTO with menu ID and fields to update
    * @returns Promise resolving to updated menu
    * @throws Error if menu not found
    * @throws ValidationError if update data is invalid
    * @throws QuotaExceededError if storage is full
    * @throws Error if storage is unavailable
-   * 
+   *
    * @example
    * const updated = await repository.update({
    *   id: 'uuid-1234',
@@ -91,12 +91,12 @@ export interface MenuRepository {
 
   /**
    * Delete a menu by ID.
-   * 
+   *
    * @param id - Menu UUID
    * @returns Promise resolving when deletion is complete
    * @throws Error if menu not found (should be non-fatal)
    * @throws Error if storage is unavailable
-   * 
+   *
    * @example
    * await repository.delete('uuid-1234');
    * console.log('Menu deleted');
@@ -105,12 +105,12 @@ export interface MenuRepository {
 
   /**
    * Delete all menus.
-   * 
+   *
    * WARNING: Destructive operation. Should prompt for confirmation in UI.
-   * 
+   *
    * @returns Promise resolving when all menus are deleted
    * @throws Error if storage is unavailable
-   * 
+   *
    * @example
    * if (confirm('Delete all menus?')) {
    *   await repository.deleteAll();
@@ -120,9 +120,9 @@ export interface MenuRepository {
 
   /**
    * Check if storage is available and writable.
-   * 
+   *
    * @returns Promise resolving to true if storage is available
-   * 
+   *
    * @example
    * const available = await repository.isAvailable();
    * if (!available) {
@@ -133,9 +133,9 @@ export interface MenuRepository {
 
   /**
    * Get storage usage information (if supported).
-   * 
+   *
    * @returns Promise resolving to storage stats or null if unsupported
-   * 
+   *
    * @example
    * const stats = await repository.getStorageStats();
    * if (stats) {
@@ -177,10 +177,10 @@ export class MenuValidationError extends Error {
   constructor(
     message: string,
     public field?: string,
-    public errors?: string[]
+    public errors?: string[],
   ) {
     super(message);
-    this.name = 'MenuValidationError';
+    this.name = "MenuValidationError";
   }
 }
 
@@ -188,9 +188,9 @@ export class MenuValidationError extends Error {
  * Error thrown when storage quota is exceeded
  */
 export class StorageQuotaExceededError extends Error {
-  constructor(message: string = 'Storage quota exceeded') {
+  constructor(message: string = "Storage quota exceeded") {
     super(message);
-    this.name = 'StorageQuotaExceededError';
+    this.name = "StorageQuotaExceededError";
   }
 }
 
@@ -198,8 +198,8 @@ export class StorageQuotaExceededError extends Error {
  * Error thrown when storage is unavailable
  */
 export class StorageUnavailableError extends Error {
-  constructor(message: string = 'Storage is unavailable') {
+  constructor(message: string = "Storage is unavailable") {
     super(message);
-    this.name = 'StorageUnavailableError';
+    this.name = "StorageUnavailableError";
   }
 }

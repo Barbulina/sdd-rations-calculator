@@ -3,19 +3,19 @@
  * Follows the builder pattern for test fixtures
  */
 
-import type { RationsType } from '@/src/domain/models/RationsType';
-import type { Menu } from '../../../specs/004-menu-builder/contracts/types';
-import { MenuItemBuilder, createMenuItem } from './MenuItemBuilder';
+import type { RationsType } from "@/src/domain/models/RationsType";
+import type { Menu } from "../../../specs/004-menu-builder/contracts/types";
+import { MenuItemBuilder, createMenuItem } from "./MenuItemBuilder";
 
 /**
  * MenuBuilder - fluent interface for creating test Menu fixtures
  */
 export class MenuBuilder {
-  private id: string = 'test-menu-uuid-1234';
-  private name: string = 'Test Menu';
-  private type: RationsType = 'frutas';
+  private id: string = "test-menu-uuid-1234";
+  private name: string = "Test Menu";
+  private type: RationsType = "frutas";
   private items: any[] = [createMenuItem()];
-  private createdAt: Date = new Date('2026-02-12T10:00:00.000Z');
+  private createdAt: Date = new Date("2026-02-12T10:00:00.000Z");
   private updatedAt?: Date;
 
   /**
@@ -116,7 +116,7 @@ export class MenuBuilder {
   buildWithEmptyName(): Menu {
     return {
       ...this.build(),
-      name: '',
+      name: "",
     };
   }
 
@@ -126,7 +126,7 @@ export class MenuBuilder {
   buildWithLongName(): Menu {
     return {
       ...this.build(),
-      name: 'a'.repeat(201),
+      name: "a".repeat(201),
     };
   }
 

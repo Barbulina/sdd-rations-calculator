@@ -3,16 +3,16 @@
  * Manages menu builder state and operations
  */
 
-import { useState, useMemo, useCallback } from 'react';
-import type { MenuRepository } from '@/src/domain/repositories/MenuRepository';
-import type { MenuItem } from '@/specs/004-menu-builder/contracts/types';
-import type { AlimentInfo } from '@/src/domain/models/AlimentInfo';
-import type { RationsType } from '@/src/domain/models/RationsType';
-import { Menu } from '@/src/domain/models/Menu';
+import { useState, useMemo, useCallback } from "react";
+import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
+import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
+import type { AlimentInfo } from "@/src/domain/models/AlimentInfo";
+import type { RationsType } from "@/src/domain/models/RationsType";
+import { Menu } from "@/src/domain/models/Menu";
 
 /**
  * Menu builder hook for state management
- * 
+ *
  * @param repository - Menu repository for persistence
  * @returns Menu builder state and operations
  */
@@ -23,7 +23,7 @@ export function useMenuBuilder(repository: MenuRepository) {
 
   /**
    * Add item to menu
-   * 
+   *
    * @param aliment - Aliment information
    * @param weightGrams - Weight in grams (1-10000)
    * @throws Error if weight is invalid
@@ -31,7 +31,7 @@ export function useMenuBuilder(repository: MenuRepository) {
   const addItem = useCallback((aliment: AlimentInfo, weightGrams: number) => {
     // Validate weight
     if (weightGrams < 1 || weightGrams > 10000) {
-      throw new Error('Weight must be between 1 and 10000 grams');
+      throw new Error("Weight must be between 1 and 10000 grams");
     }
 
     // Calculate rations (2 decimal precision)
@@ -50,7 +50,7 @@ export function useMenuBuilder(repository: MenuRepository) {
 
   /**
    * Remove item from menu by ID
-   * 
+   *
    * @param id - Item ID to remove
    */
   const removeItem = useCallback((id: string) => {
@@ -59,7 +59,7 @@ export function useMenuBuilder(repository: MenuRepository) {
 
   /**
    * Update item weight and recalculate rations
-   * 
+   *
    * @param id - Item ID to update
    * @param weightGrams - New weight in grams (1-10000)
    * @throws Error if weight is invalid
@@ -67,14 +67,16 @@ export function useMenuBuilder(repository: MenuRepository) {
   const updateItemWeight = useCallback((id: string, weightGrams: number) => {
     // Validate weight
     if (weightGrams < 1 || weightGrams > 10000) {
-      throw new Error('Weight must be between 1 and 10000 grams');
+      throw new Error("Weight must be between 1 and 10000 grams");
     }
 
     setItems((prev) =>
       prev.map((item) => {
         if (item.id === id) {
           // Recalculate rations (2 decimal precision)
-          const rations = Number((weightGrams / item.alimentInfo.racionGrams).toFixed(2));
+          const rations = Number(
+            (weightGrams / item.alimentInfo.racionGrams).toFixed(2),
+          );
           return {
             ...item,
             weightGrams,
@@ -82,7 +84,7 @@ export function useMenuBuilder(repository: MenuRepository) {
           };
         }
         return item;
-      })
+      }),
     );
   }, []);
 
@@ -110,7 +112,7 @@ export function useMenuBuilder(repository: MenuRepository) {
 
   /**
    * Save menu to repository
-   * 
+   *
    * @param name - Menu name (1-200 chars)
    * @param type - Menu type (RationsType)
    * @throws Error if validation fails or save fails
@@ -121,15 +123,15 @@ export function useMenuBuilder(repository: MenuRepository) {
         // Validate name
         const trimmedName = name.trim();
         if (trimmedName.length === 0) {
-          throw new Error('Menu name is required');
+          throw new Error("Menu name is required");
         }
         if (trimmedName.length > 200) {
-          throw new Error('Menu name must not exceed 200 characters');
+          throw new Error("Menu name must not exceed 200 characters");
         }
 
         // Validate items
         if (items.length === 0) {
-          throw new Error('Menu must contain at least one aliment');
+          throw new Error("Menu must contain at least one aliment");
         }
 
         setIsLoading(true);
@@ -148,7 +150,7 @@ export function useMenuBuilder(repository: MenuRepository) {
         setIsLoading(false);
       }
     },
-    [items, repository]
+    [items, repository],
   );
 
   /**

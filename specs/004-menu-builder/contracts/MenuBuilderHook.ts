@@ -1,18 +1,18 @@
 /**
  * useMenuBuilder Hook Contract
- * 
+ *
  * Defines the return type and behavior of the useMenuBuilder React hook.
  * This hook manages the state for building a menu with multiple aliments.
  */
 
-import type { MenuItem, Menu } from './types';
-import type { AlimentInfo } from '@/domain/models/AlimentInfo';
-import type { CustomAliment } from '@/domain/models/CustomAliment';
-import type { RationsType } from '@/domain/models/RationsType';
+import type { MenuItem, Menu } from "./types";
+import type { AlimentInfo } from "@/domain/models/AlimentInfo";
+import type { CustomAliment } from "@/domain/models/CustomAliment";
+import type { RationsType } from "@/domain/models/RationsType";
 
 /**
  * Return type for the useMenuBuilder hook.
- * 
+ *
  * @example
  * const {
  *   items,
@@ -46,16 +46,16 @@ export interface UseMenuBuilderReturn {
 
   /**
    * Add an aliment to the menu with specified weight.
-   * 
+   *
    * Creates a MenuItem with:
    * - Generated UUID
    * - Provided aliment and weight
    * - Calculated rations (weightGrams / gramsToCarbohydrate)
-   * 
+   *
    * @param aliment - Aliment from catalog or custom aliments
    * @param weightGrams - Weight in grams (must be > 0 and <= 10000)
    * @throws Error if weight is invalid
-   * 
+   *
    * @example
    * addItem(manzana, 150);
    * // Adds MenuItem { id: "uuid", aliment: manzana, weightGrams: 150, rations: 1.36 }
@@ -64,9 +64,9 @@ export interface UseMenuBuilderReturn {
 
   /**
    * Remove a menu item by ID.
-   * 
+   *
    * @param id - MenuItem UUID
-   * 
+   *
    * @example
    * removeItem('uuid-1234');
    */
@@ -75,11 +75,11 @@ export interface UseMenuBuilderReturn {
   /**
    * Update the weight of a menu item.
    * Recalculates rations automatically.
-   * 
+   *
    * @param id - MenuItem UUID
    * @param weightGrams - New weight in grams (must be > 0 and <= 10000)
    * @throws Error if item not found or weight is invalid
-   * 
+   *
    * @example
    * updateItemWeight('uuid-1234', 200);
    * // Updates item weight and recalculates rations to 200 / gramsToCarbohydrate
@@ -88,7 +88,7 @@ export interface UseMenuBuilderReturn {
 
   /**
    * Remove all items from the menu.
-   * 
+   *
    * @example
    * clearItems();
    */
@@ -96,23 +96,23 @@ export interface UseMenuBuilderReturn {
 
   /**
    * Save the current menu to repository.
-   * 
+   *
    * Validation:
    * - Name must be non-empty (after trim) and <= 200 chars
    * - Type must be valid RationsType
    * - Items must have at least 1 item
-   * 
+   *
    * On success:
    * - Clears current items
    * - Navigates to home page
-   * 
+   *
    * @param name - Menu name
    * @param type - Menu type
    * @returns Promise resolving to saved menu
    * @throws MenuValidationError if validation fails
    * @throws StorageQuotaExceededError if storage is full
    * @throws Error if save operation fails
-   * 
+   *
    * @example
    * await saveMenu('Afternoon Snack', 'frutas');
    */

@@ -3,17 +3,17 @@
  * Represents a complete meal with multiple aliments
  */
 
-import type { RationsType } from './RationsType';
-import type { MenuItem } from '../../../specs/004-menu-builder/contracts/types';
+import type { RationsType } from "./RationsType";
+import type { MenuItem } from "../../../specs/004-menu-builder/contracts/types";
 
 const VALID_RATION_TYPES: RationsType[] = [
-  'carnes',
-  'pescados',
-  'verduras y hortalizas',
-  'frutas',
-  'cereales, harinas, legumbres y tuberculos',
-  'leche y derivados',
-  'grasas',
+  "carnes",
+  "pescados",
+  "verduras y hortalizas",
+  "frutas",
+  "cereales, harinas, legumbres y tuberculos",
+  "leche y derivados",
+  "grasas",
 ];
 
 export class Menu {
@@ -28,7 +28,7 @@ export class Menu {
 
   /**
    * Create a new Menu
-   * 
+   *
    * @param name - Menu name (trimmed, 1-200 chars)
    * @param type - Menu type (valid RationsType)
    * @param items - Array of MenuItems (min 1 item)
@@ -65,7 +65,7 @@ export class Menu {
 
   /**
    * Reconstitute a Menu from stored data (deserialization/updates)
-   * 
+   *
    * @param data - Complete menu data including id, timestamps, etc.
    * @returns Reconstituted Menu instance
    * @throws Error if validation fails
@@ -79,29 +79,29 @@ export class Menu {
     updatedAt?: Date;
   }): Menu {
     const instance = Object.create(Menu.prototype);
-    
+
     // Validate and assign properties
     const trimmedName = data.name.trim();
     instance.validateName(trimmedName);
     instance.name = trimmedName;
-    
+
     instance.validateType(data.type);
     instance.type = data.type;
-    
+
     instance.validateItems(data.items);
     instance.items = [...data.items];
-    
+
     instance.id = data.id;
     instance.createdAt = data.createdAt;
     instance.updatedAt = data.updatedAt;
-    
+
     // Calculate totals
     instance.totalWeight = instance.calculateTotalWeight(instance.items);
     instance.totalRations = instance.calculateTotalRations(instance.items);
-    
+
     // Make immutable
     Object.freeze(instance);
-    
+
     return instance;
   }
 
@@ -110,11 +110,11 @@ export class Menu {
    */
   private validateName(name: string): void {
     if (name.length === 0) {
-      throw new Error('Menu name is required');
+      throw new Error("Menu name is required");
     }
 
     if (name.length > 200) {
-      throw new Error('Menu name must not exceed 200 characters');
+      throw new Error("Menu name must not exceed 200 characters");
     }
   }
 
@@ -123,7 +123,7 @@ export class Menu {
    */
   private validateType(type: RationsType): void {
     if (!type || !VALID_RATION_TYPES.includes(type)) {
-      throw new Error('Invalid menu type');
+      throw new Error("Invalid menu type");
     }
   }
 
@@ -132,7 +132,7 @@ export class Menu {
    */
   private validateItems(items: MenuItem[]): void {
     if (!items || items.length === 0) {
-      throw new Error('Menu must contain at least one aliment');
+      throw new Error("Menu must contain at least one aliment");
     }
   }
 
