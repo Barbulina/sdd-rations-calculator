@@ -228,38 +228,38 @@
 
 ### Tests First (RED)
 
-- [ ] T111 [US1] Write `tests/integration/menu-builder/AutocompleteSearch.test.ts` - test search input renders
-- [ ] T112 [P] [US1] Write tests for debounced search (300ms delay)
-- [ ] T113 [P] [US1] Write tests for filtering aliments by name (case-insensitive)
-- [ ] T114 [P] [US1] Write tests for keyboard navigation (ArrowDown, ArrowUp, Enter, Escape)
-- [ ] T115 [P] [US1] Write tests for suggestion item displays all aliment data (name, category, grams, GI, custom badge)
-- [ ] T116 [P] [US1] Write tests for click to select aliment
-- [ ] T117 [P] [US5] Write tests for empty state ("No aliments found")
-- [ ] T118 [US1] Run `npm test` → verify all autocomplete tests fail (RED phase)
+- [X] T111 [US1] Write `tests/integration/menu-builder/AutocompleteSearch.test.ts` - test search input renders
+- [X] T112 [P] [US1] Write tests for debounced search (300ms delay)
+- [X] T113 [P] [US1] Write tests for filtering aliments by name (case-insensitive)
+- [X] T114 [P] [US1] Write tests for keyboard navigation (ArrowDown, ArrowUp, Enter, Escape)
+- [X] T115 [P] [US1] Write tests for suggestion item displays all aliment data (name, category, grams, GI, custom badge)
+- [X] T116 [P] [US1] Write tests for click to select aliment
+- [X] T117 [P] [US5] Write tests for empty state ("No aliments found")
+- [X] T118 [US1] Run `npm test` → verify all autocomplete tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [ ] T119 [US1] Create `app/components/AutocompleteSearch.tsx` component
-- [ ] T120 [US1] Implement search input with controlled value
-- [ ] T121 [US1] Implement debounce logic (300ms using useEffect + setTimeout)
-- [ ] T122 [US1] Use `useCompositeAliments` hook to get aliments
-- [ ] T123 [US1] Implement filtering logic (lowercased name includes search term)
-- [ ] T124 [US1] Implement suggestions dropdown with conditional rendering
-- [ ] T125 [US1] Create `app/components/AlimentSuggestionItem.tsx` component
-- [ ] T126 [US1] Implement suggestion item layout - display name, category badge, gramsToCarbohydrate, bloodGlucoseIndex, custom badge
-- [ ] T127 [US1] Add category badge color coding using design tokens
-- [ ] T128 [US1] Implement keyboard navigation (selectedIndex state, handleKeyDown)
-- [ ] T129 [US1] Implement click handler calling onSelectAliment prop
-- [ ] T130 [US1] Implement Enter key selection
-- [ ] T131 [US1] Implement Escape key to close dropdown
-- [ ] T132 [US5] Implement empty state component
-- [ ] T133 [US1] Add ARIA attributes (role="combobox", aria-autocomplete, aria-expanded, aria-activedescendant)
-- [ ] T134 [US1] Run `npm test` → verify all autocomplete tests pass (GREEN phase)
+- [X] T119 [US1] Create `app/components/AutocompleteSearch.tsx` component
+- [X] T120 [US1] Implement search input with controlled value
+- [X] T121 [US1] Implement debounce logic (300ms using useEffect + setTimeout)
+- [X] T122 [US1] Use `useCompositeAliments` hook to get aliments
+- [X] T123 [US1] Implement filtering logic (lowercased name includes search term)
+- [X] T124 [US1] Implement suggestions dropdown with conditional rendering
+- [X] T125 [US1] Create `app/components/AlimentSuggestionItem.tsx` component
+- [X] T126 [US1] Implement suggestion item layout - display name, category badge, gramsToCarbohydrate, bloodGlucoseIndex, custom badge
+- [X] T127 [US1] Add category badge color coding using design tokens
+- [X] T128 [US1] Implement keyboard navigation (selectedIndex state, handleKeyDown)
+- [X] T129 [US1] Implement click handler calling onSelectAliment prop
+- [X] T130 [US1] Implement Enter key selection
+- [X] T131 [US1] Implement Escape key to close dropdown
+- [X] T132 [US5] Implement empty state component
+- [X] T133 [US1] Add ARIA attributes (role="combobox", aria-autocomplete, aria-expanded, aria-activedescendant)
+- [ ] T134 [US1] Run `npm test` → verify all autocomplete tests pass (GREEN phase) - NOTE: Tests created, may need async/act() debugging
 
 ### Refactor
 
 - [ ] T135 [US1] Extract debounce logic into custom hook `useDebounce` if reusable
-- [ ] T136 [US1] Extract suggestion item component if not already done
+- [ ] T136 [US1] Extract suggestion item component if not already done - DONE: Already extracted as AlimentSuggestionItem.tsx
 - [ ] T137 [US1] Run `npm test` → ensure tests still pass after refactoring
 
 ---
