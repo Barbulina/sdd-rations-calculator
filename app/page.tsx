@@ -1,115 +1,86 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRationRepository } from "@/src/application/contexts/RationRepositoryContext";
-import { useInfiniteScroll } from "@/src/application/hooks/useInfiniteScroll";
-import { RationCard } from "./components/RationCard";
+import { useMenuList } from "@/src/application/hooks/useMenuList";
+import { MenuCard } from "./components/MenuCard";
+import { MenuListFilters } from "./components/MenuListFilters";
 import { EmptyState } from "./components/EmptyState";
-import type { Ration } from "@/src/domain/models/Ration";
 
 /**
- * Home Page
+ * Home Page — Menu List
  *
- * Displays list of all rations with infinite scroll.
- * Features:
- * - Load rations from repository on mount
- * - Infinite scroll with 10 items per batch
- * - Empty state when no rations exist
- * - Link to create new rations
+ * Displays the user's saved menus with name/type filters and delete support.
  *
- * @see ../../specs/002-ration-menu-management/spec.md for user story
+ * @see specs/005-menu-list/spec.md for user stories
  */
 export default function HomePage() {
-  const repository = useRationRepository();
-  const [rations, setRations] = useState<Ration[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Infinite scroll with batch size of 10
-  const { displayedItems, hasMore, loadMoreRef } = useInfiniteScroll(
-    rations,
-    10,
-  );
-
-  /**
-   * Load rations from repository on mount
-   */
-  useEffect(() => {
-    loadRations();
-  }, []);
-
-  /**
-   * Load all rations from repository
-   */
-  const loadRations = async () => {
-    setIsLoading(true);
-    try {
-      const allRations = await repository.findAll();
-      setRations(allRations);
-    } catch (error) {
-      console.error("Failed to load rations:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const {
+    filteredMenus,
+    isLoading,
+    error,
+    hasMenus,
+    nameFilter,
+    setNameFilter,
+    typeFilter,
+    setTypeFilter,
+    deleteMenu,
+  } = useMenuList();
 
   return (
     <main className="min-h-screen p-4">
-      {/* Header */}
       <div className="container mx-auto max-w-4xl">
+        {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">My Rations</h1>
-          <div className="flex gap-2">
-            <Link
-              href="/aliment-browser"
-              className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition font-medium dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-            >
-              Browse Aliments
-            </Link>
-            <Link
-              href="/menu-builder"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
-            >
-              + Create
-            </Link>
-          </div>
+          <h1 className="text-2xl font-bold">My Menus</h1>
+          <Link
+            href="/menu-builder"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
+          >
+            + Create
+          </Link>
         </div>
 
-        {/* Loading State */}
-        {isLoading && (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-            Loading rations...
+        {/* Error */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
+            {error}
           </div>
         )}
 
-        {/* Empty State */}
-        {!isLoading && rations.length === 0 && <EmptyState />}
-
-        {/* Rations List */}
-        {!isLoading && rations.length > 0 && (
-          <div>
-            {displayedItems.map((ration) => (
-              <RationCard key={ration.id} ration={ration} />
-            ))}
-
-            {/* Loading Indicator for Infinite Scroll */}
-            {hasMore && (
-              <div
-                ref={loadMoreRef}
-                className="text-center py-4 text-gray-500 dark:text-gray-400"
-              >
-                Loading more...
-              </div>
-            )}
-
-            {/* End of List Message */}
-            {!hasMore && rations.length > 10 && (
-              <div className="text-center py-4 text-gray-400 dark:text-gray-500 text-sm">
-                End of list - {rations.length} ration
-                {rations.length !== 1 ? "s" : ""} total
-              </div>
-            )}
+        {/* Loading */}
+        {isLoading && (
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+            Loading menus...
           </div>
+        )}
+
+        {/* Empty state */}
+        {!isLoading && !hasMenus && <EmptyState />}
+
+        {/* Menus exist */}
+        {!isLoading && hasMenus && (
+          <>
+            {/* Filters */}
+            <MenuListFilters
+              nameFilter={nameFilter}
+              onNameFilterChange={setNameFilter}
+              typeFilter={typeFilter}
+              onTypeFilterChange={setTypeFilter}
+            />
+
+            {/* No results after filtering */}
+            {filteredMenus.length === 0 && (
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                No menus match your filters. Try clearing the search or type
+                selector.
+              </div>
+            )}
+
+            {/* Menu cards */}
+            {filteredMenus.map((menu) => (
+              <MenuCard key={menu.id} menu={menu} onDelete={deleteMenu} />
+            ))}
+          </>
         )}
       </div>
     </main>
