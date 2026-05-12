@@ -11,6 +11,9 @@ import { useMenuRepository } from "@/src/application/contexts/MenuRepositoryCont
 import { AlimentInfo } from "@/src/domain/models/AlimentInfo";
 import { MenuType } from "@/src/domain/models/MenuType";
 import { PageHeader } from "@/app/components/PageHeader";
+import { Input } from "@/app/components/ui/Input";
+import { Select } from "@/app/components/ui/Select";
+import { Button } from "@/app/components/ui/Button";
 
 export default function MenuBuilderPage() {
   const router = useRouter();
@@ -87,14 +90,13 @@ export default function MenuBuilderPage() {
         >
           Menu Name
         </label>
-        <input
+        <Input
           type="text"
           id="menu-name"
           value={menuName}
           onChange={(e) => setMenuName(e.target.value)}
           placeholder="Enter menu name"
           disabled={isLoading}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
           maxLength={200}
         />
       </div>
@@ -107,19 +109,18 @@ export default function MenuBuilderPage() {
         >
           Menu Type
         </label>
-        <select
+        <Select
           id="menu-type"
           value={menuType}
           onChange={(e) => setMenuType(e.target.value as MenuType | "")}
           disabled={isLoading}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <option value="">Select a type...</option>
           <option value={MenuType.BREAKFAST}>Breakfast</option>
           <option value={MenuType.LUNCH}>Lunch</option>
           <option value={MenuType.DINNER}>Dinner</option>
           <option value={MenuType.SNACK}>Snack</option>
-        </select>
+        </Select>
       </div>
 
       {/* Aliment Search */}
@@ -169,26 +170,23 @@ export default function MenuBuilderPage() {
 
       {/* Save Buttons - AT BOTTOM */}
       <div className="mt-8 flex gap-3 justify-end">
-        <button
+        <Button
           type="button"
+          variant="secondary"
           onClick={() => router.back()}
           disabled={isLoading}
-          className="px-6 py-2 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2"
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           onClick={handleSaveMenu}
           disabled={!isFormValid || isLoading}
-          className={`px-6 py-2 rounded-md font-medium transition ${
-            isFormValid && !isLoading
-              ? "bg-blue-500 text-white hover:bg-blue-600"
-              : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed"
-          }`}
+          className="px-6 py-2"
         >
           {isLoading ? "Saving..." : "Save Menu"}
-        </button>
+        </Button>
       </div>
     </div>
   );

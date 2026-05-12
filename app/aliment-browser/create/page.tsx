@@ -13,6 +13,9 @@ import { useRouter } from "next/navigation";
 import { useCustomAlimentRepository } from "@/src/application/contexts/CustomAlimentRepositoryContext";
 import { RationsType } from "@/src/domain/models/RationsType";
 import { PageHeader } from "@/app/components/PageHeader";
+import { Input } from "@/app/components/ui/Input";
+import { Select } from "@/app/components/ui/Select";
+import { Button } from "@/app/components/ui/Button";
 
 const CATEGORY_LABELS: Record<RationsType, string> = {
   [RationsType.lacteal]: "Lácteos",
@@ -100,25 +103,23 @@ export default function CreateCustomAlimentPage() {
     <div className="container mx-auto px-4 py-8 max-w-2xl">
       <PageHeader title="Create Custom Aliment" backHref="/aliment-browser" />
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-5">
         {/* Name Field */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Name *
           </label>
-          <input
+          <Input
             id="name"
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className={`w-full px-4 py-2 border rounded-lg ${
-              errors.name ? "border-red-500" : "border-gray-300"
-            }`}
+            error={!!errors.name}
             placeholder="e.g., Homemade Granola"
             disabled={isSubmitting}
           />
           {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            <p className="text-sm text-red-600 dark:text-red-400 mt-1">{errors.name}</p>
           )}
         </div>
 
@@ -126,11 +127,11 @@ export default function CreateCustomAlimentPage() {
         <div>
           <label
             htmlFor="gramsToCarbohydrate"
-            className="block text-sm font-medium mb-2"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
           >
             Grams to Carbohydrate *
           </label>
-          <input
+          <Input
             id="gramsToCarbohydrate"
             type="number"
             step="0.01"
@@ -138,14 +139,12 @@ export default function CreateCustomAlimentPage() {
             onChange={(e) =>
               setFormData({ ...formData, gramsToCarbohydrate: e.target.value })
             }
-            className={`w-full px-4 py-2 border rounded-lg ${
-              errors.gramsToCarbohydrate ? "border-red-500" : "border-gray-300"
-            }`}
+            error={!!errors.gramsToCarbohydrate}
             placeholder="e.g., 15.5"
             disabled={isSubmitting}
           />
           {errors.gramsToCarbohydrate && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-sm text-red-600 dark:text-red-400 mt-1">
               {errors.gramsToCarbohydrate}
             </p>
           )}
@@ -155,11 +154,11 @@ export default function CreateCustomAlimentPage() {
         <div>
           <label
             htmlFor="bloodGlucoseIndex"
-            className="block text-sm font-medium mb-2"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
           >
             Blood Glucose Index *
           </label>
-          <input
+          <Input
             id="bloodGlucoseIndex"
             type="number"
             step="0.01"
@@ -167,14 +166,12 @@ export default function CreateCustomAlimentPage() {
             onChange={(e) =>
               setFormData({ ...formData, bloodGlucoseIndex: e.target.value })
             }
-            className={`w-full px-4 py-2 border rounded-lg ${
-              errors.bloodGlucoseIndex ? "border-red-500" : "border-gray-300"
-            }`}
+            error={!!errors.bloodGlucoseIndex}
             placeholder="e.g., 55"
             disabled={isSubmitting}
           />
           {errors.bloodGlucoseIndex && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-sm text-red-600 dark:text-red-400 mt-1">
               {errors.bloodGlucoseIndex}
             </p>
           )}
@@ -182,16 +179,15 @@ export default function CreateCustomAlimentPage() {
 
         {/* Type Field */}
         <div>
-          <label htmlFor="type" className="block text-sm font-medium mb-2">
+          <label htmlFor="type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Categoría *
           </label>
-          <select
+          <Select
             id="type"
             value={formData.type}
             onChange={(e) =>
               setFormData({ ...formData, type: e.target.value as RationsType })
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
             disabled={isSubmitting}
           >
             {Object.entries(CATEGORY_LABELS).map(([value, label]) => (
@@ -199,33 +195,32 @@ export default function CreateCustomAlimentPage() {
                 {label}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
 
         {/* Submit Error */}
         {errors.submit && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
             {errors.submit}
           </div>
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-4">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 disabled:opacity-50"
-          >
-            {isSubmitting ? "Creating..." : "Create Aliment"}
-          </button>
-          <button
+        <div className="flex gap-3 justify-end">
+          <Button
             type="button"
+            variant="secondary"
             onClick={handleCancel}
             disabled={isSubmitting}
-            className="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 disabled:opacity-50"
           >
             Cancel
-          </button>
+          </Button>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating..." : "Create Aliment"}
+          </Button>
         </div>
       </form>
     </div>

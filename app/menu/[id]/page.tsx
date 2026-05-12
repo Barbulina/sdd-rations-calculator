@@ -11,6 +11,9 @@ import { MenuType } from "@/src/domain/models/MenuType";
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
 import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
 import { PageHeader } from "@/app/components/PageHeader";
+import { Input } from "@/app/components/ui/Input";
+import { Select } from "@/app/components/ui/Select";
+import { Button } from "@/app/components/ui/Button";
 
 const MENU_TYPE_LABELS: Record<string, string> = {
   [MenuType.BREAKFAST]: "Breakfast",
@@ -108,20 +111,20 @@ export default function MenuDetailPage({ params }: MenuDetailPageProps) {
           <div className="mb-3">
             <label
               htmlFor="menu-name"
-              className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Menu Name
             </label>
-            <input
+            <Input
               id="menu-name"
               type="text"
               value={editName}
               onChange={(e) => setEditName(e.target.value)}
               maxLength={200}
-              className="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              error={!!nameError}
             />
             {nameError && (
-              <p className="mt-1 text-xs text-red-600 dark:text-red-400">
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                 {nameError}
               </p>
             )}
@@ -131,31 +134,26 @@ export default function MenuDetailPage({ params }: MenuDetailPageProps) {
           <div className="mb-4">
             <label
               htmlFor="menu-type"
-              className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Meal Type
             </label>
-            <select
+            <Select
               id="menu-type"
               value={editType ?? ""}
               onChange={(e) => setEditType(e.target.value as MenuType)}
-              className="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {MENU_TYPE_ORDER.map((t) => (
                 <option key={t} value={t}>
                   {MENU_TYPE_LABELS[t]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
-          <button
-            onClick={saveChanges}
-            disabled={isSaving}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition disabled:opacity-50 text-sm font-medium"
-          >
+          <Button onClick={saveChanges} disabled={isSaving}>
             {isSaving ? "Saving..." : "Save changes"}
-          </button>
+          </Button>
         </section>
 
         {/* Aliments list */}
