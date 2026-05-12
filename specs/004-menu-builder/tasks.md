@@ -306,36 +306,36 @@
 
 ### Tests First (RED)
 
-- [ ] T159 [US2] Write `tests/integration/menu-builder/MenuItemsList.test.ts` - test list renders items
-- [ ] T160 [P] [US2] Write tests for each item displays all aliment data (name, category, grams, GI, custom badge)
-- [ ] T161 [P] [US2] Write tests for weight inline editing
-- [ ] T162 [P] [US2] Write tests for rations auto-update when weight changes
-- [ ] T163 [P] [US2] Write tests for remove button deletes item
-- [ ] T164 [P] [US5] Write tests for empty state ("No aliments added")
-- [ ] T165 [US2] Run `npm test` → verify all list tests fail (RED phase)
+- [X] T159 [US2] Write `tests/integration/menu-builder/MenuItemsList.test.ts` - test list renders items
+- [X] T160 [P] [US2] Write tests for each item displays all aliment data (name, category, grams, GI, custom badge)
+- [X] T161 [P] [US2] Write tests for weight inline editing
+- [X] T162 [P] [US2] Write tests for rations auto-update when weight changes
+- [X] T163 [P] [US2] Write tests for remove button deletes item
+- [X] T164 [P] [US5] Write tests for empty state ("No aliments added")
+- [X] T165 [US2] Run `npm test` → verify all list tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [ ] T166 [US2] Create `app/components/MenuItemsList.tsx` component
-- [ ] T167 [US2] Create `app/components/MenuItemCard.tsx` component for each item
-- [ ] T168 [US2] Implement card layout displaying:
+- [X] T166 [US2] Create `app/components/MenuItemsList.tsx` component
+- [X] T167 [US2] Create `app/components/MenuItemCard.tsx` component for each item
+- [X] T168 [US2] Implement card layout displaying:
   - Aliment name (heading)
   - Category badge (colored)
   - gramsToCarbohydrate (e.g., "1 ration = 110g")
   - bloodGlucoseIndex (e.g., "IG: 38")
   - Custom badge (if isCustom)
-- [ ] T169 [US2] Implement weight input (type="number", inline editable)
-- [ ] T170 [US2] Implement onChange handler calling updateItemWeight
-- [ ] T171 [US2] Implement calculated rations display (item.rations.toFixed(2))
-- [ ] T172 [US2] Implement remove button (trash icon) calling removeItem
-- [ ] T173 [US5] Implement empty state with EmptyState component
-- [ ] T174 [US2] Add styling with design tokens (card, spacing, typography)
-- [ ] T175 [US2] Run `npm test` → verify all list tests pass (GREEN phase)
+- [X] T169 [US2] Implement weight input (type="number", inline editable)
+- [X] T170 [US2] Implement onChange handler calling updateItemWeight
+- [X] T171 [US2] Implement calculated rations display (item.rations.toFixed(2))
+- [X] T172 [US2] Implement remove button (trash icon) calling removeItem
+- [X] T173 [US5] Implement empty state with EmptyState component
+- [X] T174 [US2] Add styling with design tokens (card, spacing, typography)
+- [X] T175 [US2] Run `npm test` → verify all list tests pass (GREEN phase) - 24/24 tests passing
 
 ### Refactor
 
-- [ ] T176 [US2] Ensure MenuItemCard is properly extracted
-- [ ] T177 [US2] Run `npm test` → ensure tests still pass after refactoring
+- [X] T176 [US2] Ensure MenuItemCard is properly extracted - DONE
+- [X] T177 [US2] Run `npm test` → ensure tests still pass after refactoring - DONE
 
 ---
 
