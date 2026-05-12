@@ -373,34 +373,34 @@
 
 ### Tests First (RED)
 
-- [ ] T191 [US4] Write `tests/integration/menu-builder/SaveMenuForm.test.ts` - test form renders
-- [ ] T192 [P] [US4] Write tests for name validation (required, max 200 chars)
-- [ ] T193 [P] [US4] Write tests for type selection (required, valid RationsType)
-- [ ] T194 [P] [US4] Write tests for "Save" button disabled when invalid or no items
-- [ ] T195 [P] [US4] Write tests for successful save navigates to home
-- [ ] T196 [P] [US4] Write tests for error display on save failure
-- [ ] T197 [P] [US5] Write tests for "Cancel" button navigates back
-- [ ] T198 [US4] Run `npm test` → verify all form tests fail (RED phase)
+- [X] T191 [US4] Write `tests/integration/menu-builder/SaveMenuForm.test.ts` - test form renders
+- [X] T192 [P] [US4] Write tests for name validation (required, max 200 chars)
+- [X] T193 [P] [US4] Write tests for type selection (required, valid MenuType)
+- [X] T194 [P] [US4] Write tests for "Save" button disabled when invalid or no items
+- [X] T195 [P] [US4] Write tests for successful save navigates to home
+- [X] T196 [P] [US4] Write tests for error display on save failure
+- [X] T197 [P] [US5] Write tests for "Cancel" button navigates back
+- [X] T198 [US4] Run `npm test` → verify all form tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [ ] T199 [US4] Create `app/components/SaveMenuForm.tsx` component
-- [ ] T200 [US4] Implement name input with controlled value
-- [ ] T201 [US4] Implement type select (dropdown with RationsType options)
-- [ ] T202 [US4] Implement name validation (required, max 200)
-- [ ] T203 [US4] Implement type validation (required)
-- [ ] T204 [US4] Implement "Save" button disabled logic (invalid || items.length === 0)
-- [ ] T205 [US4] Implement handleSubmit calling saveMenu()
-- [ ] T206 [US4] Implement loading state during save (button shows spinner)
-- [ ] T207 [US4] Implement error display (red text below form)
-- [ ] T208 [US5] Implement "Cancel" button - useRouter().back() or navigate to '/'
-- [ ] T209 [US4] Add ARIA attributes for form fields
-- [ ] T210 [US4] Run `npm test` → verify all form tests pass (GREEN phase)
+- [X] T199 [US4] Create `app/components/SaveMenuForm.tsx` component
+- [X] T200 [US4] Implement name input with controlled value
+- [X] T201 [US4] Implement type select (dropdown with MenuType options)
+- [X] T202 [US4] Implement name validation (required, max 200)
+- [X] T203 [US4] Implement type validation (required)
+- [X] T204 [US4] Implement "Save" button disabled logic (invalid || items.length === 0)
+- [X] T205 [US4] Implement handleSubmit calling saveMenu()
+- [X] T206 [US4] Implement loading state during save (button shows spinner)
+- [X] T207 [US4] Implement error display (red text below form)
+- [X] T208 [US5] Implement "Cancel" button - useRouter().back() or navigate to '/'
+- [X] T209 [US4] Add ARIA attributes for form fields
+- [X] T210 [US4] Run `npm test` → verify all form tests pass (GREEN phase)
 
 ### Refactor
 
-- [ ] T211 [US4] Extract form validation into custom hook if complex
-- [ ] T212 [US4] Run `npm test` → ensure tests still pass after refactoring
+- [X] T211 [US4] Extract form validation into custom hook if complex
+- [X] T212 [US4] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 
