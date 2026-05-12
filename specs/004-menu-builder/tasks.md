@@ -345,25 +345,25 @@
 
 ### Tests First (RED)
 
-- [ ] T178 [US3] Write `tests/unit/menu-builder/MenuSummary.test.ts` - test summary renders totals
-- [ ] T179 [P] [US3] Write tests for totalWeight display (formatted with "g")
-- [ ] T180 [P] [US3] Write tests for totalRations display (2 decimals + "rations")
-- [ ] T181 [P] [US3] Write tests for auto-update when items change
-- [ ] T182 [US3] Run `npm test` → verify all summary tests fail (RED phase)
+- [X] T178 [US3] Write `tests/unit/menu-builder/MenuSummary.test.ts` - test summary renders totals
+- [X] T179 [P] [US3] Write tests for totalWeight display (formatted with "g")
+- [X] T180 [P] [US3] Write tests for totalRations display (2 decimals + "rations")
+- [X] T181 [P] [US3] Write tests for auto-update when items change
+- [X] T182 [US3] Run `npm test` → verify all summary tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [ ] T183 [US3] Create `app/components/MenuSummary.tsx` component
-- [ ] T184 [US3] Implement totalWeight display: `{totalWeight}g`
-- [ ] T185 [US3] Implement totalRations display: `{totalRations.toFixed(2)} rations`
-- [ ] T186 [US3] Add highlighted styling with design tokens (background, border)
-- [ ] T187 [US3] Add ARIA live region for dynamic updates
-- [ ] T188 [US3] Run `npm test` → verify all summary tests pass (GREEN phase)
+- [X] T183 [US3] Create `app/components/MenuSummary.tsx` component
+- [X] T184 [US3] Implement totalWeight display: `{totalWeight}g`
+- [X] T185 [US3] Implement totalRations display: `{totalRations.toFixed(2)} rations`
+- [X] T186 [US3] Add highlighted styling with design tokens (background, border)
+- [X] T187 [US3] Add ARIA live region for dynamic updates
+- [X] T188 [US3] Run `npm test` → verify all summary tests pass (GREEN phase)
 
 ### Refactor
 
-- [ ] T189 [US3] No refactoring needed - component is simple
-- [ ] T190 [US3] Run `npm test` → ensure tests still pass
+- [X] T189 [US3] No refactoring needed - component is simple
+- [X] T190 [US3] Run `npm test` → ensure tests still pass
 
 ---
 
