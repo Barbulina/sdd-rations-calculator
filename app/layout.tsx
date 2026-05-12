@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { ThemeToggle } from "./components/ThemeToggle";
+import { NavMenu } from "./components/NavMenu";
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
-  display: 'swap',
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={roboto.className}>
         <Providers>
           <div className="fixed top-4 right-4 z-50">
-            <ThemeToggle />
+            <NavMenu />
           </div>
           {children}
         </Providers>
