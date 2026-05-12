@@ -3,23 +3,20 @@
  * Represents a complete meal with multiple aliments
  */
 
-import type { RationsType } from "./RationsType";
+import { MenuType } from "./MenuType";
 import type { MenuItem } from "../../../specs/004-menu-builder/contracts/types";
 
-const VALID_RATION_TYPES: RationsType[] = [
-  "carnes",
-  "pescados",
-  "verduras y hortalizas",
-  "frutas",
-  "cereales, harinas, legumbres y tuberculos",
-  "leche y derivados",
-  "grasas",
+const VALID_MENU_TYPES: MenuType[] = [
+  MenuType.BREAKFAST,
+  MenuType.LUNCH,
+  MenuType.DINNER,
+  MenuType.SNACK,
 ];
 
 export class Menu {
   readonly id: string;
   readonly name: string;
-  readonly type: RationsType;
+  readonly type: MenuType;
   readonly items: MenuItem[];
   readonly totalWeight: number;
   readonly totalRations: number;
@@ -30,11 +27,11 @@ export class Menu {
    * Create a new Menu
    *
    * @param name - Menu name (trimmed, 1-200 chars)
-   * @param type - Menu type (valid RationsType)
+   * @param type - Menu type (valid MenuType)
    * @param items - Array of MenuItems (min 1 item)
    * @throws Error if validation fails
    */
-  constructor(name: string, type: RationsType, items: MenuItem[]) {
+  constructor(name: string, type: MenuType, items: MenuItem[]) {
     // Trim and validate name
     const trimmedName = name.trim();
     this.validateName(trimmedName);
@@ -73,7 +70,7 @@ export class Menu {
   static reconstitute(data: {
     id: string;
     name: string;
-    type: RationsType;
+    type: MenuType;
     items: MenuItem[];
     createdAt: Date;
     updatedAt?: Date;
@@ -121,8 +118,8 @@ export class Menu {
   /**
    * Validate menu type
    */
-  private validateType(type: RationsType): void {
-    if (!type || !VALID_RATION_TYPES.includes(type)) {
+  private validateType(type: MenuType): void {
+    if (!type || !VALID_MENU_TYPES.includes(type)) {
       throw new Error("Invalid menu type");
     }
   }

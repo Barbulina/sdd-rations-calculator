@@ -7,7 +7,7 @@ import { useState, useMemo, useCallback } from "react";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
 import type { AlimentInfo } from "@/src/domain/models/AlimentInfo";
-import type { RationsType } from "@/src/domain/models/RationsType";
+import { MenuType } from "@/src/domain/models/MenuType";
 import { Menu } from "@/src/domain/models/Menu";
 
 /**
@@ -35,12 +35,12 @@ export function useMenuBuilder(repository: MenuRepository) {
     }
 
     // Calculate rations (2 decimal precision)
-    const rations = Number((weightGrams / aliment.racionGrams).toFixed(2));
+    const rations = Number((weightGrams / aliment.gramsToCarbohydrate).toFixed(2));
 
     // Create new menu item with UUID
     const newItem: MenuItem = {
       id: crypto.randomUUID(),
-      alimentInfo: aliment,
+      aliment: aliment,
       weightGrams,
       rations,
     };
@@ -75,7 +75,7 @@ export function useMenuBuilder(repository: MenuRepository) {
         if (item.id === id) {
           // Recalculate rations (2 decimal precision)
           const rations = Number(
-            (weightGrams / item.alimentInfo.racionGrams).toFixed(2),
+            (weightGrams / item.aliment.gramsToCarbohydrate).toFixed(2),
           );
           return {
             ...item,
@@ -114,11 +114,11 @@ export function useMenuBuilder(repository: MenuRepository) {
    * Save menu to repository
    *
    * @param name - Menu name (1-200 chars)
-   * @param type - Menu type (RationsType)
+   * @param type - Menu type (MenuType)
    * @throws Error if validation fails or save fails
    */
   const saveMenu = useCallback(
-    async (name: string, type: RationsType) => {
+    async (name: string, type: MenuType) => {
       try {
         // Validate name
         const trimmedName = name.trim();
