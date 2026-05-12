@@ -27,7 +27,7 @@ describe("LocalStorageMenuRepository", () => {
   describe("save()", () => {
     it("should save menu to localStorage", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test Menu", "frutas", items);
+      const menu = new Menu("Test Menu", "LUNCH", items);
 
       const saved = await repository.save(menu);
 
@@ -37,7 +37,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should save menu with all properties", async () => {
       const items = [createMenuItem({ weightGrams: 150, rations: 1.36 })];
-      const menu = new Menu("Breakfast", "frutas", items);
+      const menu = new Menu("Breakfast", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -46,7 +46,7 @@ describe("LocalStorageMenuRepository", () => {
       expect(data[0]).toMatchObject({
         id: menu.id,
         name: "Breakfast",
-        type: "frutas",
+        type: "LUNCH",
         totalWeight: 150,
         totalRations: 1.36,
       });
@@ -54,8 +54,8 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should append to existing menus", async () => {
       const items = [createMenuItem()];
-      const menu1 = new Menu("Menu 1", "frutas", items);
-      const menu2 = new Menu("Menu 2", "carnes", items);
+      const menu1 = new Menu("Menu 1", "LUNCH", items);
+      const menu2 = new Menu("Menu 2", "SNACK", items);
 
       await repository.save(menu1);
       await repository.save(menu2);
@@ -66,7 +66,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should serialize Date objects to ISO strings", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -89,7 +89,7 @@ describe("LocalStorageMenuRepository", () => {
           },
         }),
       ];
-      const menu = new Menu("Snack", "frutas", items);
+      const menu = new Menu("Snack", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -109,8 +109,8 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should return all saved menus", async () => {
       const items = [createMenuItem()];
-      const menu1 = new Menu("Menu 1", "frutas", items);
-      const menu2 = new Menu("Menu 2", "carnes", items);
+      const menu1 = new Menu("Menu 1", "LUNCH", items);
+      const menu2 = new Menu("Menu 2", "SNACK", items);
 
       await repository.save(menu1);
       await repository.save(menu2);
@@ -124,7 +124,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should deserialize Date objects", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -143,7 +143,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should filter out invalid menu objects", async () => {
       const items = [createMenuItem()];
-      const validMenu = new Menu("Valid", "frutas", items);
+      const validMenu = new Menu("Valid", "LUNCH", items);
       await repository.save(validMenu);
 
       // Manually corrupt data
@@ -167,7 +167,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should return menu by ID", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test Menu", "frutas", items);
+      const menu = new Menu("Test Menu", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -180,7 +180,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should deserialize Date objects", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -193,7 +193,7 @@ describe("LocalStorageMenuRepository", () => {
   describe("update()", () => {
     it("should update existing menu", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Original Name", "frutas", items);
+      const menu = new Menu("Original Name", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -201,7 +201,7 @@ describe("LocalStorageMenuRepository", () => {
       const updatedMenu = Menu.reconstitute({
         id: menu.id,
         name: "Updated Name",
-        type: "carnes",
+        type: "SNACK",
         items,
         createdAt: menu.createdAt,
       });
@@ -209,7 +209,7 @@ describe("LocalStorageMenuRepository", () => {
       const result = await repository.update(updatedMenu);
 
       expect(result.name).toBe("Updated Name");
-      expect(result.type).toBe("carnes");
+      expect(result.type).toBe("SNACK");
 
       const retrieved = await repository.getById(menu.id);
       expect(retrieved?.name).toBe("Updated Name");
@@ -217,14 +217,14 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should throw error when menu not found", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await expect(repository.update(menu)).rejects.toThrow("Menu not found");
     });
 
     it("should set updatedAt timestamp", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -234,7 +234,7 @@ describe("LocalStorageMenuRepository", () => {
       const updatedMenu = Menu.reconstitute({
         id: menu.id,
         name: "Updated",
-        type: "frutas",
+        type: "LUNCH",
         items,
         createdAt: menu.createdAt,
       });
@@ -251,7 +251,7 @@ describe("LocalStorageMenuRepository", () => {
   describe("delete()", () => {
     it("should delete menu by ID", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
       expect(await repository.getById(menu.id)).not.toBeNull();
@@ -267,8 +267,8 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should only delete specified menu", async () => {
       const items = [createMenuItem()];
-      const menu1 = new Menu("Menu 1", "frutas", items);
-      const menu2 = new Menu("Menu 2", "carnes", items);
+      const menu1 = new Menu("Menu 1", "LUNCH", items);
+      const menu2 = new Menu("Menu 2", "SNACK", items);
 
       await repository.save(menu1);
       await repository.save(menu2);
@@ -283,8 +283,8 @@ describe("LocalStorageMenuRepository", () => {
   describe("deleteAll()", () => {
     it("should delete all menus", async () => {
       const items = [createMenuItem()];
-      const menu1 = new Menu("Menu 1", "frutas", items);
-      const menu2 = new Menu("Menu 2", "carnes", items);
+      const menu1 = new Menu("Menu 1", "LUNCH", items);
+      const menu2 = new Menu("Menu 2", "SNACK", items);
 
       await repository.save(menu1);
       await repository.save(menu2);
@@ -301,7 +301,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should remove localStorage key", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
       expect(localStorage.getItem(STORAGE_KEY)).toBeDefined();
@@ -321,7 +321,7 @@ describe("LocalStorageMenuRepository", () => {
 
     it("should return true after write operation", async () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -341,7 +341,7 @@ describe("LocalStorageMenuRepository", () => {
       };
 
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", "LUNCH", items);
 
       await expect(repository.save(menu)).rejects.toThrow(
         "Storage quota exceeded",
@@ -357,7 +357,7 @@ describe("LocalStorageMenuRepository", () => {
       const items = [createMenuItem()];
       const menus = Array.from(
         { length: 10 },
-        (_, i) => new Menu(`Menu ${i}`, "frutas", items),
+        (_, i) => new Menu(`Menu ${i}`, "LUNCH", items),
       );
 
       await Promise.all(menus.map((menu) => repository.save(menu)));
@@ -374,7 +374,7 @@ describe("LocalStorageMenuRepository", () => {
         createMenuItem({ weightGrams: 200 }),
         createMenuItem({ weightGrams: 50 }),
       ];
-      const menu = new Menu("Complex Menu", "frutas", items);
+      const menu = new Menu("Complex Menu", "LUNCH", items);
 
       await repository.save(menu);
 
@@ -394,7 +394,7 @@ describe("LocalStorageMenuRepository", () => {
         createdAt: new Date(),
       };
       const items = [createMenuItem({ aliment: customAliment })];
-      const menu = new Menu("Custom Menu", "frutas", items);
+      const menu = new Menu("Custom Menu", "LUNCH", items);
 
       await repository.save(menu);
 

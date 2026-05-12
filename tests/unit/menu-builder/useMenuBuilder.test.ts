@@ -23,28 +23,10 @@ const mockRepository: MenuRepository = {
 
 // Sample aliment data for testing
 const createSampleAliment = (): AlimentInfo => ({
-  id: "test-aliment-1",
   name: "Manzana Golden",
-  racionName: "Manzana mediana",
-  categoryIndex: 3, // frutas
-  racionGrams: 150,
-  protein: 0.3,
-  lipids: 0.2,
-  carbs: 12.0,
-  fiber: 2.4,
-  kcal: 52,
-  vitaminA: 54,
-  vitaminC: 4.6,
-  vitaminD: 0,
-  vitaminE: 0.18,
-  calcium: 6,
-  iron: 0.12,
-  magnesium: 5,
-  zinc: 0.04,
-  selenium: 0,
-  sodium: 1,
-  potassium: 107,
-  phosphorus: 11,
+  gramsToCarbohydrate: 150,
+  bloodGlucoseIndex: 38,
+  type: "frutas",
 });
 
 describe("useMenuBuilder", () => {
@@ -95,7 +77,7 @@ describe("useMenuBuilder", () => {
 
       expect(result.current.items).toHaveLength(1);
       expect(result.current.items[0].id).toBeDefined();
-      expect(result.current.items[0].alimentInfo).toEqual(aliment);
+      expect(result.current.items[0].aliment).toEqual(aliment);
       expect(result.current.items[0].weightGrams).toBe(150);
       expect(result.current.items[0].rations).toBe(1.0); // 150g / 150g = 1.0
     });
@@ -279,14 +261,14 @@ describe("useMenuBuilder", () => {
       });
 
       const originalId = result.current.items[0].id;
-      const originalAliment = result.current.items[0].alimentInfo;
+      const originalAliment = result.current.items[0].aliment;
 
       act(() => {
         result.current.updateItemWeight(originalId, 200);
       });
 
       expect(result.current.items[0].id).toBe(originalId);
-      expect(result.current.items[0].alimentInfo).toEqual(originalAliment);
+      expect(result.current.items[0].aliment).toEqual(originalAliment);
     });
 
     it("should do nothing if ID not found", () => {
@@ -497,14 +479,14 @@ describe("useMenuBuilder", () => {
       mockRepository.save = mockSave;
 
       await act(async () => {
-        await result.current.saveMenu("Test Menu", "frutas");
+        await result.current.saveMenu("Test Menu", "LUNCH");
       });
 
       expect(mockSave).toHaveBeenCalledTimes(1);
       expect(mockSave).toHaveBeenCalledWith(
         expect.objectContaining({
           name: "Test Menu",
-          type: "frutas",
+          type: "LUNCH",
           items: expect.arrayContaining([
             expect.objectContaining({
               weightGrams: 150,
@@ -529,7 +511,7 @@ describe("useMenuBuilder", () => {
       mockRepository.save = vi.fn().mockReturnValue(promise);
 
       // Start save without awaiting
-      const saveCall = result.current.saveMenu("Test Menu", "frutas");
+      const saveCall = result.current.saveMenu("Test Menu", "LUNCH");
 
       // Should be loading now
       await waitFor(() => {
@@ -556,7 +538,7 @@ describe("useMenuBuilder", () => {
       mockRepository.save = vi.fn().mockResolvedValue({} as Menu);
 
       await act(async () => {
-        await result.current.saveMenu("Test Menu", "frutas");
+        await result.current.saveMenu("Test Menu", "LUNCH");
       });
 
       expect(result.current.items).toHaveLength(0);
@@ -568,7 +550,7 @@ describe("useMenuBuilder", () => {
       await expect(
         act(async () => {
           try {
-            await result.current.saveMenu("Test Menu", "frutas");
+            await result.current.saveMenu("Test Menu", "LUNCH");
           } catch (e: any) {
             throw e;
           }
@@ -587,7 +569,7 @@ describe("useMenuBuilder", () => {
       await expect(
         act(async () => {
           try {
-            await result.current.saveMenu("", "frutas");
+            await result.current.saveMenu("", "LUNCH");
           } catch (e: any) {
             throw e;
           }
@@ -608,7 +590,7 @@ describe("useMenuBuilder", () => {
       await expect(
         act(async () => {
           try {
-            await result.current.saveMenu(longName, "frutas");
+            await result.current.saveMenu(longName, "LUNCH");
           } catch (e: any) {
             throw e;
           }
@@ -630,7 +612,7 @@ describe("useMenuBuilder", () => {
 
       await act(async () => {
         try {
-          await result.current.saveMenu("Test Menu", "frutas");
+          await result.current.saveMenu("Test Menu", "LUNCH");
         } catch (e) {
           // Expected to throw
         }
@@ -651,7 +633,7 @@ describe("useMenuBuilder", () => {
 
       try {
         await act(async () => {
-          await result.current.saveMenu("Test Menu", "frutas");
+          await result.current.saveMenu("Test Menu", "LUNCH");
         });
       } catch (e) {
         // Expected to throw
@@ -674,7 +656,7 @@ describe("useMenuBuilder", () => {
 
       await act(async () => {
         try {
-          await result.current.saveMenu("Test Menu", "frutas");
+          await result.current.saveMenu("Test Menu", "LUNCH");
         } catch (e) {
           // Expected
         }

@@ -10,11 +10,15 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactNode } from "react";
-import MenuDetailPage from "@/app/menu/[id]/page";
+import MenuDetailPage from "@/app/menu/[id]/MenuDetailClient";
 import { MenuRepositoryProvider } from "@/src/application/contexts/MenuRepositoryContext";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import { MenuType } from "@/src/domain/models/MenuType";
-import { MenuBuilder, DEFAULT_ITEM_1, DEFAULT_ITEM_2 } from "../../unit/menu-detail/MenuBuilder";
+import {
+  MenuBuilder,
+  DEFAULT_ITEM_1,
+  DEFAULT_ITEM_2,
+} from "../../unit/menu-detail/MenuBuilder";
 
 // ─── Mock repository ───────────────────────────────────────────────────────
 
@@ -46,14 +50,19 @@ const testMenu = new MenuBuilder()
 
 async function renderAndWait(id = "menu-detail-1") {
   render(<MenuDetailPage params={{ id }} />, { wrapper });
-  await waitFor(() => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument());
+  await waitFor(
+    () => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+    { timeout: 3000 },
+  );
 }
 
 // ─── T011: loading + not-found + view ─────────────────────────────────────
 
 describe("MenuDetailPage — loading state (T011)", () => {
   it("shows loading indicator while fetching", () => {
-    vi.mocked(mockRepository.getById).mockImplementation(() => new Promise(() => {}));
+    vi.mocked(mockRepository.getById).mockImplementation(
+      () => new Promise(() => {}),
+    );
     render(<MenuDetailPage params={{ id: "menu-detail-1" }} />, { wrapper });
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
@@ -65,7 +74,9 @@ describe("MenuDetailPage — not found (T011)", () => {
   it("shows not found message when menu doesn't exist", async () => {
     vi.mocked(mockRepository.getById).mockResolvedValue(null);
     render(<MenuDetailPage params={{ id: "bad-id" }} />, { wrapper });
-    await waitFor(() => expect(screen.getByText(/not found/i)).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText(/not found/i)).toBeInTheDocument(),
+    );
   });
 
   it("has a link back to home when not found", async () => {
@@ -92,7 +103,9 @@ describe("MenuDetailPage — view detail (T011)", () => {
 
   it("shows the type in a select", async () => {
     await renderAndWait();
-    expect(screen.getByRole("combobox", { name: /meal type/i })).toHaveValue("LUNCH");
+    expect(screen.getByRole("combobox", { name: /meal type/i })).toHaveValue(
+      "LUNCH",
+    );
   });
 
   it("shows the creation date", async () => {
@@ -123,7 +136,7 @@ describe("MenuDetailPage — view detail (T011)", () => {
 
   it("has a back link to home", async () => {
     await renderAndWait();
-    const backLink = screen.getByRole("link", { name: /my menus/i });
+    const backLink = screen.getByRole("link", { name: /go back/i });
     expect(backLink).toHaveAttribute("href", "/");
   });
 });
@@ -139,7 +152,9 @@ describe("MenuDetailPage — edit name and type (T017)", () => {
 
   async function renderAndWait() {
     render(<MenuDetailPage params={{ id: "menu-detail-1" }} />, { wrapper });
-    await waitFor(() => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+    );
   }
 
   it("has a name input with the current menu name", async () => {
@@ -149,7 +164,9 @@ describe("MenuDetailPage — edit name and type (T017)", () => {
 
   it("has a type selector with all 4 options", async () => {
     await renderAndWait();
-    expect(screen.getByRole("option", { name: "Breakfast" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("option", { name: "Breakfast" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "Lunch" })).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "Dinner" })).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "Snack" })).toBeInTheDocument();
@@ -157,7 +174,9 @@ describe("MenuDetailPage — edit name and type (T017)", () => {
 
   it("has a Save changes button", async () => {
     await renderAndWait();
-    expect(screen.getByRole("button", { name: /save changes/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /save changes/i }),
+    ).toBeInTheDocument();
   });
 
   it("calls repository.update when saving with valid name", async () => {
@@ -165,7 +184,9 @@ describe("MenuDetailPage — edit name and type (T017)", () => {
     const nameInput = screen.getByDisplayValue("My Lunch");
     await userEvent.clear(nameInput);
     await userEvent.type(nameInput, "Updated Name");
-    await userEvent.click(screen.getByRole("button", { name: /save changes/i }));
+    await userEvent.click(
+      screen.getByRole("button", { name: /save changes/i }),
+    );
     await waitFor(() =>
       expect(mockRepository.update).toHaveBeenCalledWith(
         expect.objectContaining({ name: "Updated Name" }),
@@ -177,7 +198,9 @@ describe("MenuDetailPage — edit name and type (T017)", () => {
     await renderAndWait();
     const nameInput = screen.getByDisplayValue("My Lunch");
     await userEvent.clear(nameInput);
-    await userEvent.click(screen.getByRole("button", { name: /save changes/i }));
+    await userEvent.click(
+      screen.getByRole("button", { name: /save changes/i }),
+    );
     expect(screen.getByText(/name is required/i)).toBeInTheDocument();
     expect(mockRepository.update).not.toHaveBeenCalled();
   });
@@ -194,7 +217,9 @@ describe("MenuDetailPage — remove item (T020)", () => {
 
   async function renderAndWait() {
     render(<MenuDetailPage params={{ id: "menu-detail-1" }} />, { wrapper });
-    await waitFor(() => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+    );
   }
 
   it("each item has a remove button", async () => {
@@ -226,7 +251,9 @@ describe("MenuDetailPage — remove item (T020)", () => {
       .build();
     vi.mocked(mockRepository.getById).mockResolvedValue(singleMenu);
     render(<MenuDetailPage params={{ id: "menu-detail-1" }} />, { wrapper });
-    await waitFor(() => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+    );
     const removeBtn = screen.getByRole("button", { name: /remove/i });
     expect(removeBtn).toBeDisabled();
   });

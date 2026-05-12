@@ -109,6 +109,9 @@ export function WeightInputDialog({
         aria-describedby="dialog-description"
         className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md mx-4"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") onCancel();
+        }}
       >
         {/* Title */}
         <h2
