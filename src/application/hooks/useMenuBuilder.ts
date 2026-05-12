@@ -35,7 +35,9 @@ export function useMenuBuilder(repository: MenuRepository) {
     }
 
     // Calculate rations (2 decimal precision)
-    const rations = Number((weightGrams / aliment.gramsToCarbohydrate).toFixed(2));
+    const rations = Number(
+      (weightGrams / aliment.gramsToCarbohydrate).toFixed(2),
+    );
 
     // Create new menu item with UUID
     const newItem: MenuItem = {

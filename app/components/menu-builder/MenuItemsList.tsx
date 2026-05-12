@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import type { MenuItem } from '@/specs/004-menu-builder/contracts/types';
-import { MenuItemCard } from './MenuItemCard';
+import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
+import { MenuItemCard } from "./MenuItemCard";
 
 interface MenuItemsListProps {
   items: MenuItem[];

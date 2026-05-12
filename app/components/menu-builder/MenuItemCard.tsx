@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { MenuItem } from '@/specs/004-menu-builder/contracts/types';
+import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -13,14 +13,14 @@ export function MenuItemCard({
   onUpdateWeight,
   onRemove,
 }: MenuItemCardProps) {
-  const isCustom = 'isCustom' in item.aliment && item.aliment.isCustom;
+  const isCustom = "isCustom" in item.aliment && item.aliment.isCustom;
 
   // Format category name
   const categoryName = item.aliment.type
-    .replace(/_/g, ' ')
-    .split(' ')
+    .replace(/_/g, " ")
+    .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .join(" ");
 
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);

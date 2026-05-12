@@ -15,7 +15,7 @@ export default function MenuBuilderPage() {
   const router = useRouter();
   const repository = useMenuRepository();
   const [selectedAliment, setSelectedAliment] = useState<AlimentInfo | null>(
-    null
+    null,
   );
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
   const [menuName, setMenuName] = useState("");
@@ -71,7 +71,8 @@ export default function MenuBuilderPage() {
     }
   };
 
-  const isFormValid = menuName.trim() !== "" && menuType !== "" && items.length > 0;
+  const isFormValid =
+    menuName.trim() !== "" && menuType !== "" && items.length > 0;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -87,7 +88,10 @@ export default function MenuBuilderPage() {
 
       {/* Menu Name Input */}
       <div className="mb-6">
-        <label htmlFor="menu-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="menu-name"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Menu Name
         </label>
         <input
@@ -104,7 +108,10 @@ export default function MenuBuilderPage() {
 
       {/* Menu Type Select */}
       <div className="mb-6">
-        <label htmlFor="menu-type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="menu-type"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Menu Type
         </label>
         <select
@@ -127,9 +134,7 @@ export default function MenuBuilderPage() {
         <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
           Add Aliments
         </h2>
-        <AutocompleteSearch
-          onSelectAliment={handleAlimentSelect}
-        />
+        <AutocompleteSearch onSelectAliment={handleAlimentSelect} />
       </div>
 
       {/* Weight Input Dialog */}
@@ -156,10 +161,7 @@ export default function MenuBuilderPage() {
       {/* Menu Summary */}
       {items.length > 0 && (
         <div className="mb-6">
-          <MenuSummary
-            totalWeight={totalWeight}
-            totalRations={totalRations}
-          />
+          <MenuSummary totalWeight={totalWeight} totalRations={totalRations} />
         </div>
       )}
 
@@ -188,11 +190,11 @@ export default function MenuBuilderPage() {
           disabled={!isFormValid || isLoading}
           className={`px-6 py-2 rounded-md font-medium transition ${
             isFormValid && !isLoading
-              ? 'bg-blue-500 text-white hover:bg-blue-600'
-              : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed'
+              ? "bg-blue-500 text-white hover:bg-blue-600"
+              : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed"
           }`}
         >
-          {isLoading ? 'Saving...' : 'Save Menu'}
+          {isLoading ? "Saving..." : "Save Menu"}
         </button>
       </div>
     </div>

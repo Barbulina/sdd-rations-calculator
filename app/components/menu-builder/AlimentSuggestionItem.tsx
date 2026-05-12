@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { UnifiedAliment } from '@/src/domain/repositories/CompositeAlimentRepository';
+import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
 
 interface AlimentSuggestionItemProps {
   aliment: UnifiedAliment;
@@ -16,14 +16,14 @@ export function AlimentSuggestionItem({
   id,
 }: AlimentSuggestionItemProps) {
   // Check if it's a custom aliment
-  const isCustom = 'isCustom' in aliment && aliment.isCustom;
+  const isCustom = "isCustom" in aliment && aliment.isCustom;
 
   // Format category name (remove underscores and capitalize)
   const categoryName = aliment.type
-    .replace(/_/g, ' ')
-    .split(' ')
+    .replace(/_/g, " ")
+    .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .join(" ");
 
   return (
     <li
@@ -33,8 +33,8 @@ export function AlimentSuggestionItem({
       onClick={onClick}
       className={`px-4 py-3 cursor-pointer border-b border-gray-200 dark:border-gray-700 last:border-b-0 ${
         isHighlighted
-          ? 'bg-blue-50 dark:bg-blue-900/30'
-          : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+          ? "bg-blue-50 dark:bg-blue-900/30"
+          : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
       }`}
     >
       <div className="flex items-center justify-between gap-4">

@@ -1,20 +1,22 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { useCompositeAliments } from '@/src/application/hooks/useCompositeAliments';
-import type { UnifiedAliment } from '@/src/domain/repositories/CompositeAlimentRepository';
-import { AlimentSuggestionItem } from './AlimentSuggestionItem';
+import { useState, useEffect, useRef } from "react";
+import { useCompositeAliments } from "@/src/application/hooks/useCompositeAliments";
+import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
+import { AlimentSuggestionItem } from "./AlimentSuggestionItem";
 
 interface AutocompleteSearchProps {
   onSelectAliment: (aliment: UnifiedAliment) => void;
 }
 
-export function AutocompleteSearch({ onSelectAliment }: AutocompleteSearchProps) {
+export function AutocompleteSearch({
+  onSelectAliment,
+}: AutocompleteSearchProps) {
   const repository = useCompositeAliments();
   const [aliments, setAliments] = useState<UnifiedAliment[]>([]);
   const [isLoadingAliments, setIsLoadingAliments] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -56,13 +58,16 @@ export function AutocompleteSearch({ onSelectAliment }: AutocompleteSearchProps)
   // Filter aliments based on debounced search term
   const filteredAliments = debouncedSearchTerm.trim()
     ? aliments.filter((aliment) =>
-        aliment.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        aliment.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
       )
     : [];
 
   // Show dropdown when there are filtered results
   useEffect(() => {
-    setIsOpen(filteredAliments.length > 0 || (debouncedSearchTerm.trim() !== '' && filteredAliments.length === 0));
+    setIsOpen(
+      filteredAliments.length > 0 ||
+        (debouncedSearchTerm.trim() !== "" && filteredAliments.length === 0),
+    );
     setHighlightedIndex(-1);
   }, [filteredAliments.length, debouncedSearchTerm]);
 
@@ -71,7 +76,7 @@ export function AutocompleteSearch({ onSelectAliment }: AutocompleteSearchProps)
     if (!isOpen) return;
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
         setHighlightedIndex((prev) => {
           if (prev < filteredAliments.length - 1) {
@@ -81,7 +86,7 @@ export function AutocompleteSearch({ onSelectAliment }: AutocompleteSearchProps)
         });
         break;
 
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
         setHighlightedIndex((prev) => {
           if (prev > 0) {
@@ -91,26 +96,29 @@ export function AutocompleteSearch({ onSelectAliment }: AutocompleteSearchProps)
         });
         break;
 
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
-        if (highlightedIndex >= 0 && highlightedIndex < filteredAliments.length) {
+        if (
+          highlightedIndex >= 0 &&
+          highlightedIndex < filteredAliments.length
+        ) {
           handleSelect(filteredAliments[highlightedIndex]);
         }
         break;
 
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         setIsOpen(false);
-        setSearchTerm('');
-        setDebouncedSearchTerm('');
+        setSearchTerm("");
+        setDebouncedSearchTerm("");
         break;
     }
   };
 
   const handleSelect = (aliment: UnifiedAliment) => {
     onSelectAliment(aliment);
-    setSearchTerm('');
-    setDebouncedSearchTerm('');
+    setSearchTerm("");
+    setDebouncedSearchTerm("");
     setIsOpen(false);
     setHighlightedIndex(-1);
   };

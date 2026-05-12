@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 interface WeightInputDialogProps {
   isOpen: boolean;
@@ -15,8 +15,8 @@ export function WeightInputDialog({
   onAdd,
   onCancel,
 }: WeightInputDialogProps) {
-  const [weight, setWeight] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [weight, setWeight] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,8 +30,8 @@ export function WeightInputDialog({
   // Reset state when dialog opens
   useEffect(() => {
     if (isOpen) {
-      setWeight('');
-      setError('');
+      setWeight("");
+      setError("");
       setIsSubmitting(false);
     }
   }, [isOpen]);
@@ -39,18 +39,18 @@ export function WeightInputDialog({
   // Validate weight
   const validateWeight = (value: string): boolean => {
     const numValue = parseFloat(value);
-    
+
     if (!value || isNaN(numValue)) {
-      setError('Weight is required');
+      setError("Weight is required");
       return false;
     }
-    
+
     if (numValue < 1 || numValue > 10000) {
-      setError('Weight must be between 1 and 10000 grams');
+      setError("Weight must be between 1 and 10000 grams");
       return false;
     }
-    
-    setError('');
+
+    setError("");
     return true;
   };
 
@@ -64,7 +64,7 @@ export function WeightInputDialog({
   // Handle submit
   const handleSubmit = () => {
     if (isSubmitting) return; // Prevent double submit
-    
+
     if (validateWeight(weight)) {
       setIsSubmitting(true);
       const numValue = parseFloat(weight);
@@ -75,11 +75,11 @@ export function WeightInputDialog({
 
   // Handle Enter key on input only
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       e.stopPropagation(); // Prevent event bubbling
       handleSubmit();
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       e.preventDefault();
       e.stopPropagation();
       onCancel();
@@ -93,7 +93,7 @@ export function WeightInputDialog({
     }
   };
 
-  const isValid = weight !== '' && !error;
+  const isValid = weight !== "" && !error;
 
   if (!isOpen) return null;
 
@@ -145,8 +145,8 @@ export function WeightInputDialog({
             onKeyDown={handleInputKeyDown}
             className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
               error
-                ? 'border-red-500 focus:ring-red-500'
-                : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 dark:border-gray-600 focus:ring-blue-500"
             } bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100`}
             placeholder="150"
           />
@@ -172,11 +172,11 @@ export function WeightInputDialog({
             disabled={!isValid || isSubmitting}
             className={`px-4 py-2 rounded-md font-medium transition ${
               isValid && !isSubmitting
-                ? 'bg-blue-500 text-white hover:bg-blue-600'
-                : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed'
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed"
             }`}
           >
-            {isSubmitting ? 'Adding...' : 'Add'}
+            {isSubmitting ? "Adding..." : "Add"}
           </button>
         </div>
       </div>

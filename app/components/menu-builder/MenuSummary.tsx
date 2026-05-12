@@ -3,7 +3,7 @@
  * Displays total weight and total rations for the menu
  */
 
-'use client';
+"use client";
 
 interface MenuSummaryProps {
   totalWeight: number;
@@ -21,7 +21,7 @@ export function MenuSummary({ totalWeight, totalRations }: MenuSummaryProps) {
       <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">
         Total
       </h3>
-      
+
       <div className="grid grid-cols-2 gap-4">
         {/* Total Weight */}
         <div>
