@@ -17,7 +17,7 @@
 
 **Purpose**: Create directory structure and test infrastructure for Feature 005
 
-- [ ] T001 Create test directories `tests/unit/menu-list/` and `tests/integration/menu-list/`
+- [X] T001 Create test directories `tests/unit/menu-list/` and `tests/integration/menu-list/`
 
 ---
 
@@ -27,13 +27,13 @@
 
 **⚠️ CRITICAL**: No user story UI work can begin until this phase is complete.
 
-- [ ] T002 Write failing unit tests for `useMenuList` hook (load, sort, error) in `tests/unit/menu-list/useMenuList.test.ts`
-- [ ] T003 Write failing unit tests for filter logic (nameFilter, typeFilter, AND logic) in `tests/unit/menu-list/useMenuList.test.ts`
-- [ ] T004 Write failing unit tests for `deleteMenu` action (confirm, cancel, error) in `tests/unit/menu-list/useMenuList.test.ts`
-- [ ] T005 Implement `useMenuList` hook — load all menus from `MenuRepository`, sort by `createdAt` desc in `src/application/hooks/useMenuList.ts`
-- [ ] T006 Add `nameFilter` / `typeFilter` state + `filteredMenus` useMemo to `useMenuList` in `src/application/hooks/useMenuList.ts`
-- [ ] T007 Add `deleteMenu(id)` action with `window.confirm()` guard to `useMenuList` in `src/application/hooks/useMenuList.ts`
-- [ ] T008 Add `MENU_TYPE_LABELS` and `MENU_TYPE_ORDER` constants to `specs/005-menu-list/contracts/types.ts` (if not already present — verify and export from a shared location usable by app components)
+- [X] T002 Write failing unit tests for `useMenuList` hook (load, sort, error) in `tests/unit/menu-list/useMenuList.test.ts`
+- [X] T003 Write failing unit tests for filter logic (nameFilter, typeFilter, AND logic) in `tests/unit/menu-list/useMenuList.test.ts`
+- [X] T004 Write failing unit tests for `deleteMenu` action (confirm, cancel, error) in `tests/unit/menu-list/useMenuList.test.ts`
+- [X] T005 Implement `useMenuList` hook — load all menus from `MenuRepository`, sort by `createdAt` desc in `src/application/hooks/useMenuList.ts`
+- [X] T006 Add `nameFilter` / `typeFilter` state + `filteredMenus` useMemo to `useMenuList` in `src/application/hooks/useMenuList.ts`
+- [X] T007 Add `deleteMenu(id)` action with `window.confirm()` guard to `useMenuList` in `src/application/hooks/useMenuList.ts`
+- [X] T008 Add `MENU_TYPE_LABELS` and `MENU_TYPE_ORDER` constants to `specs/005-menu-list/contracts/types.ts` (if not already present — verify and export from a shared location usable by app components)
 
 **Checkpoint**: All `useMenuList` unit tests pass — hook is complete and independently tested
 
@@ -47,13 +47,13 @@
 
 ### Tests for User Story 1
 
-- [ ] T009 [P] [US1] Write failing integration tests for `MenuCard` — renders name, type label, date, rations, weight in `tests/integration/menu-list/MenuCard.test.tsx`
-- [ ] T010 [P] [US1] Write failing integration tests for home page — loading state, empty state, list of cards in `tests/integration/menu-list/HomePage.test.tsx`
+- [X] T009 [P] [US1] Write failing integration tests for `MenuCard` — renders name, type label, date, rations, weight in `tests/integration/menu-list/MenuCard.test.tsx`
+- [X] T010 [P] [US1] Write failing integration tests for home page — loading state, empty state, list of cards in `tests/integration/menu-list/HomePage.test.tsx`
 
 ### Implementation for User Story 1
 
-- [ ] T011 [P] [US1] Implement `MenuCard` component — displays name, `MENU_TYPE_LABELS[type]`, formatted `createdAt`, `totalRations.toFixed(2)`, `Math.round(totalWeight)`g in `app/components/MenuCard.tsx`
-- [ ] T012 [US1] Replace `app/page.tsx` — remove rations list, use `useMenuList`, show loading state, show `EmptyState` when `!hasMenus`, render `MenuCard` per menu in `filteredMenus`
+- [X] T011 [P] [US1] Implement `MenuCard` component — displays name, `MENU_TYPE_LABELS[type]`, formatted `createdAt`, `totalRations.toFixed(2)`, `Math.round(totalWeight)`g in `app/components/MenuCard.tsx`
+- [X] T012 [US1] Replace `app/page.tsx` — remove rations list, use `useMenuList`, show loading state, show `EmptyState` when `!hasMenus`, render `MenuCard` per menu in `filteredMenus`
 
 **Checkpoint**: US1 independently testable — save a menu, go to `/`, see the card. Empty state works. ✅
 
@@ -67,13 +67,13 @@
 
 ### Tests for User Story 2
 
-- [ ] T013 [US2] Write failing integration tests for `MenuCard` delete — button triggers `onDelete` with correct id, confirm/cancel behavior in `tests/integration/menu-list/MenuCard.test.tsx`
+- [X] T013 [US2] Write failing integration tests for `MenuCard` delete — button triggers `onDelete` with correct id, confirm/cancel behavior in `tests/integration/menu-list/MenuCard.test.tsx`
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Add Delete button to `MenuCard` that calls `onDelete(menu.id)` in `app/components/MenuCard.tsx`
-- [ ] T015 [US2] Pass `deleteMenu` from `useMenuList` as `onDelete` prop to each `MenuCard` in `app/page.tsx`
-- [ ] T016 [US2] Show `error` message from `useMenuList` below the header when deletion fails in `app/page.tsx`
+- [X] T014 [US2] Add Delete button to `MenuCard` that calls `onDelete(menu.id)` in `app/components/MenuCard.tsx`
+- [X] T015 [US2] Pass `deleteMenu` from `useMenuList` as `onDelete` prop to each `MenuCard` in `app/page.tsx`
+- [X] T016 [US2] Show `error` message from `useMenuList` below the header when deletion fails in `app/page.tsx`
 
 **Checkpoint**: US2 independently testable — delete works, confirmation required, error shown on failure. ✅
 
@@ -87,14 +87,14 @@
 
 ### Tests for User Story 3
 
-- [ ] T017 [P] [US3] Write failing integration tests for `MenuListFilters` — name input renders, `onNameFilterChange` called on type, reflects `nameFilter` value in `tests/integration/menu-list/MenuListFilters.test.tsx`
-- [ ] T018 [P] [US3] Write failing integration tests for home page name filter — cards filtered on input, "no results" message shown when no match in `tests/integration/menu-list/HomePage.test.tsx`
+- [X] T017 [P] [US3] Write failing integration tests for `MenuListFilters` — name input renders, `onNameFilterChange` called on type, reflects `nameFilter` value in `tests/integration/menu-list/MenuListFilters.test.tsx`
+- [X] T018 [P] [US3] Write failing integration tests for home page name filter — cards filtered on input, "no results" message shown when no match in `tests/integration/menu-list/HomePage.test.tsx`
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Implement `MenuListFilters` component — name `<input>` with `maxLength={200}`, calls `onNameFilterChange` on change in `app/components/MenuListFilters.tsx`
-- [ ] T020 [US3] Add `<MenuListFilters>` above the cards in `app/page.tsx` (only when `hasMenus`), pass `nameFilter` and `setNameFilter`
-- [ ] T021 [US3] Add "no results" message in `app/page.tsx` when `hasMenus && filteredMenus.length === 0`
+- [X] T019 [US3] Implement `MenuListFilters` component — name `<input>` with `maxLength={200}`, calls `onNameFilterChange` on change in `app/components/MenuListFilters.tsx`
+- [X] T020 [US3] Add `<MenuListFilters>` above the cards in `app/page.tsx` (only when `hasMenus`), pass `nameFilter` and `setNameFilter`
+- [X] T021 [US3] Add "no results" message in `app/page.tsx` when `hasMenus && filteredMenus.length === 0`
 
 **Checkpoint**: US3 independently testable — name filter narrows cards in real time; "no results" shown. ✅
 
@@ -108,13 +108,13 @@
 
 ### Tests for User Story 4
 
-- [ ] T022 [P] [US4] Write failing integration tests for `MenuListFilters` — type dropdown renders all options including "All types", `onTypeFilterChange` called with `MenuType` or `null` in `tests/integration/menu-list/MenuListFilters.test.tsx`
-- [ ] T023 [P] [US4] Write failing integration tests for home page combined filter — AND logic, both filters active, only matching cards shown in `tests/integration/menu-list/HomePage.test.tsx`
+- [X] T022 [P] [US4] Write failing integration tests for `MenuListFilters` — type dropdown renders all options including "All types", `onTypeFilterChange` called with `MenuType` or `null` in `tests/integration/menu-list/MenuListFilters.test.tsx`
+- [X] T023 [P] [US4] Write failing integration tests for home page combined filter — AND logic, both filters active, only matching cards shown in `tests/integration/menu-list/HomePage.test.tsx`
 
 ### Implementation for User Story 4
 
-- [ ] T024 [US4] Add type `<select>` to `MenuListFilters` component — "All types" option (value `""`), one option per `MENU_TYPE_ORDER` entry using `MENU_TYPE_LABELS`, calls `onTypeFilterChange` in `app/components/MenuListFilters.tsx`
-- [ ] T025 [US4] Pass `typeFilter` and `setTypeFilter` from `useMenuList` to `<MenuListFilters>` in `app/page.tsx`
+- [X] T024 [US4] Add type `<select>` to `MenuListFilters` component — "All types" option (value `""`), one option per `MENU_TYPE_ORDER` entry using `MENU_TYPE_LABELS`, calls `onTypeFilterChange` in `app/components/MenuListFilters.tsx`
+- [X] T025 [US4] Pass `typeFilter` and `setTypeFilter` from `useMenuList` to `<MenuListFilters>` in `app/page.tsx`
 
 **Checkpoint**: US4 independently testable — type filter works, combined AND logic works. All 4 user stories functional. ✅
 
@@ -124,9 +124,9 @@
 
 **Purpose**: Final validation and cleanup
 
-- [ ] T026 [P] Run full test suite and confirm all tests pass: `npm test --run`
-- [ ] T027 [P] Validate quickstart.md scenarios manually in the browser — all 4 user stories
-- [ ] T028 Mark all implemented tasks complete in this file and commit `tasks.md`
+- [X] T026 [P] Run full test suite and confirm all tests pass: `npm test --run`
+- [X] T027 [P] Validate quickstart.md scenarios manually in the browser — all 4 user stories
+- [X] T028 Mark all implemented tasks complete in this file and commit `tasks.md`
 
 ---
 
