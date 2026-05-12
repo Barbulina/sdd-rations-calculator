@@ -270,33 +270,33 @@
 
 ### Tests First (RED)
 
-- [ ] T138 [US2] Write `tests/integration/menu-builder/WeightInputDialog.test.ts` - test dialog renders
-- [ ] T139 [P] [US2] Write tests for weight validation (must be > 0 and <= 10000)
-- [ ] T140 [P] [US2] Write tests for "Add" button disabled when weight invalid
-- [ ] T141 [P] [US2] Write tests for "Cancel" button closes dialog
-- [ ] T142 [P] [US2] Write tests for Escape key closes dialog
-- [ ] T143 [P] [US2] Write tests for successful submission calls onAdd with weight
-- [ ] T144 [P] [US2] Write tests for auto-focus on weight input
-- [ ] T145 [US2] Run `npm test` → verify all dialog tests fail (RED phase)
+- [X] T138 [US2] Write `tests/integration/menu-builder/WeightInputDialog.test.ts` - test dialog renders
+- [X] T139 [P] [US2] Write tests for weight validation (must be > 0 and <= 10000)
+- [X] T140 [P] [US2] Write tests for "Add" button disabled when weight invalid
+- [X] T141 [P] [US2] Write tests for "Cancel" button closes dialog
+- [X] T142 [P] [US2] Write tests for Escape key closes dialog
+- [X] T143 [P] [US2] Write tests for successful submission calls onAdd with weight
+- [X] T144 [P] [US2] Write tests for auto-focus on weight input
+- [X] T145 [US2] Run `npm test` → verify all dialog tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [ ] T146 [US2] Create `app/components/WeightInputDialog.tsx` component
-- [ ] T147 [US2] Implement modal overlay with backdrop
-- [ ] T148 [US2] Implement weight input (type="number", min=1, max=10000)
-- [ ] T149 [US2] Implement validation state (valid/invalid)
-- [ ] T150 [US2] Implement real-time validation onChange
-- [ ] T151 [US2] Implement "Add" button (disabled when invalid)
-- [ ] T152 [US2] Implement "Cancel" button calling onCancel prop
-- [ ] T153 [US2] Implement Escape key handler
-- [ ] T154 [US2] Implement auto-focus using useEffect + inputRef
-- [ ] T155 [US2] Add ARIA attributes (role="dialog", aria-labelledby, aria-describedby)
-- [ ] T156 [US2] Run `npm test` → verify all dialog tests pass (GREEN phase)
+- [X] T146 [US2] Create `app/components/WeightInputDialog.tsx` component
+- [X] T147 [US2] Implement modal overlay with backdrop
+- [X] T148 [US2] Implement weight input (type="number", min=1, max=10000)
+- [X] T149 [US2] Implement validation state (valid/invalid)
+- [X] T150 [US2] Implement real-time validation onChange
+- [X] T151 [US2] Implement "Add" button (disabled when invalid)
+- [X] T152 [US2] Implement "Cancel" button calling onCancel prop
+- [X] T153 [US2] Implement Escape key handler
+- [X] T154 [US2] Implement auto-focus using useEffect + inputRef
+- [X] T155 [US2] Add ARIA attributes (role="dialog", aria-labelledby, aria-describedby)
+- [X] T156 [US2] Run `npm test` → verify all dialog tests pass (GREEN phase) - 24/24 tests passing
 
 ### Refactor
 
-- [ ] T157 [US2] Extract modal wrapper into reusable `Dialog` component if useful
-- [ ] T158 [US2] Run `npm test` → ensure tests still pass after refactoring
+- [ ] T157 [US2] Extract modal wrapper into reusable `Dialog` component if useful - SKIP: Component is simple enough
+- [ ] T158 [US2] Run `npm test` → ensure tests still pass after refactoring - SKIP: No refactoring needed
 
 ---
 
