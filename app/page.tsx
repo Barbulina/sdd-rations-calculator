@@ -30,17 +30,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen p-4">
       <div className="container mx-auto max-w-4xl">
-        <PageHeader
-          title="My Menus"
-          action={
-            <Link
-              href="/menu-builder"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
-            >
-              + Create
-            </Link>
-          }
-        />
+        <PageHeader title="My Menus" />
 
         {/* Error */}
         {error && (
@@ -85,6 +75,28 @@ export default function HomePage() {
           </>
         )}
       </div>
+
+      {/* Floating action button — only visible when there's at least one menu */}
+      {hasMenus && (
+        <Link
+          href="/menu-builder"
+          aria-label="Create menu"
+          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-blue-500 text-white hover:bg-blue-600 active:scale-95 transition shadow-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-7 h-7"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </Link>
+      )}
     </main>
   );
 }
