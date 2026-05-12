@@ -119,3 +119,20 @@ describe("MenuCard — delete action (T013)", () => {
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("MenuCard — navigation link (T010)", () => {
+  it("has a link to the menu detail page", () => {
+    render(<MenuCard menu={baseMenu} onDelete={vi.fn()} />);
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("href", "/menu/menu-123");
+  });
+
+  it("delete button does NOT navigate (stops propagation)", async () => {
+    const onDelete = vi.fn();
+    render(<MenuCard menu={baseMenu} onDelete={onDelete} />);
+    const deleteBtn = screen.getByRole("button", { name: /delete/i });
+    // delete button must not be inside the <a> link element
+    const link = screen.getByRole("link");
+    expect(link).not.toContainElement(deleteBtn);
+  });
+});
