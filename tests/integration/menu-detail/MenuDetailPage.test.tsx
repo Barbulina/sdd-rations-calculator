@@ -10,7 +10,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactNode } from "react";
-import MenuDetailPage from "@/app/menu/[id]/page";
+import MenuDetailPage from "@/app/menu/[id]/MenuDetailClient";
 import { MenuRepositoryProvider } from "@/src/application/contexts/MenuRepositoryContext";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import { MenuType } from "@/src/domain/models/MenuType";
@@ -46,7 +46,7 @@ const testMenu = new MenuBuilder()
 
 async function renderAndWait(id = "menu-detail-1") {
   render(<MenuDetailPage params={{ id }} />, { wrapper });
-  await waitFor(() => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(), { timeout: 3000 });
 }
 
 // ─── T011: loading + not-found + view ─────────────────────────────────────

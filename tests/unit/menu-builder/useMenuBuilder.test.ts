@@ -497,7 +497,7 @@ describe("useMenuBuilder", () => {
       mockRepository.save = mockSave;
 
       await act(async () => {
-        await result.current.saveMenu("Test Menu", "frutas");
+        await result.current.saveMenu("Test Menu", "LUNCH");
       });
 
       expect(mockSave).toHaveBeenCalledTimes(1);
@@ -529,7 +529,7 @@ describe("useMenuBuilder", () => {
       mockRepository.save = vi.fn().mockReturnValue(promise);
 
       // Start save without awaiting
-      const saveCall = result.current.saveMenu("Test Menu", "frutas");
+      const saveCall = result.current.saveMenu("Test Menu", "LUNCH");
 
       // Should be loading now
       await waitFor(() => {
@@ -556,7 +556,7 @@ describe("useMenuBuilder", () => {
       mockRepository.save = vi.fn().mockResolvedValue({} as Menu);
 
       await act(async () => {
-        await result.current.saveMenu("Test Menu", "frutas");
+        await result.current.saveMenu("Test Menu", "LUNCH");
       });
 
       expect(result.current.items).toHaveLength(0);
@@ -568,7 +568,7 @@ describe("useMenuBuilder", () => {
       await expect(
         act(async () => {
           try {
-            await result.current.saveMenu("Test Menu", "frutas");
+            await result.current.saveMenu("Test Menu", "LUNCH");
           } catch (e: any) {
             throw e;
           }
@@ -630,7 +630,7 @@ describe("useMenuBuilder", () => {
 
       await act(async () => {
         try {
-          await result.current.saveMenu("Test Menu", "frutas");
+          await result.current.saveMenu("Test Menu", "LUNCH");
         } catch (e) {
           // Expected to throw
         }
@@ -651,7 +651,7 @@ describe("useMenuBuilder", () => {
 
       try {
         await act(async () => {
-          await result.current.saveMenu("Test Menu", "frutas");
+          await result.current.saveMenu("Test Menu", "LUNCH");
         });
       } catch (e) {
         // Expected to throw
@@ -674,7 +674,7 @@ describe("useMenuBuilder", () => {
 
       await act(async () => {
         try {
-          await result.current.saveMenu("Test Menu", "frutas");
+          await result.current.saveMenu("Test Menu", "LUNCH");
         } catch (e) {
           // Expected
         }
