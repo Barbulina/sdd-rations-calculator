@@ -5,6 +5,7 @@ import { useMenuList } from "@/src/application/hooks/useMenuList";
 import { MenuCard } from "./components/MenuCard";
 import { MenuListFilters } from "./components/MenuListFilters";
 import { EmptyState } from "./components/EmptyState";
+import { PageHeader } from "./components/PageHeader";
 
 /**
  * Home Page — Menu List
@@ -29,16 +30,17 @@ export default function HomePage() {
   return (
     <main className="min-h-screen p-4">
       <div className="container mx-auto max-w-4xl">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">My Menus</h1>
-          <Link
-            href="/menu-builder"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
-          >
-            + Create
-          </Link>
-        </div>
+        <PageHeader
+          title="My Menus"
+          action={
+            <Link
+              href="/menu-builder"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition font-medium"
+            >
+              + Create
+            </Link>
+          }
+        />
 
         {/* Error */}
         {error && (

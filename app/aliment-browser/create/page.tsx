@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCustomAlimentRepository } from "@/src/application/contexts/CustomAlimentRepositoryContext";
 import { RationsType } from "@/src/domain/models/RationsType";
+import { PageHeader } from "@/app/components/PageHeader";
 
 const CATEGORY_LABELS: Record<RationsType, string> = {
   [RationsType.lacteal]: "Lácteos",
@@ -97,7 +98,7 @@ export default function CreateCustomAlimentPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-6">Create Custom Aliment</h1>
+      <PageHeader title="Create Custom Aliment" backHref="/aliment-browser" />
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name Field */}
