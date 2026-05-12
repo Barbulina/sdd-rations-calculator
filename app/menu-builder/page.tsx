@@ -75,12 +75,25 @@ export default function MenuBuilderPage() {
           Create Menu
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Search for aliments, add weights, and save your menu
+          Start by entering menu details, then add aliments
         </p>
+      </div>
+
+      {/* Save Menu Form - NOW AT TOP */}
+      <div className="mb-8">
+        <SaveMenuForm
+          hasItems={items.length > 0}
+          onSave={handleSaveMenu}
+          isLoading={isLoading}
+          error={error}
+        />
       </div>
 
       {/* Aliment Search */}
       <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+          Add Aliments
+        </h2>
         <AutocompleteSearch
           onSelectAliment={handleAlimentSelect}
         />
@@ -116,16 +129,6 @@ export default function MenuBuilderPage() {
           />
         </div>
       )}
-
-      {/* Save Menu Form */}
-      <div className="mt-8">
-        <SaveMenuForm
-          hasItems={items.length > 0}
-          onSave={handleSaveMenu}
-          isLoading={isLoading}
-          error={error}
-        />
-      </div>
     </div>
   );
 }

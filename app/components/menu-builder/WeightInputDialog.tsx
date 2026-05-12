@@ -17,6 +17,7 @@ export function WeightInputDialog({
 }: WeightInputDialogProps) {
   const [weight, setWeight] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-focus input when dialog opens
@@ -31,6 +32,7 @@ export function WeightInputDialog({
     if (isOpen) {
       setWeight('');
       setError('');
+      setIsSubmitting(false);
     }
   }, [isOpen]);
 
@@ -61,9 +63,13 @@ export function WeightInputDialog({
 
   // Handle submit
   const handleSubmit = () => {
+    if (isSubmitting) return; // Prevent double submit
+    
     if (validateWeight(weight)) {
+      setIsSubmitting(true);
       const numValue = parseFloat(weight);
       onAdd(numValue);
+      // Note: Dialog will be closed by parent, which resets isSubmitting via useEffect
     }
   };
 
@@ -162,14 +168,14 @@ export function WeightInputDialog({
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={!isValid}
+            disabled={!isValid || isSubmitting}
             className={`px-4 py-2 rounded-md font-medium transition ${
-              isValid
+              isValid && !isSubmitting
                 ? 'bg-blue-500 text-white hover:bg-blue-600'
                 : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed'
             }`}
           >
-            Add
+            {isSubmitting ? 'Adding...' : 'Add'}
           </button>
         </div>
       </div>
