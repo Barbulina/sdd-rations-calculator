@@ -3,18 +3,28 @@
  * Tests for aliment search with autocomplete functionality
  */
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { AutocompleteSearch } from "@/app/components/menu-builder/AutocompleteSearch";
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
 import { RationsType } from "@/src/domain/models/RationsType";
 
-// Mock useCompositeAliments hook
+// Use vi.hoisted to create a stable mock repository object (avoids infinite loop caused by
+// new object reference on every render triggering useEffect re-runs in the component)
+const { mockRepository, mockFindAll } = vi.hoisted(() => {
+  const findAll = vi.fn();
+  return { mockRepository: { findAll }, mockFindAll: findAll };
+});
+
 vi.mock("@/src/application/hooks/useCompositeAliments", () => ({
-  useCompositeAliments: () => ({
-    findAll: vi.fn().mockResolvedValue(mockAliments),
-  }),
+  useCompositeAliments: () => mockRepository,
 }));
 
 const mockAliments: UnifiedAliment[] = [
@@ -46,6 +56,12 @@ describe("AutocompleteSearch", () => {
   beforeEach(() => {
     onSelectAliment = vi.fn<[(aliment: UnifiedAliment) => void]>();
     vi.clearAllMocks();
+    mockFindAll.mockResolvedValue(mockAliments);
+  });
+
+  afterEach(() => {
+    // Always restore real timers to prevent leakage between tests
+    vi.useRealTimers();
   });
 
   describe("rendering", () => {
@@ -73,8 +89,13 @@ describe("AutocompleteSearch", () => {
 
   describe("debounced search", () => {
     it("should debounce search input by 300ms", async () => {
-      vi.useFakeTimers();
+      vi.useFakeTimers({ shouldAdvanceTime: true });
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
+
+      // Wait for aliments to load
+      await act(async () => {
+        await Promise.resolve();
+      });
 
       const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
 
@@ -84,42 +105,50 @@ describe("AutocompleteSearch", () => {
       // Suggestions should not appear immediately
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
 
-      // Fast-forward 300ms
-      vi.advanceTimersByTime(300);
-
-      // Wait for suggestions to appear
-      await waitFor(() => {
-        expect(screen.getByRole("listbox")).toBeInTheDocument();
+      // Fast-forward 300ms and flush React state
+      await act(async () => {
+        vi.advanceTimersByTime(300);
+        await Promise.resolve();
       });
 
-      vi.useRealTimers();
+      expect(screen.getByRole("listbox")).toBeInTheDocument();
     });
 
     it("should reset debounce timer on new input", async () => {
-      vi.useFakeTimers();
+      vi.useFakeTimers({ shouldAdvanceTime: true });
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
+
+      // Wait for aliments to load
+      await act(async () => {
+        await Promise.resolve();
+      });
 
       const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
 
       // Type first letter
       fireEvent.change(searchInput, { target: { value: "m" } });
-      vi.advanceTimersByTime(200);
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+        await Promise.resolve();
+      });
 
       // Type second letter before debounce completes
       fireEvent.change(searchInput, { target: { value: "ma" } });
-      vi.advanceTimersByTime(200);
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+        await Promise.resolve();
+      });
 
       // Should not show results yet (timer was reset)
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
 
       // Complete the debounce
-      vi.advanceTimersByTime(100);
-
-      await waitFor(() => {
-        expect(screen.getByRole("listbox")).toBeInTheDocument();
+      await act(async () => {
+        vi.advanceTimersByTime(100);
+        await Promise.resolve();
       });
 
-      vi.useRealTimers();
+      expect(screen.getByRole("listbox")).toBeInTheDocument();
     });
   });
 

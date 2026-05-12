@@ -3,7 +3,7 @@
  * Follows the builder pattern for test fixtures
  */
 
-import type { RationsType } from "@/src/domain/models/RationsType";
+import { MenuType } from "@/src/domain/models/MenuType";
 import type { Menu } from "../../../specs/004-menu-builder/contracts/types";
 import { MenuItemBuilder, createMenuItem } from "./MenuItemBuilder";
 
@@ -13,7 +13,7 @@ import { MenuItemBuilder, createMenuItem } from "./MenuItemBuilder";
 export class MenuBuilder {
   private id: string = "test-menu-uuid-1234";
   private name: string = "Test Menu";
-  private type: RationsType = "frutas";
+  private type: MenuType = MenuType.LUNCH;
   private items: any[] = [createMenuItem()];
   private createdAt: Date = new Date("2026-02-12T10:00:00.000Z");
   private updatedAt?: Date;
@@ -37,7 +37,7 @@ export class MenuBuilder {
   /**
    * Set custom type
    */
-  withType(type: RationsType): this {
+  withType(type: MenuType): this {
     this.type = type;
     return this;
   }

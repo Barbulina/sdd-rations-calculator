@@ -12,7 +12,7 @@ import {
   createMenuItem,
   createTestAliment,
 } from "./MenuItemBuilder";
-import type { RationsType } from "@/src/domain/models/RationsType";
+import { MenuType } from "@/src/domain/models/MenuType";
 
 describe("Menu", () => {
   describe("creation", () => {
@@ -20,29 +20,29 @@ describe("Menu", () => {
       const item1 = createMenuItem({ weightGrams: 150, rations: 1.36 });
       const item2 = createMenuItem({ weightGrams: 100, rations: 0.91 });
 
-      const menu = new Menu("Afternoon Snack", "frutas", [item1, item2]);
+      const menu = new Menu("Afternoon Snack", MenuType.LUNCH, [item1, item2]);
 
       expect(menu.id).toBeDefined();
       expect(menu.id).toMatch(
         /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
       );
       expect(menu.name).toBe("Afternoon Snack");
-      expect(menu.type).toBe("frutas");
+      expect(menu.type).toBe(MenuType.LUNCH);
       expect(menu.items).toHaveLength(2);
       expect(menu.createdAt).toBeInstanceOf(Date);
     });
 
     it("should generate unique UUIDs for different menus", () => {
       const items = [createMenuItem()];
-      const menu1 = new Menu("Menu 1", "frutas", items);
-      const menu2 = new Menu("Menu 2", "frutas", items);
+      const menu1 = new Menu("Menu 1", MenuType.LUNCH, items);
+      const menu2 = new Menu("Menu 2", MenuType.LUNCH, items);
 
       expect(menu1.id).not.toBe(menu2.id);
     });
 
     it("should trim menu name", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("  Trimmed Name  ", "frutas", items);
+      const menu = new Menu("  Trimmed Name  ", MenuType.LUNCH, items);
 
       expect(menu.name).toBe("Trimmed Name");
     });
@@ -52,7 +52,7 @@ describe("Menu", () => {
     it("should reject empty name after trimming", () => {
       const items = [createMenuItem()];
 
-      expect(() => new Menu("", "frutas", items)).toThrow(
+      expect(() => new Menu("", MenuType.LUNCH, items)).toThrow(
         "Menu name is required",
       );
     });
@@ -60,7 +60,7 @@ describe("Menu", () => {
     it("should reject whitespace-only name", () => {
       const items = [createMenuItem()];
 
-      expect(() => new Menu("   ", "frutas", items)).toThrow(
+      expect(() => new Menu("   ", MenuType.LUNCH, items)).toThrow(
         "Menu name is required",
       );
     });
@@ -69,7 +69,7 @@ describe("Menu", () => {
       const items = [createMenuItem()];
       const longName = "a".repeat(201);
 
-      expect(() => new Menu(longName, "frutas", items)).toThrow(
+      expect(() => new Menu(longName, MenuType.LUNCH, items)).toThrow(
         "Menu name must not exceed 200 characters",
       );
     });
@@ -77,7 +77,7 @@ describe("Menu", () => {
     it("should accept name at 200 character boundary", () => {
       const items = [createMenuItem()];
       const maxName = "a".repeat(200);
-      const menu = new Menu(maxName, "frutas", items);
+      const menu = new Menu(maxName, MenuType.LUNCH, items);
 
       expect(menu.name).toBe(maxName);
       expect(menu.name.length).toBe(200);
@@ -85,16 +85,13 @@ describe("Menu", () => {
   });
 
   describe("type validation", () => {
-    it("should accept valid RationsType", () => {
+    it("should accept valid MenuType", () => {
       const items = [createMenuItem()];
-      const validTypes: RationsType[] = [
-        "carnes",
-        "pescados",
-        "verduras y hortalizas",
-        "frutas",
-        "cereales, harinas, legumbres y tuberculos",
-        "leche y derivados",
-        "grasas",
+      const validTypes: MenuType[] = [
+        MenuType.BREAKFAST,
+        MenuType.LUNCH,
+        MenuType.DINNER,
+        MenuType.SNACK,
       ];
 
       validTypes.forEach((type) => {
@@ -122,14 +119,14 @@ describe("Menu", () => {
 
   describe("items validation", () => {
     it("should reject empty items array", () => {
-      expect(() => new Menu("Test Menu", "frutas", [])).toThrow(
+      expect(() => new Menu("Test Menu", MenuType.LUNCH, [])).toThrow(
         "Menu must contain at least one aliment",
       );
     });
 
     it("should accept single item", () => {
       const item = createMenuItem();
-      const menu = new Menu("Test Menu", "frutas", [item]);
+      const menu = new Menu("Test Menu", MenuType.LUNCH, [item]);
 
       expect(menu.items).toHaveLength(1);
       expect(menu.items[0]).toEqual(item);
@@ -141,7 +138,7 @@ describe("Menu", () => {
         createMenuItem({ id: "id-2" }),
         createMenuItem({ id: "id-3" }),
       ];
-      const menu = new Menu("Test Menu", "frutas", items);
+      const menu = new Menu("Test Menu", MenuType.LUNCH, items);
 
       expect(menu.items).toHaveLength(3);
     });
@@ -150,7 +147,7 @@ describe("Menu", () => {
   describe("totalWeight calculation", () => {
     it("should calculate total weight from single item", () => {
       const item = createMenuItem({ weightGrams: 150 });
-      const menu = new Menu("Test", "frutas", [item]);
+      const menu = new Menu("Test", MenuType.LUNCH, [item]);
 
       expect(menu.totalWeight).toBe(150);
     });
@@ -161,7 +158,7 @@ describe("Menu", () => {
         createMenuItem({ weightGrams: 100 }),
         createMenuItem({ weightGrams: 50 }),
       ];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(menu.totalWeight).toBe(300); // 150 + 100 + 50
     });
@@ -171,7 +168,7 @@ describe("Menu", () => {
         createMenuItem({ weightGrams: 5000 }),
         createMenuItem({ weightGrams: 4999 }),
       ];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(menu.totalWeight).toBe(9999);
     });
@@ -180,7 +177,7 @@ describe("Menu", () => {
   describe("totalRations calculation", () => {
     it("should calculate total rations from single item", () => {
       const item = createMenuItem({ rations: 1.36 });
-      const menu = new Menu("Test", "frutas", [item]);
+      const menu = new Menu("Test", MenuType.LUNCH, [item]);
 
       expect(menu.totalRations).toBe(1.36);
     });
@@ -191,7 +188,7 @@ describe("Menu", () => {
         createMenuItem({ rations: 2.5 }),
         createMenuItem({ rations: 0.91 }),
       ];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(menu.totalRations).toBe(4.77); // 1.36 + 2.5 + 0.91
     });
@@ -202,7 +199,7 @@ describe("Menu", () => {
         createMenuItem({ rations: 2.222 }),
         createMenuItem({ rations: 3.333 }),
       ];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       // 1.111 + 2.222 + 3.333 = 6.666 → 6.67
       expect(menu.totalRations).toBe(6.67);
@@ -214,7 +211,7 @@ describe("Menu", () => {
         createMenuItem({ rations: 2 }),
         createMenuItem({ rations: 3 }),
       ];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(menu.totalRations).toBe(5);
     });
@@ -224,7 +221,7 @@ describe("Menu", () => {
     it("should auto-generate createdAt on creation", () => {
       const items = [createMenuItem()];
       const before = new Date();
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
       const after = new Date();
 
       expect(menu.createdAt).toBeInstanceOf(Date);
@@ -234,7 +231,7 @@ describe("Menu", () => {
 
     it("should set createdAt to current time", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
       const now = new Date();
 
       // Within 1 second tolerance
@@ -246,7 +243,7 @@ describe("Menu", () => {
   describe("updatedAt timestamp", () => {
     it("should not have updatedAt on initial creation", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(menu.updatedAt).toBeUndefined();
     });
@@ -258,7 +255,7 @@ describe("Menu", () => {
   describe("immutability", () => {
     it("should not allow modification of name after creation", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(() => {
         // @ts-expect-error Testing immutability
@@ -268,7 +265,7 @@ describe("Menu", () => {
 
     it("should not allow modification of items after creation", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(() => {
         // @ts-expect-error Testing immutability
@@ -278,7 +275,7 @@ describe("Menu", () => {
 
     it("should not allow modification of totalWeight after creation", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(() => {
         // @ts-expect-error Testing immutability
@@ -290,7 +287,7 @@ describe("Menu", () => {
   describe("items as snapshot", () => {
     it("should store items as snapshot (prevent external mutations)", () => {
       const items = [createMenuItem({ weightGrams: 150 })];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       // Modify original array
       items.push(createMenuItem({ weightGrams: 200 }));
@@ -306,7 +303,7 @@ describe("Menu", () => {
   describe("UUID generation", () => {
     it("should use crypto.randomUUID for ID generation", () => {
       const items = [createMenuItem()];
-      const menu = new Menu("Test", "frutas", items);
+      const menu = new Menu("Test", MenuType.LUNCH, items);
 
       expect(menu.id).toMatch(
         /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
@@ -318,7 +315,7 @@ describe("Menu", () => {
       const ids = new Set<string>();
 
       for (let i = 0; i < 100; i++) {
-        const menu = new Menu("Test", "frutas", items);
+        const menu = new Menu("Test", MenuType.LUNCH, items);
         ids.add(menu.id);
       }
 
