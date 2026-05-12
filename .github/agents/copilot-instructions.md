@@ -30,7 +30,6 @@ TypeScript 5, React 19: Follow standard conventions
 ## Recent Changes
 - 005-menu-list: Added TypeScript 5.x (strict mode), React 19, Next.js 15.1.6 + React, Next.js App Router, Tailwind CSS, Material Design 3 tokens
 - 003-aliment-catalog: Added TypeScript 5.x (strict mode) + Next.js 15.1.6, React 19, next-themes 0.4.4, Tailwind CSS 3.4.17
-- 003-aliment-catalog: Added TypeScript 5.x (strict mode) + Next.js 15.x App Router, React 19, Tailwind CSS 3.4
 
 
 <!-- MANUAL ADDITIONS START -->
