@@ -19,7 +19,7 @@ export function MenuItemCard({
   const categoryName = item.aliment.type
     .replace(/_/g, " ")
     .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {

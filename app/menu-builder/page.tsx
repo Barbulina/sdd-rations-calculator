@@ -68,10 +68,8 @@ export default function MenuBuilderPage() {
 
   const handleSaveMenu = async () => {
     if (menuName.trim() && menuType && items.length > 0) {
-      const menu = await saveMenu(menuName, menuType as MenuType);
-      if (menu) {
-        router.push("/");
-      }
+      await saveMenu(menuName, menuType as MenuType);
+      router.push("/");
     }
   };
 
@@ -146,8 +144,8 @@ export default function MenuBuilderPage() {
         <div className="mb-6">
           <MenuItemsList
             items={items}
-            onRemove={removeItem}
-            onEditWeight={handleEditWeight}
+            onRemoveItem={removeItem}
+            onUpdateWeight={updateItemWeight}
           />
         </div>
       )}
