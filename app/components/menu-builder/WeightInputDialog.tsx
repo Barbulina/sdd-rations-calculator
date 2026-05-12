@@ -73,13 +73,15 @@ export function WeightInputDialog({
     }
   };
 
-  // Handle Enter key
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  // Handle Enter key on input only
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
+      e.stopPropagation(); // Prevent event bubbling
       handleSubmit();
     } else if (e.key === 'Escape') {
       e.preventDefault();
+      e.stopPropagation();
       onCancel();
     }
   };
@@ -100,7 +102,6 @@ export function WeightInputDialog({
       data-testid="dialog-backdrop"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
       onClick={handleBackdropClick}
-      onKeyDown={handleKeyDown}
     >
       <div
         role="dialog"
@@ -141,7 +142,7 @@ export function WeightInputDialog({
             max="10000"
             value={weight}
             onChange={handleWeightChange}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleInputKeyDown}
             className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
               error
                 ? 'border-red-500 focus:ring-red-500'
