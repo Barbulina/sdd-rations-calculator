@@ -10,9 +10,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactNode } from "react";
 import HomePage from "@/app/page";
-import {
-  MenuRepositoryProvider,
-} from "@/src/application/contexts/MenuRepositoryContext";
+import { MenuRepositoryProvider } from "@/src/application/contexts/MenuRepositoryContext";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import { MenuType } from "@/src/domain/models/MenuType";
 import { MenuBuilder } from "../../unit/menu-list/MenuBuilder";

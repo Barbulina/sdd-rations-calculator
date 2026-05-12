@@ -28,7 +28,10 @@ describe("MenuListFilters — name input (T017)", () => {
   it("calls onNameFilterChange with typed value", async () => {
     const onNameFilterChange = vi.fn();
     render(
-      <MenuListFilters {...defaultProps} onNameFilterChange={onNameFilterChange} />,
+      <MenuListFilters
+        {...defaultProps}
+        onNameFilterChange={onNameFilterChange}
+      />,
     );
     await userEvent.type(screen.getByPlaceholderText(/search/i), "abc");
     expect(onNameFilterChange).toHaveBeenCalled();
@@ -58,12 +61,16 @@ describe("MenuListFilters — type dropdown (T022)", () => {
 
   it("includes 'All types' option", () => {
     render(<MenuListFilters {...defaultProps} />);
-    expect(screen.getByRole("option", { name: "All types" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("option", { name: "All types" }),
+    ).toBeInTheDocument();
   });
 
   it("includes Breakfast option", () => {
     render(<MenuListFilters {...defaultProps} />);
-    expect(screen.getByRole("option", { name: "Breakfast" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("option", { name: "Breakfast" }),
+    ).toBeInTheDocument();
   });
 
   it("includes Lunch option", () => {

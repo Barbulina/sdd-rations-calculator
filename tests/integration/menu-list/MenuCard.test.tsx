@@ -17,8 +17,28 @@ const baseMenu = new MenuBuilder()
   .withType(MenuType.BREAKFAST)
   .withCreatedAt(new Date("2026-05-12T08:00:00.000Z"))
   .withItems([
-    { id: "i1", aliment: { name: "apple", type: "frutas", gramsToCarbohydrate: 110, bloodGlucoseIndex: 38 }, weightGrams: 150, rations: 1.36 },
-    { id: "i2", aliment: { name: "bread", type: "cereales", gramsToCarbohydrate: 20, bloodGlucoseIndex: 70 }, weightGrams: 60, rations: 3.0 },
+    {
+      id: "i1",
+      aliment: {
+        name: "apple",
+        type: "frutas",
+        gramsToCarbohydrate: 110,
+        bloodGlucoseIndex: 38,
+      },
+      weightGrams: 150,
+      rations: 1.36,
+    },
+    {
+      id: "i2",
+      aliment: {
+        name: "bread",
+        type: "cereales",
+        gramsToCarbohydrate: 20,
+        bloodGlucoseIndex: 70,
+      },
+      weightGrams: 60,
+      rations: 3.0,
+    },
   ])
   .build();
 
@@ -82,9 +102,7 @@ describe("MenuCard — rendering (T009)", () => {
 describe("MenuCard — delete action (T013)", () => {
   it("has a delete button", () => {
     render(<MenuCard menu={baseMenu} onDelete={vi.fn()} />);
-    expect(
-      screen.getByRole("button", { name: /delete/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /delete/i })).toBeInTheDocument();
   });
 
   it("calls onDelete with the menu id when delete button clicked", async () => {
