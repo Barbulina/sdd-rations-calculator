@@ -1,0 +1,19 @@
+#!/bin/sh
+# Pre-push hook: run tests before pushing to any remote.
+# Installed automatically via `npm install` (prepare script sets core.hooksPath).
+
+echo "🧪 Running tests before push..."
+
+npm test -- --run --exclude="**/design-tokens/**"
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ Tests failed. Push aborted."
+  echo "   Fix the failing tests and try again."
+  echo "   To skip this check (not recommended): git push --no-verify"
+  exit 1
+fi
+
+echo "✅ All tests passed. Proceeding with push."
+exit 0

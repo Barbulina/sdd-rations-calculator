@@ -1,0 +1,28 @@
+name: CI — Tests on Pull Request
+
+# Runs on every PR targeting main. Required check before merge.
+# Configure in GitHub Settings → Branches → Protection rules → "Require status checks".
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --run --exclude="**/design-tokens/**"
