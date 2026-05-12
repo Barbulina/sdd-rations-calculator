@@ -85,7 +85,10 @@ export default function AlimentBrowserPage() {
       <div className="mb-6 space-y-4">
         {/* Search Input */}
         <div>
-          <label htmlFor="search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="search"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Buscar alimento
           </label>
           <Input
@@ -99,7 +102,10 @@ export default function AlimentBrowserPage() {
 
         {/* Category Filter */}
         <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Categoría
           </label>
           <Select
@@ -153,14 +159,18 @@ export default function AlimentBrowserPage() {
 
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-500 dark:text-gray-400">Categoría:</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Categoría:
+                    </span>
                     <span className="font-medium text-gray-900 dark:text-gray-100">
                       {CATEGORY_LABELS[aliment.type]}
                     </span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-gray-500 dark:text-gray-400">Gramos (10g HC):</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Gramos (10g HC):
+                    </span>
                     <span className="font-medium text-gray-900 dark:text-gray-100">
                       {aliment.gramsToCarbohydrate}g
                     </span>
@@ -168,7 +178,9 @@ export default function AlimentBrowserPage() {
 
                   {aliment.bloodGlucoseIndex !== undefined && (
                     <div className="flex justify-between">
-                      <span className="text-gray-500 dark:text-gray-400">Índice Glucémico:</span>
+                      <span className="text-gray-500 dark:text-gray-400">
+                        Índice Glucémico:
+                      </span>
                       <span className="font-medium text-gray-900 dark:text-gray-100">
                         {aliment.bloodGlucoseIndex}
                       </span>

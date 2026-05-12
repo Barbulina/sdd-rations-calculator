@@ -106,7 +106,10 @@ export default function CreateCustomAlimentPage() {
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Name Field */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Name *
           </label>
           <Input
@@ -119,7 +122,9 @@ export default function CreateCustomAlimentPage() {
             disabled={isSubmitting}
           />
           {errors.name && (
-            <p className="text-sm text-red-600 dark:text-red-400 mt-1">{errors.name}</p>
+            <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+              {errors.name}
+            </p>
           )}
         </div>
 
@@ -179,7 +184,10 @@ export default function CreateCustomAlimentPage() {
 
         {/* Type Field */}
         <div>
-          <label htmlFor="type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="type"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Categoría *
           </label>
           <Select
@@ -215,10 +223,7 @@ export default function CreateCustomAlimentPage() {
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-          >
+          <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Creating..." : "Create Aliment"}
           </Button>
         </div>
