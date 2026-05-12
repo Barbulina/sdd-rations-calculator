@@ -6,6 +6,7 @@ import type { AlimentInfo } from "@/src/domain/models/AlimentInfo";
 import { RationsType } from "@/src/domain/models/RationsType";
 import { useCompositeAliments } from "@/src/application/hooks/useCompositeAliments";
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
+import { PageHeader } from "@/app/components/PageHeader";
 
 const CATEGORY_LABELS: Record<RationsType, string> = {
   [RationsType.lacteal]: "Lácteos",
@@ -66,21 +67,18 @@ export default function AlimentBrowserPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <Link href="/" className="text-blue-600 hover:underline">
-          ← Volver
-        </Link>
-      </div>
-
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Catálogo de Alimentos</h1>
-        <Link
-          href="/aliment-browser/create"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-        >
-          + Crear Alimento
-        </Link>
-      </div>
+      <PageHeader
+        title="Catálogo de Alimentos"
+        backHref="/"
+        action={
+          <Link
+            href="/aliment-browser/create"
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-medium"
+          >
+            + Crear Alimento
+          </Link>
+        }
+      />
 
       <div className="mb-6 space-y-4">
         {/* Search Input */}

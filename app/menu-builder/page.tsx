@@ -10,6 +10,7 @@ import { useMenuBuilder } from "@/src/application/hooks/useMenuBuilder";
 import { useMenuRepository } from "@/src/application/contexts/MenuRepositoryContext";
 import { AlimentInfo } from "@/src/domain/models/AlimentInfo";
 import { MenuType } from "@/src/domain/models/MenuType";
+import { PageHeader } from "@/app/components/PageHeader";
 
 export default function MenuBuilderPage() {
   const router = useRouter();
@@ -76,15 +77,7 @@ export default function MenuBuilderPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
-          Create Menu
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Enter menu details, add aliments, and save
-        </p>
-      </div>
+      <PageHeader title="Create Menu" backHref="/" />
 
       {/* Menu Name Input */}
       <div className="mb-6">

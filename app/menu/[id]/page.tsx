@@ -10,6 +10,7 @@ import { WeightInputDialog } from "@/app/components/menu-builder/WeightInputDial
 import { MenuType } from "@/src/domain/models/MenuType";
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
 import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
+import { PageHeader } from "@/app/components/PageHeader";
 
 const MENU_TYPE_LABELS: Record<string, string> = {
   [MenuType.BREAKFAST]: "Breakfast",
@@ -46,7 +47,9 @@ export default function MenuDetailPage({ params }: MenuDetailPageProps) {
     addItem,
   } = useMenuDetail(params.id);
 
-  const [pendingAliment, setPendingAliment] = useState<UnifiedAliment | null>(null);
+  const [pendingAliment, setPendingAliment] = useState<UnifiedAliment | null>(
+    null,
+  );
 
   // ── Loading ────────────────────────────────────────────────────────────
   if (isLoading) {
@@ -86,18 +89,7 @@ export default function MenuDetailPage({ params }: MenuDetailPageProps) {
   return (
     <main className="min-h-screen p-4">
       <div className="container mx-auto max-w-2xl">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <Link
-            href="/"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition"
-          >
-            ← My Menus
-          </Link>
-          <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Menu Detail
-          </h1>
-        </div>
+        <PageHeader title="Menu Detail" backHref="/" />
 
         {/* Error */}
         {error && (
@@ -193,7 +185,9 @@ export default function MenuDetailPage({ params }: MenuDetailPageProps) {
             Add Aliment
           </h2>
           <AutocompleteSearch
-            onSelectAliment={(aliment: UnifiedAliment) => setPendingAliment(aliment)}
+            onSelectAliment={(aliment: UnifiedAliment) =>
+              setPendingAliment(aliment)
+            }
           />
         </section>
 
@@ -219,7 +213,6 @@ export default function MenuDetailPage({ params }: MenuDetailPageProps) {
           }}
           onCancel={() => setPendingAliment(null)}
         />
-
       </div>
     </main>
   );
