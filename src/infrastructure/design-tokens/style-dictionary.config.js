@@ -24,7 +24,7 @@ export default {
       buildPath: 'src/infrastructure/design-tokens/',
       files: [
         {
-          destination: 'tailwind-tokens.js',
+          destination: 'tailwind-tokens.cjs',
           format: 'javascript/module-flat',
         },
       ],
