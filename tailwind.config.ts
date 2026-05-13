@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 // Import generated design tokens
-const tokens = require("./src/infrastructure/design-tokens/tailwind-tokens.js");
+const tokens = require("./src/infrastructure/design-tokens/tailwind-tokens.cjs");
 
 const config: Config = {
   darkMode: 'class',

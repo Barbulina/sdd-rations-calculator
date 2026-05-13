@@ -99,7 +99,7 @@ async function main() {
 
   console.log('🎉 Design token build complete!');
   console.log('   Generated files:');
-  console.log('   - src/infrastructure/design-tokens/tailwind-tokens.js');
+   console.log('   - src/infrastructure/design-tokens/tailwind-tokens.cjs');
   console.log('   - src/infrastructure/design-tokens/css-variables.css');
 }
 

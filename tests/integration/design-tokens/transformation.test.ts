@@ -8,7 +8,7 @@ const TOKENS_PATH = join(
 );
 const TAILWIND_TOKENS_PATH = join(
   process.cwd(),
-  "src/infrastructure/design-tokens/tailwind-tokens.js",
+  "src/infrastructure/design-tokens/tailwind-tokens.cjs",
 );
 const CSS_VARIABLES_PATH = join(
   process.cwd(),

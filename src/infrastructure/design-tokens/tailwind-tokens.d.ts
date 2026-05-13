@@ -193,7 +193,7 @@ export type DesignTokenClassName = DesignTokenClass | string;
  * Token Values Type (for programmatic access)
  *
  * @example
- * import tokens from '@/infrastructure/design-tokens/tailwind-tokens';
+ * import tokens from '@/infrastructure/design-tokens/tailwind-tokens.cjs';
  * const lactealColor: string = tokens['category-lacteal'];
  */
 export interface DesignTokens {

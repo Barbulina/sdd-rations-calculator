@@ -8,8 +8,8 @@ const nextConfig = {
   // are pre-existing issues unrelated to this feature. Tests catch real errors.
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  experimental: {
-    turbo: {},
+  turbopack: {
+    root: process.cwd(),
   },
 };
 
