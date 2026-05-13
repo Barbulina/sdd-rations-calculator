@@ -30,17 +30,13 @@ class LocalStoragePolyfill {
   }
 }
 
-// Install polyfill
-if (
-  typeof globalThis.localStorage === "undefined" ||
-  typeof globalThis.localStorage.setItem !== "function"
-) {
-  Object.defineProperty(globalThis, "localStorage", {
-    value: new LocalStoragePolyfill(),
-    writable: true,
-    configurable: true,
-  });
-}
+// Install polyfill unconditionally so tests can reliably override setItem/getItem
+// (jsdom's native Storage object may not allow property shadowing on all platforms)
+Object.defineProperty(globalThis, "localStorage", {
+  value: new LocalStoragePolyfill(),
+  writable: true,
+  configurable: true,
+});
 
 // Ensure crypto.randomUUID is available
 if (typeof globalThis.crypto === "undefined") {
