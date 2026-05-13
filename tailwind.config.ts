@@ -4,7 +4,7 @@ import type { Config } from "tailwindcss";
 const tokens = require("./src/infrastructure/design-tokens/tailwind-tokens.cjs");
 
 const config: Config = {
-  darkMode: 'class',
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",

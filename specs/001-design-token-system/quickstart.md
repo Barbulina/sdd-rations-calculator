@@ -78,7 +78,7 @@ The design token system provides a single source of truth for all visual design 
 1. In Specify, select **Export** → **Rations Calculator - JSON**
 2. Choose export destination: Download `tokens.json` file
 3. **Verify JSON structure** (should match schema in `contracts/tokens-schema.json`)
-4. **Share with development team**: 
+4. **Share with development team**:
    - Slack notification: "Design tokens updated - exported tokens.json"
    - Attach `tokens.json` file or commit to design repo
 
@@ -123,20 +123,20 @@ pnpm run tokens:build
 **Step 3**: Import in `tailwind.config.ts`
 
 ```typescript
-import type { Config } from 'tailwindcss';
-import { tokens } from './src/infrastructure/design-tokens/tailwind-tokens';
+import type { Config } from "tailwindcss";
+import { tokens } from "./src/infrastructure/design-tokens/tailwind-tokens";
 
 const config: Config = {
-  darkMode: 'class', // Enable dark mode via .dark class
+  darkMode: "class", // Enable dark mode via .dark class
   content: [
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      colors: tokens.colors,       // Category, state, feedback colors
-      spacing: tokens.spacing,     // 8px grid scale
-      fontSize: tokens.fontSize,   // Typography scale (includes lineHeight, letterSpacing)
+      colors: tokens.colors, // Category, state, feedback colors
+      spacing: tokens.spacing, // 8px grid scale
+      fontSize: tokens.fontSize, // Typography scale (includes lineHeight, letterSpacing)
     },
   },
   plugins: [],
@@ -164,6 +164,7 @@ export function AlimentCard({ category }: { category: string }) {
 ```
 
 **Available category color classes**:
+
 - `bg-category-lacteal`, `text-category-lacteal`, `border-category-lacteal`
 - `bg-category-cereals-flours-pulses-legumes-tubers`, etc.
 - `bg-category-fruits`, `bg-category-vegetables`
@@ -176,18 +177,21 @@ export function AlimentCard({ category }: { category: string }) {
 // Offline indicator component
 export function OfflineIndicator({ isOnline }: { isOnline: boolean }) {
   return (
-    <div className={`
+    <div
+      className={`
       px-space-2 py-space-1
-      ${isOnline ? 'bg-state-online' : 'bg-state-offline'}
+      ${isOnline ? "bg-state-online" : "bg-state-offline"}
       text-white rounded
-    `}>
-      {isOnline ? 'Online' : 'Offline'}
+    `}
+    >
+      {isOnline ? "Online" : "Offline"}
     </div>
   );
 }
 ```
 
 **Available state color classes**:
+
 - `bg-state-offline`, `text-state-offline` (warning amber)
 - `bg-state-syncing`, `text-state-syncing` (info blue)
 - `bg-state-sync-error`, `text-state-sync-error` (error red)
@@ -197,14 +201,22 @@ export function OfflineIndicator({ isOnline }: { isOnline: boolean }) {
 
 ```tsx
 // Toast notification component
-export function Toast({ type, message }: { type: 'success' | 'error' | 'warning' | 'info', message: string }) {
+export function Toast({
+  type,
+  message,
+}: {
+  type: "success" | "error" | "warning" | "info";
+  message: string;
+}) {
   return (
-    <div className={`
+    <div
+      className={`
       p-space-3
       bg-feedback-${type}
       text-white
       rounded-md
-    `}>
+    `}
+    >
       {message}
     </div>
   );
@@ -240,6 +252,7 @@ export function BodyText({ children }: { children: React.ReactNode }) {
 ```
 
 **Available typography classes**:
+
 - `text-heading-1` through `text-heading-6`
 - `text-body-large`, `text-body-medium`, `text-body-small`
 - `text-label-large`, `text-label-medium`, `text-label-small`
@@ -276,6 +289,7 @@ export function Button({ children }: { children: React.ReactNode }) {
 ```
 
 **Available spacing classes**:
+
 - `p-space-{0|1|2|3|4|5|6|8|10|12}` (padding)
 - `m-space-{0|1|2|3|4|5|6|8|10|12}` (margin)
 - `gap-space-{0|1|2|3|4|5|6|8|10|12}` (flexbox/grid gap)
@@ -286,9 +300,9 @@ export function Button({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // app/providers.tsx
-'use client';
+"use client";
 
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from "next-themes";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -302,30 +316,31 @@ export function Providers({ children }: { children: React.ReactNode }) {
 **Use theme toggle**:
 
 ```tsx
-'use client';
+"use client";
 
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-      Toggle {theme === 'dark' ? 'Light' : 'Dark'} Mode
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      Toggle {theme === "dark" ? "Light" : "Dark"} Mode
     </button>
   );
 }
 ```
 
 **How it works**:
+
 - `next-themes` adds/removes `.dark` class on `<html>` element
 - CSS custom properties automatically switch values:
   ```css
   :root {
-    --color-category-lacteal: #6750A4; /* Light */
+    --color-category-lacteal: #6750a4; /* Light */
   }
   .dark {
-    --color-category-lacteal: #D0BCFF; /* Dark */
+    --color-category-lacteal: #d0bcff; /* Dark */
   }
   ```
 - Tailwind classes reference custom properties → automatic theme switching
@@ -353,25 +368,27 @@ export function ThemeToggle() {
 
 ```typescript
 // tests/e2e/design-tokens.spec.ts
-test('category colors display distinct hues', async ({ page }) => {
-  await page.goto('/token-specimen');
-  
+test("category colors display distinct hues", async ({ page }) => {
+  await page.goto("/token-specimen");
+
   // Take screenshot of all category colors
-  await expect(page.locator('.category-colors')).toHaveScreenshot('category-colors.png');
+  await expect(page.locator(".category-colors")).toHaveScreenshot(
+    "category-colors.png",
+  );
 });
 
-test('dark mode switches theme correctly', async ({ page }) => {
-  await page.goto('/');
-  
+test("dark mode switches theme correctly", async ({ page }) => {
+  await page.goto("/");
+
   // Toggle dark mode
   await page.click('[data-testid="theme-toggle"]');
-  
+
   // Verify dark theme colors applied
-  const bgColor = await page.locator('body').evaluate(el => 
-    window.getComputedStyle(el).backgroundColor
-  );
-  
-  expect(bgColor).toBe('rgb(28, 27, 31)'); // M3 dark surface
+  const bgColor = await page
+    .locator("body")
+    .evaluate((el) => window.getComputedStyle(el).backgroundColor);
+
+  expect(bgColor).toBe("rgb(28, 27, 31)"); // M3 dark surface
 });
 ```
 
@@ -395,6 +412,7 @@ Before releasing token changes:
 **Symptom**: Class like `bg-category-lacteal` not applying styles
 
 **Fix**:
+
 1. Verify `tokens.json` contains the token
 2. Run `pnpm run tokens:build` to regenerate Tailwind config
 3. Restart dev server (`pnpm run dev`)
@@ -405,6 +423,7 @@ Before releasing token changes:
 **Symptom**: Build error: `Color token 'category-fruits' fails WCAG AA (ratio: 3.2:1, required: 4.5:1)`
 
 **Fix**:
+
 1. Notify designer of failing token
 2. Designer adjusts M3 tone: darker for light theme, lighter for dark theme
 3. Re-export `tokens.json`
@@ -415,6 +434,7 @@ Before releasing token changes:
 **Symptom**: Build error: `Spacing token 'space-7' value 28px is not a multiple of 8`
 
 **Fix**:
+
 1. Remove invalid spacing token (7 × 4px = 28px breaks grid)
 2. Use existing token: `space-4` (32px) or `space-3` (24px)
 3. If 28px truly needed, add to exception list with justification (rare)
@@ -424,6 +444,7 @@ Before releasing token changes:
 **Symptom**: White flash when toggling dark mode
 
 **Fix**:
+
 1. Ensure `next-themes` script runs before page renders:
    ```tsx
    // app/layout.tsx

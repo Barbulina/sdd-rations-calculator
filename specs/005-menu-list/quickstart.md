@@ -6,15 +6,15 @@
 
 ## What gets built
 
-| Deliverable | Path | Change |
-|-------------|------|--------|
-| `useMenuList` hook | `src/application/hooks/useMenuList.ts` | NEW |
-| `MenuCard` component | `app/components/MenuCard.tsx` | NEW |
-| `MenuListFilters` component | `app/components/MenuListFilters.tsx` | NEW |
-| Home page | `app/page.tsx` | REPLACE (remove rations list, add menu list) |
-| `useMenuList` unit tests | `tests/unit/menu-list/useMenuList.test.ts` | NEW |
-| `MenuCard` integration tests | `tests/integration/menu-list/MenuCard.test.tsx` | NEW |
-| `MenuListFilters` integration tests | `tests/integration/menu-list/MenuListFilters.test.tsx` | NEW |
+| Deliverable                         | Path                                                   | Change                                       |
+| ----------------------------------- | ------------------------------------------------------ | -------------------------------------------- |
+| `useMenuList` hook                  | `src/application/hooks/useMenuList.ts`                 | NEW                                          |
+| `MenuCard` component                | `app/components/MenuCard.tsx`                          | NEW                                          |
+| `MenuListFilters` component         | `app/components/MenuListFilters.tsx`                   | NEW                                          |
+| Home page                           | `app/page.tsx`                                         | REPLACE (remove rations list, add menu list) |
+| `useMenuList` unit tests            | `tests/unit/menu-list/useMenuList.test.ts`             | NEW                                          |
+| `MenuCard` integration tests        | `tests/integration/menu-list/MenuCard.test.tsx`        | NEW                                          |
+| `MenuListFilters` integration tests | `tests/integration/menu-list/MenuListFilters.test.tsx` | NEW                                          |
 
 **Nothing changes in the domain or infrastructure layer.**
 
@@ -95,7 +95,8 @@ export function useMenuList() {
     try {
       const all = await repository.getAll();
       const sorted = [...all].sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       );
       setMenus(sorted);
     } catch {
@@ -107,21 +108,22 @@ export function useMenuList() {
 
   const filteredMenus = useMemo(() => {
     return menus
-      .filter(m =>
-        nameFilter === "" ||
-        m.name.toLowerCase().includes(nameFilter.toLowerCase())
+      .filter(
+        (m) =>
+          nameFilter === "" ||
+          m.name.toLowerCase().includes(nameFilter.toLowerCase()),
       )
-      .filter(m => typeFilter === null || m.type === typeFilter);
+      .filter((m) => typeFilter === null || m.type === typeFilter);
   }, [menus, nameFilter, typeFilter]);
 
   const deleteMenu = async (id: string) => {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this menu? This action cannot be undone."
+      "Are you sure you want to delete this menu? This action cannot be undone.",
     );
     if (!confirmed) return;
     try {
       await repository.delete(id);
-      setMenus(prev => prev.filter(m => m.id !== id));
+      setMenus((prev) => prev.filter((m) => m.id !== id));
     } catch {
       setError("Failed to delete menu. Please try again.");
     }
@@ -227,13 +229,18 @@ describe("MenuListFilters", () => {
 ```tsx
 "use client";
 
-import { MENU_TYPE_LABELS, MENU_TYPE_ORDER } from "@/specs/005-menu-list/contracts/types";
+import {
+  MENU_TYPE_LABELS,
+  MENU_TYPE_ORDER,
+} from "@/specs/005-menu-list/contracts/types";
 import type { MenuListFiltersProps } from "@/specs/005-menu-list/contracts/types";
 import { MenuType } from "@/src/domain/models/MenuType";
 
 export function MenuListFilters({
-  nameFilter, onNameFilterChange,
-  typeFilter, onTypeFilterChange,
+  nameFilter,
+  onNameFilterChange,
+  typeFilter,
+  onTypeFilterChange,
 }: MenuListFiltersProps) {
   return (
     <div className="...">
@@ -241,16 +248,22 @@ export function MenuListFilters({
         type="text"
         placeholder="Search by name..."
         value={nameFilter}
-        onChange={e => onNameFilterChange(e.target.value)}
+        onChange={(e) => onNameFilterChange(e.target.value)}
         maxLength={200}
       />
       <select
         value={typeFilter ?? ""}
-        onChange={e => onTypeFilterChange(e.target.value === "" ? null : e.target.value as MenuType)}
+        onChange={(e) =>
+          onTypeFilterChange(
+            e.target.value === "" ? null : (e.target.value as MenuType),
+          )
+        }
       >
         <option value="">All types</option>
-        {MENU_TYPE_ORDER.map(type => (
-          <option key={type} value={type}>{MENU_TYPE_LABELS[type]}</option>
+        {MENU_TYPE_ORDER.map((type) => (
+          <option key={type} value={type}>
+            {MENU_TYPE_LABELS[type]}
+          </option>
         ))}
       </select>
     </div>
@@ -275,9 +288,14 @@ import Link from "next/link";
 
 export default function HomePage() {
   const {
-    filteredMenus, isLoading, error, hasMenus,
-    nameFilter, setNameFilter,
-    typeFilter, setTypeFilter,
+    filteredMenus,
+    isLoading,
+    error,
+    hasMenus,
+    nameFilter,
+    setNameFilter,
+    typeFilter,
+    setTypeFilter,
     deleteMenu,
   } = useMenuList();
 
@@ -287,7 +305,9 @@ export default function HomePage() {
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">My Menus</h1>
-          <Link href="/menu-builder" className="...">+ Create</Link>
+          <Link href="/menu-builder" className="...">
+            + Create
+          </Link>
         </div>
 
         {/* Loading */}
@@ -311,11 +331,14 @@ export default function HomePage() {
 
             {/* No results after filtering */}
             {filteredMenus.length === 0 && (
-              <p>No menus match your filters. Try clearing the search or type selector.</p>
+              <p>
+                No menus match your filters. Try clearing the search or type
+                selector.
+              </p>
             )}
 
             {/* Menu cards */}
-            {filteredMenus.map(menu => (
+            {filteredMenus.map((menu) => (
               <MenuCard key={menu.id} menu={menu} onDelete={deleteMenu} />
             ))}
           </>
@@ -345,12 +368,12 @@ npm test --run
 
 ## Key constraints (from research)
 
-| Topic | Decision |
-|-------|----------|
-| Sort order | Client-side sort by `createdAt` desc in hook |
-| Delete confirmation | `window.confirm()` — no custom modal |
-| Filter logic | `useMemo` in hook, AND logic |
-| Type labels | `MENU_TYPE_LABELS` from `contracts/types.ts` |
-| Date format | `toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })` |
-| EmptyState | No changes needed — already correct from Feature 004 |
-| Pagination | None — all menus loaded at once |
+| Topic               | Decision                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| Sort order          | Client-side sort by `createdAt` desc in hook                                       |
+| Delete confirmation | `window.confirm()` — no custom modal                                               |
+| Filter logic        | `useMemo` in hook, AND logic                                                       |
+| Type labels         | `MENU_TYPE_LABELS` from `contracts/types.ts`                                       |
+| Date format         | `toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })` |
+| EmptyState          | No changes needed — already correct from Feature 004                               |
+| Pagination          | None — all menus loaded at once                                                    |

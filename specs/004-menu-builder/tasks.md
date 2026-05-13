@@ -28,12 +28,12 @@
 
 **Purpose**: Verify testing infrastructure exists from Feature 003
 
-- [X] T001 Verify Vitest installed: Check `node_modules/@vitest`
-- [X] T002 Verify Playwright installed: Check `node_modules/@playwright`
-- [X] T003 Verify `vitest.config.ts` exists in project root
-- [X] T004 Verify `playwright.config.ts` exists in project root
-- [X] T005 Run `npm test` to confirm test environment works
-- [X] T006 Create `.gitignore` entries if missing: `coverage/`, `test-results/`, `playwright-report/`
+- [x] T001 Verify Vitest installed: Check `node_modules/@vitest`
+- [x] T002 Verify Playwright installed: Check `node_modules/@playwright`
+- [x] T003 Verify `vitest.config.ts` exists in project root
+- [x] T004 Verify `playwright.config.ts` exists in project root
+- [x] T005 Run `npm test` to confirm test environment works
+- [x] T006 Create `.gitignore` entries if missing: `coverage/`, `test-results/`, `playwright-report/`
 
 ---
 
@@ -43,29 +43,29 @@
 
 ### Tests First (RED)
 
-- [X] T007 [US2] Create `tests/unit/menu-builder/MenuItemBuilder.ts` test builder for MenuItem fixtures
-- [X] T008 [US2] Write `tests/unit/menu-builder/MenuItem.test.ts` - test MenuItem creation with valid data
-- [X] T009 [P] [US2] Write tests for weight validation (must be > 0)
-- [X] T010 [P] [US2] Write tests for weight validation (must be <= 10000)
-- [X] T011 [P] [US2] Write tests for rations calculation (weightGrams / gramsToCarbohydrate)
-- [X] T012 [P] [US2] Write tests for rations precision (2 decimal places)
-- [X] T013 [P] [US2] Write tests for UUID generation
-- [X] T014 [US2] Run `npm test` → verify all MenuItem tests fail (RED phase)
+- [x] T007 [US2] Create `tests/unit/menu-builder/MenuItemBuilder.ts` test builder for MenuItem fixtures
+- [x] T008 [US2] Write `tests/unit/menu-builder/MenuItem.test.ts` - test MenuItem creation with valid data
+- [x] T009 [P] [US2] Write tests for weight validation (must be > 0)
+- [x] T010 [P] [US2] Write tests for weight validation (must be <= 10000)
+- [x] T011 [P] [US2] Write tests for rations calculation (weightGrams / gramsToCarbohydrate)
+- [x] T012 [P] [US2] Write tests for rations precision (2 decimal places)
+- [x] T013 [P] [US2] Write tests for UUID generation
+- [x] T014 [US2] Run `npm test` → verify all MenuItem tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T015 [US2] Create `src/domain/models/MenuItem.ts` with MenuItem class/interface
-- [X] T016 [US2] Implement constructor with aliment, weightGrams parameters
-- [X] T017 [US2] Implement weight validation function
-- [X] T018 [US2] Implement rations calculation getter/property
-- [X] T019 [US2] Implement UUID generation using crypto.randomUUID()
-- [X] T020 [US2] Implement toFixed(2) for rations precision
-- [X] T021 [US2] Run `npm test` → verify all MenuItem tests pass (GREEN phase) - ✓ 20/20 tests passing
+- [x] T015 [US2] Create `src/domain/models/MenuItem.ts` with MenuItem class/interface
+- [x] T016 [US2] Implement constructor with aliment, weightGrams parameters
+- [x] T017 [US2] Implement weight validation function
+- [x] T018 [US2] Implement rations calculation getter/property
+- [x] T019 [US2] Implement UUID generation using crypto.randomUUID()
+- [x] T020 [US2] Implement toFixed(2) for rations precision
+- [x] T021 [US2] Run `npm test` → verify all MenuItem tests pass (GREEN phase) - ✓ 20/20 tests passing
 
 ### Refactor
 
-- [X] T022 [US2] Refactor validation logic if needed for clarity - no refactoring needed
-- [X] T023 [US2] Run `npm test` → ensure tests still pass after refactoring
+- [x] T022 [US2] Refactor validation logic if needed for clarity - no refactoring needed
+- [x] T023 [US2] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 
@@ -75,35 +75,35 @@
 
 ### Tests First (RED)
 
-- [X] T024 [US4] Create `tests/unit/menu-builder/MenuBuilder.ts` test builder for Menu fixtures
-- [X] T025 [US4] Write `tests/unit/menu-builder/Menu.test.ts` - test Menu creation with valid data
-- [X] T026 [P] [US4] Write tests for name validation (required, trimmed, max 200 chars)
-- [X] T027 [P] [US4] Write tests for type validation (required, valid RationsType)
-- [X] T028 [P] [US4] Write tests for items validation (min 1 item)
-- [X] T029 [P] [US3] Write tests for totalWeight calculation (sum of item weights)
-- [X] T030 [P] [US3] Write tests for totalRations calculation (sum of item rations)
-- [X] T031 [P] [US4] Write tests for createdAt timestamp auto-generation
-- [X] T032 [P] [US4] Write tests for updatedAt on updates
-- [X] T033 [US4] Run `npm test` → verify all Menu tests fail (RED phase)
+- [x] T024 [US4] Create `tests/unit/menu-builder/MenuBuilder.ts` test builder for Menu fixtures
+- [x] T025 [US4] Write `tests/unit/menu-builder/Menu.test.ts` - test Menu creation with valid data
+- [x] T026 [P] [US4] Write tests for name validation (required, trimmed, max 200 chars)
+- [x] T027 [P] [US4] Write tests for type validation (required, valid RationsType)
+- [x] T028 [P] [US4] Write tests for items validation (min 1 item)
+- [x] T029 [P] [US3] Write tests for totalWeight calculation (sum of item weights)
+- [x] T030 [P] [US3] Write tests for totalRations calculation (sum of item rations)
+- [x] T031 [P] [US4] Write tests for createdAt timestamp auto-generation
+- [x] T032 [P] [US4] Write tests for updatedAt on updates
+- [x] T033 [US4] Run `npm test` → verify all Menu tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T034 [US4] Create `src/domain/models/Menu.ts` with Menu class/interface
-- [X] T035 [US4] Implement constructor with name, type, items parameters
-- [X] T036 [US4] Implement name validation function
-- [X] T037 [US4] Implement type validation function
-- [X] T038 [US4] Implement items validation function (min 1 item)
-- [X] T039 [US3] Implement totalWeight getter/property (reduce items)
-- [X] T040 [US3] Implement totalRations getter/property (reduce items, toFixed(2))
-- [X] T041 [US4] Implement createdAt auto-generation (new Date())
-- [X] T042 [US4] Implement updatedAt handling for updates
-- [X] T043 [US4] Implement UUID generation
-- [X] T044 [US4] Run `npm test` → verify all Menu tests pass (GREEN phase) - ✓ 29/29 tests passing
+- [x] T034 [US4] Create `src/domain/models/Menu.ts` with Menu class/interface
+- [x] T035 [US4] Implement constructor with name, type, items parameters
+- [x] T036 [US4] Implement name validation function
+- [x] T037 [US4] Implement type validation function
+- [x] T038 [US4] Implement items validation function (min 1 item)
+- [x] T039 [US3] Implement totalWeight getter/property (reduce items)
+- [x] T040 [US3] Implement totalRations getter/property (reduce items, toFixed(2))
+- [x] T041 [US4] Implement createdAt auto-generation (new Date())
+- [x] T042 [US4] Implement updatedAt handling for updates
+- [x] T043 [US4] Implement UUID generation
+- [x] T044 [US4] Run `npm test` → verify all Menu tests pass (GREEN phase) - ✓ 29/29 tests passing
 
 ### Refactor
 
-- [X] T045 [US4] Refactor totals calculation for performance (memoization if needed) - no refactoring needed
-- [X] T046 [US4] Run `npm test` → ensure tests still pass after refactoring
+- [x] T045 [US4] Refactor totals calculation for performance (memoization if needed) - no refactoring needed
+- [x] T046 [US4] Run `npm test` → ensure tests still pass after refactoring
 - [ ] T044 [US4] Run `npm test` → verify all Menu tests pass (GREEN phase)
 
 ### Refactor
@@ -119,39 +119,39 @@
 
 ### Tests First (RED)
 
-- [X] T047 [US4] Write `tests/integration/menu-builder/LocalStorageMenuRepository.test.ts` - test save() method
-- [X] T048 [P] [US4] Write tests for getAll() - returns all menus
-- [X] T049 [P] [US4] Write tests for getById() - returns menu or null
-- [X] T050 [P] [US4] Write tests for update() - updates and sets updatedAt
-- [X] T051 [P] [US4] Write tests for delete() - removes menu by ID
-- [X] T052 [P] [US4] Write tests for deleteAll() - clears all menus
-- [X] T053 [P] [US4] Write tests for Date serialization (ISO 8601 format)
-- [X] T054 [P] [US4] Write tests for Date deserialization (string → Date object)
-- [X] T055 [P] [US4] Write tests for storage quota exceeded error
-- [X] T056 [P] [US4] Write tests for corrupt data handling
-- [X] T057 [US4] Run `npm test` → verify all repository tests fail (RED phase)
+- [x] T047 [US4] Write `tests/integration/menu-builder/LocalStorageMenuRepository.test.ts` - test save() method
+- [x] T048 [P] [US4] Write tests for getAll() - returns all menus
+- [x] T049 [P] [US4] Write tests for getById() - returns menu or null
+- [x] T050 [P] [US4] Write tests for update() - updates and sets updatedAt
+- [x] T051 [P] [US4] Write tests for delete() - removes menu by ID
+- [x] T052 [P] [US4] Write tests for deleteAll() - clears all menus
+- [x] T053 [P] [US4] Write tests for Date serialization (ISO 8601 format)
+- [x] T054 [P] [US4] Write tests for Date deserialization (string → Date object)
+- [x] T055 [P] [US4] Write tests for storage quota exceeded error
+- [x] T056 [P] [US4] Write tests for corrupt data handling
+- [x] T057 [US4] Run `npm test` → verify all repository tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T058 [US4] Create `src/domain/repositories/MenuRepository.ts` interface matching contracts/MenuRepository.ts
-- [X] T059 [US4] Create `src/infrastructure/repositories/LocalStorageMenuRepository.ts` implementing interface
-- [X] T060 [US4] Implement save() with UUID generation, timestamps, totals calculation
-- [X] T061 [US4] Implement getAll() with JSON parsing and Date deserialization
-- [X] T062 [P] [US4] Implement getById() with array.find
-- [X] T063 [P] [US4] Implement update() with updatedAt timestamp
-- [X] T064 [P] [US4] Implement delete() with array.filter
-- [X] T065 [P] [US4] Implement deleteAll() clearing storage key
-- [X] T066 [P] [US4] Implement isAvailable() checking localStorage access
-- [X] T067 [P] [US4] Implement getStorageStats() if possible - not implemented (not needed)
-- [X] T068 [US4] Add error handling for QuotaExceededError
-- [X] T069 [US4] Add error handling for corrupt JSON data
-- [X] T070 [US4] Use localStorage key: `sdd-rations-calculator:menus`
-- [X] T071 [US4] Run `npm test` → verify all repository tests pass (GREEN phase)
+- [x] T058 [US4] Create `src/domain/repositories/MenuRepository.ts` interface matching contracts/MenuRepository.ts
+- [x] T059 [US4] Create `src/infrastructure/repositories/LocalStorageMenuRepository.ts` implementing interface
+- [x] T060 [US4] Implement save() with UUID generation, timestamps, totals calculation
+- [x] T061 [US4] Implement getAll() with JSON parsing and Date deserialization
+- [x] T062 [P] [US4] Implement getById() with array.find
+- [x] T063 [P] [US4] Implement update() with updatedAt timestamp
+- [x] T064 [P] [US4] Implement delete() with array.filter
+- [x] T065 [P] [US4] Implement deleteAll() clearing storage key
+- [x] T066 [P] [US4] Implement isAvailable() checking localStorage access
+- [x] T067 [P] [US4] Implement getStorageStats() if possible - not implemented (not needed)
+- [x] T068 [US4] Add error handling for QuotaExceededError
+- [x] T069 [US4] Add error handling for corrupt JSON data
+- [x] T070 [US4] Use localStorage key: `sdd-rations-calculator:menus`
+- [x] T071 [US4] Run `npm test` → verify all repository tests pass (GREEN phase)
 
 ### Refactor
 
-- [X] T072 [US4] Refactor duplicate serialization/deserialization into private methods
-- [X] T073 [US4] Run `npm test` → ensure tests still pass after refactoring
+- [x] T072 [US4] Refactor duplicate serialization/deserialization into private methods
+- [x] T073 [US4] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 
@@ -161,38 +161,38 @@
 
 ### Tests First (RED)
 
-- [X] T074 [US2] Write `tests/unit/menu-builder/useMenuBuilder.test.ts` - test initial state
-- [X] T075 [P] [US2] Write tests for addItem() - creates MenuItem with UUID and rations
-- [X] T076 [P] [US2] Write tests for addItem() with invalid weight (should throw or reject)
-- [X] T077 [P] [US2] Write tests for removeItem() by ID
-- [X] T078 [P] [US2] Write tests for updateItemWeight() - recalculates rations
-- [X] T079 [P] [US3] Write tests for totalWeight auto-calculation
-- [X] T080 [P] [US3] Write tests for totalRations auto-calculation
-- [X] T081 [P] [US4] Write tests for clearItems()
-- [X] T082 [P] [US4] Write tests for saveMenu() - calls repository.save()
-- [X] T083 [P] [US4] Write tests for saveMenu() validation errors
-- [X] T084 [US2] Run `npm test` → verify all hook tests fail (RED phase) - confirmed module not found
+- [x] T074 [US2] Write `tests/unit/menu-builder/useMenuBuilder.test.ts` - test initial state
+- [x] T075 [P] [US2] Write tests for addItem() - creates MenuItem with UUID and rations
+- [x] T076 [P] [US2] Write tests for addItem() with invalid weight (should throw or reject)
+- [x] T077 [P] [US2] Write tests for removeItem() by ID
+- [x] T078 [P] [US2] Write tests for updateItemWeight() - recalculates rations
+- [x] T079 [P] [US3] Write tests for totalWeight auto-calculation
+- [x] T080 [P] [US3] Write tests for totalRations auto-calculation
+- [x] T081 [P] [US4] Write tests for clearItems()
+- [x] T082 [P] [US4] Write tests for saveMenu() - calls repository.save()
+- [x] T083 [P] [US4] Write tests for saveMenu() validation errors
+- [x] T084 [US2] Run `npm test` → verify all hook tests fail (RED phase) - confirmed module not found
 
 ### Implementation (GREEN)
 
-- [X] T085 [US2] Create `src/application/hooks/useMenuBuilder.ts` with hook scaffold
-- [X] T086 [US2] Implement items state: useState<MenuItem[]>([])
-- [X] T087 [US2] Implement addItem() function - validate weight, create MenuItem, append to array
-- [X] T088 [US2] Implement removeItem() function - filter by ID
-- [X] T089 [US2] Implement updateItemWeight() - map over items, find by ID, recalculate rations
-- [X] T090 [US3] Implement totalWeight with useMemo - sum of item.weightGrams
-- [X] T091 [US3] Implement totalRations with useMemo - sum of item.rations, toFixed(2)
-- [X] T092 [US4] Implement clearItems() - setItems([])
-- [X] T093 [US4] Implement saveMenu() - validate, create Menu, call repository.save()
-- [X] T094 [US4] Implement isLoading state for async operations
-- [X] T095 [US4] Implement error state for error messages
-- [X] T096 [US4] Implement clearError() function
-- [X] T097 [US2] Run `npm test` → verify all hook tests pass (GREEN phase)
+- [x] T085 [US2] Create `src/application/hooks/useMenuBuilder.ts` with hook scaffold
+- [x] T086 [US2] Implement items state: useState<MenuItem[]>([])
+- [x] T087 [US2] Implement addItem() function - validate weight, create MenuItem, append to array
+- [x] T088 [US2] Implement removeItem() function - filter by ID
+- [x] T089 [US2] Implement updateItemWeight() - map over items, find by ID, recalculate rations
+- [x] T090 [US3] Implement totalWeight with useMemo - sum of item.weightGrams
+- [x] T091 [US3] Implement totalRations with useMemo - sum of item.rations, toFixed(2)
+- [x] T092 [US4] Implement clearItems() - setItems([])
+- [x] T093 [US4] Implement saveMenu() - validate, create Menu, call repository.save()
+- [x] T094 [US4] Implement isLoading state for async operations
+- [x] T095 [US4] Implement error state for error messages
+- [x] T096 [US4] Implement clearError() function
+- [x] T097 [US2] Run `npm test` → verify all hook tests pass (GREEN phase)
 
 ### Refactor
 
-- [X] T098 [US2] Refactor validation logic if needed - no refactoring needed
-- [X] T099 [US2] Run `npm test` → ensure tests still pass after refactoring
+- [x] T098 [US2] Refactor validation logic if needed - no refactoring needed
+- [x] T099 [US2] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 
@@ -202,23 +202,23 @@
 
 ### Tests First (RED)
 
-- [X] T100 [US4] Write `tests/integration/menu-builder/MenuRepositoryContext.test.tsx` - test context provider
-- [X] T101 [P] [US4] Write tests for useMenuRepository() hook throws if no provider
-- [X] T102 [US4] Run `npm test` → verify context tests fail (RED phase) - confirmed module not found
+- [x] T100 [US4] Write `tests/integration/menu-builder/MenuRepositoryContext.test.tsx` - test context provider
+- [x] T101 [P] [US4] Write tests for useMenuRepository() hook throws if no provider
+- [x] T102 [US4] Run `npm test` → verify context tests fail (RED phase) - confirmed module not found
 
 ### Implementation (GREEN)
 
-- [X] T103 [US4] Create `src/application/contexts/MenuRepositoryContext.tsx` with provider and hook
-- [X] T104 [US4] Implement MenuRepositoryProvider component wrapping children
-- [X] T105 [US4] Implement useMenuRepository() hook with useContext
-- [X] T106 [US4] Add error throw if hook used outside provider
-- [X] T107 [US4] Update `app/providers.tsx` to include MenuRepositoryProvider with LocalStorageMenuRepository
-- [X] T108 [US4] Run `npm test` → verify context tests pass (GREEN phase)
+- [x] T103 [US4] Create `src/application/contexts/MenuRepositoryContext.tsx` with provider and hook
+- [x] T104 [US4] Implement MenuRepositoryProvider component wrapping children
+- [x] T105 [US4] Implement useMenuRepository() hook with useContext
+- [x] T106 [US4] Add error throw if hook used outside provider
+- [x] T107 [US4] Update `app/providers.tsx` to include MenuRepositoryProvider with LocalStorageMenuRepository
+- [x] T108 [US4] Run `npm test` → verify context tests pass (GREEN phase)
 
 ### Refactor
 
-- [X] T109 [US4] No refactoring needed - context is simple
-- [X] T110 [US4] Run `npm test` → ensure tests still pass - 122/122 menu-builder tests passing
+- [x] T109 [US4] No refactoring needed - context is simple
+- [x] T110 [US4] Run `npm test` → ensure tests still pass - 122/122 menu-builder tests passing
 
 ---
 
@@ -228,32 +228,32 @@
 
 ### Tests First (RED)
 
-- [X] T111 [US1] Write `tests/integration/menu-builder/AutocompleteSearch.test.ts` - test search input renders
-- [X] T112 [P] [US1] Write tests for debounced search (300ms delay)
-- [X] T113 [P] [US1] Write tests for filtering aliments by name (case-insensitive)
-- [X] T114 [P] [US1] Write tests for keyboard navigation (ArrowDown, ArrowUp, Enter, Escape)
-- [X] T115 [P] [US1] Write tests for suggestion item displays all aliment data (name, category, grams, GI, custom badge)
-- [X] T116 [P] [US1] Write tests for click to select aliment
-- [X] T117 [P] [US5] Write tests for empty state ("No aliments found")
-- [X] T118 [US1] Run `npm test` → verify all autocomplete tests fail (RED phase)
+- [x] T111 [US1] Write `tests/integration/menu-builder/AutocompleteSearch.test.ts` - test search input renders
+- [x] T112 [P] [US1] Write tests for debounced search (300ms delay)
+- [x] T113 [P] [US1] Write tests for filtering aliments by name (case-insensitive)
+- [x] T114 [P] [US1] Write tests for keyboard navigation (ArrowDown, ArrowUp, Enter, Escape)
+- [x] T115 [P] [US1] Write tests for suggestion item displays all aliment data (name, category, grams, GI, custom badge)
+- [x] T116 [P] [US1] Write tests for click to select aliment
+- [x] T117 [P] [US5] Write tests for empty state ("No aliments found")
+- [x] T118 [US1] Run `npm test` → verify all autocomplete tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T119 [US1] Create `app/components/AutocompleteSearch.tsx` component
-- [X] T120 [US1] Implement search input with controlled value
-- [X] T121 [US1] Implement debounce logic (300ms using useEffect + setTimeout)
-- [X] T122 [US1] Use `useCompositeAliments` hook to get aliments
-- [X] T123 [US1] Implement filtering logic (lowercased name includes search term)
-- [X] T124 [US1] Implement suggestions dropdown with conditional rendering
-- [X] T125 [US1] Create `app/components/AlimentSuggestionItem.tsx` component
-- [X] T126 [US1] Implement suggestion item layout - display name, category badge, gramsToCarbohydrate, bloodGlucoseIndex, custom badge
-- [X] T127 [US1] Add category badge color coding using design tokens
-- [X] T128 [US1] Implement keyboard navigation (selectedIndex state, handleKeyDown)
-- [X] T129 [US1] Implement click handler calling onSelectAliment prop
-- [X] T130 [US1] Implement Enter key selection
-- [X] T131 [US1] Implement Escape key to close dropdown
-- [X] T132 [US5] Implement empty state component
-- [X] T133 [US1] Add ARIA attributes (role="combobox", aria-autocomplete, aria-expanded, aria-activedescendant)
+- [x] T119 [US1] Create `app/components/AutocompleteSearch.tsx` component
+- [x] T120 [US1] Implement search input with controlled value
+- [x] T121 [US1] Implement debounce logic (300ms using useEffect + setTimeout)
+- [x] T122 [US1] Use `useCompositeAliments` hook to get aliments
+- [x] T123 [US1] Implement filtering logic (lowercased name includes search term)
+- [x] T124 [US1] Implement suggestions dropdown with conditional rendering
+- [x] T125 [US1] Create `app/components/AlimentSuggestionItem.tsx` component
+- [x] T126 [US1] Implement suggestion item layout - display name, category badge, gramsToCarbohydrate, bloodGlucoseIndex, custom badge
+- [x] T127 [US1] Add category badge color coding using design tokens
+- [x] T128 [US1] Implement keyboard navigation (selectedIndex state, handleKeyDown)
+- [x] T129 [US1] Implement click handler calling onSelectAliment prop
+- [x] T130 [US1] Implement Enter key selection
+- [x] T131 [US1] Implement Escape key to close dropdown
+- [x] T132 [US5] Implement empty state component
+- [x] T133 [US1] Add ARIA attributes (role="combobox", aria-autocomplete, aria-expanded, aria-activedescendant)
 - [ ] T134 [US1] Run `npm test` → verify all autocomplete tests pass (GREEN phase) - NOTE: Tests created, may need async/act() debugging
 
 ### Refactor
@@ -270,28 +270,28 @@
 
 ### Tests First (RED)
 
-- [X] T138 [US2] Write `tests/integration/menu-builder/WeightInputDialog.test.ts` - test dialog renders
-- [X] T139 [P] [US2] Write tests for weight validation (must be > 0 and <= 10000)
-- [X] T140 [P] [US2] Write tests for "Add" button disabled when weight invalid
-- [X] T141 [P] [US2] Write tests for "Cancel" button closes dialog
-- [X] T142 [P] [US2] Write tests for Escape key closes dialog
-- [X] T143 [P] [US2] Write tests for successful submission calls onAdd with weight
-- [X] T144 [P] [US2] Write tests for auto-focus on weight input
-- [X] T145 [US2] Run `npm test` → verify all dialog tests fail (RED phase)
+- [x] T138 [US2] Write `tests/integration/menu-builder/WeightInputDialog.test.ts` - test dialog renders
+- [x] T139 [P] [US2] Write tests for weight validation (must be > 0 and <= 10000)
+- [x] T140 [P] [US2] Write tests for "Add" button disabled when weight invalid
+- [x] T141 [P] [US2] Write tests for "Cancel" button closes dialog
+- [x] T142 [P] [US2] Write tests for Escape key closes dialog
+- [x] T143 [P] [US2] Write tests for successful submission calls onAdd with weight
+- [x] T144 [P] [US2] Write tests for auto-focus on weight input
+- [x] T145 [US2] Run `npm test` → verify all dialog tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T146 [US2] Create `app/components/WeightInputDialog.tsx` component
-- [X] T147 [US2] Implement modal overlay with backdrop
-- [X] T148 [US2] Implement weight input (type="number", min=1, max=10000)
-- [X] T149 [US2] Implement validation state (valid/invalid)
-- [X] T150 [US2] Implement real-time validation onChange
-- [X] T151 [US2] Implement "Add" button (disabled when invalid)
-- [X] T152 [US2] Implement "Cancel" button calling onCancel prop
-- [X] T153 [US2] Implement Escape key handler
-- [X] T154 [US2] Implement auto-focus using useEffect + inputRef
-- [X] T155 [US2] Add ARIA attributes (role="dialog", aria-labelledby, aria-describedby)
-- [X] T156 [US2] Run `npm test` → verify all dialog tests pass (GREEN phase) - 24/24 tests passing
+- [x] T146 [US2] Create `app/components/WeightInputDialog.tsx` component
+- [x] T147 [US2] Implement modal overlay with backdrop
+- [x] T148 [US2] Implement weight input (type="number", min=1, max=10000)
+- [x] T149 [US2] Implement validation state (valid/invalid)
+- [x] T150 [US2] Implement real-time validation onChange
+- [x] T151 [US2] Implement "Add" button (disabled when invalid)
+- [x] T152 [US2] Implement "Cancel" button calling onCancel prop
+- [x] T153 [US2] Implement Escape key handler
+- [x] T154 [US2] Implement auto-focus using useEffect + inputRef
+- [x] T155 [US2] Add ARIA attributes (role="dialog", aria-labelledby, aria-describedby)
+- [x] T156 [US2] Run `npm test` → verify all dialog tests pass (GREEN phase) - 24/24 tests passing
 
 ### Refactor
 
@@ -306,36 +306,36 @@
 
 ### Tests First (RED)
 
-- [X] T159 [US2] Write `tests/integration/menu-builder/MenuItemsList.test.ts` - test list renders items
-- [X] T160 [P] [US2] Write tests for each item displays all aliment data (name, category, grams, GI, custom badge)
-- [X] T161 [P] [US2] Write tests for weight inline editing
-- [X] T162 [P] [US2] Write tests for rations auto-update when weight changes
-- [X] T163 [P] [US2] Write tests for remove button deletes item
-- [X] T164 [P] [US5] Write tests for empty state ("No aliments added")
-- [X] T165 [US2] Run `npm test` → verify all list tests fail (RED phase)
+- [x] T159 [US2] Write `tests/integration/menu-builder/MenuItemsList.test.ts` - test list renders items
+- [x] T160 [P] [US2] Write tests for each item displays all aliment data (name, category, grams, GI, custom badge)
+- [x] T161 [P] [US2] Write tests for weight inline editing
+- [x] T162 [P] [US2] Write tests for rations auto-update when weight changes
+- [x] T163 [P] [US2] Write tests for remove button deletes item
+- [x] T164 [P] [US5] Write tests for empty state ("No aliments added")
+- [x] T165 [US2] Run `npm test` → verify all list tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T166 [US2] Create `app/components/MenuItemsList.tsx` component
-- [X] T167 [US2] Create `app/components/MenuItemCard.tsx` component for each item
-- [X] T168 [US2] Implement card layout displaying:
+- [x] T166 [US2] Create `app/components/MenuItemsList.tsx` component
+- [x] T167 [US2] Create `app/components/MenuItemCard.tsx` component for each item
+- [x] T168 [US2] Implement card layout displaying:
   - Aliment name (heading)
   - Category badge (colored)
   - gramsToCarbohydrate (e.g., "1 ration = 110g")
   - bloodGlucoseIndex (e.g., "IG: 38")
   - Custom badge (if isCustom)
-- [X] T169 [US2] Implement weight input (type="number", inline editable)
-- [X] T170 [US2] Implement onChange handler calling updateItemWeight
-- [X] T171 [US2] Implement calculated rations display (item.rations.toFixed(2))
-- [X] T172 [US2] Implement remove button (trash icon) calling removeItem
-- [X] T173 [US5] Implement empty state with EmptyState component
-- [X] T174 [US2] Add styling with design tokens (card, spacing, typography)
-- [X] T175 [US2] Run `npm test` → verify all list tests pass (GREEN phase) - 24/24 tests passing
+- [x] T169 [US2] Implement weight input (type="number", inline editable)
+- [x] T170 [US2] Implement onChange handler calling updateItemWeight
+- [x] T171 [US2] Implement calculated rations display (item.rations.toFixed(2))
+- [x] T172 [US2] Implement remove button (trash icon) calling removeItem
+- [x] T173 [US5] Implement empty state with EmptyState component
+- [x] T174 [US2] Add styling with design tokens (card, spacing, typography)
+- [x] T175 [US2] Run `npm test` → verify all list tests pass (GREEN phase) - 24/24 tests passing
 
 ### Refactor
 
-- [X] T176 [US2] Ensure MenuItemCard is properly extracted - DONE
-- [X] T177 [US2] Run `npm test` → ensure tests still pass after refactoring - DONE
+- [x] T176 [US2] Ensure MenuItemCard is properly extracted - DONE
+- [x] T177 [US2] Run `npm test` → ensure tests still pass after refactoring - DONE
 
 ---
 
@@ -345,25 +345,25 @@
 
 ### Tests First (RED)
 
-- [X] T178 [US3] Write `tests/unit/menu-builder/MenuSummary.test.ts` - test summary renders totals
-- [X] T179 [P] [US3] Write tests for totalWeight display (formatted with "g")
-- [X] T180 [P] [US3] Write tests for totalRations display (2 decimals + "rations")
-- [X] T181 [P] [US3] Write tests for auto-update when items change
-- [X] T182 [US3] Run `npm test` → verify all summary tests fail (RED phase)
+- [x] T178 [US3] Write `tests/unit/menu-builder/MenuSummary.test.ts` - test summary renders totals
+- [x] T179 [P] [US3] Write tests for totalWeight display (formatted with "g")
+- [x] T180 [P] [US3] Write tests for totalRations display (2 decimals + "rations")
+- [x] T181 [P] [US3] Write tests for auto-update when items change
+- [x] T182 [US3] Run `npm test` → verify all summary tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T183 [US3] Create `app/components/MenuSummary.tsx` component
-- [X] T184 [US3] Implement totalWeight display: `{totalWeight}g`
-- [X] T185 [US3] Implement totalRations display: `{totalRations.toFixed(2)} rations`
-- [X] T186 [US3] Add highlighted styling with design tokens (background, border)
-- [X] T187 [US3] Add ARIA live region for dynamic updates
-- [X] T188 [US3] Run `npm test` → verify all summary tests pass (GREEN phase)
+- [x] T183 [US3] Create `app/components/MenuSummary.tsx` component
+- [x] T184 [US3] Implement totalWeight display: `{totalWeight}g`
+- [x] T185 [US3] Implement totalRations display: `{totalRations.toFixed(2)} rations`
+- [x] T186 [US3] Add highlighted styling with design tokens (background, border)
+- [x] T187 [US3] Add ARIA live region for dynamic updates
+- [x] T188 [US3] Run `npm test` → verify all summary tests pass (GREEN phase)
 
 ### Refactor
 
-- [X] T189 [US3] No refactoring needed - component is simple
-- [X] T190 [US3] Run `npm test` → ensure tests still pass
+- [x] T189 [US3] No refactoring needed - component is simple
+- [x] T190 [US3] Run `npm test` → ensure tests still pass
 
 ---
 
@@ -373,34 +373,34 @@
 
 ### Tests First (RED)
 
-- [X] T191 [US4] Write `tests/integration/menu-builder/SaveMenuForm.test.ts` - test form renders
-- [X] T192 [P] [US4] Write tests for name validation (required, max 200 chars)
-- [X] T193 [P] [US4] Write tests for type selection (required, valid MenuType)
-- [X] T194 [P] [US4] Write tests for "Save" button disabled when invalid or no items
-- [X] T195 [P] [US4] Write tests for successful save navigates to home
-- [X] T196 [P] [US4] Write tests for error display on save failure
-- [X] T197 [P] [US5] Write tests for "Cancel" button navigates back
-- [X] T198 [US4] Run `npm test` → verify all form tests fail (RED phase)
+- [x] T191 [US4] Write `tests/integration/menu-builder/SaveMenuForm.test.ts` - test form renders
+- [x] T192 [P] [US4] Write tests for name validation (required, max 200 chars)
+- [x] T193 [P] [US4] Write tests for type selection (required, valid MenuType)
+- [x] T194 [P] [US4] Write tests for "Save" button disabled when invalid or no items
+- [x] T195 [P] [US4] Write tests for successful save navigates to home
+- [x] T196 [P] [US4] Write tests for error display on save failure
+- [x] T197 [P] [US5] Write tests for "Cancel" button navigates back
+- [x] T198 [US4] Run `npm test` → verify all form tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T199 [US4] Create `app/components/SaveMenuForm.tsx` component
-- [X] T200 [US4] Implement name input with controlled value
-- [X] T201 [US4] Implement type select (dropdown with MenuType options)
-- [X] T202 [US4] Implement name validation (required, max 200)
-- [X] T203 [US4] Implement type validation (required)
-- [X] T204 [US4] Implement "Save" button disabled logic (invalid || items.length === 0)
-- [X] T205 [US4] Implement handleSubmit calling saveMenu()
-- [X] T206 [US4] Implement loading state during save (button shows spinner)
-- [X] T207 [US4] Implement error display (red text below form)
-- [X] T208 [US5] Implement "Cancel" button - useRouter().back() or navigate to '/'
-- [X] T209 [US4] Add ARIA attributes for form fields
-- [X] T210 [US4] Run `npm test` → verify all form tests pass (GREEN phase)
+- [x] T199 [US4] Create `app/components/SaveMenuForm.tsx` component
+- [x] T200 [US4] Implement name input with controlled value
+- [x] T201 [US4] Implement type select (dropdown with MenuType options)
+- [x] T202 [US4] Implement name validation (required, max 200)
+- [x] T203 [US4] Implement type validation (required)
+- [x] T204 [US4] Implement "Save" button disabled logic (invalid || items.length === 0)
+- [x] T205 [US4] Implement handleSubmit calling saveMenu()
+- [x] T206 [US4] Implement loading state during save (button shows spinner)
+- [x] T207 [US4] Implement error display (red text below form)
+- [x] T208 [US5] Implement "Cancel" button - useRouter().back() or navigate to '/'
+- [x] T209 [US4] Add ARIA attributes for form fields
+- [x] T210 [US4] Run `npm test` → verify all form tests pass (GREEN phase)
 
 ### Refactor
 
-- [X] T211 [US4] Extract form validation into custom hook if complex
-- [X] T212 [US4] Run `npm test` → ensure tests still pass after refactoring
+- [x] T211 [US4] Extract form validation into custom hook if complex
+- [x] T212 [US4] Run `npm test` → ensure tests still pass after refactoring
 
 ---
 
@@ -472,8 +472,8 @@
 
 - [ ] T243 Check if `.gitignore` exists, create if missing or verify it contains: `node_modules/`, `dist/`, `build/`, `.next/`, `coverage/`, `test-results/`, `playwright-report/`, `.env*`, `*.log`, `.DS_Store`
 - [ ] T244 Check if `.eslintignore` or `eslint.config.*` exists, ensure patterns: `node_modules/`, `dist/`, `build/`, `.next/`, `coverage/`, `test-results/`, `playwright-report/`
-- [ ] T245 Check if `.prettierignore` exists (if .prettierrc* found), ensure patterns: `node_modules/`, `dist/`, `build/`, `.next/`, `coverage/`, `package-lock.json`, `pnpm-lock.yaml`
-- [ ] T246 Check if `.dockerignore` needed (if Dockerfile* exists), create with patterns: `node_modules/`, `.git/`, `.env*`, `coverage/`, `test-results/`, `*.log`
+- [ ] T245 Check if `.prettierignore` exists (if .prettierrc\* found), ensure patterns: `node_modules/`, `dist/`, `build/`, `.next/`, `coverage/`, `package-lock.json`, `pnpm-lock.yaml`
+- [ ] T246 Check if `.dockerignore` needed (if Dockerfile* exists), create with patterns: `node_modules/`, `.git/`, `.env*`, `coverage/`, `test-results/`, `\*.log`
 - [ ] T247 Verify `.gitignore` contains `.vscode/`, `.idea/` if not already present
 
 ---
@@ -524,6 +524,7 @@
 ### Parallel Execution
 
 Tasks marked with **[P]** can run in parallel within their phase:
+
 - Different files
 - No shared dependencies
 - Independent test cases
@@ -531,6 +532,7 @@ Tasks marked with **[P]** can run in parallel within their phase:
 ### TDD Discipline
 
 Every phase follows RED-GREEN-REFACTOR:
+
 1. **RED**: Write failing tests first
 2. **GREEN**: Implement minimal code to pass
 3. **REFACTOR**: Improve code quality while keeping tests green
@@ -538,6 +540,7 @@ Every phase follows RED-GREEN-REFACTOR:
 ### Checkpoints
 
 After each phase:
+
 1. Verify all tests pass
 2. Commit changes
 3. Check no regressions in previous features
@@ -579,25 +582,25 @@ After each phase:
 
 ## Task Summary
 
-| Phase | Tasks | Type | Estimated Time |
-|-------|-------|------|----------------|
-| Phase 1 | T001-T006 | Setup | 15 mins |
-| Phase 2 | T007-T023 | Domain (MenuItem) | 1.5 hours |
-| Phase 3 | T024-T046 | Domain (Menu) | 1.5 hours |
-| Phase 4 | T047-T073 | Repository | 2 hours |
-| Phase 5 | T074-T099 | Hook | 2 hours |
-| Phase 6 | T100-T110 | Context | 30 mins |
-| Phase 7 | T111-T137 | Autocomplete | 3 hours |
-| Phase 8 | T138-T158 | Weight Dialog | 1.5 hours |
-| Phase 9 | T159-T177 | Items List | 2 hours |
-| Phase 10 | T178-T190 | Summary | 30 mins |
-| Phase 11 | T191-T212 | Save Form | 1.5 hours |
-| Phase 12 | T213-T237 | Page Integration | 3 hours |
-| Phase 13 | T238-T242 | Home Page (defer) | - |
-| Phase 14 | T243-T247 | Ignore Files | 30 mins |
-| Phase 15 | T248-T258 | Polish | 2 hours |
-| Phase 16 | T259-T263 | Documentation | 1 hour |
-| **Total** | **263 tasks** | | **~18-20 hours** |
+| Phase     | Tasks         | Type              | Estimated Time   |
+| --------- | ------------- | ----------------- | ---------------- |
+| Phase 1   | T001-T006     | Setup             | 15 mins          |
+| Phase 2   | T007-T023     | Domain (MenuItem) | 1.5 hours        |
+| Phase 3   | T024-T046     | Domain (Menu)     | 1.5 hours        |
+| Phase 4   | T047-T073     | Repository        | 2 hours          |
+| Phase 5   | T074-T099     | Hook              | 2 hours          |
+| Phase 6   | T100-T110     | Context           | 30 mins          |
+| Phase 7   | T111-T137     | Autocomplete      | 3 hours          |
+| Phase 8   | T138-T158     | Weight Dialog     | 1.5 hours        |
+| Phase 9   | T159-T177     | Items List        | 2 hours          |
+| Phase 10  | T178-T190     | Summary           | 30 mins          |
+| Phase 11  | T191-T212     | Save Form         | 1.5 hours        |
+| Phase 12  | T213-T237     | Page Integration  | 3 hours          |
+| Phase 13  | T238-T242     | Home Page (defer) | -                |
+| Phase 14  | T243-T247     | Ignore Files      | 30 mins          |
+| Phase 15  | T248-T258     | Polish            | 2 hours          |
+| Phase 16  | T259-T263     | Documentation     | 1 hour           |
+| **Total** | **263 tasks** |                   | **~18-20 hours** |
 
 ---
 

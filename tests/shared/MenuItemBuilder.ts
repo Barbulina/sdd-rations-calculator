@@ -72,6 +72,8 @@ export function createMenuItem(overrides?: Record<string, unknown>) {
   };
 }
 
-export function createTestAliment(overrides?: Partial<AlimentInfo>): AlimentInfo {
+export function createTestAliment(
+  overrides?: Partial<AlimentInfo>,
+): AlimentInfo {
   return { ...defaultAliment, ...overrides };
 }

@@ -5,7 +5,7 @@
 **Status**: Draft  
 **Input**: User description: "Create a design token system in Specify that includes: Semantic Colors for each aliment category following M3 color roles, States for Offline status indicators and TDD/Action feedback, Scales for Typography and spacing based on 8px grid for Mobile First usage. Must be compatible with Tailwind CSS config."
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Aliment Category Color System (Priority: P1)
 
@@ -85,7 +85,7 @@ Developers following TDD methodology and users performing actions need visual fe
 - How are transitions between light/dark mode handled? Tokens must support both themes without UI flicker or inconsistency.
 - What happens if spacing values conflict with component library requirements? The 8px grid must be flexible enough to accommodate 4px micro-adjustments where needed.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -103,7 +103,7 @@ Developers following TDD methodology and users performing actions need visual fe
 - **FR-012**: System MUST document the semantic meaning of each token in the design system documentation
 - **FR-013**: Tailwind configuration MUST expose tokens via utility classes following Tailwind naming conventions
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **Design Token**: Represents a single design decision with properties: name (semantic identifier), value (actual CSS value), category (color/typography/spacing), theme (light/dark), and description
 - **Color Token**: Extends Design Token with additional properties: hex value, RGB values, HSL values, M3 color role mapping, contrast ratio validation results
@@ -111,7 +111,7 @@ Developers following TDD methodology and users performing actions need visual fe
 - **Spacing Token**: Extends Design Token with properties: pixel value, rem equivalent, grid alignment factor (must be multiple of 8)
 - **Token Collection**: Groups related tokens (e.g., all category colors, all spacing values) with metadata about the collection purpose and usage guidelines
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

@@ -17,13 +17,13 @@
 
 **Purpose**: Install and configure testing frameworks required by Constitution Principle III (TDD)
 
-- [X] T001 Install Vitest and dependencies: `npm install -D vitest @vitest/ui @testing-library/react @testing-library/jest-dom jsdom @vitejs/plugin-react`
-- [X] T002 Install Playwright: `npm install -D @playwright/test` and run `npx playwright install`
-- [X] T003 Create `vitest.config.ts` in project root with jsdom environment and path aliases
-- [X] T004 Create `tests/setup.ts` importing @testing-library/jest-dom
-- [X] T005 Create `playwright.config.ts` in project root with test directory and dev server config
-- [X] T006 Add test scripts to `package.json`: test, test:ui, test:e2e, test:e2e:ui
-- [X] T007 Create `.gitignore` entries for test outputs: `test-results/`, `playwright-report/`, `coverage/`
+- [x] T001 Install Vitest and dependencies: `npm install -D vitest @vitest/ui @testing-library/react @testing-library/jest-dom jsdom @vitejs/plugin-react`
+- [x] T002 Install Playwright: `npm install -D @playwright/test` and run `npx playwright install`
+- [x] T003 Create `vitest.config.ts` in project root with jsdom environment and path aliases
+- [x] T004 Create `tests/setup.ts` importing @testing-library/jest-dom
+- [x] T005 Create `playwright.config.ts` in project root with test directory and dev server config
+- [x] T006 Add test scripts to `package.json`: test, test:ui, test:e2e, test:e2e:ui
+- [x] T007 Create `.gitignore` entries for test outputs: `test-results/`, `playwright-report/`, `coverage/`
 
 ---
 
@@ -33,24 +33,24 @@
 
 ### Tests First (RED)
 
-- [X] T008 [US2] Create `tests/unit/custom-aliments/CustomAlimentBuilder.ts` test builder following existing RationBuilder pattern
-- [X] T009 [US2] Write `tests/unit/custom-aliments/CustomAliment.test.ts` - test name validation (required, max 200 chars, trimmed)
-- [X] T010 [P] [US2] Write tests for gramsToCarbohydrate validation (required, > 0)
-- [X] T011 [P] [US2] Write tests for bloodGlucoseIndex validation (optional, 0-100 range)
-- [X] T012 [P] [US2] Write tests for type validation (required, must be valid RationsType)
-- [X] T013 [US2] Run `npm test` → verify all tests fail (RED phase)
+- [x] T008 [US2] Create `tests/unit/custom-aliments/CustomAlimentBuilder.ts` test builder following existing RationBuilder pattern
+- [x] T009 [US2] Write `tests/unit/custom-aliments/CustomAliment.test.ts` - test name validation (required, max 200 chars, trimmed)
+- [x] T010 [P] [US2] Write tests for gramsToCarbohydrate validation (required, > 0)
+- [x] T011 [P] [US2] Write tests for bloodGlucoseIndex validation (optional, 0-100 range)
+- [x] T012 [P] [US2] Write tests for type validation (required, must be valid RationsType)
+- [x] T013 [US2] Run `npm test` → verify all tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T014 [US2] Create `src/domain/models/CustomAliment.ts` with CustomAliment interface extending AlimentInfo
-- [X] T015 [US2] Implement validation functions in CustomAliment.ts (validateName, validateGrams, validateBGI, validateType)
-- [X] T016 [US2] Create CreateCustomAlimentDTO and UpdateCustomAlimentDTO types
-- [X] T017 [US2] Run `npm test` → verify all tests pass (GREEN phase) - ✓ 18/18 tests passing
+- [x] T014 [US2] Create `src/domain/models/CustomAliment.ts` with CustomAliment interface extending AlimentInfo
+- [x] T015 [US2] Implement validation functions in CustomAliment.ts (validateName, validateGrams, validateBGI, validateType)
+- [x] T016 [US2] Create CreateCustomAlimentDTO and UpdateCustomAlimentDTO types
+- [x] T017 [US2] Run `npm test` → verify all tests pass (GREEN phase) - ✓ 18/18 tests passing
 
 ### Refactor
 
-- [X] T018 [US2] Refactor validation logic for clarity and DRY principles - validation logic is clean
-- [X] T019 [US2] Run `npm test` → ensure tests still pass after refactoring - no refactoring needed
+- [x] T018 [US2] Refactor validation logic for clarity and DRY principles - validation logic is clean
+- [x] T019 [US2] Run `npm test` → ensure tests still pass after refactoring - no refactoring needed
 
 ---
 
@@ -60,36 +60,36 @@
 
 ### Tests First (RED)
 
-- [X] T020 [US1] Write `tests/integration/custom-aliments/LocalStorageCustomAlimentRepository.test.ts` - test save() method
-- [X] T021 [P] [US3] Write tests for findAll() - returns all custom aliments sorted by createdAt DESC
-- [X] T022 [P] [US3] Write tests for findById() - returns aliment or undefined
-- [X] T023 [P] [US3] Write tests for findByType() - filters by category
-- [X] T024 [P] [US3] Write tests for search() - case-insensitive name matching
-- [X] T025 [P] [US1] Write tests for update() - updates fields and sets updatedAt
-- [X] T026 [P] [US1] Write tests for delete() - removes aliment by ID
-- [X] T027 [P] [US1] Write tests for count() - returns total count
-- [X] T028 [US1] Write tests for storage quota exceeded error handling
-- [X] T029 [US1] Run `npm test` → verify all repository tests fail (RED phase)
+- [x] T020 [US1] Write `tests/integration/custom-aliments/LocalStorageCustomAlimentRepository.test.ts` - test save() method
+- [x] T021 [P] [US3] Write tests for findAll() - returns all custom aliments sorted by createdAt DESC
+- [x] T022 [P] [US3] Write tests for findById() - returns aliment or undefined
+- [x] T023 [P] [US3] Write tests for findByType() - filters by category
+- [x] T024 [P] [US3] Write tests for search() - case-insensitive name matching
+- [x] T025 [P] [US1] Write tests for update() - updates fields and sets updatedAt
+- [x] T026 [P] [US1] Write tests for delete() - removes aliment by ID
+- [x] T027 [P] [US1] Write tests for count() - returns total count
+- [x] T028 [US1] Write tests for storage quota exceeded error handling
+- [x] T029 [US1] Run `npm test` → verify all repository tests fail (RED phase)
 
 ### Implementation (GREEN)
 
-- [X] T030 [US1] Create `src/domain/repositories/CustomAlimentRepository.ts` interface matching contracts/CustomAlimentRepository.ts
-- [X] T031 [US1] Create `src/infrastructure/repositories/LocalStorageCustomAlimentRepository.ts` implementing interface
-- [X] T032 [US1] Implement save() with UUID generation, createdAt timestamp, isCustom flag
-- [X] T033 [US1] Implement findAll() with JSON parsing and sorting
-- [X] T034 [P] [US3] Implement findById() with array.find
-- [X] T035 [P] [US3] Implement findByType() with array.filter
-- [X] T036 [P] [US3] Implement search() with toLowerCase and includes
-- [X] T037 [P] [US1] Implement update() with updatedAt timestamp
-- [X] T038 [P] [US1] Implement delete() with array.filter
-- [X] T039 [P] [US1] Implement count() returning array length
-- [X] T040 [US1] Add error handling for QuotaExceededError using LocalStorageAdapter pattern
-- [X] T041 [US1] Run `npm test` → verify all repository tests pass (GREEN phase) - ✓ 26/26 tests passing
+- [x] T030 [US1] Create `src/domain/repositories/CustomAlimentRepository.ts` interface matching contracts/CustomAlimentRepository.ts
+- [x] T031 [US1] Create `src/infrastructure/repositories/LocalStorageCustomAlimentRepository.ts` implementing interface
+- [x] T032 [US1] Implement save() with UUID generation, createdAt timestamp, isCustom flag
+- [x] T033 [US1] Implement findAll() with JSON parsing and sorting
+- [x] T034 [P] [US3] Implement findById() with array.find
+- [x] T035 [P] [US3] Implement findByType() with array.filter
+- [x] T036 [P] [US3] Implement search() with toLowerCase and includes
+- [x] T037 [P] [US1] Implement update() with updatedAt timestamp
+- [x] T038 [P] [US1] Implement delete() with array.filter
+- [x] T039 [P] [US1] Implement count() returning array length
+- [x] T040 [US1] Add error handling for QuotaExceededError using LocalStorageAdapter pattern
+- [x] T041 [US1] Run `npm test` → verify all repository tests pass (GREEN phase) - ✓ 26/26 tests passing
 
 ### Refactor
 
-- [X] T042 [US1] Refactor duplicate code (parsing, error handling) into private methods - code is clean
-- [X] T043 [US1] Run `npm test` → ensure tests still pass after refactoring - no refactoring needed
+- [x] T042 [US1] Refactor duplicate code (parsing, error handling) into private methods - code is clean
+- [x] T043 [US1] Run `npm test` → ensure tests still pass after refactoring - no refactoring needed
 
 ---
 
@@ -106,19 +106,19 @@
 
 ### Implementation (GREEN)
 
-- [X] T048 [US3] Create `src/application/contexts/CustomAlimentRepositoryContext.tsx` with provider and hook
-- [X] T049 [US3] Update `app/providers.tsx` to include CustomAlimentRepositoryProvider wrapping children
-- [X] T050 [US3] Create `src/domain/repositories/CompositeAlimentRepository.ts` implementing merged catalog
-- [X] T051 [US3] Implement composite findAll() merging catalog + custom, sorted by name
-- [X] T052 [P] [US3] Implement composite search() calling both repositories
-- [X] T053 [P] [US3] Implement composite findById() - only custom (catalog has no IDs)
-- [X] T054 [US3] Create `src/application/hooks/useCompositeAliments.ts` hook using both repositories
-- [X] T055 [US3] Added count() method to AlimentInfoRepository interface and implementation
-- [X] T056 [US3] Run `npm test` → verify all tests pass ✓ 44/44 passing
+- [x] T048 [US3] Create `src/application/contexts/CustomAlimentRepositoryContext.tsx` with provider and hook
+- [x] T049 [US3] Update `app/providers.tsx` to include CustomAlimentRepositoryProvider wrapping children
+- [x] T050 [US3] Create `src/domain/repositories/CompositeAlimentRepository.ts` implementing merged catalog
+- [x] T051 [US3] Implement composite findAll() merging catalog + custom, sorted by name
+- [x] T052 [P] [US3] Implement composite search() calling both repositories
+- [x] T053 [P] [US3] Implement composite findById() - only custom (catalog has no IDs)
+- [x] T054 [US3] Create `src/application/hooks/useCompositeAliments.ts` hook using both repositories
+- [x] T055 [US3] Added count() method to AlimentInfoRepository interface and implementation
+- [x] T056 [US3] Run `npm test` → verify all tests pass ✓ 44/44 passing
 
 ### Refactor
 
-- [X] T057 [US3] No refactoring needed - code is clean and performant
+- [x] T057 [US3] No refactoring needed - code is clean and performant
 - [ ] T057 [US3] Run `npm test` → ensure tests still pass
 
 ---
@@ -139,24 +139,24 @@
 
 ### Implementation (GREEN)
 
-- [X] T065 [US2] Create `app/aliment-browser/create/page.tsx` with form component structure
-- [X] T066 [US2] Implement form state management (formData, errors, isSubmitting)
-- [X] T067 [US2] Implement field-level validation using domain validation functions
-- [X] T068 [US2] Add form fields: name, type (RationsType), gramsToCarbohydrate, bloodGlucoseIndex
-- [X] T069 [US2] Implement real-time validation on onChange
-- [X] T070 [US2] Add ARIA labels and semantic HTML for accessibility
-- [X] T071 [US2] Implement handleSubmit calling repository.save()
-- [X] T072 [US1] Implement handleCancel navigation to /aliment-browser
-- [X] T073 [US2] Add loading state during submission
-- [X] T074 [US2] Add error handling for submission failures
-- [X] T075 [US2] Style form using design tokens (no hardcoded colors/spacing)
-- [X] T076 [US1] Manual testing → form works end-to-end ✓
+- [x] T065 [US2] Create `app/aliment-browser/create/page.tsx` with form component structure
+- [x] T066 [US2] Implement form state management (formData, errors, isSubmitting)
+- [x] T067 [US2] Implement field-level validation using domain validation functions
+- [x] T068 [US2] Add form fields: name, type (RationsType), gramsToCarbohydrate, bloodGlucoseIndex
+- [x] T069 [US2] Implement real-time validation on onChange
+- [x] T070 [US2] Add ARIA labels and semantic HTML for accessibility
+- [x] T071 [US2] Implement handleSubmit calling repository.save()
+- [x] T072 [US1] Implement handleCancel navigation to /aliment-browser
+- [x] T073 [US2] Add loading state during submission
+- [x] T074 [US2] Add error handling for submission failures
+- [x] T075 [US2] Style form using design tokens (no hardcoded colors/spacing)
+- [x] T076 [US1] Manual testing → form works end-to-end ✓
 
 ### Refactor
 
-- [X] T077 [US2] No extraction needed - form is clean and maintainable
-- [X] T078 [US2] No duplication found
-- [X] T079 [US1] Build successful, form tested manually
+- [x] T077 [US2] No extraction needed - form is clean and maintainable
+- [x] T078 [US2] No duplication found
+- [x] T079 [US1] Build successful, form tested manually
 
 ---
 
@@ -177,19 +177,19 @@
 
 ### Implementation (GREEN)
 
-- [X] T088 [US1] Update `app/aliment-browser/page.tsx` to use useCompositeAliments hook
-- [X] T089 [US1] Add "+ Crear Alimento" button in browser header with Link to /aliment-browser/create
-- [X] T090 [US1] Empty state already exists (not updated with searchQuery pre-fill - deferred to v2)
-- [X] T091 [US1] SearchParams pre-fill deferred to v2
-- [X] T092 [US3] Add custom badge display in aliment cards using isCustom type guard
-- [X] T093 [US3] Style badge using design tokens (bg-blue-100 text-blue-800)
-- [X] T094 [US1] SearchParams handling deferred to v2
-- [X] T095 [US1] Manual testing → browser works end-to-end ✓
+- [x] T088 [US1] Update `app/aliment-browser/page.tsx` to use useCompositeAliments hook
+- [x] T089 [US1] Add "+ Crear Alimento" button in browser header with Link to /aliment-browser/create
+- [x] T090 [US1] Empty state already exists (not updated with searchQuery pre-fill - deferred to v2)
+- [x] T091 [US1] SearchParams pre-fill deferred to v2
+- [x] T092 [US3] Add custom badge display in aliment cards using isCustom type guard
+- [x] T093 [US3] Style badge using design tokens (bg-blue-100 text-blue-800)
+- [x] T094 [US1] SearchParams handling deferred to v2
+- [x] T095 [US1] Manual testing → browser works end-to-end ✓
 
 ### Refactor
 
-- [X] T096 [US3] AlimentCard inline - no extraction needed for current scope
-- [X] T097 [US1] Build successful, browser tested manually
+- [x] T096 [US3] AlimentCard inline - no extraction needed for current scope
+- [x] T097 [US1] Build successful, browser tested manually
 
 ---
 
@@ -199,15 +199,15 @@
 
 ### Tests
 
-- [X] T098 [US4] Write E2E test: Create custom aliment → navigate to create-ration → verify custom aliment appears in list - SKIPPED (manual testing confirms functionality)
-- [X] T099 [US4] Write E2E test: Create ration using custom aliment → verify ration saves with correct aliment data - SKIPPED (manual testing confirms functionality)
-- [X] T100 [US4] Run `npm run test:e2e` → verify integration tests pass - SKIPPED (Playwright tests deferred to future enhancement)
+- [x] T098 [US4] Write E2E test: Create custom aliment → navigate to create-ration → verify custom aliment appears in list - SKIPPED (manual testing confirms functionality)
+- [x] T099 [US4] Write E2E test: Create ration using custom aliment → verify ration saves with correct aliment data - SKIPPED (manual testing confirms functionality)
+- [x] T100 [US4] Run `npm run test:e2e` → verify integration tests pass - SKIPPED (Playwright tests deferred to future enhancement)
 
 ### Implementation
 
-- [X] T101 [US4] Verify `app/create-ration/page.tsx` (or aliment selector if exists) uses composite repository - create-ration is direct form entry; aliment selection integration deferred to future enhancement
-- [X] T102 [US4] Test manual flow: create custom aliment → create ration → verify persistence - ✓ Manual testing confirms localStorage persistence works
-- [X] T103 [US4] Run full test suite: `npm test && npm run test:e2e` → all tests pass - ✓ 44/44 custom aliment tests passing
+- [x] T101 [US4] Verify `app/create-ration/page.tsx` (or aliment selector if exists) uses composite repository - create-ration is direct form entry; aliment selection integration deferred to future enhancement
+- [x] T102 [US4] Test manual flow: create custom aliment → create ration → verify persistence - ✓ Manual testing confirms localStorage persistence works
+- [x] T103 [US4] Run full test suite: `npm test && npm run test:e2e` → all tests pass - ✓ 44/44 custom aliment tests passing
 
 ---
 
@@ -215,13 +215,13 @@
 
 **Purpose**: Final quality checks and documentation updates
 
-- [X] T104 Run linter: `npm run lint` → fix any errors - ✓ No errors found
-- [X] T105 [P] Check accessibility: Form has proper ARIA labels, keyboard navigation works - ✓ Form uses semantic HTML with proper labels
-- [X] T106 [P] Check design tokens: No hardcoded colors/spacing in new files - ✓ Using Tailwind CSS classes only
-- [X] T107 [P] Check offline functionality: Form works without network, localStorage persists - ✓ localStorage works offline
-- [X] T108 Update `docs/aliment-catalog.md` with usage examples - ✓ Added custom aliment documentation with examples
-- [X] T109 Run full test suite: `npm test && npm run test:e2e` → 100% pass rate - ✓ 44/44 tests passing (design token tests pre-existing failures)
-- [X] T110 Mark tasks.md checkboxes as complete - ✓ Completed
+- [x] T104 Run linter: `npm run lint` → fix any errors - ✓ No errors found
+- [x] T105 [P] Check accessibility: Form has proper ARIA labels, keyboard navigation works - ✓ Form uses semantic HTML with proper labels
+- [x] T106 [P] Check design tokens: No hardcoded colors/spacing in new files - ✓ Using Tailwind CSS classes only
+- [x] T107 [P] Check offline functionality: Form works without network, localStorage persists - ✓ localStorage works offline
+- [x] T108 Update `docs/aliment-catalog.md` with usage examples - ✓ Added custom aliment documentation with examples
+- [x] T109 Run full test suite: `npm test && npm run test:e2e` → 100% pass rate - ✓ 44/44 tests passing (design token tests pre-existing failures)
+- [x] T110 Mark tasks.md checkboxes as complete - ✓ Completed
 
 ---
 
@@ -239,6 +239,7 @@
 ### Parallel Execution
 
 Tasks marked **[P]** can run in parallel (different files, no dependencies):
+
 - T010-T012: Domain validation tests (different test cases)
 - T021-T028: Repository method tests (independent methods)
 - T034-T039: Repository implementations (independent methods)
@@ -251,6 +252,7 @@ Tasks marked **[P]** can run in parallel (different files, no dependencies):
 ### Dependency Chain
 
 **Must complete in order**:
+
 1. Phase 1 (Setup) → unlocks all testing
 2. T008 (Builder) → unlocks T009-T012 (needs builder in tests)
 3. T014 (CustomAliment model) → unlocks T020-T028 (tests import model)
@@ -261,6 +263,7 @@ Tasks marked **[P]** can run in parallel (different files, no dependencies):
 ### Progress Tracking
 
 Mark tasks complete with `[X]` in tasks.md as you finish them. After each phase, verify:
+
 - ✅ All tests pass
 - ✅ No linting errors
 - ✅ Design tokens used (no hardcoded values)
@@ -270,13 +273,13 @@ Mark tasks complete with `[X]` in tasks.md as you finish them. After each phase,
 
 ## Constitutional Compliance Verification
 
-| Principle | Verification Tasks |
-|-----------|-------------------|
-| **I. Architectural Integrity** | T014, T030-T031 (domain isolated), T048-T049 (hexagonal boundaries) |
-| **II. Testing Strategy** | T008 (CustomAlimentBuilder pattern) |
-| **III. Test-First Methodology** | T009-T013, T020-T029, T058-T064, T080-T087 (tests before implementation) |
-| **IV. Design & Implementation** | T075, T093, T106 (design tokens only) |
-| **V. Availability & Resilience** | T028, T040, T107 (offline-first, localStorage) |
-| **VI. Quality Assurance** | T020-T029 (integration tests), T058-T099 (E2E tests) |
+| Principle                        | Verification Tasks                                                       |
+| -------------------------------- | ------------------------------------------------------------------------ |
+| **I. Architectural Integrity**   | T014, T030-T031 (domain isolated), T048-T049 (hexagonal boundaries)      |
+| **II. Testing Strategy**         | T008 (CustomAlimentBuilder pattern)                                      |
+| **III. Test-First Methodology**  | T009-T013, T020-T029, T058-T064, T080-T087 (tests before implementation) |
+| **IV. Design & Implementation**  | T075, T093, T106 (design tokens only)                                    |
+| **V. Availability & Resilience** | T028, T040, T107 (offline-first, localStorage)                           |
+| **VI. Quality Assurance**        | T020-T029 (integration tests), T058-T099 (E2E tests)                     |
 
 **Ready to implement!** Start with Phase 1 (T001-T007) and proceed through phases in TDD order.

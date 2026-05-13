@@ -43,7 +43,9 @@ export function useMenuDetail(id: string) {
       }
     }
     load();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [id, repository]);
 
   // ── Save name + type ────────────────────────────────────────────────────
@@ -62,7 +64,7 @@ export function useMenuDetail(id: string) {
       const updated: Menu = {
         ...menu,
         name: trimmed,
-        type: (editType ?? menu.type as unknown as MenuType) as any,
+        type: (editType ?? (menu.type as unknown as MenuType)) as any,
         updatedAt: new Date(),
       };
       const saved = await repository.update(updated);

@@ -18,16 +18,16 @@ Represents a food item with nutritional information for meal planning and blood 
 
 #### Attributes
 
-| Field | Type | Required | Validation | Description |
-|-------|------|----------|------------|-------------|
-| `id` | string | Yes | UUID format | Unique identifier for the ration |
-| `type` | RationsType | Yes | Must be valid enum value | Category of food aliment |
-| `name` | string | Yes | Non-empty, max 200 chars | Human-readable name of food item |
-| `gramsToCarbohydrate` | number | Yes | > 0 | Grams of food containing 10g HC |
-| `bloodGlucoseIndex` | number \| undefined | No | 0-100 if provided | Optional glycemic index value |
-| `weight` | number | Yes | > 0 | Weight of food portion in grams |
-| `rations` | number | Yes | > 0 | Calculated ration value |
-| `createdAt` | Date | Yes | Valid ISO date | Timestamp of creation (for sorting) |
+| Field                 | Type                | Required | Validation               | Description                         |
+| --------------------- | ------------------- | -------- | ------------------------ | ----------------------------------- |
+| `id`                  | string              | Yes      | UUID format              | Unique identifier for the ration    |
+| `type`                | RationsType         | Yes      | Must be valid enum value | Category of food aliment            |
+| `name`                | string              | Yes      | Non-empty, max 200 chars | Human-readable name of food item    |
+| `gramsToCarbohydrate` | number              | Yes      | > 0                      | Grams of food containing 10g HC     |
+| `bloodGlucoseIndex`   | number \| undefined | No       | 0-100 if provided        | Optional glycemic index value       |
+| `weight`              | number              | Yes      | > 0                      | Weight of food portion in grams     |
+| `rations`             | number              | Yes      | > 0                      | Calculated ration value             |
+| `createdAt`           | Date                | Yes      | Valid ISO date           | Timestamp of creation (for sorting) |
 
 #### Type Definition
 
@@ -67,27 +67,27 @@ Represents the seven categories of food aliments with Spanish display labels.
 
 #### Values
 
-| Enum Key | Display Value (Spanish) | Design Token Color |
-|----------|------------------------|-------------------|
-| `lacteal` | lácteos | `category-lacteal` (M3 Primary purple) |
-| `cereals_flours_pulses_legumes_tubers` | cereales, harinas, legumbres y tuberculos | `category-cereals...` (M3 Secondary) |
-| `fruits` | frutas | `category-fruits` (M3 Tertiary orange) |
-| `vegetables` | hortalizas | `category-vegetables` (M3 custom green) |
-| `oily_and_dry_fruit` | frutas secas y grasa | `category-oily-dry-fruits` (M3 custom brown) |
-| `drinks` | bebidas | `category-drinks` (M3 custom blue) |
-| `others` | otros | `category-others` (M3 surface-variant gray) |
+| Enum Key                               | Display Value (Spanish)                   | Design Token Color                           |
+| -------------------------------------- | ----------------------------------------- | -------------------------------------------- |
+| `lacteal`                              | lácteos                                   | `category-lacteal` (M3 Primary purple)       |
+| `cereals_flours_pulses_legumes_tubers` | cereales, harinas, legumbres y tuberculos | `category-cereals...` (M3 Secondary)         |
+| `fruits`                               | frutas                                    | `category-fruits` (M3 Tertiary orange)       |
+| `vegetables`                           | hortalizas                                | `category-vegetables` (M3 custom green)      |
+| `oily_and_dry_fruit`                   | frutas secas y grasa                      | `category-oily-dry-fruits` (M3 custom brown) |
+| `drinks`                               | bebidas                                   | `category-drinks` (M3 custom blue)           |
+| `others`                               | otros                                     | `category-others` (M3 surface-variant gray)  |
 
 #### Type Definition
 
 ```typescript
 enum RationsType {
-  lacteal = 'lácteos',
-  cereals_flours_pulses_legumes_tubers = 'cereales, harinas, legumbres y tuberculos',
-  fruits = 'frutas',
-  vegetables = 'hortalizas',
-  oily_and_dry_fruit = 'frutas secas y grasa',
-  drinks = 'bebidas',
-  others = 'otros'
+  lacteal = "lácteos",
+  cereals_flours_pulses_legumes_tubers = "cereales, harinas, legumbres y tuberculos",
+  fruits = "frutas",
+  vegetables = "hortalizas",
+  oily_and_dry_fruit = "frutas secas y grasa",
+  drinks = "bebidas",
+  others = "otros",
 }
 ```
 
@@ -121,6 +121,7 @@ enum RationsType {
 ```
 
 **Relationships**:
+
 - **RationsType ↔ Ration**: One-to-Many (one type can have many rations)
 - No foreign keys in MVP (standalone entities)
 - Future: User entity (one user has many rations)
@@ -132,6 +133,7 @@ enum RationsType {
 ### Ration Validation
 
 #### Required Fields
+
 - `id`: Must be present, non-empty UUID
 - `type`: Must be valid RationsType enum value
 - `name`: Must be non-empty string, trimmed, max 200 characters
@@ -141,9 +143,11 @@ enum RationsType {
 - `createdAt`: Must be valid Date object
 
 #### Optional Fields
+
 - `bloodGlucoseIndex`: If provided, must be number between 0-100
 
 #### Business Rules
+
 1. **Name uniqueness**: Not enforced (users can have duplicate names for different portions)
 2. **Ration calculation**: Should match formula `rations = weight / gramsToCarbohydrate * 10` (verify in tests)
 3. **Type consistency**: Type must map to valid design token color class
@@ -161,47 +165,53 @@ function validateRation(ration: Partial<Ration>): ValidationResult {
 
   // Required fields
   if (!ration.id?.trim()) {
-    errors.id = 'ID is required';
+    errors.id = "ID is required";
   }
 
   if (!ration.type || !Object.values(RationsType).includes(ration.type)) {
-    errors.type = 'Valid ration type is required';
+    errors.type = "Valid ration type is required";
   }
 
   if (!ration.name?.trim()) {
-    errors.name = 'Name is required';
+    errors.name = "Name is required";
   } else if (ration.name.length > 200) {
-    errors.name = 'Name must be 200 characters or less';
+    errors.name = "Name must be 200 characters or less";
   }
 
-  if (typeof ration.gramsToCarbohydrate !== 'number' || ration.gramsToCarbohydrate <= 0) {
-    errors.gramsToCarbohydrate = 'Grams to carbohydrate must be greater than 0';
+  if (
+    typeof ration.gramsToCarbohydrate !== "number" ||
+    ration.gramsToCarbohydrate <= 0
+  ) {
+    errors.gramsToCarbohydrate = "Grams to carbohydrate must be greater than 0";
   }
 
-  if (typeof ration.weight !== 'number' || ration.weight <= 0) {
-    errors.weight = 'Weight must be greater than 0';
+  if (typeof ration.weight !== "number" || ration.weight <= 0) {
+    errors.weight = "Weight must be greater than 0";
   }
 
-  if (typeof ration.rations !== 'number' || ration.rations <= 0) {
-    errors.rations = 'Rations must be greater than 0';
+  if (typeof ration.rations !== "number" || ration.rations <= 0) {
+    errors.rations = "Rations must be greater than 0";
   }
 
   if (!ration.createdAt || !(ration.createdAt instanceof Date)) {
-    errors.createdAt = 'Created date is required';
+    errors.createdAt = "Created date is required";
   }
 
   // Optional fields
   if (ration.bloodGlucoseIndex !== undefined) {
-    if (typeof ration.bloodGlucoseIndex !== 'number' || 
-        ration.bloodGlucoseIndex < 0 || 
-        ration.bloodGlucoseIndex > 100) {
-      errors.bloodGlucoseIndex = 'Blood glucose index must be between 0 and 100';
+    if (
+      typeof ration.bloodGlucoseIndex !== "number" ||
+      ration.bloodGlucoseIndex < 0 ||
+      ration.bloodGlucoseIndex > 100
+    ) {
+      errors.bloodGlucoseIndex =
+        "Blood glucose index must be between 0 and 100";
     }
   }
 
   return {
     valid: Object.keys(errors).length === 0,
-    errors
+    errors,
   };
 }
 ```
@@ -247,6 +257,7 @@ function validateRation(ration: Partial<Ration>): ValidationResult {
 ```
 
 **States**:
+
 1. **Draft** (Form): User is filling form, data in component state only
 2. **Validating**: Form submission triggered, validation running
 3. **Saving**: Valid data being persisted to localStorage
@@ -254,6 +265,7 @@ function validateRation(ration: Partial<Ration>): ValidationResult {
 5. **Displayed**: Rendered in home page list
 
 **Error States**:
+
 - **Validation Error**: Form data invalid, show field errors, stay on form
 - **Save Error**: localStorage quota exceeded or disabled, show notification, stay on form
 - **Load Error**: localStorage corrupt or unavailable, show empty state with message
@@ -276,19 +288,22 @@ interface LocalStorageSchema {
 }
 
 // Actual storage
-localStorage.setItem('sdd-rations-calculator:rations', JSON.stringify([
-  {
-    id: "uuid-1",
-    type: "lacteal",
-    name: "Leche",
-    gramsToCarbohydrate: 200,
-    bloodGlucoseIndex: 32,
-    weight: 250,
-    rations: 1.25,
-    createdAt: "2026-02-12T14:30:00.000Z"
-  },
-  // ... more rations
-]));
+localStorage.setItem(
+  "sdd-rations-calculator:rations",
+  JSON.stringify([
+    {
+      id: "uuid-1",
+      type: "lacteal",
+      name: "Leche",
+      gramsToCarbohydrate: 200,
+      bloodGlucoseIndex: 32,
+      weight: 250,
+      rations: 1.25,
+      createdAt: "2026-02-12T14:30:00.000Z",
+    },
+    // ... more rations
+  ]),
+);
 ```
 
 #### Serialization Rules
@@ -364,6 +379,7 @@ interface LocalStorageData {
 **Current version**: 1
 
 **Future migrations**:
+
 - V1 → V2: Add `updatedAt` field
 - V2 → V3: Add `userId` for multi-user support
 - V3 → V4: Migrate to backend API (export/import)
@@ -378,12 +394,12 @@ function migrateData(data: any): Ration[] {
   if (Array.isArray(data)) {
     return data.map(addDefaults);
   }
-  
+
   // Handle versioned schema
   if (data.version === 1) {
     return data.rations;
   }
-  
+
   // Future versions...
   return [];
 }

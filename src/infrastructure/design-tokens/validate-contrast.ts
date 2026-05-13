@@ -9,16 +9,16 @@ import Color from "colorjs.io";
 export interface ContrastValidationResult {
   /** Calculated contrast ratio */
   ratio: number;
-  
+
   /** Whether ratio meets WCAG AA threshold */
   passes: boolean;
-  
+
   /** Required minimum ratio for given text size */
   required: number;
-  
+
   /** WCAG conformance level achieved */
-  level: 'AAA' | 'AA' | 'fail';
-  
+  level: "AAA" | "AA" | "fail";
+
   /** Human-readable result message */
   message: string;
 }
@@ -33,38 +33,38 @@ export interface ContrastValidationResult {
 export function validateContrastRatio(
   foreground: string,
   background: string,
-  textSize: 'normal' | 'large' = 'normal'
+  textSize: "normal" | "large" = "normal",
 ): ContrastValidationResult {
   try {
     const fg = new Color(foreground);
     const bg = new Color(background);
-    
+
     // Calculate WCAG 2.1 contrast ratio
-    const ratio = Math.abs(fg.contrast(bg, 'WCAG21'));
-    
+    const ratio = Math.abs(fg.contrast(bg, "WCAG21"));
+
     // WCAG AA thresholds
-    const required = textSize === 'normal' ? 4.5 : 3.0;
-    const aaaThreshold = textSize === 'normal' ? 7.0 : 4.5;
-    
+    const required = textSize === "normal" ? 4.5 : 3.0;
+    const aaaThreshold = textSize === "normal" ? 7.0 : 4.5;
+
     const passes = ratio >= required;
-    const level: 'AAA' | 'AA' | 'fail' = 
-      ratio >= aaaThreshold ? 'AAA' : 
-      ratio >= required ? 'AA' : 
-      'fail';
-    
+    const level: "AAA" | "AA" | "fail" =
+      ratio >= aaaThreshold ? "AAA" : ratio >= required ? "AA" : "fail";
+
     const message = passes
-      ? `Contrast ratio ${ratio.toFixed(1)}:1 ${level === 'AAA' ? 'exceeds WCAG AA requirement' : 'meets WCAG AA requirement'} (${required}:1)${level === 'AAA' ? ' and achieves AAA' : ''}`
+      ? `Contrast ratio ${ratio.toFixed(1)}:1 ${level === "AAA" ? "exceeds WCAG AA requirement" : "meets WCAG AA requirement"} (${required}:1)${level === "AAA" ? " and achieves AAA" : ""}`
       : `Contrast ratio ${ratio.toFixed(1)}:1 fails WCAG AA requirement (${required}:1) for ${textSize} text`;
-    
+
     return {
       ratio: Math.round(ratio * 10) / 10, // Round to 1 decimal place
       passes,
       required,
       level,
-      message
+      message,
     };
   } catch (error) {
-    throw new Error(`Invalid color value: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Invalid color value: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
 }
 
@@ -76,13 +76,13 @@ export function validateContrastRatio(
  */
 export function validateTokenContrast(
   colorHex: string,
-  theme: 'light' | 'dark'
+  theme: "light" | "dark",
 ): ContrastValidationResult {
   // Material Design 3 standard surface colors
   const backgrounds = {
-    light: '#FFFBFE', // M3 light surface
-    dark: '#1C1B1F'   // M3 dark surface
+    light: "#FFFBFE", // M3 light surface
+    dark: "#1C1B1F", // M3 dark surface
   };
-  
-  return validateContrastRatio(colorHex, backgrounds[theme], 'normal');
+
+  return validateContrastRatio(colorHex, backgrounds[theme], "normal");
 }

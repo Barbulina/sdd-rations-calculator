@@ -9,7 +9,7 @@
 This guide provides step-by-step instructions for implementing the ration menu management system with:
 
 - Create ration form page with navigation
-- localStorage persistence via repository pattern  
+- localStorage persistence via repository pattern
 - Home page ration list with infinite scroll
 - Integration with design token system for category colors
 
@@ -68,13 +68,13 @@ Create type definitions and repository interface.
 
 ```typescript
 export enum RationsType {
-  lacteal = 'lácteos',
-  cereals_flours_pulses_legumes_tubers = 'cereales, harinas, legumbres y tuberculos',
-  fruits = 'frutas',
-  vegetables = 'hortalizas',
-  oily_and_dry_fruit = 'frutas secas y grasa',
-  drinks = 'bebidas',
-  others = 'otros'
+  lacteal = "lácteos",
+  cereals_flours_pulses_legumes_tubers = "cereales, harinas, legumbres y tuberculos",
+  fruits = "frutas",
+  vegetables = "hortalizas",
+  oily_and_dry_fruit = "frutas secas y grasa",
+  drinks = "bebidas",
+  others = "otros",
 }
 
 export interface Ration {
@@ -88,7 +88,7 @@ export interface Ration {
   createdAt: Date;
 }
 
-export type CreateRationDTO = Omit<Ration, 'id' | 'createdAt'>;
+export type CreateRationDTO = Omit<Ration, "id" | "createdAt">;
 ```
 
 **Verify**: TypeScript compiles without errors
@@ -100,7 +100,7 @@ export type CreateRationDTO = Omit<Ration, 'id' | 'createdAt'>;
 **File**: `src/domain/repositories/RationRepository.ts`
 
 ```typescript
-import { Ration, CreateRationDTO } from '../models/Ration';
+import { Ration, CreateRationDTO } from "../models/Ration";
 
 export interface RationRepository {
   save(data: CreateRationDTO): Promise<Ration>;
@@ -124,11 +124,11 @@ Implement localStorage repository adapter.
 
 ```typescript
 export class LocalStorageAdapter {
-  private readonly prefix = 'sdd-rations-calculator:';
+  private readonly prefix = "sdd-rations-calculator:";
 
   isAvailable(): boolean {
     try {
-      const test = '__storage_test__';
+      const test = "__storage_test__";
       localStorage.setItem(test, test);
       localStorage.removeItem(test);
       return true;
@@ -142,7 +142,7 @@ export class LocalStorageAdapter {
       const item = localStorage.getItem(this.prefix + key);
       return item ? JSON.parse(item) : null;
     } catch (error) {
-      console.error('localStorage getItem error:', error);
+      console.error("localStorage getItem error:", error);
       return null;
     }
   }
@@ -152,7 +152,7 @@ export class LocalStorageAdapter {
       localStorage.setItem(this.prefix + key, JSON.stringify(value));
       return true;
     } catch (error) {
-      console.error('localStorage setItem error:', error);
+      console.error("localStorage setItem error:", error);
       return false;
     }
   }
@@ -164,10 +164,11 @@ export class LocalStorageAdapter {
 ```
 
 **Test**: Open browser console, verify storage works:
+
 ```javascript
 const adapter = new LocalStorageAdapter();
-adapter.setItem('test', { foo: 'bar' });
-console.log(adapter.getItem('test')); // { foo: 'bar' }
+adapter.setItem("test", { foo: "bar" });
+console.log(adapter.getItem("test")); // { foo: 'bar' }
 ```
 
 ---
@@ -177,12 +178,12 @@ console.log(adapter.getItem('test')); // { foo: 'bar' }
 **File**: `src/infrastructure/repositories/LocalStorageRationRepository.ts`
 
 ```typescript
-import { RationRepository } from '@/src/domain/repositories/RationRepository';
-import { Ration, CreateRationDTO } from '@/src/domain/models/Ration';
-import { LocalStorageAdapter } from '../storage/LocalStorageAdapter';
+import { RationRepository } from "@/src/domain/repositories/RationRepository";
+import { Ration, CreateRationDTO } from "@/src/domain/models/Ration";
+import { LocalStorageAdapter } from "../storage/LocalStorageAdapter";
 
 export class LocalStorageRationRepository implements RationRepository {
-  private readonly storageKey = 'rations';
+  private readonly storageKey = "rations";
   private adapter: LocalStorageAdapter;
 
   constructor() {
@@ -193,12 +194,12 @@ export class LocalStorageRationRepository implements RationRepository {
     const ration: Ration = {
       ...data,
       id: crypto.randomUUID(),
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     const rations = await this.findAll();
     rations.push(ration);
-    
+
     this.adapter.setItem(this.storageKey, this.serializeRations(rations));
     return ration;
   }
@@ -206,38 +207,38 @@ export class LocalStorageRationRepository implements RationRepository {
   async findAll(): Promise<Ration[]> {
     const data = this.adapter.getItem<any[]>(this.storageKey);
     if (!data) return [];
-    
+
     return this.deserializeRations(data).sort(
-      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
     );
   }
 
   async findById(id: string): Promise<Ration | null> {
     const rations = await this.findAll();
-    return rations.find(r => r.id === id) ?? null;
+    return rations.find((r) => r.id === id) ?? null;
   }
 
   async delete(id: string): Promise<boolean> {
     const rations = await this.findAll();
-    const filtered = rations.filter(r => r.id !== id);
-    
+    const filtered = rations.filter((r) => r.id !== id);
+
     if (filtered.length === rations.length) return false;
-    
+
     this.adapter.setItem(this.storageKey, this.serializeRations(filtered));
     return true;
   }
 
   private serializeRations(rations: Ration[]): any[] {
-    return rations.map(r => ({
+    return rations.map((r) => ({
       ...r,
-      createdAt: r.createdAt.toISOString()
+      createdAt: r.createdAt.toISOString(),
     }));
   }
 
   private deserializeRations(data: any[]): Ration[] {
-    return data.map(r => ({
+    return data.map((r) => ({
       ...r,
-      createdAt: new Date(r.createdAt)
+      createdAt: new Date(r.createdAt),
     }));
   }
 }
@@ -266,7 +267,7 @@ const RationRepositoryContext = createContext<RationRepository | null>(null);
 
 export function RationRepositoryProvider({ children }: { children: ReactNode }) {
   const repository = new LocalStorageRationRepository();
-  
+
   return (
     <RationRepositoryContext.Provider value={repository}>
       {children}
@@ -292,14 +293,11 @@ export function useRationRepository(): RationRepository {
 **File**: `src/application/hooks/useInfiniteScroll.ts`
 
 ```typescript
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
-export function useInfiniteScroll<T>(
-  items: T[],
-  batchSize: number = 10
-) {
+export function useInfiniteScroll<T>(items: T[], batchSize: number = 10) {
   const [displayedItems, setDisplayedItems] = useState<T[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -316,7 +314,7 @@ export function useInfiniteScroll<T>(
           loadMore();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (loadMoreRef.current) {
@@ -329,15 +327,15 @@ export function useInfiniteScroll<T>(
   const loadMore = () => {
     const nextBatch = items.slice(
       displayedItems.length,
-      displayedItems.length + batchSize
+      displayedItems.length + batchSize,
     );
-    
+
     if (nextBatch.length === 0) {
       setHasMore(false);
       return;
     }
-    
-    setDisplayedItems(prev => [...prev, ...nextBatch]);
+
+    setDisplayedItems((prev) => [...prev, ...nextBatch]);
   };
 
   return { displayedItems, hasMore, loadMoreRef };
@@ -483,7 +481,7 @@ import { RationsType, CreateRationDTO } from '@/src/domain/models/Ration';
 export default function CreateRationPage() {
   const router = useRouter();
   const repository = useRationRepository();
-  
+
   const [formData, setFormData] = useState<CreateRationDTO>({
     type: RationsType.lacteal,
     name: '',
@@ -497,21 +495,21 @@ export default function CreateRationPage() {
 
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (formData.gramsToCarbohydrate <= 0) newErrors.gramsToCarbohydrate = 'Must be > 0';
     if (formData.weight <= 0) newErrors.weight = 'Must be > 0';
     if (formData.rations <= 0) newErrors.rations = 'Must be > 0';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!validate()) return;
-    
+
     await repository.save(formData);
     router.push('/');
   };
@@ -519,7 +517,7 @@ export default function CreateRationPage() {
   return (
     <div className="p-4 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Create Ration</h1>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-2">Type</label>
@@ -584,9 +582,9 @@ export default function CreateRationPage() {
           <input
             type="number"
             value={formData.bloodGlucoseIndex ?? ''}
-            onChange={e => setFormData({ 
-              ...formData, 
-              bloodGlucoseIndex: e.target.value ? Number(e.target.value) : undefined 
+            onChange={e => setFormData({
+              ...formData,
+              bloodGlucoseIndex: e.target.value ? Number(e.target.value) : undefined
             })}
             className="w-full p-2 border rounded"
           />
@@ -613,7 +611,8 @@ export default function CreateRationPage() {
 }
 ```
 
-**Test**: 
+**Test**:
+
 1. Visit `/create-ration`
 2. Fill form
 3. Submit
@@ -664,15 +663,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 ## Common Issues
 
 ### Issue: "useRationRepository must be used within RationRepositoryProvider"
+
 **Solution**: Verify RationRepositoryProvider wraps app in layout.tsx
 
 ### Issue: Colors not applying
+
 **Solution**: Ensure design token system is built (`npm run tokens:build`)
 
 ### Issue: Infinite scroll not working
+
 **Solution**: Create 15+ rations to exceed initial batch size (10)
 
 ### Issue: Dark mode colors wrong
+
 **Solution**: Verify next-themes ThemeProvider is active
 
 ## Next Steps

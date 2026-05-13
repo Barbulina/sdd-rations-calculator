@@ -64,7 +64,12 @@ This directory contains schema definitions and type contracts for the design tok
         "state-sync-error": { "$ref": "#/$defs/colorToken" },
         "state-online": { "$ref": "#/$defs/colorToken" }
       },
-      "required": ["state-offline", "state-syncing", "state-sync-error", "state-online"]
+      "required": [
+        "state-offline",
+        "state-syncing",
+        "state-sync-error",
+        "state-online"
+      ]
     },
     "feedback-colors": {
       "type": "object",
@@ -75,7 +80,12 @@ This directory contains schema definitions and type contracts for the design tok
         "feedback-error": { "$ref": "#/$defs/colorToken" },
         "feedback-info": { "$ref": "#/$defs/colorToken" }
       },
-      "required": ["feedback-success", "feedback-warning", "feedback-error", "feedback-info"]
+      "required": [
+        "feedback-success",
+        "feedback-warning",
+        "feedback-error",
+        "feedback-info"
+      ]
     },
     "typography": {
       "type": "object",
@@ -95,9 +105,18 @@ This directory contains schema definitions and type contracts for the design tok
         "label-small": { "$ref": "#/$defs/typographyToken" }
       },
       "required": [
-        "heading-1", "heading-2", "heading-3", "heading-4", "heading-5", "heading-6",
-        "body-large", "body-medium", "body-small",
-        "label-large", "label-medium", "label-small"
+        "heading-1",
+        "heading-2",
+        "heading-3",
+        "heading-4",
+        "heading-5",
+        "heading-6",
+        "body-large",
+        "body-medium",
+        "body-small",
+        "label-large",
+        "label-medium",
+        "label-small"
       ]
     },
     "spacing": {
@@ -116,12 +135,26 @@ This directory contains schema definitions and type contracts for the design tok
         "space-12": { "$ref": "#/$defs/spacingToken" }
       },
       "required": [
-        "space-0", "space-1", "space-2", "space-3", "space-4",
-        "space-5", "space-6", "space-8", "space-10", "space-12"
+        "space-0",
+        "space-1",
+        "space-2",
+        "space-3",
+        "space-4",
+        "space-5",
+        "space-6",
+        "space-8",
+        "space-10",
+        "space-12"
       ]
     }
   },
-  "required": ["category-colors", "state-colors", "feedback-colors", "typography", "spacing"],
+  "required": [
+    "category-colors",
+    "state-colors",
+    "feedback-colors",
+    "typography",
+    "spacing"
+  ],
   "$defs": {
     "colorToken": {
       "type": "object",
@@ -147,9 +180,16 @@ This directory contains schema definitions and type contracts for the design tok
           "properties": {
             "m3Role": {
               "enum": [
-                "primary", "secondary", "tertiary", "error",
-                "surface", "surface-variant", "outline",
-                "custom-extended-1", "custom-extended-2", "custom-extended-3"
+                "primary",
+                "secondary",
+                "tertiary",
+                "error",
+                "surface",
+                "surface-variant",
+                "outline",
+                "custom-extended-1",
+                "custom-extended-2",
+                "custom-extended-3"
               ],
               "description": "Material Design 3 color role"
             },
@@ -190,7 +230,13 @@ This directory contains schema definitions and type contracts for the design tok
               "type": "string"
             }
           },
-          "required": ["fontSize", "lineHeight", "letterSpacing", "fontWeight", "fontFamily"]
+          "required": [
+            "fontSize",
+            "lineHeight",
+            "letterSpacing",
+            "fontWeight",
+            "fontFamily"
+          ]
         },
         "type": {
           "const": "typography"
@@ -257,65 +303,101 @@ This directory contains schema definitions and type contracts for the design tok
 export interface DesignTokens {
   colors: {
     // Category colors (7 aliment categories)
-    'category-lacteal': string;
-    'category-cereals-flours-pulses-legumes-tubers': string;
-    'category-fruits': string;
-    'category-vegetables': string;
-    'category-oily-dry-fruits': string;
-    'category-drinks': string;
-    'category-others': string;
+    "category-lacteal": string;
+    "category-cereals-flours-pulses-legumes-tubers": string;
+    "category-fruits": string;
+    "category-vegetables": string;
+    "category-oily-dry-fruits": string;
+    "category-drinks": string;
+    "category-others": string;
 
     // State colors (offline/online indicators)
-    'state-offline': string;
-    'state-syncing': string;
-    'state-sync-error': string;
-    'state-online': string;
+    "state-offline": string;
+    "state-syncing": string;
+    "state-sync-error": string;
+    "state-online": string;
 
     // Feedback colors (TDD/action feedback)
-    'feedback-success': string;
-    'feedback-warning': string;
-    'feedback-error': string;
-    'feedback-info': string;
+    "feedback-success": string;
+    "feedback-warning": string;
+    "feedback-error": string;
+    "feedback-info": string;
   };
 
   spacing: {
-    'space-0': string;  // 0px
-    'space-1': string;  // 8px
-    'space-2': string;  // 16px
-    'space-3': string;  // 24px
-    'space-4': string;  // 32px
-    'space-5': string;  // 40px (min for 44px touch target)
-    'space-6': string;  // 48px
-    'space-8': string;  // 64px
-    'space-10': string; // 80px
-    'space-12': string; // 96px
+    "space-0": string; // 0px
+    "space-1": string; // 8px
+    "space-2": string; // 16px
+    "space-3": string; // 24px
+    "space-4": string; // 32px
+    "space-5": string; // 40px (min for 44px touch target)
+    "space-6": string; // 48px
+    "space-8": string; // 64px
+    "space-10": string; // 80px
+    "space-12": string; // 96px
   };
 
   fontSize: {
-    'heading-1': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'heading-2': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'heading-3': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'heading-4': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'heading-5': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'heading-6': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'body-large': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'body-medium': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'body-small': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'label-large': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'label-medium': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
-    'label-small': [string, { lineHeight: string; letterSpacing: string; fontWeight: number }];
+    "heading-1": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "heading-2": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "heading-3": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "heading-4": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "heading-5": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "heading-6": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "body-large": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "body-medium": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "body-small": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "label-large": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "label-medium": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
+    "label-small": [
+      string,
+      { lineHeight: string; letterSpacing: string; fontWeight: number },
+    ];
   };
 }
 
 /**
  * Augment Tailwind's default theme types
  */
-declare module 'tailwindcss/tailwind-config' {
+declare module "tailwindcss/tailwind-config" {
   interface TailwindTheme {
     extend: {
-      colors: DesignTokens['colors'];
-      spacing: DesignTokens['spacing'];
-      fontSize: DesignTokens['fontSize'];
+      colors: DesignTokens["colors"];
+      spacing: DesignTokens["spacing"];
+      fontSize: DesignTokens["fontSize"];
     };
   }
 }
@@ -324,19 +406,19 @@ declare module 'tailwindcss/tailwind-config' {
  * Type-safe utility class names (for className prop validation)
  */
 export type CategoryColorClass =
-  | `bg-category-${'lacteal' | 'cereals-flours-pulses-legumes-tubers' | 'fruits' | 'vegetables' | 'oily-dry-fruits' | 'drinks' | 'others'}`
-  | `text-category-${'lacteal' | 'cereals-flours-pulses-legumes-tubers' | 'fruits' | 'vegetables' | 'oily-dry-fruits' | 'drinks' | 'others'}`
-  | `border-category-${'lacteal' | 'cereals-flours-pulses-legumes-tubers' | 'fruits' | 'vegetables' | 'oily-dry-fruits' | 'drinks' | 'others'}`;
+  | `bg-category-${"lacteal" | "cereals-flours-pulses-legumes-tubers" | "fruits" | "vegetables" | "oily-dry-fruits" | "drinks" | "others"}`
+  | `text-category-${"lacteal" | "cereals-flours-pulses-legumes-tubers" | "fruits" | "vegetables" | "oily-dry-fruits" | "drinks" | "others"}`
+  | `border-category-${"lacteal" | "cereals-flours-pulses-legumes-tubers" | "fruits" | "vegetables" | "oily-dry-fruits" | "drinks" | "others"}`;
 
 export type StateColorClass =
-  | `bg-state-${'offline' | 'syncing' | 'sync-error' | 'online'}`
-  | `text-state-${'offline' | 'syncing' | 'sync-error' | 'online'}`
-  | `border-state-${'offline' | 'syncing' | 'sync-error' | 'online'}`;
+  | `bg-state-${"offline" | "syncing" | "sync-error" | "online"}`
+  | `text-state-${"offline" | "syncing" | "sync-error" | "online"}`
+  | `border-state-${"offline" | "syncing" | "sync-error" | "online"}`;
 
 export type FeedbackColorClass =
-  | `bg-feedback-${'success' | 'warning' | 'error' | 'info'}`
-  | `text-feedback-${'success' | 'warning' | 'error' | 'info'}`
-  | `border-feedback-${'success' | 'warning' | 'error' | 'info'}`;
+  | `bg-feedback-${"success" | "warning" | "error" | "info"}`
+  | `text-feedback-${"success" | "warning" | "error" | "info"}`
+  | `border-feedback-${"success" | "warning" | "error" | "info"}`;
 
 export type SpacingClass =
   | `p-space-${0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12}`
@@ -345,8 +427,8 @@ export type SpacingClass =
 
 export type TypographyClass =
   | `text-heading-${1 | 2 | 3 | 4 | 5 | 6}`
-  | `text-body-${'large' | 'medium' | 'small'}`
-  | `text-label-${'large' | 'medium' | 'small'}`;
+  | `text-body-${"large" | "medium" | "small"}`
+  | `text-label-${"large" | "medium" | "small"}`;
 
 /**
  * Combined type for all design token utility classes
@@ -380,28 +462,29 @@ export type DesignTokenClass =
 function validateContrastRatio(
   foreground: string,
   background: string,
-  textSize: 'normal' | 'large'
+  textSize: "normal" | "large",
 ): ContrastValidationResult;
 
 interface ContrastValidationResult {
   /** Calculated contrast ratio */
   ratio: number;
-  
+
   /** Whether ratio meets WCAG AA threshold */
   passes: boolean;
-  
+
   /** Required minimum ratio for given text size */
   required: number;
-  
+
   /** WCAG conformance level achieved */
-  level: 'AAA' | 'AA' | 'fail';
-  
+  level: "AAA" | "AA" | "fail";
+
   /** Human-readable result message */
   message: string;
 }
 ```
 
 **WCAG AA Thresholds**:
+
 - Normal text (< 18pt regular or < 14pt bold): **4.5:1** minimum
 - Large text (≥ 18pt regular or ≥ 14pt bold): **3.0:1** minimum
 - UI components and graphical objects: **3.0:1** minimum
@@ -443,6 +526,7 @@ const result = validateContrastRatio('#D0BCFF', '#FFFBFE', 'normal');
 This validation runs during Style Dictionary transformation. If any color token fails contrast validation against standard backgrounds (light surface `#FFFBFE` and dark surface `#1C1B1F`), the build fails with detailed error messages listing all violations.
 
 **Test Backgrounds**:
+
 - Light theme: `#FFFBFE` (M3 light surface)
 - Dark theme: `#1C1B1F` (M3 dark surface)
 

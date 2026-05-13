@@ -21,11 +21,13 @@ Currently, the aliment catalog contains 365+ pre-defined food items, but users c
 **So that** I can track all my food items, even those not pre-defined
 
 **Acceptance Criteria**:
+
 - Given I'm on the aliment browser page `/aliment-browser`
 - When I click a "Create Custom Aliment" button
 - Then I'm navigated to `/aliment-browser/create` with a form
 
 **Acceptance Criteria**:
+
 - Given I'm on the aliment browser page
 - When I search for an aliment that doesn't exist (0 results)
 - Then I see a "Create '[search term]'" button in the empty state
@@ -38,6 +40,7 @@ Currently, the aliment catalog contains 365+ pre-defined food items, but users c
 **So that** I can save accurate nutritional information
 
 **Acceptance Criteria**:
+
 - Form includes fields:
   - Name (required, max 200 chars)
   - Category/Type (required, dropdown with 7 options)
@@ -54,6 +57,7 @@ Currently, the aliment catalog contains 365+ pre-defined food items, but users c
 **So that** I have a complete view of all available aliments
 
 **Acceptance Criteria**:
+
 - Custom aliments display with a visual indicator (badge or icon)
 - Search function includes custom aliments
 - Category filter includes custom aliments
@@ -66,6 +70,7 @@ Currently, the aliment catalog contains 365+ pre-defined food items, but users c
 **So that** I can create complete meal plans
 
 **Acceptance Criteria**:
+
 - Custom aliments appear in aliment browser
 - When creating a ration from a custom aliment, all fields populate correctly
 - Custom aliment data persists across sessions
@@ -75,11 +80,12 @@ Currently, the aliment catalog contains 365+ pre-defined food items, but users c
 ### Data Model
 
 **CustomAliment** (extends AlimentInfo):
+
 ```typescript
 interface CustomAliment extends AlimentInfo {
-  id: string;              // UUID for custom aliments
-  createdAt: Date;         // Timestamp
-  isCustom: true;          // Flag to differentiate from catalog
+  id: string; // UUID for custom aliments
+  createdAt: Date; // Timestamp
+  isCustom: true; // Flag to differentiate from catalog
 }
 ```
 
@@ -100,16 +106,19 @@ interface CustomAliment extends AlimentInfo {
 ## Non-Functional Requirements
 
 ### Performance
+
 - Form validation must be instant (<50ms)
 - Custom aliments merged with catalog in <100ms
 - No impact on existing 365+ catalog load time
 
 ### Accessibility
+
 - Form must be keyboard navigable
 - ARIA labels for all form fields
 - Error messages must be announced to screen readers
 
 ### Offline Support
+
 - Custom aliments stored in localStorage
 - Form works offline
 - No dependency on network for CRUD operations

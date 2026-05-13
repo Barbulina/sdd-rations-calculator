@@ -11,6 +11,7 @@ Redesign the ration creation flow to use an aliment search and selection interfa
 ## Problem Statement
 
 The current `/create-ration` page requires users to manually enter all nutritional data (name, type, gramsToCarbohydrate, bloodGlucoseIndex). This is inefficient because:
+
 - Users must remember or look up nutritional values
 - Prone to data entry errors
 - Doesn't leverage the existing 365+ aliment catalog
@@ -25,6 +26,7 @@ The current `/create-ration` page requires users to manually enter all nutrition
 **So that** I can quickly find and add items to my menu
 
 **Acceptance Criteria**:
+
 - Autocomplete input searches both catalog and custom aliments
 - Search is case-insensitive with partial matching
 - Results show aliment name and category
@@ -40,6 +42,7 @@ The current `/create-ration` page requires users to manually enter all nutrition
 **So that** rations are calculated based on actual consumption
 
 **Acceptance Criteria**:
+
 - Each aliment in the list displays complete information:
   - Aliment name
   - Category/Type
@@ -60,6 +63,7 @@ The current `/create-ration` page requires users to manually enter all nutrition
 **So that** I can track my carbohydrate intake for the meal
 
 **Acceptance Criteria**:
+
 - Summary shows total rations (sum of all aliment rations)
 - Summary updates automatically when weights change
 - Summary visible at bottom of aliment list
@@ -72,6 +76,7 @@ The current `/create-ration` page requires users to manually enter all nutrition
 **So that** I can track it as a meal
 
 **Acceptance Criteria**:
+
 - "Save Menu" button at bottom
 - Menu requires at least 1 aliment to save
 - Must provide menu name and menu type (breakfast, lunch, etc.)
@@ -86,6 +91,7 @@ The current `/create-ration` page requires users to manually enter all nutrition
 **So that** I know what to do next
 
 **Acceptance Criteria**:
+
 - Empty state shows message: "Search and add aliments to build your menu"
 - Cancel button returns to home page
 - Confirmation dialog if unsaved changes exist
@@ -95,31 +101,34 @@ The current `/create-ration` page requires users to manually enter all nutrition
 ### Data Model
 
 **MenuItem** (new entity):
+
 ```typescript
 interface MenuItem {
-  aliment: AlimentInfo | CustomAliment;  // The selected aliment
-  weightGrams: number;                    // Weight in grams
-  rations: number;                        // Calculated: weight / gramsToCarbohydrate
+  aliment: AlimentInfo | CustomAliment; // The selected aliment
+  weightGrams: number; // Weight in grams
+  rations: number; // Calculated: weight / gramsToCarbohydrate
 }
 ```
 
 **Menu** (replaces Ration):
+
 ```typescript
 interface Menu {
-  id: string;                            // UUID
-  name: string;                          // Menu name
-  type: RationsType;                     // Menu type (breakfast, lunch, etc.)
-  items: MenuItem[];                     // List of aliments with weights
-  totalWeight: number;                   // Sum of all weights
-  totalRations: number;                  // Sum of all rations
-  createdAt: Date;                       // Creation timestamp
-  updatedAt?: Date;                      // Last modification
+  id: string; // UUID
+  name: string; // Menu name
+  type: RationsType; // Menu type (breakfast, lunch, etc.)
+  items: MenuItem[]; // List of aliments with weights
+  totalWeight: number; // Sum of all weights
+  totalRations: number; // Sum of all rations
+  createdAt: Date; // Creation timestamp
+  updatedAt?: Date; // Last modification
 }
 ```
 
 ### UI Components
 
 **Page**: `/create-ration` (redesigned)
+
 - **AlimentSearchInput**: Autocomplete search component
 - **MenuItemsList**: List of selected aliments with weight inputs
 - **MenuSummary**: Total weight and rations display
@@ -133,16 +142,10 @@ interface Menu {
 const itemRations = weightGrams / aliment.gramsToCarbohydrate;
 
 // Calculate total rations
-const totalRations = menuItems.reduce(
-  (sum, item) => sum + item.rations, 
-  0
-);
+const totalRations = menuItems.reduce((sum, item) => sum + item.rations, 0);
 
 // Calculate total weight
-const totalWeight = menuItems.reduce(
-  (sum, item) => sum + item.weightGrams, 
-  0
-);
+const totalWeight = menuItems.reduce((sum, item) => sum + item.weightGrams, 0);
 ```
 
 ### Repository Changes
@@ -161,23 +164,27 @@ Recommended: **Option 2** - Create MenuRepository for cleaner separation.
 ## Non-Functional Requirements
 
 ### Performance
+
 - Autocomplete search responds in <100ms
 - Rations recalculate in <50ms on weight change
 - Page renders <200ms
 
 ### Usability
+
 - Clear visual feedback during search
 - Inline validation errors
 - Autofocus on search input
 - Keyboard navigation support (arrow keys for autocomplete)
 
 ### Accessibility
+
 - ARIA labels for all inputs
 - Screen reader announcements for rations updates
 - Keyboard-only navigation support
 - Focus management
 
 ### Data Validation
+
 - Weight must be > 0 and < 10000 grams
 - Menu name required, max 200 characters
 - At least 1 aliment required to save
@@ -209,16 +216,19 @@ Recommended: **Option 2** - Create MenuRepository for cleaner separation.
 ## Migration Strategy
 
 ### Phase 1: Build New UI (No Breaking Changes)
+
 - Create new components alongside existing form
 - Use feature flag or new route `/create-menu`
 - Test with users
 
 ### Phase 2: Data Migration
+
 - Migrate existing Ration entries to Menu format
 - Add MenuItem structure to stored data
 - Maintain backward compatibility
 
 ### Phase 3: Replace Old Flow
+
 - Replace `/create-ration` with new menu builder
 - Archive old form code
 - Update documentation
@@ -248,16 +258,17 @@ Recommended: **Option 2** - Create MenuRepository for cleaner separation.
 
 ## Risks & Mitigation
 
-| Risk | Impact | Mitigation |
-|------|--------|-----------|
-| Autocomplete too slow with 365+ items | High | Implement debouncing, limit results to 10 |
-| Users confused by rations calculation | Medium | Show formula tooltip, add help text |
-| localStorage quota exceeded | Low | Limit menus to 100, show storage warning |
-| Breaking existing ration data | High | Careful migration, maintain compatibility |
+| Risk                                  | Impact | Mitigation                                |
+| ------------------------------------- | ------ | ----------------------------------------- |
+| Autocomplete too slow with 365+ items | High   | Implement debouncing, limit results to 10 |
+| Users confused by rations calculation | Medium | Show formula tooltip, add help text       |
+| localStorage quota exceeded           | Low    | Limit menus to 100, show storage warning  |
+| Breaking existing ration data         | High   | Careful migration, maintain compatibility |
 
 ## Design Considerations
 
 ### Empty State
+
 ```
 ╔══════════════════════════════════════╗
 ║   🔍 Search for aliments...           ║
@@ -269,33 +280,35 @@ Recommended: **Option 2** - Create MenuRepository for cleaner separation.
 ║                                      ║
 ╚══════════════════════════════════════╝
 ```
-[X]  ║
-║     Category: Frutas                 ║
-║     Grams to Carb: 110g              ║
-║     Glycemic Index: 38               ║
-║     Weight: [150]g → 1.36 rations    ║
-║                                      ║
-║   ✓ Pan integral (Custom)       [X]  ║
-║     Category: Cereales               ║
-║     Grams to Carb: 20g               ║
-║     Glycemic Index: 55               ║
-║     Weight: [50]g → 2.50 rations      ║
+
+[X] ║
+║ Category: Frutas ║
+║ Grams to Carb: 110g ║
+║ Glycemic Index: 38 ║
+║ Weight: [150]g → 1.36 rations ║
+║ ║
+║ ✓ Pan integral (Custom) [X] ║
+║ Category: Cereales ║
+║ Grams to Carb: 20g ║
+║ Glycemic Index: 55 ║
+║ Weight: [50]g → 2.50 rations ║
 ╠══════════════════════════════════════╣
-║   ✓ Manzana                          ║
-║     150g → 1.36 rations         [X]  ║
-║                                      ║
-║   ✓ Pan integral (Custom)            ║
-║     50g → 2.50 rations          [X]  ║
+║ ✓ Manzana ║
+║ 150g → 1.36 rations [X] ║
+║ ║
+║ ✓ Pan integral (Custom) ║
+║ 50g → 2.50 rations [X] ║
 ╠══════════════════════════════════════╣
-║   📊 Summary                          ║
-║   Total Weight: 200g                 ║
-║   Total Rations: 3.86                ║
+║ 📊 Summary ║
+║ Total Weight: 200g ║
+║ Total Rations: 3.86 ║
 ╠══════════════════════════════════════╣
-║   Menu Name: [____________]          ║
-║   Type: [Lunch ▼]                   ║
-║                                      ║
-║   [Cancel]          [Save Menu]      ║
+║ Menu Name: [____________] ║
+║ Type: [Lunch ▼] ║
+║ ║
+║ [Cancel] [Save Menu] ║
 ╚══════════════════════════════════════╝
+
 ```
 
 ## Next Steps
@@ -305,3 +318,4 @@ Recommended: **Option 2** - Create MenuRepository for cleaner separation.
 3. Create implementation plan with TDD tasks
 4. Design UI mockups
 5. Begin Phase 1 implementation
+```

@@ -23,8 +23,11 @@ Contracts define the **shape** of data and operations without implementation det
 ### Import Types
 
 ```typescript
-import { Ration, RationsType } from '@/specs/002-ration-menu-management/contracts/types';
-import { RationRepository } from '@/specs/002-ration-menu-management/contracts/repository-interface';
+import {
+  Ration,
+  RationsType,
+} from "@/specs/002-ration-menu-management/contracts/types";
+import { RationRepository } from "@/specs/002-ration-menu-management/contracts/repository-interface";
 ```
 
 ### Implement Repository
@@ -34,11 +37,11 @@ class LocalStorageRationRepository implements RationRepository {
   async save(ration: Ration): Promise<void> {
     // Implementation
   }
-  
+
   async findAll(): Promise<Ration[]> {
     // Implementation
   }
-  
+
   // ... other methods
 }
 ```
@@ -55,11 +58,11 @@ const rations = await repository.findAll();
 Verify implementations conform to interfaces:
 
 ```typescript
-describe('LocalStorageRationRepository', () => {
-  it('should conform to RationRepository interface', () => {
+describe("LocalStorageRationRepository", () => {
+  it("should conform to RationRepository interface", () => {
     const repo: RationRepository = new LocalStorageRationRepository();
-    expect(repo).toHaveProperty('save');
-    expect(repo).toHaveProperty('findAll');
+    expect(repo).toHaveProperty("save");
+    expect(repo).toHaveProperty("findAll");
     // ... assert all methods exist
   });
 });

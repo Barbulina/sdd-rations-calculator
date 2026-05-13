@@ -1,12 +1,29 @@
 #!/bin/sh
-# Pre-push hook: run tests before pushing to any remote.
+# Pre-push hook: run format check, lint, and tests before pushing.
 # Installed automatically via `npm install` (prepare script sets core.hooksPath).
 
-echo "🧪 Running tests before push..."
+echo "🔍 Running format check..."
+npm run format:check
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ Format check failed. Push aborted."
+  echo "   Run 'npm run format' to fix formatting issues."
+  exit 1
+fi
 
+echo "🔍 Running linter..."
+npm run lint:check
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ Lint check failed. Push aborted."
+  exit 1
+fi
+
+echo "🧪 Running tests..."
 npm test -- --run --exclude="**/design-tokens/**"
 EXIT_CODE=$?
-
 if [ $EXIT_CODE -ne 0 ]; then
   echo ""
   echo "❌ Tests failed. Push aborted."
@@ -15,5 +32,5 @@ if [ $EXIT_CODE -ne 0 ]; then
   exit 1
 fi
 
-echo "✅ All tests passed. Proceeding with push."
+echo "✅ All checks passed. Proceeding with push."
 exit 0

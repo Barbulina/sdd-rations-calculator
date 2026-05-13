@@ -18,10 +18,10 @@
 
 **Purpose**: Project initialization and design token infrastructure setup
 
-- [X] T001 Install design token dependencies in package.json: style-dictionary, colorjs.io, next-themes
-- [X] T002 Create directory structure: src/infrastructure/design-tokens/ and tests/integration/design-tokens/
-- [X] T003 [P] Configure TypeScript strict mode in tsconfig.json for token validation
-- [X] T004 [P] Configure Tailwind dark mode in tailwind.config.ts with darkMode: 'class'
+- [x] T001 Install design token dependencies in package.json: style-dictionary, colorjs.io, next-themes
+- [x] T002 Create directory structure: src/infrastructure/design-tokens/ and tests/integration/design-tokens/
+- [x] T003 [P] Configure TypeScript strict mode in tsconfig.json for token validation
+- [x] T004 [P] Configure Tailwind dark mode in tailwind.config.ts with darkMode: 'class'
 
 ---
 
@@ -31,14 +31,14 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [X] T005 Create tokens.json schema validation in src/infrastructure/design-tokens/validate-schema.ts based on contracts/tokens-schema.json
-- [X] T006 Implement WCAG AA contrast validation function in src/infrastructure/design-tokens/validate-contrast.ts using colorjs.io (per contracts/validation-api.md)
-- [X] T007 Create Style Dictionary configuration in src/infrastructure/design-tokens/style-dictionary.config.js for tokens.json → Tailwind transformation
-- [X] T008 Implement build script in src/infrastructure/design-tokens/build-tokens.ts that runs schema validation, contrast validation, and Style Dictionary transformation
-- [X] T009 Configure next-themes ThemeProvider wrapper in src/app/providers.tsx for light/dark mode support
-- [X] T010 Update tailwind.config.ts to import generated tokens from src/infrastructure/design-tokens/tailwind-tokens.js
-- [X] T011 Add npm script in package.json: "tokens:build" that runs build-tokens.ts
-- [X] T012 Create CSS custom properties template in src/infrastructure/design-tokens/css-variables.css for theme switching
+- [x] T005 Create tokens.json schema validation in src/infrastructure/design-tokens/validate-schema.ts based on contracts/tokens-schema.json
+- [x] T006 Implement WCAG AA contrast validation function in src/infrastructure/design-tokens/validate-contrast.ts using colorjs.io (per contracts/validation-api.md)
+- [x] T007 Create Style Dictionary configuration in src/infrastructure/design-tokens/style-dictionary.config.js for tokens.json → Tailwind transformation
+- [x] T008 Implement build script in src/infrastructure/design-tokens/build-tokens.ts that runs schema validation, contrast validation, and Style Dictionary transformation
+- [x] T009 Configure next-themes ThemeProvider wrapper in src/app/providers.tsx for light/dark mode support
+- [x] T010 Update tailwind.config.ts to import generated tokens from src/infrastructure/design-tokens/tailwind-tokens.js
+- [x] T011 Add npm script in package.json: "tokens:build" that runs build-tokens.ts
+- [x] T012 Create CSS custom properties template in src/infrastructure/design-tokens/css-variables.css for theme switching
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -52,16 +52,16 @@
 
 ### Implementation for User Story 1
 
-- [X] T013 [P] [US1] Create category-lacteal color token (light: #6750A4 M3 Primary 40, dark: #D0BCFF M3 Primary 80) in tokens.json
-- [X] T014 [P] [US1] Create category-cereals-flours-pulses-legumes-tubers color token (light/dark M3 Secondary tones) in tokens.json
-- [X] T015 [P] [US1] Create category-fruits color token (light/dark M3 Tertiary tones) in tokens.json
-- [X] T016 [P] [US1] Create category-vegetables color token (light/dark M3 custom-extended-1 green tones) in tokens.json
-- [X] T017 [P] [US1] Create category-oily-dry-fruits color token (light/dark M3 custom-extended-2 brown tones) in tokens.json
-- [X] T018 [P] [US1] Create category-drinks color token (light/dark M3 custom-extended-3 blue tones) in tokens.json
-- [X] T019 [P] [US1] Create category-others color token (light/dark M3 surface-variant gray tones) in tokens.json
-- [X] T020 [US1] Run tokens:build script to transform category colors into Tailwind utility classes (bg-category-lacteal, text-category-fruits, etc.)
-- [X] T021 [US1] Create token specimen page in src/app/design-tokens/page.tsx showing all category colors with hex values and M3 role labels
-- [X] T022 [US1] Verify contrast validation passes for all 7 categories × 2 themes = 14 color tokens (4.5:1 minimum for normal text)
+- [x] T013 [P] [US1] Create category-lacteal color token (light: #6750A4 M3 Primary 40, dark: #D0BCFF M3 Primary 80) in tokens.json
+- [x] T014 [P] [US1] Create category-cereals-flours-pulses-legumes-tubers color token (light/dark M3 Secondary tones) in tokens.json
+- [x] T015 [P] [US1] Create category-fruits color token (light/dark M3 Tertiary tones) in tokens.json
+- [x] T016 [P] [US1] Create category-vegetables color token (light/dark M3 custom-extended-1 green tones) in tokens.json
+- [x] T017 [P] [US1] Create category-oily-dry-fruits color token (light/dark M3 custom-extended-2 brown tones) in tokens.json
+- [x] T018 [P] [US1] Create category-drinks color token (light/dark M3 custom-extended-3 blue tones) in tokens.json
+- [x] T019 [P] [US1] Create category-others color token (light/dark M3 surface-variant gray tones) in tokens.json
+- [x] T020 [US1] Run tokens:build script to transform category colors into Tailwind utility classes (bg-category-lacteal, text-category-fruits, etc.)
+- [x] T021 [US1] Create token specimen page in src/app/design-tokens/page.tsx showing all category colors with hex values and M3 role labels
+- [x] T022 [US1] Verify contrast validation passes for all 7 categories × 2 themes = 14 color tokens (4.5:1 minimum for normal text)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - all category colors display with distinct hues and pass WCAG AA
 
@@ -75,13 +75,13 @@
 
 ### Implementation for User Story 2
 
-- [X] T023 [P] [US2] Create state-offline color token (light/dark M3 warning amber tones) in tokens.json
-- [X] T024 [P] [US2] Create state-syncing color token (light/dark M3 info blue tones) in tokens.json
-- [X] T025 [P] [US2] Create state-sync-error color token (light/dark M3 error red tones) in tokens.json
-- [X] T026 [P] [US2] Create state-online color token (light/dark M3 success green tones) in tokens.json
-- [X] T027 [US2] Run tokens:build script to transform state colors into Tailwind utility classes (bg-state-offline, text-state-syncing, etc.)
-- [X] T028 [US2] Add state indicator examples to token specimen page in src/app/design-tokens/page.tsx showing offline/syncing/error/online badges
-- [X] T029 [US2] Verify contrast validation passes for all 4 state colors × 2 themes = 8 color tokens
+- [x] T023 [P] [US2] Create state-offline color token (light/dark M3 warning amber tones) in tokens.json
+- [x] T024 [P] [US2] Create state-syncing color token (light/dark M3 info blue tones) in tokens.json
+- [x] T025 [P] [US2] Create state-sync-error color token (light/dark M3 error red tones) in tokens.json
+- [x] T026 [P] [US2] Create state-online color token (light/dark M3 success green tones) in tokens.json
+- [x] T027 [US2] Run tokens:build script to transform state colors into Tailwind utility classes (bg-state-offline, text-state-syncing, etc.)
+- [x] T028 [US2] Add state indicator examples to token specimen page in src/app/design-tokens/page.tsx showing offline/syncing/error/online badges
+- [x] T029 [US2] Verify contrast validation passes for all 4 state colors × 2 themes = 8 color tokens
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently - category colors and state indicators are fully functional
 
@@ -95,33 +95,33 @@
 
 ### Implementation for User Story 3
 
-- [X] T030 [P] [US3] Create heading-1 typography token (57px M3 Display Large) in tokens.json with fontSize, lineHeight, letterSpacing, fontWeight, fontFamily
-- [X] T031 [P] [US3] Create heading-2 typography token (45px M3 Display Medium) in tokens.json
-- [X] T032 [P] [US3] Create heading-3 typography token (36px M3 Display Small) in tokens.json
-- [X] T033 [P] [US3] Create heading-4 typography token (32px M3 Headline Large) in tokens.json
-- [X] T034 [P] [US3] Create heading-5 typography token (28px M3 Headline Medium) in tokens.json
-- [X] T035 [P] [US3] Create heading-6 typography token (24px M3 Headline Small) in tokens.json
-- [X] T036 [P] [US3] Create body-large typography token (16px M3 Body Large) in tokens.json
-- [X] T037 [P] [US3] Create body-medium typography token (14px M3 Body Medium) in tokens.json
-- [X] T038 [P] [US3] Create body-small typography token (12px M3 Body Small) in tokens.json
-- [X] T039 [P] [US3] Create label-large typography token (14px M3 Label Large) in tokens.json
-- [X] T040 [P] [US3] Create label-medium typography token (12px M3 Label Medium) in tokens.json
-- [X] T041 [P] [US3] Create label-small typography token (11px M3 Label Small) in tokens.json
-- [X] T042 [P] [US3] Create space-0 spacing token (0px / 0rem, gridFactor: 0) in tokens.json
-- [X] T043 [P] [US3] Create space-1 spacing token (8px / 0.5rem, gridFactor: 1) in tokens.json
-- [X] T044 [P] [US3] Create space-2 spacing token (16px / 1rem, gridFactor: 2) in tokens.json
-- [X] T045 [P] [US3] Create space-3 spacing token (24px / 1.5rem, gridFactor: 3) in tokens.json
-- [X] T046 [P] [US3] Create space-4 spacing token (32px / 2rem, gridFactor: 4) in tokens.json
-- [X] T047 [P] [US3] Create space-5 spacing token (40px / 2.5rem, gridFactor: 5, min for 44px touch target) in tokens.json
-- [X] T048 [P] [US3] Create space-6 spacing token (48px / 3rem, gridFactor: 6) in tokens.json
-- [X] T049 [P] [US3] Create space-8 spacing token (64px / 4rem, gridFactor: 8) in tokens.json
-- [X] T050 [P] [US3] Create space-10 spacing token (80px / 5rem, gridFactor: 10) in tokens.json
-- [X] T051 [P] [US3] Create space-12 spacing token (96px / 6rem, gridFactor: 12) in tokens.json
-- [X] T052 [US3] Run tokens:build script to transform typography and spacing tokens into Tailwind utility classes (text-heading-1, p-space-3, etc.)
-- [X] T053 [US3] Add typography specimen to token page in src/app/design-tokens/page.tsx showing all 12 type scales with sample text
-- [X] T054 [US3] Add spacing specimen to token page showing all 10 spacing values with visual grid alignment
-- [X] T055 [US3] Verify 8px grid alignment validation passes for all spacing tokens (except space-0)
-- [X] T056 [US3] Verify body text minimum font size ≥ 14px for mobile accessibility (body-medium and above)
+- [x] T030 [P] [US3] Create heading-1 typography token (57px M3 Display Large) in tokens.json with fontSize, lineHeight, letterSpacing, fontWeight, fontFamily
+- [x] T031 [P] [US3] Create heading-2 typography token (45px M3 Display Medium) in tokens.json
+- [x] T032 [P] [US3] Create heading-3 typography token (36px M3 Display Small) in tokens.json
+- [x] T033 [P] [US3] Create heading-4 typography token (32px M3 Headline Large) in tokens.json
+- [x] T034 [P] [US3] Create heading-5 typography token (28px M3 Headline Medium) in tokens.json
+- [x] T035 [P] [US3] Create heading-6 typography token (24px M3 Headline Small) in tokens.json
+- [x] T036 [P] [US3] Create body-large typography token (16px M3 Body Large) in tokens.json
+- [x] T037 [P] [US3] Create body-medium typography token (14px M3 Body Medium) in tokens.json
+- [x] T038 [P] [US3] Create body-small typography token (12px M3 Body Small) in tokens.json
+- [x] T039 [P] [US3] Create label-large typography token (14px M3 Label Large) in tokens.json
+- [x] T040 [P] [US3] Create label-medium typography token (12px M3 Label Medium) in tokens.json
+- [x] T041 [P] [US3] Create label-small typography token (11px M3 Label Small) in tokens.json
+- [x] T042 [P] [US3] Create space-0 spacing token (0px / 0rem, gridFactor: 0) in tokens.json
+- [x] T043 [P] [US3] Create space-1 spacing token (8px / 0.5rem, gridFactor: 1) in tokens.json
+- [x] T044 [P] [US3] Create space-2 spacing token (16px / 1rem, gridFactor: 2) in tokens.json
+- [x] T045 [P] [US3] Create space-3 spacing token (24px / 1.5rem, gridFactor: 3) in tokens.json
+- [x] T046 [P] [US3] Create space-4 spacing token (32px / 2rem, gridFactor: 4) in tokens.json
+- [x] T047 [P] [US3] Create space-5 spacing token (40px / 2.5rem, gridFactor: 5, min for 44px touch target) in tokens.json
+- [x] T048 [P] [US3] Create space-6 spacing token (48px / 3rem, gridFactor: 6) in tokens.json
+- [x] T049 [P] [US3] Create space-8 spacing token (64px / 4rem, gridFactor: 8) in tokens.json
+- [x] T050 [P] [US3] Create space-10 spacing token (80px / 5rem, gridFactor: 10) in tokens.json
+- [x] T051 [P] [US3] Create space-12 spacing token (96px / 6rem, gridFactor: 12) in tokens.json
+- [x] T052 [US3] Run tokens:build script to transform typography and spacing tokens into Tailwind utility classes (text-heading-1, p-space-3, etc.)
+- [x] T053 [US3] Add typography specimen to token page in src/app/design-tokens/page.tsx showing all 12 type scales with sample text
+- [x] T054 [US3] Add spacing specimen to token page showing all 10 spacing values with visual grid alignment
+- [x] T055 [US3] Verify 8px grid alignment validation passes for all spacing tokens (except space-0)
+- [x] T056 [US3] Verify body text minimum font size ≥ 14px for mobile accessibility (body-medium and above)
 
 **Checkpoint**: All core design tokens now functional - category colors, state indicators, typography, and spacing scales complete
 
@@ -135,13 +135,13 @@
 
 ### Implementation for User Story 4
 
-- [X] T057 [P] [US4] Create feedback-success color token (light/dark M3 tertiary or success green tones) in tokens.json
-- [X] T058 [P] [US4] Create feedback-warning color token (light/dark M3 warning amber tones) in tokens.json
-- [X] T059 [P] [US4] Create feedback-error color token (light/dark M3 error red tones) in tokens.json
-- [X] T060 [P] [US4] Create feedback-info color token (light/dark M3 info blue tones) in tokens.json
-- [X] T061 [US4] Run tokens:build script to transform feedback colors into Tailwind utility classes (bg-feedback-success, text-feedback-error, etc.)
-- [X] T062 [US4] Add feedback state examples to token specimen page in src/app/design-tokens/page.tsx showing success/warning/error/info alerts
-- [X] T063 [US4] Verify contrast validation passes for all 4 feedback colors × 2 themes = 8 color tokens
+- [x] T057 [P] [US4] Create feedback-success color token (light/dark M3 tertiary or success green tones) in tokens.json
+- [x] T058 [P] [US4] Create feedback-warning color token (light/dark M3 warning amber tones) in tokens.json
+- [x] T059 [P] [US4] Create feedback-error color token (light/dark M3 error red tones) in tokens.json
+- [x] T060 [P] [US4] Create feedback-info color token (light/dark M3 info blue tones) in tokens.json
+- [x] T061 [US4] Run tokens:build script to transform feedback colors into Tailwind utility classes (bg-feedback-success, text-feedback-error, etc.)
+- [x] T062 [US4] Add feedback state examples to token specimen page in src/app/design-tokens/page.tsx showing success/warning/error/info alerts
+- [x] T063 [US4] Verify contrast validation passes for all 4 feedback colors × 2 themes = 8 color tokens
 
 **Checkpoint**: All user stories complete - full design token system implemented with 50 tokens total
 
@@ -151,16 +151,16 @@
 
 **Purpose**: Documentation, validation, and final quality checks affecting all user stories
 
-- [X] T064 [P] Generate design token documentation in docs/design-tokens.md using Style Dictionary formatter showing all token values and usage guidelines
-- [X] T065 [P] Add TypeScript type definitions file in src/infrastructure/design-tokens/tailwind-tokens.d.ts for utility class type safety (per contracts/tailwind-tokens.d.ts)
-- [X] T066 [P] Create theme toggle component in src/components/ThemeToggle.tsx using next-themes useTheme() hook
-- [X] T067 Create integration test in tests/integration/design-tokens/token-schema.test.ts validating tokens.json against JSON schema
-- [X] T068 Create integration test in tests/integration/design-tokens/contrast-validation.test.ts validating all color tokens meet WCAG AA (4.5:1 normal text, 3:1 large text)
-- [X] T069 Create integration test in tests/integration/design-tokens/spacing-grid.test.ts validating all spacing tokens are multiples of 8px (except space-0)
-- [X] T070 Create integration test in tests/integration/design-tokens/transformation.test.ts validating Style Dictionary transforms tokens.json → tailwind-tokens.js correctly
-- [X] T071 Update README.md with design token system overview and link to quickstart.md
-- [X] T072 Run quickstart.md validation: verify designer export workflow and developer import workflow both complete in < 5 minutes
-- [X] T073 Final validation: confirm all 50 tokens generated (7 categories × 2 themes + 4 states × 2 themes + 4 feedback × 2 themes + 12 typography + 10 spacing)
+- [x] T064 [P] Generate design token documentation in docs/design-tokens.md using Style Dictionary formatter showing all token values and usage guidelines
+- [x] T065 [P] Add TypeScript type definitions file in src/infrastructure/design-tokens/tailwind-tokens.d.ts for utility class type safety (per contracts/tailwind-tokens.d.ts)
+- [x] T066 [P] Create theme toggle component in src/components/ThemeToggle.tsx using next-themes useTheme() hook
+- [x] T067 Create integration test in tests/integration/design-tokens/token-schema.test.ts validating tokens.json against JSON schema
+- [x] T068 Create integration test in tests/integration/design-tokens/contrast-validation.test.ts validating all color tokens meet WCAG AA (4.5:1 normal text, 3:1 large text)
+- [x] T069 Create integration test in tests/integration/design-tokens/spacing-grid.test.ts validating all spacing tokens are multiples of 8px (except space-0)
+- [x] T070 Create integration test in tests/integration/design-tokens/transformation.test.ts validating Style Dictionary transforms tokens.json → tailwind-tokens.js correctly
+- [x] T071 Update README.md with design token system overview and link to quickstart.md
+- [x] T072 Run quickstart.md validation: verify designer export workflow and developer import workflow both complete in < 5 minutes
+- [x] T073 Final validation: confirm all 50 tokens generated (7 categories × 2 themes + 4 states × 2 themes + 4 feedback × 2 themes + 12 typography + 10 spacing)
 
 ---
 
@@ -196,29 +196,35 @@
 **Phase 1 - Setup**: All 4 tasks can run in parallel (T001-T004)
 
 **Phase 2 - Foundational**: Tasks can be parallelized:
+
 - Group 1 (parallel): T005 (schema validation), T006 (contrast validation) - different files
 - Group 2 (sequential): T007, T008 (Style Dictionary config depends on validation functions)
 - Group 3 (parallel): T009 (providers.tsx), T010 (tailwind.config.ts), T011 (package.json), T012 (css-variables.css)
 
-**Phase 3 - User Story 1**: 
+**Phase 3 - User Story 1**:
+
 - T013-T019 (all 7 category color tokens) can run in parallel - different tokens in tokens.json
 - T020-T022 sequential - build, specimen page, validation
 
 **Phase 4 - User Story 2**:
+
 - T023-T026 (all 4 state color tokens) can run in parallel
 - T027-T029 sequential - build, specimen page, validation
 
 **Phase 5 - User Story 3**:
+
 - T030-T041 (all 12 typography tokens) can run in parallel
 - T042-T051 (all 10 spacing tokens) can run in parallel
 - All 22 token creation tasks (T030-T051) can run simultaneously
 - T052-T056 sequential - build, specimen pages, validation
 
 **Phase 6 - User Story 4**:
+
 - T057-T060 (all 4 feedback color tokens) can run in parallel
 - T061-T063 sequential - build, specimen page, validation
 
 **Phase 7 - Polish**:
+
 - T064, T065, T066 can run in parallel (different files)
 - T067-T070 (all 4 integration tests) can run in parallel
 - T071-T073 sequential - final documentation and validation
@@ -304,6 +310,7 @@ With 4 developers available:
 3. **Week 2**: Stories complete and merge independently, then team works on Polish together
 
 **Timeline Estimate**:
+
 - Setup: 0.5 day
 - Foundational: 1.5 days (critical path)
 - User Stories 1-4: 3 days (parallel) or 6 days (sequential)

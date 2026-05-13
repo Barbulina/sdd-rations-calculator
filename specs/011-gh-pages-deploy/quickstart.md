@@ -27,10 +27,11 @@
 The following files are changed in this feature branch:
 
 ### `next.config.ts` — add static export configuration
+
 ```typescript
 const nextConfig = {
-  output: 'export',
-  basePath: '/sdd-rations-calculator',
+  output: "export",
+  basePath: "/sdd-rations-calculator",
   trailingSlash: true,
   images: { unoptimized: true },
   experimental: { turbo: {} },
@@ -39,15 +40,18 @@ export default nextConfig;
 ```
 
 ### `app/menu/[id]/page.tsx` — add static export params
+
 ```typescript
 export const dynamicParams = false;
 export function generateStaticParams() {
   return [];
 }
 ```
+
 (Add at the top of the file, outside the component function)
 
 ### `.github/workflows/deploy.yml` — create the workflow
+
 Copy the contents from `specs/011-gh-pages-deploy/contracts/deploy.yml`.
 
 ---
@@ -83,18 +87,19 @@ Once the workflow completes:
 3. Branch name pattern: `main`
 4. Enable the following:
 
-| Setting | Value |
-|---|---|
-| Require a pull request before merging | ✅ |
-| Required approvals | 1 |
-| Dismiss stale reviews when new commits pushed | ✅ |
-| Require status checks to pass before merging | ✅ |
-| Status checks: | select `build` |
-| Do not allow bypassing the above settings | ✅ |
+| Setting                                       | Value          |
+| --------------------------------------------- | -------------- |
+| Require a pull request before merging         | ✅             |
+| Required approvals                            | 1              |
+| Dismiss stale reviews when new commits pushed | ✅             |
+| Require status checks to pass before merging  | ✅             |
+| Status checks:                                | select `build` |
+| Do not allow bypassing the above settings     | ✅             |
 
 5. Click **Create**
 
 ### Verify branch protection
+
 ```bash
 # This push should now be rejected:
 git checkout main

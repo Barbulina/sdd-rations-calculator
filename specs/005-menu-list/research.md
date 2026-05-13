@@ -17,12 +17,14 @@ Feature 005 is a UI-layer feature built entirely on top of Feature 004's infrast
 **Decision**: Replace the home page content entirely. The home page becomes the Menu List.
 
 **Rationale**:
+
 - The spec says explicitly "en la página principal" (on the main page)
 - Feature 004 already updated `EmptyState` and the "+ Create" button to point to `/menu-builder`
 - The app's primary entity is now a `Menu` (not a `Ration`). The rations list was a scaffolded placeholder from Feature 002
 - Keeping both lists on the same page would be confusing and outside the spec scope
 
 **Alternatives considered**:
+
 - Add a separate `/menus` page and keep the home page as-is — rejected because the spec explicitly targets the home page
 - Show both rations and menus — rejected as out of scope
 
@@ -35,6 +37,7 @@ Feature 005 is a UI-layer feature built entirely on top of Feature 004's infrast
 **Decision**: No. Client-side sort by `createdAt` descending is applied in `useMenuList`.
 
 **Rationale**:
+
 - `LocalStorageMenuRepository.getAll()` returns menus in insertion order (the raw array from localStorage)
 - No sort guarantee is documented in the `MenuRepository` interface
 - Sorting in the hook keeps the sorting concern at the UI layer, which is appropriate; the repository stays simple
@@ -50,11 +53,13 @@ Feature 005 is a UI-layer feature built entirely on top of Feature 004's infrast
 **Decision**: `window.confirm()` — native browser confirmation dialog.
 
 **Rationale**:
+
 - The spec assumption explicitly states "a simple inline confirm interaction (not a full modal) to keep scope minimal"
 - `window.confirm()` is zero-cost to implement, natively accessible, and well understood by users
 - Feature 004 established no `ConfirmDialog` component; building one now would be out of scope
 
 **Alternatives considered**:
+
 - Inline toggle "click to confirm" — more complex, requires extra state per card
 - Custom modal — out of scope for this feature, adds component complexity
 - No confirmation — rejected because FR-004 mandates it
@@ -68,17 +73,23 @@ Feature 005 is a UI-layer feature built entirely on top of Feature 004's infrast
 **Decision**: Filtering is done in `useMenuList` as derived state (computed from raw menus + filter state).
 
 **Rationale**:
+
 - Keeps components pure/presentational (they receive filtered data, not filter logic)
 - Matches the pattern established by `useMenuBuilder` in Feature 004
 - Enables straightforward unit testing of filter logic in isolation
 
 **Implementation pattern**:
+
 ```typescript
 // In useMenuList:
 const filteredMenus = useMemo(() => {
   return menus
-    .filter(m => nameFilter === '' || m.name.toLowerCase().includes(nameFilter.toLowerCase()))
-    .filter(m => typeFilter === null || m.type === typeFilter);
+    .filter(
+      (m) =>
+        nameFilter === "" ||
+        m.name.toLowerCase().includes(nameFilter.toLowerCase()),
+    )
+    .filter((m) => typeFilter === null || m.type === typeFilter);
 }, [menus, nameFilter, typeFilter]);
 ```
 
@@ -132,6 +143,7 @@ This will be defined in the contracts and referenced by both `MenuCard` and `Men
 **Decision**: Use `toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })`.
 
 **Rationale**:
+
 - Human-readable (e.g., "May 12, 2026")
 - No additional date library needed
 - Matches the locale of the app (English labels throughout)
@@ -150,14 +162,14 @@ This will be defined in the contracts and referenced by both `MenuCard` and `Men
 
 ## All NEEDS CLARIFICATION items resolved
 
-| Item | Status |
-|------|--------|
-| Home page: replace or extend? | ✅ Replace |
-| Repository sort order | ✅ Sort client-side in hook |
-| Delete confirmation mechanism | ✅ `window.confirm()` |
-| Filter placement (hook vs component) | ✅ Hook, as derived `useMemo` state |
-| Delete method availability | ✅ Exists: `delete(id: string): Promise<void>` |
-| Test builders availability | ✅ MenuBuilder + MenuItemBuilder from Feature 004 |
-| MenuType display labels | ✅ Simple record map `MENU_TYPE_LABELS` |
-| Date format | ✅ `toLocaleDateString('en-US', { month: 'short', ... })` |
-| EmptyState component | ✅ No changes needed |
+| Item                                 | Status                                                    |
+| ------------------------------------ | --------------------------------------------------------- |
+| Home page: replace or extend?        | ✅ Replace                                                |
+| Repository sort order                | ✅ Sort client-side in hook                               |
+| Delete confirmation mechanism        | ✅ `window.confirm()`                                     |
+| Filter placement (hook vs component) | ✅ Hook, as derived `useMemo` state                       |
+| Delete method availability           | ✅ Exists: `delete(id: string): Promise<void>`            |
+| Test builders availability           | ✅ MenuBuilder + MenuItemBuilder from Feature 004         |
+| MenuType display labels              | ✅ Simple record map `MENU_TYPE_LABELS`                   |
+| Date format                          | ✅ `toLocaleDateString('en-US', { month: 'short', ... })` |
+| EmptyState component                 | ✅ No changes needed                                      |

@@ -74,7 +74,9 @@ describe("useMenuDetail — load menu (T003)", () => {
   beforeEach(() => vi.resetAllMocks());
 
   it("starts with isLoading = true", () => {
-    vi.mocked(mockRepository.getById).mockImplementation(() => new Promise(() => {}));
+    vi.mocked(mockRepository.getById).mockImplementation(
+      () => new Promise(() => {}),
+    );
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     expect(result.current.isLoading).toBe(true);
   });
@@ -89,19 +91,25 @@ describe("useMenuDetail — load menu (T003)", () => {
   it("calls getById with the given id", async () => {
     vi.mocked(mockRepository.getById).mockResolvedValue(testMenu);
     renderHook(() => useMenuDetail("menu-abc"), { wrapper });
-    await waitFor(() => expect(mockRepository.getById).toHaveBeenCalledWith("menu-abc"));
+    await waitFor(() =>
+      expect(mockRepository.getById).toHaveBeenCalledWith("menu-abc"),
+    );
   });
 
   it("sets notFound = true when getById returns null", async () => {
     vi.mocked(mockRepository.getById).mockResolvedValue(null);
-    const { result } = renderHook(() => useMenuDetail("unknown-id"), { wrapper });
+    const { result } = renderHook(() => useMenuDetail("unknown-id"), {
+      wrapper,
+    });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     expect(result.current.notFound).toBe(true);
     expect(result.current.menu).toBeNull();
   });
 
   it("sets error when getById throws", async () => {
-    vi.mocked(mockRepository.getById).mockRejectedValue(new Error("Storage fail"));
+    vi.mocked(mockRepository.getById).mockRejectedValue(
+      new Error("Storage fail"),
+    );
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     expect(result.current.error).toBeTruthy();
@@ -159,9 +167,14 @@ describe("useMenuDetail — saveChanges (T005)", () => {
       result.current.setEditName("Desayuno Actualizado");
       result.current.setEditType(MenuType.DINNER);
     });
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     expect(mockRepository.update).toHaveBeenCalledWith(
-      expect.objectContaining({ name: "Desayuno Actualizado", type: MenuType.DINNER }),
+      expect.objectContaining({
+        name: "Desayuno Actualizado",
+        type: MenuType.DINNER,
+      }),
     );
   });
 
@@ -169,7 +182,9 @@ describe("useMenuDetail — saveChanges (T005)", () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     act(() => result.current.setEditName(""));
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     expect(mockRepository.update).not.toHaveBeenCalled();
   });
 
@@ -177,7 +192,9 @@ describe("useMenuDetail — saveChanges (T005)", () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     act(() => result.current.setEditName("   "));
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     expect(result.current.nameError).toBeTruthy();
   });
 
@@ -185,9 +202,13 @@ describe("useMenuDetail — saveChanges (T005)", () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     act(() => result.current.setEditName(""));
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     act(() => result.current.setEditName("Valid Name"));
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     expect(result.current.nameError).toBeNull();
   });
 
@@ -195,7 +216,9 @@ describe("useMenuDetail — saveChanges (T005)", () => {
     vi.mocked(mockRepository.update).mockRejectedValue(new Error("Write fail"));
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     expect(result.current.error).toBeTruthy();
   });
 
@@ -203,7 +226,9 @@ describe("useMenuDetail — saveChanges (T005)", () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     expect(result.current.isSaving).toBe(false);
-    await act(async () => { await result.current.saveChanges(); });
+    await act(async () => {
+      await result.current.saveChanges();
+    });
     expect(result.current.isSaving).toBe(false);
   });
 });
@@ -220,7 +245,9 @@ describe("useMenuDetail — removeItem (T006)", () => {
   it("removes the item from the menu", async () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.removeItem(DEFAULT_ITEM_1.id); });
+    await act(async () => {
+      await result.current.removeItem(DEFAULT_ITEM_1.id);
+    });
     expect(result.current.menu!.items).not.toContainEqual(
       expect.objectContaining({ id: DEFAULT_ITEM_1.id }),
     );
@@ -229,14 +256,18 @@ describe("useMenuDetail — removeItem (T006)", () => {
   it("calls repository.update after removing", async () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.removeItem(DEFAULT_ITEM_1.id); });
+    await act(async () => {
+      await result.current.removeItem(DEFAULT_ITEM_1.id);
+    });
     expect(mockRepository.update).toHaveBeenCalled();
   });
 
   it("recalculates totalWeight and totalRations after removing", async () => {
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.removeItem(DEFAULT_ITEM_1.id); });
+    await act(async () => {
+      await result.current.removeItem(DEFAULT_ITEM_1.id);
+    });
     const remaining = testMenu.items.filter((i) => i.id !== DEFAULT_ITEM_1.id);
     const expectedWeight = remaining.reduce((s, i) => s + i.weightGrams, 0);
     expect(mockRepository.update).toHaveBeenCalledWith(
@@ -252,7 +283,9 @@ describe("useMenuDetail — removeItem (T006)", () => {
     vi.mocked(mockRepository.getById).mockResolvedValue(singleItemMenu);
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.removeItem(DEFAULT_ITEM_1.id); });
+    await act(async () => {
+      await result.current.removeItem(DEFAULT_ITEM_1.id);
+    });
     expect(mockRepository.update).not.toHaveBeenCalled();
     expect(result.current.menu!.items).toHaveLength(1);
   });
@@ -261,7 +294,9 @@ describe("useMenuDetail — removeItem (T006)", () => {
     vi.mocked(mockRepository.update).mockRejectedValue(new Error("fail"));
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.removeItem(DEFAULT_ITEM_1.id); });
+    await act(async () => {
+      await result.current.removeItem(DEFAULT_ITEM_1.id);
+    });
     expect(result.current.error).toBeTruthy();
   });
 });
@@ -276,28 +311,46 @@ describe("useMenuDetail — addItem (T007)", () => {
   });
 
   it("adds the item to the menu", async () => {
-    const newItem = createMenuItem({ id: "item-new", weightGrams: 50, rations: 2 });
+    const newItem = createMenuItem({
+      id: "item-new",
+      weightGrams: 50,
+      rations: 2,
+    });
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.addItem(newItem); });
+    await act(async () => {
+      await result.current.addItem(newItem);
+    });
     expect(result.current.menu!.items).toContainEqual(
       expect.objectContaining({ id: "item-new" }),
     );
   });
 
   it("calls repository.update after adding", async () => {
-    const newItem = createMenuItem({ id: "item-new", weightGrams: 50, rations: 2 });
+    const newItem = createMenuItem({
+      id: "item-new",
+      weightGrams: 50,
+      rations: 2,
+    });
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.addItem(newItem); });
+    await act(async () => {
+      await result.current.addItem(newItem);
+    });
     expect(mockRepository.update).toHaveBeenCalled();
   });
 
   it("recalculates totalWeight and totalRations after adding", async () => {
-    const newItem = createMenuItem({ id: "item-new", weightGrams: 50, rations: 2 });
+    const newItem = createMenuItem({
+      id: "item-new",
+      weightGrams: 50,
+      rations: 2,
+    });
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.addItem(newItem); });
+    await act(async () => {
+      await result.current.addItem(newItem);
+    });
     const expectedWeight = testMenu.totalWeight + 50;
     expect(mockRepository.update).toHaveBeenCalledWith(
       expect.objectContaining({ totalWeight: expectedWeight }),
@@ -306,10 +359,16 @@ describe("useMenuDetail — addItem (T007)", () => {
 
   it("sets error when repository.update throws on add", async () => {
     vi.mocked(mockRepository.update).mockRejectedValue(new Error("fail"));
-    const newItem = createMenuItem({ id: "item-new", weightGrams: 50, rations: 2 });
+    const newItem = createMenuItem({
+      id: "item-new",
+      weightGrams: 50,
+      rations: 2,
+    });
     const { result } = renderHook(() => useMenuDetail("menu-abc"), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));
-    await act(async () => { await result.current.addItem(newItem); });
+    await act(async () => {
+      await result.current.addItem(newItem);
+    });
     expect(result.current.error).toBeTruthy();
   });
 });

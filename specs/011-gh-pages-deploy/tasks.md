@@ -118,6 +118,7 @@ T005 (local build)   ──┘                                                  
 ```
 
 **Parallel opportunities**:
+
 - T003 + T004 can be done simultaneously (different files)
 - T011 + T013 can be done simultaneously (inspection only, no file edits)
 - T020 + T021 + T022 can be done simultaneously (browser verification)
@@ -129,6 +130,7 @@ T005 (local build)   ──┘                                                  
 **MVP scope (US1 only)**: T001 → T010. After T010, the app is live on GitHub Pages. Everything else is verification or hardening.
 
 **Suggested sequence**:
+
 1. T001–T005: local setup and build verification (can be done in ~15 min)
 2. T006–T007: author the workflow YAML (copy from contract, ~5 min)
 3. T008–T010: push, PR, merge (depends on reviewer availability)

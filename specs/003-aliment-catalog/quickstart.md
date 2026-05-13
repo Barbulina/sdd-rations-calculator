@@ -36,17 +36,20 @@ npm run dev
 ### 2. Access Custom Aliment Features
 
 **Browse Aliments**:
+
 - Navigate to `/aliment-browser`
 - See pre-defined catalog (365+ items)
 - Custom aliments (if any) appear with "Custom" badge
 
 **Create Custom Aliment**:
+
 - Click "Create Custom Aliment" button in browser
 - Fill out form at `/aliment-browser/create`
 - Required fields: Name, Category, Grams to Carbohydrate
 - Optional: Blood Glucose Index (0-100)
 
 **Create from Search**:
+
 - Search for non-existent aliment (e.g., "my special food")
 - Click "Create 'my special food'" button in empty state
 - Form pre-fills with search term
@@ -59,22 +62,22 @@ npm run dev
 // Via UI form at /aliment-browser/create
 // Or programmatically:
 
-import { useCustomAlimentRepository } from '@/src/application/contexts/CustomAlimentRepositoryContext';
-import { RationsType } from '@/src/domain/models/RationsType';
+import { useCustomAlimentRepository } from "@/src/application/contexts/CustomAlimentRepositoryContext";
+import { RationsType } from "@/src/domain/models/RationsType";
 
 export function MyComponent() {
   const repository = useCustomAlimentRepository();
 
   const createAliment = async () => {
     const dto: CreateCustomAlimentDTO = {
-      name: 'Manzana ecológica',
+      name: "Manzana ecológica",
       type: RationsType.fruits,
       gramsToCarbohydrate: 110,
-      bloodGlucoseIndex: 38
+      bloodGlucoseIndex: 38,
     };
 
     const saved = await repository.save(dto);
-    console.log('Created:', saved);
+    console.log("Created:", saved);
     // {
     //   id: '550e8400-e29b-41d4-a716-446655440000',
     //   name: 'Manzana ecológica',
@@ -118,9 +121,9 @@ export function AlimentSearch() {
 const updateAliment = async (id: string) => {
   const updated = await repository.update({
     id,
-    gramsToCarbohydrate: 115 // Update just one field
+    gramsToCarbohydrate: 115, // Update just one field
   });
-  console.log('Updated:', updated.updatedAt);
+  console.log("Updated:", updated.updatedAt);
 };
 ```
 
@@ -130,7 +133,7 @@ const updateAliment = async (id: string) => {
 const deleteAliment = async (id: string) => {
   const deleted = await repository.delete(id);
   if (deleted) {
-    console.log('Deleted successfully');
+    console.log("Deleted successfully");
   }
 };
 ```
@@ -166,13 +169,13 @@ src/
 ### Add Custom Aliment Repository to New Component
 
 ```typescript
-'use client';
+"use client";
 
-import { useCustomAlimentRepository } from '@/src/application/contexts/CustomAlimentRepositoryContext';
+import { useCustomAlimentRepository } from "@/src/application/contexts/CustomAlimentRepositoryContext";
 
 export function MyComponent() {
   const repository = useCustomAlimentRepository();
-  
+
   // Use repository methods
   const loadAliments = async () => {
     const aliments = await repository.findAll();
@@ -184,7 +187,7 @@ export function MyComponent() {
 ### Filter Custom Aliments by Category
 
 ```typescript
-import { RationsType } from '@/src/domain/models/RationsType';
+import { RationsType } from "@/src/domain/models/RationsType";
 
 const fruits = await repository.findByType(RationsType.fruits);
 console.log(`Found ${fruits.length} custom fruit aliments`);
@@ -221,54 +224,56 @@ npx playwright install
 **Create test configuration files**:
 
 1. **vitest.config.ts** (project root):
+
 ```typescript
-import { defineConfig } from 'vitest/config';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'jsdom',
-    setupFiles: ['./tests/setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./tests/setup.ts"],
     globals: true,
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './'),
+      "@": path.resolve(__dirname, "./"),
     },
   },
 });
 ```
 
 2. **tests/setup.ts**:
+
 ```typescript
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 ```
 
 3. **playwright.config.ts** (project root):
+
 ```typescript
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: "./tests/e2e",
   fullyParallel: true,
   use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
+    baseURL: "http://localhost:3000",
+    trace: "on-first-retry",
   },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-  ],
+  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000',
+    command: "npm run dev",
+    url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
   },
 });
 ```
 
 **Update package.json scripts**:
+
 ```json
 {
   "scripts": {
@@ -285,6 +290,7 @@ export default defineConfig({
 **Constitution mandates test-first development**. Follow this workflow strictly:
 
 **Phase 1: Domain Layer (Unit Tests)**
+
 ```bash
 # 1. Write failing test
 cat > tests/unit/custom-aliments/CustomAliment.test.ts
@@ -304,6 +310,7 @@ npm test
 ```
 
 **Phase 2: Repository Layer (Integration Tests)**
+
 ```bash
 # 1. Write failing integration test
 cat > tests/integration/custom-aliments/LocalStorageCustomAlimentRepository.test.ts
@@ -321,6 +328,7 @@ npm test
 ```
 
 **Phase 3: UI Layer (E2E Tests)**
+
 ```bash
 # 1. Write failing E2E test
 cat > tests/e2e/custom-aliments/create-custom-aliment.spec.ts
@@ -377,6 +385,7 @@ npm run test:e2e -- custom-aliment-creation
 **Problem**: Error creating custom aliment: "Storage quota exceeded"
 
 **Solution**:
+
 ```typescript
 // Clear  older custom aliments
 const aliments = await repository.findAll();
@@ -391,6 +400,7 @@ for (const aliment of toDelete) {
 **Problem**: Form shows "Name is required" even after typing
 
 **Solution**: Check that `updateField` is called on change:
+
 ```typescript
 <input
   value={formData.name}
@@ -403,6 +413,7 @@ for (const aliment of toDelete) {
 **Problem**: Created aliment doesn't show in browser
 
 **Solution**: Verify CompositeAlimentRepository is used:
+
 ```typescript
 // In aliment-browser/page.tsx
 const { aliments } = useCompositeAliments(); // NOT useAlimentInfoRepository()
@@ -412,20 +423,21 @@ const { aliments } = useCompositeAliments(); // NOT useAlimentInfoRepository()
 
 ### Repository Methods
 
-| Method | Parameters | Returns | Description |
-|--------|-----------|---------|-------------|
-| `save` | `CreateCustomAlimentDTO` | `Promise<CustomAliment>` | Create new custom aliment |
-| `findAll` | None | `Promise<CustomAliment[]>` | Get all custom aliments |
-| `findById` | `string` | `Promise<CustomAliment \| undefined>` | Find by ID |
-| `findByType` | `RationsType` | `Promise<CustomAliment[]>` | Filter by category |
-| `search` | `string` | `Promise<CustomAliment[]>` | Search by name |
-| `update` | `UpdateCustomAlimentDTO` | `Promise<CustomAliment>` | Update existing |
-| `delete` | `string` | `Promise<boolean>` | Delete by ID |
-| `count` | None | `Promise<number>` | Count total |
+| Method       | Parameters               | Returns                               | Description               |
+| ------------ | ------------------------ | ------------------------------------- | ------------------------- |
+| `save`       | `CreateCustomAlimentDTO` | `Promise<CustomAliment>`              | Create new custom aliment |
+| `findAll`    | None                     | `Promise<CustomAliment[]>`            | Get all custom aliments   |
+| `findById`   | `string`                 | `Promise<CustomAliment \| undefined>` | Find by ID                |
+| `findByType` | `RationsType`            | `Promise<CustomAliment[]>`            | Filter by category        |
+| `search`     | `string`                 | `Promise<CustomAliment[]>`            | Search by name            |
+| `update`     | `UpdateCustomAlimentDTO` | `Promise<CustomAliment>`              | Update existing           |
+| `delete`     | `string`                 | `Promise<boolean>`                    | Delete by ID              |
+| `count`      | None                     | `Promise<number>`                     | Count total               |
 
 ### DTOs
 
 **CreateCustomAlimentDTO**:
+
 ```typescript
 {
   name: string;                    // Required, 1-200 chars
@@ -436,6 +448,7 @@ const { aliments } = useCompositeAliments(); // NOT useAlimentInfoRepository()
 ```
 
 **UpdateCustomAlimentDTO**:
+
 ```typescript
 {
   id: string;                     // Required, UUID
@@ -465,6 +478,7 @@ const { aliments } = useCompositeAliments(); // NOT useAlimentInfoRepository()
 ## Support
 
 For issues or questions:
+
 1. Check existing tests for usage examples
 2. Review contracts in `specs/003-aliment-catalog/contracts/`
 3. See data model in `specs/003-aliment-catalog/data-model.md`

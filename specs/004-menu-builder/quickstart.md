@@ -43,8 +43,8 @@ const menu: Menu = {
   name: "Afternoon Snack",
   type: "frutas",
   items: [menuItem1, menuItem2],
-  totalWeight: 300,      // sum of item weights
-  totalRations: 2.86,    // sum of item rations
+  totalWeight: 300, // sum of item weights
+  totalRations: 2.86, // sum of item rations
   createdAt: new Date(),
 };
 ```
@@ -118,16 +118,19 @@ Navigate to: `http://localhost:3000/create-ration`
 ### 3. Run Tests
 
 **Unit + Integration**:
+
 ```bash
 npm test
 ```
 
 **E2E**:
+
 ```bash
 npm run test:e2e
 ```
 
 **Coverage**:
+
 ```bash
 npm run test:coverage
 ```
@@ -151,14 +154,16 @@ npm run test:coverage
 For each component/model:
 
 1. **RED**: Write failing test
+
    ```typescript
-   it('should calculate rations correctly', () => {
+   it("should calculate rations correctly", () => {
      const item = new MenuItem(aliment, 150);
      expect(item.rations).toBe(1.36);
    });
    ```
 
 2. **GREEN**: Implement to pass test
+
    ```typescript
    class MenuItem {
      constructor(aliment, weightGrams) {
@@ -222,7 +227,7 @@ interface MenuRepository {
 ### Using the Repository
 
 ```typescript
-import { useMenuRepository } from '@/application/contexts/MenuRepositoryContext';
+import { useMenuRepository } from "@/application/contexts/MenuRepositoryContext";
 
 function MyComponent() {
   const repository = useMenuRepository();
@@ -230,9 +235,9 @@ function MyComponent() {
   const saveMenu = async (menu: Menu) => {
     try {
       const saved = await repository.save(menu);
-      console.log('Saved:', saved);
+      console.log("Saved:", saved);
     } catch (error) {
-      console.error('Save failed:', error);
+      console.error("Save failed:", error);
     }
   };
 }
@@ -248,12 +253,12 @@ function MyComponent() {
 export class MenuItem {
   validate(): string[] {
     const errors: string[] = [];
-    
+
     // Add new rule
     if (this.weightGrams > 10000) {
-      errors.push('Weight cannot exceed 10kg');
+      errors.push("Weight cannot exceed 10kg");
     }
-    
+
     return errors;
   }
 }
@@ -262,10 +267,10 @@ export class MenuItem {
 **Test**: `tests/unit/menu-builder/MenuItem.test.ts`
 
 ```typescript
-it('should reject weight > 10kg', () => {
+it("should reject weight > 10kg", () => {
   expect(() => {
     new MenuItem(aliment, 15000);
-  }).toThrow('Weight cannot exceed 10kg');
+  }).toThrow("Weight cannot exceed 10kg");
 });
 ```
 
@@ -307,23 +312,23 @@ async save(menu: Menu): Promise<Menu> {
 ### Unit Test: Domain Model
 
 ```typescript
-import { describe, it, expect } from 'vitest';
-import { MenuItem } from '@/domain/models/MenuItem';
+import { describe, it, expect } from "vitest";
+import { MenuItem } from "@/domain/models/MenuItem";
 
-describe('MenuItem', () => {
+describe("MenuItem", () => {
   const aliment = {
-    name: 'manzana',
-    type: 'frutas',
+    name: "manzana",
+    type: "frutas",
     gramsToCarbohydrate: 110,
     bloodGlucoseIndex: 38,
   };
 
-  it('should calculate rations correctly', () => {
+  it("should calculate rations correctly", () => {
     const item = new MenuItem(aliment, 150);
     expect(item.rations).toBe(1.36);
   });
 
-  it('should reject zero weight', () => {
+  it("should reject zero weight", () => {
     expect(() => new MenuItem(aliment, 0)).toThrow();
   });
 });
@@ -332,10 +337,10 @@ describe('MenuItem', () => {
 ### Integration Test: Repository
 
 ```typescript
-import { describe, it, expect, beforeEach } from 'vitest';
-import { LocalStorageMenuRepository } from '@/infrastructure/repositories/LocalStorageMenuRepository';
+import { describe, it, expect, beforeEach } from "vitest";
+import { LocalStorageMenuRepository } from "@/infrastructure/repositories/LocalStorageMenuRepository";
 
-describe('LocalStorageMenuRepository', () => {
+describe("LocalStorageMenuRepository", () => {
   let repository: LocalStorageMenuRepository;
 
   beforeEach(() => {
@@ -343,10 +348,10 @@ describe('LocalStorageMenuRepository', () => {
     repository = new LocalStorageMenuRepository();
   });
 
-  it('should save and retrieve menu', async () => {
+  it("should save and retrieve menu", async () => {
     const menu = createTestMenu();
     await repository.save(menu);
-    
+
     const retrieved = await repository.getById(menu.id);
     expect(retrieved).toEqual(menu);
   });
@@ -356,30 +361,30 @@ describe('LocalStorageMenuRepository', () => {
 ### E2E Test: Full Flow
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('should create menu with multiple aliments', async ({ page }) => {
-  await page.goto('/create-ration');
-  
+test("should create menu with multiple aliments", async ({ page }) => {
+  await page.goto("/create-ration");
+
   // Search for aliment
-  await page.fill('[data-testid="search-input"]', 'manzana');
+  await page.fill('[data-testid="search-input"]', "manzana");
   await page.click('[data-testid="suggestion-0"]');
-  
+
   // Enter weight
-  await page.fill('[data-testid="weight-input"]', '150');
+  await page.fill('[data-testid="weight-input"]', "150");
   await page.click('[data-testid="add-button"]');
-  
+
   // Verify item added
   await expect(page.locator('[data-testid="menu-item-0"]')).toBeVisible();
-  await expect(page.locator('[data-testid="item-rations"]')).toHaveText('1.36');
-  
+  await expect(page.locator('[data-testid="item-rations"]')).toHaveText("1.36");
+
   // Save menu
-  await page.fill('[data-testid="menu-name"]', 'Test Menu');
-  await page.selectOption('[data-testid="menu-type"]', 'frutas');
+  await page.fill('[data-testid="menu-name"]', "Test Menu");
+  await page.selectOption('[data-testid="menu-type"]', "frutas");
   await page.click('[data-testid="save-button"]');
-  
+
   // Verify navigation
-  await expect(page).toHaveURL('/');
+  await expect(page).toHaveURL("/");
 });
 ```
 
@@ -388,52 +393,63 @@ test('should create menu with multiple aliments', async ({ page }) => {
 ### Problem: Rations not calculating
 
 **Check**:
+
 1. `gramsToCarbohydrate` is not zero
 2. Weight is valid number
 3. Calculation in `MenuItem` class
 
 **Debug**:
+
 ```typescript
-console.log('Weight:', this.weightGrams);
-console.log('GramsToCH:', this.aliment.gramsToCarbohydrate);
-console.log('Rations:', this.rations);
+console.log("Weight:", this.weightGrams);
+console.log("GramsToCH:", this.aliment.gramsToCarbohydrate);
+console.log("Rations:", this.rations);
 ```
 
 ### Problem: localStorage not persisting
 
 **Check**:
+
 1. Browser localStorage enabled
 2. Quota not exceeded
 3. Correct key used (`sdd-rations-calculator:menus`)
 
 **Debug**:
+
 ```typescript
-console.log('Storage available:', isLocalStorageAvailable());
-console.log('Current data:', localStorage.getItem('sdd-rations-calculator:menus'));
+console.log("Storage available:", isLocalStorageAvailable());
+console.log(
+  "Current data:",
+  localStorage.getItem("sdd-rations-calculator:menus"),
+);
 ```
 
 ### Problem: Autocomplete not filtering
 
 **Check**:
+
 1. `useCompositeAliments` hook working
 2. Search term trimmed and lowercased
 3. Filter logic correct
 
 **Debug**:
+
 ```typescript
-console.log('Search term:', searchTerm);
-console.log('Aliments:', aliments.length);
-console.log('Filtered:', filteredAliments.length);
+console.log("Search term:", searchTerm);
+console.log("Aliments:", aliments.length);
+console.log("Filtered:", filteredAliments.length);
 ```
 
 ### Problem: Tests failing
 
 **Common Issues**:
+
 1. **Async timing**: Use `waitFor` or `findBy` queries
 2. **localStorage not mocked**: Add `beforeEach(() => localStorage.clear())`
 3. **React context missing**: Wrap component in provider
 
 **Example Fix**:
+
 ```typescript
 // Before
 const { getByText } = render(<MyComponent />);
@@ -451,7 +467,7 @@ const { getByText } = render(
 ### Debounce Search Input
 
 ```typescript
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -465,25 +481,25 @@ function useDebounce<T>(value: T, delay: number): T {
 }
 
 // Usage
-const [searchTerm, setSearchTerm] = useState('');
+const [searchTerm, setSearchTerm] = useState("");
 const debouncedTerm = useDebounce(searchTerm, 300);
 ```
 
 ### Memoize Calculations
 
 ```typescript
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 const totalRations = useMemo(
   () => items.reduce((sum, item) => sum + item.rations, 0),
-  [items]
+  [items],
 );
 ```
 
 ### Virtual Scrolling (if needed)
 
 ```typescript
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 const virtualizer = useVirtualizer({
   count: aliments.length,
@@ -624,21 +640,21 @@ const virtualizer = useVirtualizer({
 ### Reset localStorage (in browser console)
 
 ```javascript
-localStorage.removeItem('sdd-rations-calculator:menus');
+localStorage.removeItem("sdd-rations-calculator:menus");
 ```
 
 ### View all menus (in browser console)
 
 ```javascript
-JSON.parse(localStorage.getItem('sdd-rations-calculator:menus'));
+JSON.parse(localStorage.getItem("sdd-rations-calculator:menus"));
 ```
 
 ### Clear all app data
 
 ```javascript
 Object.keys(localStorage)
-  .filter(k => k.startsWith('sdd-rations-calculator:'))
-  .forEach(k => localStorage.removeItem(k));
+  .filter((k) => k.startsWith("sdd-rations-calculator:"))
+  .forEach((k) => localStorage.removeItem(k));
 ```
 
 ## Next Steps

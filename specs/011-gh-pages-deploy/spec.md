@@ -5,7 +5,7 @@
 **Status**: Draft  
 **Input**: User description: "quiero crear un github action para que cuando cuando mergee en main una PR se haga un deploy de la app en una github page"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Automatic Deployment on Merge to Main (Priority: P1)
 
@@ -77,7 +77,7 @@ A developer attempts to push commits directly to `main` without opening a pull r
 - What happens if two PRs are merged in quick succession? → Both runs queue; the second run deploys after the first completes, resulting in the latest version being live.
 - What happens if the app has client-side routing (e.g., `/menu/123`)? → Direct navigation to sub-paths may result in 404 from the static host; out of scope for this spec (can be addressed separately with a custom 404 page).
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -99,7 +99,7 @@ A developer attempts to push commits directly to `main` without opening a pull r
 - No external API calls at build time that would require secrets.
 - The `basePath` will be set to `/sdd-rations-calculator` to match the GitHub Pages sub-path URL.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

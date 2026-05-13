@@ -5,10 +5,10 @@
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `types.ts` | View-layer types: `MenuFilter`, `MenuCardProps`, `MenuListFiltersProps`, `MENU_TYPE_LABELS`, `MENU_TYPE_ORDER` |
-| `MenuListHook.ts` | TypeScript interface for the `useMenuList` hook: `UseMenuListResult` + `UseMenuList` |
+| File              | Purpose                                                                                                        |
+| ----------------- | -------------------------------------------------------------------------------------------------------------- |
+| `types.ts`        | View-layer types: `MenuFilter`, `MenuCardProps`, `MenuListFiltersProps`, `MENU_TYPE_LABELS`, `MENU_TYPE_ORDER` |
+| `MenuListHook.ts` | TypeScript interface for the `useMenuList` hook: `UseMenuListResult` + `UseMenuList`                           |
 
 ## Dependency Graph
 

@@ -76,8 +76,9 @@ describe("Contrast Validation", () => {
   });
 
   it("feedback-warning has sufficient contrast (regression)", () => {
-    const feedbackWarning =
-      (tokens as any)["feedback-colors"]["feedback-warning"];
+    const feedbackWarning = (tokens as any)["feedback-colors"][
+      "feedback-warning"
+    ];
     const validation = validateTokenContrast(feedbackWarning.value, "light");
     expect(validation.ratio).toBeGreaterThanOrEqual(4.5);
     expect(feedbackWarning.value).toBe("#BF360C");
@@ -132,8 +133,9 @@ describe("Contrast Validation", () => {
   });
 
   it("category-others achieves highest contrast (>= 9:1)", () => {
-    const categoryOthers =
-      (tokens as any)["category-colors"]["category-others"];
+    const categoryOthers = (tokens as any)["category-colors"][
+      "category-others"
+    ];
     const validation = validateTokenContrast(categoryOthers.value, "light");
     expect(validation.ratio).toBeGreaterThanOrEqual(9.0);
   });

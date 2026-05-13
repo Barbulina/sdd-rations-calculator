@@ -23,40 +23,54 @@ const DEFAULT_ITEM_1 = createMenuItem({
 
 describe("MenuItemRow — rendering (T012)", () => {
   it("shows the aliment name", () => {
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />,
+    );
     expect(screen.getByText("Arroz blanco")).toBeInTheDocument();
   });
 
   it("shows the weight in grams", () => {
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />,
+    );
     expect(screen.getByText(/80\s*g/)).toBeInTheDocument();
   });
 
   it("shows the rations with 2 decimal places", () => {
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />,
+    );
     expect(screen.getByText(/3\.20/)).toBeInTheDocument();
   });
 
   it("renders a remove button", () => {
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={false} />,
+    );
     expect(screen.getByRole("button", { name: /remove/i })).toBeInTheDocument();
   });
 
   it("calls onRemove with item id when button clicked", async () => {
     const onRemove = vi.fn();
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={onRemove} isLast={false} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={onRemove} isLast={false} />,
+    );
     await userEvent.click(screen.getByRole("button", { name: /remove/i }));
     expect(onRemove).toHaveBeenCalledWith(DEFAULT_ITEM_1.id);
   });
 
   it("disables remove button when isLast is true", () => {
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={true} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={vi.fn()} isLast={true} />,
+    );
     expect(screen.getByRole("button", { name: /remove/i })).toBeDisabled();
   });
 
   it("does not call onRemove when disabled (last item)", async () => {
     const onRemove = vi.fn();
-    render(<MenuItemRow item={DEFAULT_ITEM_1} onRemove={onRemove} isLast={true} />);
+    render(
+      <MenuItemRow item={DEFAULT_ITEM_1} onRemove={onRemove} isLast={true} />,
+    );
     await userEvent.click(screen.getByRole("button", { name: /remove/i }));
     expect(onRemove).not.toHaveBeenCalled();
   });

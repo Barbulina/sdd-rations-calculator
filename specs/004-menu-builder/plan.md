@@ -11,22 +11,26 @@ Transform the ration creation flow from manual entry to autocomplete-based menu 
 ## Tech Stack
 
 ### Core
+
 - **Framework**: Next.js 15.1.6 (App Router)
 - **React**: 19.0.0
 - **TypeScript**: 5.7.3 (strict mode)
 - **Styling**: Tailwind CSS 3.4.1 + Design Tokens
 
 ### Data Layer
+
 - **State**: React Context API
 - **Storage**: localStorage via Repository Pattern
 - **Validation**: Runtime type checking
 
 ### Testing
+
 - **Unit**: Vitest 4.0.18 + @testing-library/react
 - **E2E**: Playwright 1.49.1
 - **Coverage**: @vitest/coverage-v8
 
 ### Dependencies (Existing)
+
 - `useCompositeAliments` hook (Feature 003)
 - `AlimentInfo`, `CustomAliment` models
 - `RationsType` enum
@@ -113,12 +117,14 @@ CreateRationPage
 ### Phase 1: Domain Layer (TDD)
 
 **Files**:
+
 - `src/domain/models/MenuItem.ts`
 - `src/domain/models/Menu.ts`
 - `tests/unit/menu-builder/MenuItem.test.ts`
 - `tests/unit/menu-builder/Menu.test.ts`
 
 **Tasks**:
+
 1. RED: Write MenuItem tests (weight validation, rations calc)
 2. GREEN: Implement MenuItem model
 3. REFACTOR: Extract calculation logic if needed
@@ -127,6 +133,7 @@ CreateRationPage
 6. REFACTOR: Optimize totals calculation
 
 **Test Coverage**:
+
 - MenuItem creation with valid/invalid weights
 - Rations calculation formula
 - Menu creation with multiple items
@@ -138,11 +145,13 @@ CreateRationPage
 ### Phase 2: Repository Layer (TDD)
 
 **Files**:
+
 - `src/domain/repositories/MenuRepository.ts`
 - `src/infrastructure/repositories/LocalStorageMenuRepository.ts`
 - `tests/integration/menu-builder/LocalStorageMenuRepository.test.ts`
 
 **Tasks**:
+
 1. RED: Write repository interface contract tests
 2. GREEN: Implement MenuRepository interface
 3. RED: Write LocalStorage implementation tests
@@ -150,6 +159,7 @@ CreateRationPage
 5. REFACTOR: Handle serialization edge cases
 
 **Test Coverage**:
+
 - CRUD operations
 - localStorage key isolation (`sdd-rations-calculator:menus`)
 - Date serialization/deserialization
@@ -161,11 +171,13 @@ CreateRationPage
 ### Phase 3: Application Layer (TDD)
 
 **Files**:
+
 - `src/application/hooks/useMenuBuilder.ts`
 - `src/application/contexts/MenuRepositoryContext.tsx`
 - `tests/unit/menu-builder/useMenuBuilder.test.ts`
 
 **Tasks**:
+
 1. RED: Write hook tests (add/remove items, calculate totals)
 2. GREEN: Implement useMenuBuilder hook
 3. REFACTOR: Extract reusable logic
@@ -173,6 +185,7 @@ CreateRationPage
 5. GREEN: Implement MenuRepositoryContext
 
 **Hook API**:
+
 ```typescript
 interface UseMenuBuilderReturn {
   items: MenuItem[];
@@ -187,6 +200,7 @@ interface UseMenuBuilderReturn {
 ```
 
 **Test Coverage**:
+
 - Add item with auto-calculation
 - Remove item updates totals
 - Update weight recalculates rations
@@ -198,11 +212,13 @@ interface UseMenuBuilderReturn {
 ### Phase 4: Autocomplete Component (TDD)
 
 **Files**:
+
 - `app/components/AutocompleteSearch.tsx`
 - `app/components/AlimentSuggestionItem.tsx`
 - `tests/integration/menu-builder/AutocompleteSearch.test.ts`
 
 **Tasks**:
+
 1. RED: Write autocomplete interaction tests
 2. GREEN: Implement search input with debounce
 3. RED: Write suggestions list tests
@@ -212,6 +228,7 @@ interface UseMenuBuilderReturn {
 7. REFACTOR: Extract suggestion item component
 
 **Features**:
+
 - Debounced search (300ms)
 - Keyboard navigation (Arrow Up/Down, Enter, Escape)
 - Display all aliment properties:
@@ -224,6 +241,7 @@ interface UseMenuBuilderReturn {
 - Empty state ("No aliments found")
 
 **Test Coverage**:
+
 - Search filters catalog + custom aliments
 - Debounce prevents excessive renders
 - Keyboard navigation works
@@ -235,10 +253,12 @@ interface UseMenuBuilderReturn {
 ### Phase 5: Weight Input Dialog (TDD)
 
 **Files**:
+
 - `app/components/WeightInputDialog.tsx`
 - `tests/integration/menu-builder/WeightInputDialog.test.ts`
 
 **Tasks**:
+
 1. RED: Write dialog interaction tests
 2. GREEN: Implement modal dialog
 3. RED: Write numeric input validation tests
@@ -246,6 +266,7 @@ interface UseMenuBuilderReturn {
 5. REFACTOR: Extract reusable dialog component
 
 **Features**:
+
 - Modal overlay with focus trap
 - Numeric input (positive integers only)
 - Min: 1g, Max: 10000g
@@ -255,6 +276,7 @@ interface UseMenuBuilderReturn {
 - Escape key to close
 
 **Test Coverage**:
+
 - Dialog opens on aliment selection
 - Invalid weights block submission
 - Valid submission adds item with calculated rations
@@ -266,11 +288,13 @@ interface UseMenuBuilderReturn {
 ### Phase 6: Menu Items List (TDD)
 
 **Files**:
+
 - `app/components/MenuItemsList.tsx`
 - `app/components/MenuItemCard.tsx`
 - `tests/integration/menu-builder/MenuItemsList.test.ts`
 
 **Tasks**:
+
 1. RED: Write list rendering tests
 2. GREEN: Implement items list
 3. RED: Write item card tests (all aliment data)
@@ -280,6 +304,7 @@ interface UseMenuBuilderReturn {
 7. REFACTOR: Extract card component
 
 **Features**:
+
 - List of MenuItemCard components
 - Each card displays:
   - Aliment name (heading)
@@ -293,6 +318,7 @@ interface UseMenuBuilderReturn {
 - Empty state ("Add aliments to build your menu")
 
 **Test Coverage**:
+
 - All aliment properties render
 - Weight changes recalculate rations
 - Remove button deletes item
@@ -304,21 +330,25 @@ interface UseMenuBuilderReturn {
 ### Phase 7: Summary Component (TDD)
 
 **Files**:
+
 - `app/components/MenuSummary.tsx`
 - `tests/unit/menu-builder/MenuSummary.test.ts`
 
 **Tasks**:
+
 1. RED: Write summary display tests
 2. GREEN: Implement totals display
 3. REFACTOR: Add formatting helpers
 
 **Features**:
+
 - Total Weight: `{totalWeight}g`
 - Total Rations: `{totalRations.toFixed(2)} rations`
 - Highlighted box (design token colors)
 - Auto-update on item changes
 
 **Test Coverage**:
+
 - Totals calculate correctly
 - Updates when items added/removed/edited
 - Formatting displays correctly
@@ -328,10 +358,12 @@ interface UseMenuBuilderReturn {
 ### Phase 8: Save Menu Form (TDD)
 
 **Files**:
+
 - `app/components/SaveMenuForm.tsx`
 - `tests/integration/menu-builder/SaveMenuForm.test.ts`
 
 **Tasks**:
+
 1. RED: Write form validation tests
 2. GREEN: Implement menu name input
 3. RED: Write type selection tests
@@ -341,6 +373,7 @@ interface UseMenuBuilderReturn {
 7. REFACTOR: Extract form validation
 
 **Features**:
+
 - Menu name input (required, max 200 chars)
 - Menu type select (RationsType dropdown)
 - Save button (disabled if invalid or no items)
@@ -349,6 +382,7 @@ interface UseMenuBuilderReturn {
 - Error: Display validation errors
 
 **Test Coverage**:
+
 - Name validation (required, length)
 - Type selection required
 - Disabled if no items
@@ -360,15 +394,18 @@ interface UseMenuBuilderReturn {
 ### Phase 9: Page Integration (E2E)
 
 **Files**:
+
 - `app/create-ration/page.tsx` (complete redesign)
 - `tests/e2e/menu-builder.spec.ts`
 
 **Tasks**:
+
 1. RED: Write full flow E2E tests
 2. GREEN: Integrate all components
 3. REFACTOR: Optimize rendering
 
 **User Flow**:
+
 ```
 1. Navigate to /create-ration
 2. Search for aliment (autocomplete)
@@ -388,6 +425,7 @@ interface UseMenuBuilderReturn {
 ```
 
 **E2E Test Coverage**:
+
 - Complete flow from search to save
 - Multiple items in menu
 - Edit weight inline
@@ -401,10 +439,12 @@ interface UseMenuBuilderReturn {
 ### Phase 10: Home Page Integration
 
 **Files**:
+
 - `app/page.tsx` (update to show menus)
 - `app/components/MenuCard.tsx` (new component)
 
 **Tasks**:
+
 1. Create MenuCard component to display saved menus
 2. Update home page to fetch and render menus
 3. Add expand/collapse for menu items
@@ -470,10 +510,11 @@ tests/
 ## Design Token Usage
 
 ### Colors
+
 - **Primary**: Autocomplete focus, Save button
 - **Success**: Menu saved confirmation
 - **Neutral**: Card backgrounds, borders
-- **Semantic (category badges)**: 
+- **Semantic (category badges)**:
   - Red: Carnes
   - Green: Verduras
   - Yellow: Frutas
@@ -481,16 +522,19 @@ tests/
   - Orange: Cereales
 
 ### Typography
+
 - **Heading**: Aliment names
 - **Body**: Descriptions, labels
 - **Caption**: Helper text, subtext
 
 ### Spacing
+
 - **Card padding**: `var(--spacing-4)`
 - **List gaps**: `var(--spacing-3)`
 - **Form inputs**: `var(--spacing-3)`
 
 ### Shadows
+
 - **Card**: `var(--elevation-1)`
 - **Dialog**: `var(--elevation-3)`
 
@@ -502,18 +546,19 @@ tests/
 
 ```typescript
 const {
-  items,           // Current menu items
-  totalWeight,     // Sum of weights
-  totalRations,    // Sum of rations
-  addItem,         // (aliment, weight) => void
-  removeItem,      // (id) => void
+  items, // Current menu items
+  totalWeight, // Sum of weights
+  totalRations, // Sum of rations
+  addItem, // (aliment, weight) => void
+  removeItem, // (id) => void
   updateItemWeight, // (id, weight) => void
-  clearItems,      // () => void
-  saveMenu,        // (name, type) => Promise<void>
+  clearItems, // () => void
+  saveMenu, // (name, type) => Promise<void>
 } = useMenuBuilder();
 ```
 
 **Implementation**:
+
 - `items`: `useState<MenuItem[]>([])`
 - `addItem`: Create MenuItem with UUID, calculate rations, append to array
 - `removeItem`: Filter out item by ID
@@ -531,14 +576,14 @@ Use existing `useCompositeAliments` hook:
 
 ```typescript
 const { aliments } = useCompositeAliments();
-const [searchTerm, setSearchTerm] = useState('');
+const [searchTerm, setSearchTerm] = useState("");
 
 const filteredAliments = useMemo(() => {
   if (!searchTerm) return aliments.slice(0, 10); // Show first 10
-  
+
   const term = searchTerm.toLowerCase();
   return aliments
-    .filter(a => a.name.toLowerCase().includes(term))
+    .filter((a) => a.name.toLowerCase().includes(term))
     .slice(0, 20); // Limit to 20 results
 }, [searchTerm, aliments]);
 ```
@@ -546,14 +591,14 @@ const filteredAliments = useMemo(() => {
 ### Debounce
 
 ```typescript
-const [searchTerm, setSearchTerm] = useState('');
-const [debouncedTerm, setDebouncedTerm] = useState('');
+const [searchTerm, setSearchTerm] = useState("");
+const [debouncedTerm, setDebouncedTerm] = useState("");
 
 useEffect(() => {
   const timer = setTimeout(() => {
     setDebouncedTerm(searchTerm);
   }, 300);
-  
+
   return () => clearTimeout(timer);
 }, [searchTerm]);
 
@@ -567,21 +612,21 @@ const [selectedIndex, setSelectedIndex] = useState(-1);
 
 const handleKeyDown = (e: KeyboardEvent) => {
   switch (e.key) {
-    case 'ArrowDown':
+    case "ArrowDown":
       e.preventDefault();
-      setSelectedIndex(i => Math.min(i + 1, suggestions.length - 1));
+      setSelectedIndex((i) => Math.min(i + 1, suggestions.length - 1));
       break;
-    case 'ArrowUp':
+    case "ArrowUp":
       e.preventDefault();
-      setSelectedIndex(i => Math.max(i - 1, -1));
+      setSelectedIndex((i) => Math.max(i - 1, -1));
       break;
-    case 'Enter':
+    case "Enter":
       e.preventDefault();
       if (selectedIndex >= 0) {
         selectAliment(suggestions[selectedIndex]);
       }
       break;
-    case 'Escape':
+    case "Escape":
       setShowSuggestions(false);
       break;
   }
@@ -595,49 +640,52 @@ const handleKeyDown = (e: KeyboardEvent) => {
 ### Client-Side Validation
 
 **Weight Input**:
+
 ```typescript
 function validateWeight(weight: string): string | null {
   const num = Number(weight);
   if (isNaN(num) || num <= 0) {
-    return 'Weight must be a positive number';
+    return "Weight must be a positive number";
   }
   if (num > 10000) {
-    return 'Weight cannot exceed 10,000g';
+    return "Weight cannot exceed 10,000g";
   }
   return null; // Valid
 }
 ```
 
 **Menu Name**:
+
 ```typescript
 function validateMenuName(name: string): string | null {
   const trimmed = name.trim();
   if (trimmed.length === 0) {
-    return 'Menu name is required';
+    return "Menu name is required";
   }
   if (trimmed.length > 200) {
-    return 'Menu name must be 200 characters or less';
+    return "Menu name must be 200 characters or less";
   }
   return null;
 }
 ```
 
 **Menu Validation**:
+
 ```typescript
 function validateMenu(menu: CreateMenuDTO): string[] {
   const errors: string[] = [];
-  
+
   const nameError = validateMenuName(menu.name);
   if (nameError) errors.push(nameError);
-  
+
   if (!menu.type) {
-    errors.push('Menu type is required');
+    errors.push("Menu type is required");
   }
-  
+
   if (menu.items.length === 0) {
-    errors.push('Menu must contain at least one aliment');
+    errors.push("Menu must contain at least one aliment");
   }
-  
+
   return errors;
 }
 ```
@@ -653,9 +701,9 @@ try {
   repository.save(menu);
 } catch (error) {
   if (error instanceof QuotaExceededError) {
-    showError('Storage full. Please delete some menus.');
+    showError("Storage full. Please delete some menus.");
   } else {
-    showError('Failed to save menu. Please try again.');
+    showError("Failed to save menu. Please try again.");
   }
 }
 ```
@@ -667,7 +715,7 @@ const saveMenu = async (name: string, type: RationsType) => {
   try {
     setLoading(true);
     await repository.save({ name, type, items });
-    router.push('/?success=menu-created');
+    router.push("/?success=menu-created");
   } catch (error) {
     setError(error.message);
   } finally {
@@ -681,22 +729,26 @@ const saveMenu = async (name: string, type: RationsType) => {
 ## Testing Strategy
 
 ### Unit Tests
+
 - Domain models (MenuItem, Menu)
 - Calculation functions
 - Validation functions
 - Hooks (useMenuBuilder)
 
 ### Integration Tests
+
 - Repository with localStorage
 - Component interactions
 - Form submissions
 
 ### E2E Tests
+
 - Full user flow
 - Error scenarios
 - Edge cases
 
 ### Coverage Target
+
 - **Overall**: 80%+
 - **Domain layer**: 100%
 - **Repository layer**: 100%
@@ -707,18 +759,21 @@ const saveMenu = async (name: string, type: RationsType) => {
 ## Performance Considerations
 
 ### Debounce Search
+
 - 300ms delay prevents excessive filtering
 - Cancel previous timer on new input
 
 ### Memoization
+
 ```typescript
 const totalWeight = useMemo(
   () => items.reduce((sum, item) => sum + item.weightGrams, 0),
-  [items]
+  [items],
 );
 ```
 
 ### Virtual Scrolling (Future)
+
 If aliment list grows large (100+), consider react-window for suggestions dropdown.
 
 ---
@@ -726,17 +781,20 @@ If aliment list grows large (100+), consider react-window for suggestions dropdo
 ## Accessibility
 
 ### Keyboard Support
+
 - Tab navigation through form
 - Arrow keys for autocomplete
 - Escape to close dialogs
 - Enter to submit
 
 ### Screen Readers
+
 - ARIA labels on inputs
 - ARIA live regions for totals
 - Descriptive button labels
 
 ### Focus Management
+
 - Auto-focus weight input in dialog
 - Return focus to trigger after dialog close
 - Visible focus indicators
@@ -748,11 +806,13 @@ If aliment list grows large (100+), consider react-window for suggestions dropdo
 ### Backward Compatibility
 
 **Option A**: Keep separate Ration and Menu models
+
 - `sdd-rations-calculator:rations` → old model
 - `sdd-rations-calculator:menus` → new model
 - Display both on home page
 
 **Option B**: Migrate Rations to Menus
+
 - Detect old rations on load
 - Convert to Menu format
 - Prompt user: "Migrate old rations to new menu format?"
@@ -764,16 +824,19 @@ If aliment list grows large (100+), consider react-window for suggestions dropdo
 ## Rollout Plan
 
 ### Phase 1: Parallel Release
+
 - Deploy menu builder to `/create-ration`
 - Keep old ration list working on home page
 - Add "New Menu Builder" badge
 
 ### Phase 2: User Feedback
+
 - Collect usage analytics
 - Fix bugs
 - Improve UX based on feedback
 
 ### Phase 3: Migration (Future)
+
 - Add migration prompt on home page
 - Convert old rations to menus
 - Deprecate old Ration model
@@ -811,12 +874,14 @@ If aliment list grows large (100+), consider react-window for suggestions dropdo
 ## Dependencies
 
 ### Existing Features Required
+
 - Feature 003: Aliment Catalog (CustomAliment, CompositeRepository)
 - Design Tokens system
 - RationsType enum
 - LocalStorageAdapter
 
 ### External Libraries
+
 - None (all based on existing dependencies)
 
 ---
@@ -824,19 +889,25 @@ If aliment list grows large (100+), consider react-window for suggestions dropdo
 ## Risk Mitigation
 
 ### Risk: localStorage quota exceeded
-**Mitigation**: 
+
+**Mitigation**:
+
 - Show storage usage indicator
 - Allow menu deletion
 - Limit menu history to 100 items
 
 ### Risk: Performance with large menu
+
 **Mitigation**:
+
 - Limit items per menu to 50
 - Use memoization for calculations
 - Debounce weight inputs
 
 ### Risk: Data loss on localStorage clear
+
 **Mitigation**:
+
 - Add export functionality
 - Periodic backup prompt
 - Warn before destructive actions

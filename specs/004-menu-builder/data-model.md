@@ -11,23 +11,24 @@ Represents a single aliment in a menu with its weight and calculated rations.
 
 ```typescript
 interface MenuItem {
-  id: string;                                    // Unique ID for the menu item
-  aliment: AlimentInfo | CustomAliment;          // Reference to the aliment
-  weightGrams: number;                           // Weight in grams
-  rations: number;                               // Calculated: weightGrams / aliment.gramsToCarbohydrate
+  id: string; // Unique ID for the menu item
+  aliment: AlimentInfo | CustomAliment; // Reference to the aliment
+  weightGrams: number; // Weight in grams
+  rations: number; // Calculated: weightGrams / aliment.gramsToCarbohydrate
 }
 ```
 
 **Fields**:
 
-| Field | Type | Required | Validation | Source |
-|-------|------|----------|------------|--------|
-| `id` | string | Yes | UUID v4 format | Generated when adding aliment to menu |
-| `aliment` | AlimentInfo \| CustomAliment | Yes | Valid aliment from catalog or custom | Selected from CompositeAlimentRepository |
-| `weightGrams` | number | Yes | > 0, < 10000 | User input |
-| `rations` | number | Yes | Calculated value | Auto-calculated: weightGrams / aliment.gramsToCarbohydrate |
+| Field         | Type                         | Required | Validation                           | Source                                                     |
+| ------------- | ---------------------------- | -------- | ------------------------------------ | ---------------------------------------------------------- |
+| `id`          | string                       | Yes      | UUID v4 format                       | Generated when adding aliment to menu                      |
+| `aliment`     | AlimentInfo \| CustomAliment | Yes      | Valid aliment from catalog or custom | Selected from CompositeAlimentRepository                   |
+| `weightGrams` | number                       | Yes      | > 0, < 10000                         | User input                                                 |
+| `rations`     | number                       | Yes      | Calculated value                     | Auto-calculated: weightGrams / aliment.gramsToCarbohydrate |
 
 **Business Rules**:
+
 - Weight must be positive and reasonable (< 10kg)
 - Rations auto-update when weight changes
 - Rations displayed with 2 decimal precision
@@ -41,31 +42,32 @@ Represents a complete meal/menu with multiple aliments.
 
 ```typescript
 interface Menu {
-  id: string;                    // UUID for the menu
-  name: string;                  // Menu name (e.g., "Afternoon Snack")
-  type: RationsType;             // Menu type (breakfast, lunch, etc.)
-  items: MenuItem[];             // List of aliments with weights
-  totalWeight: number;           // Sum of all item weights
-  totalRations: number;          // Sum of all item rations
-  createdAt: Date;               // Creation timestamp
-  updatedAt?: Date;              // Last modification (optional)
+  id: string; // UUID for the menu
+  name: string; // Menu name (e.g., "Afternoon Snack")
+  type: RationsType; // Menu type (breakfast, lunch, etc.)
+  items: MenuItem[]; // List of aliments with weights
+  totalWeight: number; // Sum of all item weights
+  totalRations: number; // Sum of all item rations
+  createdAt: Date; // Creation timestamp
+  updatedAt?: Date; // Last modification (optional)
 }
 ```
 
 **Fields**:
 
-| Field | Type | Required | Validation | Source |
-|-------|------|----------|------------|--------|
-| `id` | string | Yes | UUID v4 format | Generated on save |
-| `name` | string | Yes | 1-200 chars, trimmed | User input |
-| `type` | RationsType | Yes | Valid enum value | User selection |
-| `items` | MenuItem[] | Yes | Min 1 item | Built from user selections |
-| `totalWeight` | number | Yes | Sum of item weights | Auto-calculated |
-| `totalRations` | number | Yes | Sum of item rations | Auto-calculated |
-| `createdAt` | Date | Yes | Valid Date | Auto-generated on save |
-| `updatedAt` | Date | No | Valid Date, >= createdAt | Set on updates |
+| Field          | Type        | Required | Validation               | Source                     |
+| -------------- | ----------- | -------- | ------------------------ | -------------------------- |
+| `id`           | string      | Yes      | UUID v4 format           | Generated on save          |
+| `name`         | string      | Yes      | 1-200 chars, trimmed     | User input                 |
+| `type`         | RationsType | Yes      | Valid enum value         | User selection             |
+| `items`        | MenuItem[]  | Yes      | Min 1 item               | Built from user selections |
+| `totalWeight`  | number      | Yes      | Sum of item weights      | Auto-calculated            |
+| `totalRations` | number      | Yes      | Sum of item rations      | Auto-calculated            |
+| `createdAt`    | Date        | Yes      | Valid Date               | Auto-generated on save     |
+| `updatedAt`    | Date        | No       | Valid Date, >= createdAt | Set on updates             |
 
 **Validation Rules**:
+
 - `name`: Non-empty after trim, max 200 characters
 - `type`: Must be valid RationsType enum
 - `items`: Must contain at least 1 MenuItem
@@ -73,6 +75,7 @@ interface Menu {
 - `totalRations`: Must be > 0
 
 **Business Rules**:
+
 - Menu requires at least one aliment to save
 - Totals auto-calculate from items array
 - Menu can contain duplicate aliments with different weights
@@ -106,7 +109,7 @@ Data transfer object for updating existing menus.
 
 ```typescript
 interface UpdateMenuDTO {
-  id: string;                    // Required: which menu to update
+  id: string; // Required: which menu to update
   name?: string;
   type?: RationsType;
   items?: MenuItem[];
@@ -134,12 +137,13 @@ Menu {
 
 ### MenuItem → AlimentInfo/CustomAliment (Many-to-One)
 
-- **Type**: Reference (uses)  
+- **Type**: Reference (uses)
 - **Cardinality**: N:1 (many MenuItems can reference same Aliment)
 - **Ownership**: MenuItem references Aliment (no ownership)
 - **Storage**: MenuItem stores complete aliment data as snapshot
 
 **Important**: MenuItem stores a **snapshot** of the aliment data at time of menu creation. This ensures:
+
 - Menu remains valid even if aliment is deleted
 - Historical accuracy (nutritional data doesn't change retroactively)
 - No dangling references
@@ -149,32 +153,31 @@ Menu {
 ## Calculations
 
 ### Item Rations
+
 ```typescript
 const itemRations = menuItem.weightGrams / menuItem.aliment.gramsToCarbohydrate;
 ```
 
 **Example**:
+
 - Aliment: Manzana (110g per 10g carbs)
 - Weight: 150g
 - Rations: 150 / 110 = 1.36 rations
 
 ### Total Weight
+
 ```typescript
-const totalWeight = menu.items.reduce(
-  (sum, item) => sum + item.weightGrams,
-  0
-);
+const totalWeight = menu.items.reduce((sum, item) => sum + item.weightGrams, 0);
 ```
 
 ### Total Rations
+
 ```typescript
-const totalRations = menu.items.reduce(
-  (sum, item) => sum + item.rations,
-  0
-);
+const totalRations = menu.items.reduce((sum, item) => sum + item.rations, 0);
 ```
 
 ### Display Format
+
 - Rations: Fixed to 2 decimal places
 - Weight: Integer (grams)
 
@@ -218,7 +221,7 @@ const totalRations = menu.items.reduce(
           "createdAt": "2026-02-12T10:30:00.000Z"
         },
         "weightGrams": 50,
-        "rations": 2.50
+        "rations": 2.5
       }
     ],
     "totalWeight": 200,
@@ -254,23 +257,26 @@ interface Ration {
 ### Migration Strategy
 
 **Option 1**: Convert Ration → Menu with single MenuItem
+
 ```typescript
 function migrateRationToMenu(ration: Ration): Menu {
   return {
     id: crypto.randomUUID(),
     name: ration.name,
     type: ration.type,
-    items: [{
-      id: crypto.randomUUID(),
-      aliment: {
-        name: ration.name,
-        type: ration.type,
-        gramsToCarbohydrate: ration.gramsToCarbohydrate,
-        bloodGlucoseIndex: ration.bloodGlucoseIndex,
+    items: [
+      {
+        id: crypto.randomUUID(),
+        aliment: {
+          name: ration.name,
+          type: ration.type,
+          gramsToCarbohydrate: ration.gramsToCarbohydrate,
+          bloodGlucoseIndex: ration.bloodGlucoseIndex,
+        },
+        weightGrams: ration.weight,
+        rations: ration.rations,
       },
-      weightGrams: ration.weight,
-      rations: ration.rations,
-    }],
+    ],
     totalWeight: ration.weight,
     totalRations: ration.rations,
     createdAt: new Date(),
@@ -279,6 +285,7 @@ function migrateRationToMenu(ration: Ration): Menu {
 ```
 
 **Option 2**: Keep separate Ration and Menu storage
+
 - Maintain `sdd-rations-calculator:rations` for backward compatibility
 - Add new `sdd-rations-calculator:menus` key
 - Display both in home page with migration prompt
@@ -295,19 +302,19 @@ function migrateRationToMenu(ration: Ration): Menu {
  */
 function validateMenuItem(item: MenuItem): string[] {
   const errors: string[] = [];
-  
+
   if (!item.aliment) {
-    errors.push('Aliment is required');
+    errors.push("Aliment is required");
   }
-  
+
   if (!item.weightGrams || item.weightGrams <= 0) {
-    errors.push('Weight must be greater than 0');
+    errors.push("Weight must be greater than 0");
   }
-  
+
   if (item.weightGrams > 10000) {
-    errors.push('Weight cannot exceed 10000g (10kg)');
+    errors.push("Weight cannot exceed 10000g (10kg)");
   }
-  
+
   return errors;
 }
 
@@ -316,31 +323,31 @@ function validateMenuItem(item: MenuItem): string[] {
  */
 function validateMenu(menu: CreateMenuDTO): string[] {
   const errors: string[] = [];
-  
+
   if (!menu.name || menu.name.trim().length === 0) {
-    errors.push('Menu name is required');
+    errors.push("Menu name is required");
   }
-  
+
   if (menu.name?.length > 200) {
-    errors.push('Menu name must not exceed 200 characters');
+    errors.push("Menu name must not exceed 200 characters");
   }
-  
+
   if (!menu.type) {
-    errors.push('Menu type is required');
+    errors.push("Menu type is required");
   }
-  
+
   if (!menu.items || menu.items.length === 0) {
-    errors.push('Menu must contain at least one aliment');
+    errors.push("Menu must contain at least one aliment");
   }
-  
+
   // Validate each item
   menu.items?.forEach((item, index) => {
     const itemErrors = validateMenuItem(item);
-    itemErrors.forEach(err => {
+    itemErrors.forEach((err) => {
       errors.push(`Item ${index + 1}: ${err}`);
     });
   });
-  
+
   return errors;
 }
 ```
@@ -353,12 +360,12 @@ function validateMenu(menu: CreateMenuDTO): string[] {
 function isMenu(obj: any): obj is Menu {
   return (
     obj &&
-    typeof obj.id === 'string' &&
-    typeof obj.name === 'string' &&
-    typeof obj.type === 'string' &&
+    typeof obj.id === "string" &&
+    typeof obj.name === "string" &&
+    typeof obj.type === "string" &&
     Array.isArray(obj.items) &&
-    typeof obj.totalWeight === 'number' &&
-    typeof obj.totalRations === 'number' &&
+    typeof obj.totalWeight === "number" &&
+    typeof obj.totalRations === "number" &&
     obj.createdAt instanceof Date
   );
 }
@@ -366,10 +373,10 @@ function isMenu(obj: any): obj is Menu {
 function isMenuItem(obj: any): obj is MenuItem {
   return (
     obj &&
-    typeof obj.id === 'string' &&
+    typeof obj.id === "string" &&
     obj.aliment &&
-    typeof obj.weightGrams === 'number' &&
-    typeof obj.rations === 'number'
+    typeof obj.weightGrams === "number" &&
+    typeof obj.rations === "number"
   );
 }
 ```

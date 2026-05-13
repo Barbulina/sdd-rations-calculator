@@ -14,17 +14,18 @@ This design token system provides a single source of truth for all visual design
 
 Semantic colors for aliment categories, providing visual distinction and quick identification.
 
-| Token Name | Light Value | M3 Role | M3 Tone | Usage |
-|------------|-------------|---------|---------|-------|
-| `category-lacteal` | #6750A4 | Primary | 40 | Lacteal products (milk, cheese, yogurt) |
-| `category-cereals-flours-pulses-legumes-tubers` | #625B71 | Secondary | 40 | Grains, flours, pulses, legumes, tubers |
-| `category-fruits` | #7D5260 | Tertiary | 40 | All fruits |
-| `category-vegetables` | #386A20 | Custom Extended 1 | 40 | All vegetables |
-| `category-oily-dry-fruits` | #6C5D3D | Custom Extended 2 | 40 | Nuts and oily fruits |
-| `category-drinks` | #0061A4 | Custom Extended 3 | 40 | Beverages |
-| `category-others` | #49454F | Surface Variant | 30 | Miscellaneous items |
+| Token Name                                      | Light Value | M3 Role           | M3 Tone | Usage                                   |
+| ----------------------------------------------- | ----------- | ----------------- | ------- | --------------------------------------- |
+| `category-lacteal`                              | #6750A4     | Primary           | 40      | Lacteal products (milk, cheese, yogurt) |
+| `category-cereals-flours-pulses-legumes-tubers` | #625B71     | Secondary         | 40      | Grains, flours, pulses, legumes, tubers |
+| `category-fruits`                               | #7D5260     | Tertiary          | 40      | All fruits                              |
+| `category-vegetables`                           | #386A20     | Custom Extended 1 | 40      | All vegetables                          |
+| `category-oily-dry-fruits`                      | #6C5D3D     | Custom Extended 2 | 40      | Nuts and oily fruits                    |
+| `category-drinks`                               | #0061A4     | Custom Extended 3 | 40      | Beverages                               |
+| `category-others`                               | #49454F     | Surface Variant   | 30      | Miscellaneous items                     |
 
-**Tailwind Classes**: 
+**Tailwind Classes**:
+
 - `bg-category-lacteal`, `text-category-lacteal`, `border-category-lacteal`
 - (Same pattern for all other categories)
 
@@ -36,14 +37,15 @@ Semantic colors for aliment categories, providing visual distinction and quick i
 
 Colors for offline/online status and synchronization state.
 
-| Token Name | Light Value | M3 Role | M3 Tone | Contrast Ratio | Usage |
-|------------|-------------|---------|---------|----------------|-------|
-| `state-offline` | #BF360C | Error | 40 | 5.5:1 (AA) | Device offline |
-| `state-syncing` | #01579B | Primary | 40 | 7.2:1 (AAA) | Sync in progress |
-| `state-sync-error` | #D32F2F | Error | 40 | 4.9:1 (AA) | Sync failed |
-| `state-online` | #1B5E20 | Success | 40 | 7.7:1 (AAA) | Device online, synced |
+| Token Name         | Light Value | M3 Role | M3 Tone | Contrast Ratio | Usage                 |
+| ------------------ | ----------- | ------- | ------- | -------------- | --------------------- |
+| `state-offline`    | #BF360C     | Error   | 40      | 5.5:1 (AA)     | Device offline        |
+| `state-syncing`    | #01579B     | Primary | 40      | 7.2:1 (AAA)    | Sync in progress      |
+| `state-sync-error` | #D32F2F     | Error   | 40      | 4.9:1 (AA)     | Sync failed           |
+| `state-online`     | #1B5E20     | Success | 40      | 7.7:1 (AAA)    | Device online, synced |
 
-**Tailwind Classes**: 
+**Tailwind Classes**:
+
 - `bg-state-offline`, `text-state-offline`, `border-state-offline`
 - (Same pattern for all states)
 
@@ -55,14 +57,15 @@ Colors for offline/online status and synchronization state.
 
 Semantic colors for user action feedback (success, warning, error, info).
 
-| Token Name | Light Value | M3 Role | M3 Tone | Contrast Ratio | Usage |
-|------------|-------------|---------|---------|----------------|-------|
-| `feedback-success` | #2E7D32 | Success | 40 | 5.0:1 (AA) | Successful operations |
-| `feedback-warning` | #BF360C | Warning | 40 | 5.5:1 (AA) | Warnings and cautions |
-| `feedback-error` | #C62828 | Error | 40 | 5.5:1 (AA) | Errors and failures |
-| `feedback-info` | #1565C0 | Info | 40 | 4.7:1 (AA) | Informational messages |
+| Token Name         | Light Value | M3 Role | M3 Tone | Contrast Ratio | Usage                  |
+| ------------------ | ----------- | ------- | ------- | -------------- | ---------------------- |
+| `feedback-success` | #2E7D32     | Success | 40      | 5.0:1 (AA)     | Successful operations  |
+| `feedback-warning` | #BF360C     | Warning | 40      | 5.5:1 (AA)     | Warnings and cautions  |
+| `feedback-error`   | #C62828     | Error   | 40      | 5.5:1 (AA)     | Errors and failures    |
+| `feedback-info`    | #1565C0     | Info    | 40      | 4.7:1 (AA)     | Informational messages |
 
-**Tailwind Classes**: 
+**Tailwind Classes**:
+
 - `bg-feedback-success`, `text-feedback-success`, `border-feedback-success`
 - (Same pattern for all feedback states)
 
@@ -74,24 +77,25 @@ Semantic colors for user action feedback (success, warning, error, info).
 
 Mobile-first typography system based on Material Design 3 type scale.
 
-| Token Name | Font Size | Line Height | Letter Spacing | Font Weight | Usage |
-|------------|-----------|-------------|----------------|-------------|-------|
-| `heading-1` | 57px | 64px | -0.25px | 400 | Display Large - Page titles |
-| `heading-2` | 45px | 52px | 0px | 400 | Display Medium - Section headers |
-| `heading-3` | 36px | 44px | 0px | 400 | Display Small - Subsection headers |
-| `heading-4` | 32px | 40px | 0px | 400 | Headline Large - Card titles |
-| `heading-5` | 28px | 36px | 0px | 400 | Headline Medium - List headers |
-| `heading-6` | 24px | 32px | 0px | 400 | Headline Small - Minor headings |
-| `body-large` | 16px | 24px | 0.5px | 400 | Body Large - Emphasized text |
-| `body-medium` | 14px | 20px | 0.25px | 400 | Body Medium - Default body text |
-| `body-small` | 12px | 16px | 0.4px | 400 | Body Small - Captions, footnotes |
-| `label-large` | 14px | 20px | 0.1px | 500 | Label Large - Primary buttons |
-| `label-medium` | 12px | 16px | 0.5px | 500 | Label Medium - Secondary buttons |
-| `label-small` | 11px | 16px | 0.5px | 500 | Label Small - Tertiary buttons |
+| Token Name     | Font Size | Line Height | Letter Spacing | Font Weight | Usage                              |
+| -------------- | --------- | ----------- | -------------- | ----------- | ---------------------------------- |
+| `heading-1`    | 57px      | 64px        | -0.25px        | 400         | Display Large - Page titles        |
+| `heading-2`    | 45px      | 52px        | 0px            | 400         | Display Medium - Section headers   |
+| `heading-3`    | 36px      | 44px        | 0px            | 400         | Display Small - Subsection headers |
+| `heading-4`    | 32px      | 40px        | 0px            | 400         | Headline Large - Card titles       |
+| `heading-5`    | 28px      | 36px        | 0px            | 400         | Headline Medium - List headers     |
+| `heading-6`    | 24px      | 32px        | 0px            | 400         | Headline Small - Minor headings    |
+| `body-large`   | 16px      | 24px        | 0.5px          | 400         | Body Large - Emphasized text       |
+| `body-medium`  | 14px      | 20px        | 0.25px         | 400         | Body Medium - Default body text    |
+| `body-small`   | 12px      | 16px        | 0.4px          | 400         | Body Small - Captions, footnotes   |
+| `label-large`  | 14px      | 20px        | 0.1px          | 500         | Label Large - Primary buttons      |
+| `label-medium` | 12px      | 16px        | 0.5px          | 500         | Label Medium - Secondary buttons   |
+| `label-small`  | 11px      | 16px        | 0.5px          | 500         | Label Small - Tertiary buttons     |
 
 **Font Family**: Roboto (weights: 300, 400, 500, 700)
 
 **Accessibility Notes**:
+
 - Minimum body text: 14px (body-medium)
 - Mobile-first: All sizes optimized for small screens
 - Line heights ensure readability (1.4-1.6 ratio)
@@ -104,20 +108,21 @@ Mobile-first typography system based on Material Design 3 type scale.
 
 8px grid system for consistent spacing and layout alignment.
 
-| Token Name | Pixel Value | Rem Value | Grid Factor | Touch Target | Usage |
-|------------|-------------|-----------|-------------|--------------|-------|
-| `space-0` | 0px | 0rem | 0 | - | No spacing |
-| `space-1` | 8px | 0.5rem | 1 | ❌ | Tiny gaps |
-| `space-2` | 16px | 1rem | 2 | ❌ | Small spacing |
-| `space-3` | 24px | 1.5rem | 3 | ❌ | Medium spacing |
-| `space-4` | 32px | 2rem | 4 | ❌ | Large spacing |
-| `space-5` | 40px | 2.5rem | 5 | ✅ 44px with padding | Minimum touch target |
-| `space-6` | 48px | 3rem | 6 | ✅ | Comfortable touch |
-| `space-8` | 64px | 4rem | 8 | ✅ | Extra large spacing |
-| `space-10` | 80px | 5rem | 10 | ✅ | Section gaps |
-| `space-12` | 96px | 6rem | 12 | ✅ | Major layout divisions |
+| Token Name | Pixel Value | Rem Value | Grid Factor | Touch Target         | Usage                  |
+| ---------- | ----------- | --------- | ----------- | -------------------- | ---------------------- |
+| `space-0`  | 0px         | 0rem      | 0           | -                    | No spacing             |
+| `space-1`  | 8px         | 0.5rem    | 1           | ❌                   | Tiny gaps              |
+| `space-2`  | 16px        | 1rem      | 2           | ❌                   | Small spacing          |
+| `space-3`  | 24px        | 1.5rem    | 3           | ❌                   | Medium spacing         |
+| `space-4`  | 32px        | 2rem      | 4           | ❌                   | Large spacing          |
+| `space-5`  | 40px        | 2.5rem    | 5           | ✅ 44px with padding | Minimum touch target   |
+| `space-6`  | 48px        | 3rem      | 6           | ✅                   | Comfortable touch      |
+| `space-8`  | 64px        | 4rem      | 8           | ✅                   | Extra large spacing    |
+| `space-10` | 80px        | 5rem      | 10          | ✅                   | Section gaps           |
+| `space-12` | 96px        | 6rem      | 12          | ✅                   | Major layout divisions |
 
-**Tailwind Classes**: 
+**Tailwind Classes**:
+
 - Padding: `p-space-3`, `px-space-4`, `py-space-2`
 - Margin: `m-space-5`, `mx-space-6`, `my-space-1`
 - Gap: `gap-space-4`, `gap-x-space-3`, `gap-y-space-2`
@@ -145,6 +150,7 @@ Mobile-first typography system based on Material Design 3 type scale.
 ### Importing Tokens in Code
 
 **Tailwind Utility Classes** (Recommended):
+
 ```tsx
 // Category colors
 <div className="bg-category-lacteal text-white">Lacteal Products</div>
@@ -160,6 +166,7 @@ Mobile-first typography system based on Material Design 3 type scale.
 ```
 
 **CSS Custom Properties**:
+
 ```css
 /* Available in :root for light theme */
 .custom-element {
@@ -170,12 +177,13 @@ Mobile-first typography system based on Material Design 3 type scale.
 ```
 
 **JavaScript/TypeScript**:
+
 ```typescript
-import tokens from '@/infrastructure/design-tokens/tailwind-tokens.js';
+import tokens from "@/infrastructure/design-tokens/tailwind-tokens.js";
 
 // Access token values programmatically
-const lactealColor = tokens['category-lacteal']; // "#6750A4"
-const mediumSpacing = tokens['space-3']; // "1.5rem"
+const lactealColor = tokens["category-lacteal"]; // "#6750A4"
+const mediumSpacing = tokens["space-3"]; // "1.5rem"
 ```
 
 ---
@@ -207,6 +215,7 @@ npm run tokens:build
 ```
 
 **Build fails if**:
+
 - Any required token is missing
 - Color tokens fail WCAG AA contrast (< 4.5:1)
 - Spacing tokens violate 8px grid (except space-0)
@@ -223,6 +232,7 @@ npm run tokens:build
 ### Current Compliance Status
 
 ✅ **All color tokens pass WCAG AA**:
+
 - **Category colors**: 4.7:1 to 9.1:1
 - **State colors**: 4.9:1 to 7.7:1 (3 achieve AAA at 7.0:1+)
 - **Feedback colors**: 4.7:1 to 5.5:1
@@ -230,6 +240,7 @@ npm run tokens:build
 ### Touch Target Compliance
 
 ✅ **Minimum 44px × 44px** for interactive elements (WCAG 2.1 Level AAA)
+
 - Use `space-5` (40px) + 2px padding = 44px
 - Or `space-6` (48px) for comfortable touch
 
@@ -240,10 +251,10 @@ npm run tokens:build
 ### Implementation
 
 ```tsx
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 // Add to layout
-<ThemeToggle />
+<ThemeToggle />;
 ```
 
 ### How It Works
@@ -308,6 +319,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 **Issue**: `bg-category-lacteal` has no effect
 
 **Check**:
+
 1. Run `npm run tokens:build` to regenerate
 2. Verify `tailwind.config.ts` imports `tailwind-tokens.js`
 3. Restart dev server to reload Tailwind config

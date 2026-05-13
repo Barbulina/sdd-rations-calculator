@@ -19,16 +19,16 @@ Arreglar los 4 tests standalone de design tokens que están rotos (API mismatche
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0. Re-check after each phase.*
+_GATE: Must pass before Phase 0. Re-check after each phase._
 
-| Principle | Compliance | Notes |
-|-----------|------------|-------|
-| **I. Architectural Integrity** | ✅ PASS | No se modifica la arquitectura hexagonal. Todos los cambios son en tests y configuración. |
-| **II. Testing Strategy** | ✅ PASS | Se refuerza: builders centralizados (shared/), tests desacoplados de implementación. |
-| **III. Test-First Methodology** | ✅ PASS | No se altera el flujo TDD. Se reparan y refactorizan tests existentes. |
-| **IV. Design & Implementation** | ✅ PASS | Sin cambios en UI, design tokens, o Tailwind. |
-| **V. Availability & Resilience** | ✅ PASS | Sin cambios en persistencia offline. |
-| **VI. Quality Assurance** | ✅ PASS | El objetivo principal es mejorar QA: tests que pasan y son mantenibles. |
+| Principle                        | Compliance | Notes                                                                                     |
+| -------------------------------- | ---------- | ----------------------------------------------------------------------------------------- |
+| **I. Architectural Integrity**   | ✅ PASS    | No se modifica la arquitectura hexagonal. Todos los cambios son en tests y configuración. |
+| **II. Testing Strategy**         | ✅ PASS    | Se refuerza: builders centralizados (shared/), tests desacoplados de implementación.      |
+| **III. Test-First Methodology**  | ✅ PASS    | No se altera el flujo TDD. Se reparan y refactorizan tests existentes.                    |
+| **IV. Design & Implementation**  | ✅ PASS    | Sin cambios en UI, design tokens, o Tailwind.                                             |
+| **V. Availability & Resilience** | ✅ PASS    | Sin cambios en persistencia offline.                                                      |
+| **VI. Quality Assurance**        | ✅ PASS    | El objetivo principal es mejorar QA: tests que pasan y son mantenibles.                   |
 
 **GATE STATUS**: ✅ ALL PASS - Ready to proceed
 
@@ -89,16 +89,21 @@ No aplica. Todos los cambios son correcciones dentro de la arquitectura existent
 ## Execution Phases
 
 ### Phase 0: Setup (ESM/CJS + Vitest Config)
+
 Preparar el proyecto para ESM y configurar Vitest para incluir los token tests.
 
 ### Phase 1: Migrar Token Tests a Vitest (US-1)
+
 Reescribir los 4 tests standalone para que usen Vitest, corrigiendo API mismatches.
 
 ### Phase 2: Refactor Tests Frágiles (US-2)
+
 Desacoplar tests de componentes de implementación específica.
 
 ### Phase 3: Centralizar Builders y Mocking (US-3)
+
 Consolidar builders en `tests/shared/` con tipos del dominio y crear helpers de mocking.
 
 ### Phase 4: Verificación Final
+
 Ejecutar suite completa, build y lint para verificar que no hay regresiones.

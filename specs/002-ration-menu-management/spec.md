@@ -5,7 +5,7 @@
 **Status**: Draft  
 **Input**: Create menu page with ration form, localStorage persistence using repository pattern, home page list with infinite scroll, and navigation between pages
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Create New Ration Entry (Priority: P1) 🎯 MVP
 
@@ -91,7 +91,7 @@ Ration cards display category-specific colors from the design token system (001-
 - How does form handle very long ration names (>100 characters)?
 - What happens when rations array is empty vs undefined vs null in localStorage?
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -115,13 +115,13 @@ Ration cards display category-specific colors from the design token system (001-
 
 ```typescript
 enum RationsType {
-  lacteal = 'lácteos',
-  cereals_flours_pulses_legumes_tubers = 'cereales, harinas, legumbres y tuberculos',
-  fruits = 'frutas',
-  vegetables = 'hortalizas',
-  oily_and_dry_fruit = 'frutas secas y grasa',
-  drinks = 'bebidas',
-  others = 'otros'
+  lacteal = "lácteos",
+  cereals_flours_pulses_legumes_tubers = "cereales, harinas, legumbres y tuberculos",
+  fruits = "frutas",
+  vegetables = "hortalizas",
+  oily_and_dry_fruit = "frutas secas y grasa",
+  drinks = "bebidas",
+  others = "otros",
 }
 ```
 
@@ -146,7 +146,7 @@ enum RationsType {
   - Serializes/deserializes JSON
   - Handles localStorage errors
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

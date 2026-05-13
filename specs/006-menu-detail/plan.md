@@ -26,6 +26,7 @@ app/menu/[id]/page.tsx          (UI layer — 'use client')
 ## File Structure
 
 ### New Files
+
 ```
 src/application/hooks/useMenuDetail.ts
 app/menu/[id]/page.tsx
@@ -38,21 +39,22 @@ tests/unit/menu-detail/MenuBuilder.ts          (reuse pattern from 005)
 ```
 
 ### Modified Files
+
 ```
 app/components/MenuCard.tsx     (add link to /menu/[id])
 ```
 
 ## Constitution Check
 
-| Check | Status |
-|-------|--------|
-| No new domain entities — reuses Menu + MenuItem | ✅ PASS |
-| Repository interface unchanged | ✅ PASS |
-| `update()` already exists in MenuRepository | ✅ PASS |
-| Reuses AutocompleteSearch + WeightInputDialog | ✅ PASS |
-| TDD approach maintained | ✅ PASS |
-| 'use client' on all interactive components | ✅ PASS |
-| MenuCard link doesn't break existing tests | requires verification |
+| Check                                           | Status                |
+| ----------------------------------------------- | --------------------- |
+| No new domain entities — reuses Menu + MenuItem | ✅ PASS               |
+| Repository interface unchanged                  | ✅ PASS               |
+| `update()` already exists in MenuRepository     | ✅ PASS               |
+| Reuses AutocompleteSearch + WeightInputDialog   | ✅ PASS               |
+| TDD approach maintained                         | ✅ PASS               |
+| 'use client' on all interactive components      | ✅ PASS               |
+| MenuCard link doesn't break existing tests      | requires verification |
 
 ## Key Implementation Notes
 
