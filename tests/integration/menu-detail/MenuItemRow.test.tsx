@@ -7,7 +7,19 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MenuItemRow } from "@/app/components/menu-detail/MenuItemRow";
-import { DEFAULT_ITEM_1, createMenuItem } from "../../unit/menu-detail/MenuBuilder";
+import { createMenuItem } from "../../shared/MenuItemBuilder";
+
+const DEFAULT_ITEM_1 = createMenuItem({
+  id: "item-1",
+  aliment: {
+    name: "Arroz blanco",
+    type: "cereales",
+    gramsToCarbohydrate: 25,
+    bloodGlucoseIndex: 72,
+  },
+  weightGrams: 80,
+  rations: 3.2,
+});
 
 describe("MenuItemRow — rendering (T012)", () => {
   it("shows the aliment name", () => {

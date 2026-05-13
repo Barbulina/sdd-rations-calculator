@@ -13,6 +13,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { LocalStorageCustomAlimentRepository } from "@/src/infrastructure/repositories/LocalStorageCustomAlimentRepository";
 import { RationsType } from "@/src/domain/models/RationsType";
 import type { CreateCustomAlimentDTO } from "@/src/domain/models/CustomAliment";
+import { createQuotaExceededMock } from "../../shared/localStorageMock";
 
 describe("LocalStorageCustomAlimentRepository", () => {
   let repository: LocalStorageCustomAlimentRepository;
@@ -390,13 +391,7 @@ describe("LocalStorageCustomAlimentRepository", () => {
 
   describe("Error handling", () => {
     it("should handle storage quota exceeded gracefully", async () => {
-      // Mock the adapter's setItem to simulate quota exceeded
-      const originalSetItem = localStorage.setItem;
-      globalThis.localStorage.setItem = function () {
-        const error = new Error("QuotaExceededError");
-        error.name = "QuotaExceededError";
-        throw error;
-      };
+      const mock = createQuotaExceededMock();
 
       const dto: CreateCustomAlimentDTO = {
         name: "Test",
@@ -406,8 +401,7 @@ describe("LocalStorageCustomAlimentRepository", () => {
 
       await expect(repository.save(dto)).rejects.toThrow("Storage full");
 
-      // Restore original
-      globalThis.localStorage.setItem = originalSetItem;
+      mock.restore();
     });
   });
 });

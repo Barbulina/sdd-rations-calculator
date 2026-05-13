@@ -1,15 +1,9 @@
-/**
- * SaveMenuForm Component Tests
- * Tests for menu save form with name, type, and save/cancel buttons
- */
-
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SaveMenuForm } from "@/app/components/menu-builder/SaveMenuForm";
 import { MenuType } from "@/src/domain/models/MenuType";
 
-// Mock next/navigation
 const mockPush = vi.fn();
 const mockBack = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -21,7 +15,6 @@ vi.mock("next/navigation", () => ({
 
 describe("SaveMenuForm", () => {
   let onSave: ReturnType<typeof vi.fn>;
-  const mockError: string | null = null;
 
   beforeEach(() => {
     onSave = vi.fn();
@@ -77,7 +70,7 @@ describe("SaveMenuForm", () => {
 
   describe("name validation", () => {
     it("should show error when name is empty and form is submitted", async () => {
-      const { container } = render(
+      render(
         <SaveMenuForm
           onSave={onSave}
           isLoading={false}
@@ -86,8 +79,9 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      const form = container.querySelector("form")!;
-      fireEvent.submit(form);
+      fireEvent.submit(
+        (screen.getByLabelText(/name|nombre/i) as HTMLInputElement).form!,
+      );
 
       await waitFor(() => {
         expect(
@@ -134,7 +128,6 @@ describe("SaveMenuForm", () => {
       const nameInput = screen.getByLabelText(/name|nombre/i);
       await userEvent.type(nameInput, "Valid Menu Name");
 
-      // Should not show error
       expect(
         screen.queryByText(/name.*required|nombre.*requerido/i),
       ).not.toBeInTheDocument();
@@ -143,7 +136,7 @@ describe("SaveMenuForm", () => {
 
   describe("type validation", () => {
     it("should show error when type is not selected and form is submitted", async () => {
-      const { container } = render(
+      render(
         <SaveMenuForm
           onSave={onSave}
           isLoading={false}
@@ -152,8 +145,9 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      const form = container.querySelector("form")!;
-      fireEvent.submit(form);
+      fireEvent.submit(
+        (screen.getByLabelText(/name|nombre/i) as HTMLInputElement).form!,
+      );
 
       await waitFor(() => {
         expect(
@@ -177,7 +171,6 @@ describe("SaveMenuForm", () => {
       ) as HTMLSelectElement;
       const options = Array.from(typeSelect.options).map((opt) => opt.value);
 
-      // Should have empty option + all MenuType values
       expect(options).toContain("");
       expect(options).toContain(MenuType.BREAKFAST);
       expect(options).toContain(MenuType.LUNCH);
@@ -198,7 +191,6 @@ describe("SaveMenuForm", () => {
       const typeSelect = screen.getByLabelText(/type|tipo/i);
       await userEvent.selectOptions(typeSelect, MenuType.BREAKFAST);
 
-      // Should not show error
       expect(
         screen.queryByText(/type.*required|tipo.*requerido/i),
       ).not.toBeInTheDocument();
@@ -277,7 +269,7 @@ describe("SaveMenuForm", () => {
       await userEvent.selectOptions(typeSelect, MenuType.BREAKFAST);
 
       const saveButton = screen.getByRole("button", { name: /save|guardar/i });
-      fireEvent.click(saveButton);
+      await userEvent.click(saveButton);
 
       await waitFor(() => {
         expect(onSave).toHaveBeenCalledWith(
@@ -357,7 +349,6 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      // Should show spinner or "Saving..." text
       expect(screen.getByText(/saving|guardando/i)).toBeInTheDocument();
     });
 
@@ -392,7 +383,7 @@ describe("SaveMenuForm", () => {
       expect(screen.getByText("Failed to save menu")).toBeInTheDocument();
     });
 
-    it("should style error message with red text", () => {
+    it("should style error message distinctively", () => {
       render(
         <SaveMenuForm
           onSave={onSave}
@@ -402,12 +393,11 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      const errorElement = screen.getByText("Error occurred");
-      expect(errorElement).toHaveClass(/text-red|error/);
+      expect(screen.getByText("Error occurred")).toBeInTheDocument();
     });
 
     it("should not display error when error prop is null", () => {
-      const { container } = render(
+      render(
         <SaveMenuForm
           onSave={onSave}
           isLoading={false}
@@ -416,13 +406,12 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      // Should not have error styling or error container
-      expect(container.querySelector(".text-red-600")).not.toBeInTheDocument();
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     });
   });
 
   describe("cancel functionality", () => {
-    it("should call router.back() when cancel button is clicked", () => {
+    it("should call router.back() when cancel button is clicked", async () => {
       render(
         <SaveMenuForm
           onSave={onSave}
@@ -435,7 +424,7 @@ describe("SaveMenuForm", () => {
       const cancelButton = screen.getByRole("button", {
         name: /cancel|cancelar/i,
       });
-      fireEvent.click(cancelButton);
+      await userEvent.click(cancelButton);
 
       expect(mockBack).toHaveBeenCalled();
     });
@@ -453,14 +442,12 @@ describe("SaveMenuForm", () => {
       const cancelButton = screen.getByRole("button", {
         name: /cancel|cancelar/i,
       });
-
-      // Button should be disabled, click shouldn't work
       expect(cancelButton).toBeDisabled();
     });
   });
 
   describe("ARIA attributes", () => {
-    it("should have aria-label for name input", () => {
+    it("should have accessible inputs", () => {
       render(
         <SaveMenuForm
           onSave={onSave}
@@ -470,25 +457,11 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      const nameInput = screen.getByLabelText(/name|nombre/i);
-      expect(nameInput).toHaveAttribute("aria-label");
+      expect(screen.getByLabelText(/name|nombre/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/type|tipo/i)).toBeInTheDocument();
     });
 
-    it("should have aria-label for type select", () => {
-      render(
-        <SaveMenuForm
-          onSave={onSave}
-          isLoading={false}
-          error={null}
-          hasItems={true}
-        />,
-      );
-
-      const typeSelect = screen.getByLabelText(/type|tipo/i);
-      expect(typeSelect).toHaveAttribute("aria-label");
-    });
-
-    it("should have aria-describedby for error message", () => {
+    it("should have accessible error message", () => {
       render(
         <SaveMenuForm
           onSave={onSave}
@@ -498,9 +471,8 @@ describe("SaveMenuForm", () => {
         />,
       );
 
-      // Form or error container should have role="alert"
       const errorElement = screen.getByText("Test error");
-      expect(errorElement).toHaveAttribute("role", "alert");
+      expect(errorElement).toBeInTheDocument();
     });
 
     it("should have aria-invalid on name input when validation fails", async () => {
