@@ -6,12 +6,12 @@
 import { describe, it, expect } from "vitest";
 import { Menu } from "@/src/domain/models/Menu";
 import { MenuItem } from "@/src/domain/models/MenuItem";
-import { MenuBuilder, createMenu } from "./MenuBuilder";
+import { MenuBuilder, createMenu } from "../../shared/MenuBuilder";
 import {
   MenuItemBuilder,
   createMenuItem,
   createTestAliment,
-} from "./MenuItemBuilder";
+} from "../../shared/MenuItemBuilder";
 import { MenuType } from "@/src/domain/models/MenuType";
 
 describe("Menu", () => {

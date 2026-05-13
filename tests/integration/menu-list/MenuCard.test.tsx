@@ -9,7 +9,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MenuCard } from "@/app/components/MenuCard";
 import { MenuType } from "@/src/domain/models/MenuType";
-import { MenuBuilder } from "../../unit/menu-list/MenuBuilder";
+import { MenuBuilder } from "../../shared/MenuBuilder";
 
 const baseMenu = new MenuBuilder()
   .withId("menu-123")

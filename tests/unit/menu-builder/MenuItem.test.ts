@@ -5,7 +5,7 @@
 
 import { describe, it, expect } from "vitest";
 import { MenuItem } from "@/src/domain/models/MenuItem";
-import { MenuItemBuilder, createTestAliment } from "./MenuItemBuilder";
+import { MenuItemBuilder, createTestAliment } from "../../shared/MenuItemBuilder";
 
 describe("MenuItem", () => {
   describe("creation", () => {

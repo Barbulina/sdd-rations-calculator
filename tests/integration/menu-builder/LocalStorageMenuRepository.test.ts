@@ -6,7 +6,8 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { LocalStorageMenuRepository } from "@/src/infrastructure/repositories/LocalStorageMenuRepository";
 import { Menu } from "@/src/domain/models/Menu";
-import { createMenuItem } from "../../unit/menu-builder/MenuItemBuilder";
+import { createMenuItem } from "../../shared/MenuItemBuilder";
+import { createQuotaExceededMock } from "../../shared/localStorageMock";
 
 const STORAGE_KEY = "sdd-rations-calculator:menus";
 
@@ -332,13 +333,7 @@ describe("LocalStorageMenuRepository", () => {
 
   describe("storage quota handling", () => {
     it("should handle QuotaExceededError gracefully", async () => {
-      // Mock localStorage.setItem to throw QuotaExceededError
-      const originalSetItem = localStorage.setItem;
-      localStorage.setItem = () => {
-        const error: any = new Error("QuotaExceededError");
-        error.name = "QuotaExceededError";
-        throw error;
-      };
+      const mock = createQuotaExceededMock();
 
       const items = [createMenuItem()];
       const menu = new Menu("Test", "LUNCH", items);
@@ -347,8 +342,7 @@ describe("LocalStorageMenuRepository", () => {
         "Storage quota exceeded",
       );
 
-      // Restore original
-      localStorage.setItem = originalSetItem;
+      mock.restore();
     });
   });
 

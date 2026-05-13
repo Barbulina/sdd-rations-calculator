@@ -13,7 +13,7 @@ import HomePage from "@/app/page";
 import { MenuRepositoryProvider } from "@/src/application/contexts/MenuRepositoryContext";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import { MenuType } from "@/src/domain/models/MenuType";
-import { MenuBuilder } from "../../unit/menu-list/MenuBuilder";
+import { MenuBuilder } from "../../shared/MenuBuilder";
 
 // ─── Mock repository ───────────────────────────────────────────────────────
 

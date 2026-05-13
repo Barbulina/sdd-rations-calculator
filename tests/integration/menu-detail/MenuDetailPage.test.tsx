@@ -14,11 +14,32 @@ import MenuDetailPage from "@/app/menu/[id]/MenuDetailClient";
 import { MenuRepositoryProvider } from "@/src/application/contexts/MenuRepositoryContext";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import { MenuType } from "@/src/domain/models/MenuType";
-import {
-  MenuBuilder,
-  DEFAULT_ITEM_1,
-  DEFAULT_ITEM_2,
-} from "../../unit/menu-detail/MenuBuilder";
+import { MenuBuilder } from "../../shared/MenuBuilder";
+import { createMenuItem } from "../../shared/MenuItemBuilder";
+
+const DEFAULT_ITEM_1 = createMenuItem({
+  id: "item-1",
+  aliment: {
+    name: "Arroz blanco",
+    type: "cereales" as any,
+    gramsToCarbohydrate: 25,
+    bloodGlucoseIndex: 72,
+  },
+  weightGrams: 80,
+  rations: 3.2,
+});
+
+const DEFAULT_ITEM_2 = createMenuItem({
+  id: "item-2",
+  aliment: {
+    name: "Pechuga de pollo",
+    type: "proteinas" as any,
+    gramsToCarbohydrate: 0,
+    bloodGlucoseIndex: 0,
+  },
+  weightGrams: 120,
+  rations: 0,
+});
 
 // ─── Mock repository ───────────────────────────────────────────────────────
 

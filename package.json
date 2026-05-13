@@ -2,6 +2,7 @@
   "name": "sdd-rations-calculator",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "prepare": "git config core.hooksPath .githooks",
     "dev": "next dev --turbopack",
