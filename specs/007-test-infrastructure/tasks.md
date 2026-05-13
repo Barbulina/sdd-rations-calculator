@@ -121,11 +121,13 @@
 ### TDD Workflow
 
 No aplica TDD estricto (son tests existentes). Para cada fase:
+
 1. Hacer cambios → 2. Ejecutar `npm test` → 3. Verificar que pasan → 4. Pasar a siguiente
 
 ### Parallel Execution
 
 Tasks marked **[P]** can run in parallel:
+
 - T001-T002: Cambios independientes en package.json y postcss.config
 - T005-T015: Los 4 token tests son independientes entre sí
 - T017-T026: Los 3 componentes frágiles son independientes
@@ -135,6 +137,7 @@ Tasks marked **[P]** can run in parallel:
 ### Dependency Chain
 
 **Must complete in order**:
+
 1. Phase 0 → unlocks Phase 1 (sin ESM config no arrancan tests migrados correctamente)
 2. T016 (token tests pasan) → verifica Phase 1 completa
 3. T029 → depende de T027-T028 (shared builders creados)
@@ -143,6 +146,7 @@ Tasks marked **[P]** can run in parallel:
 ### Progress Tracking
 
 Mark tasks complete with `[X]` in tasks.md as you finish them. After each phase, verify:
+
 - ✅ `npm test` passes
 - ✅ No linting errors (`npm run lint`)
 - ✅ Build succeeds (`npm run build`)

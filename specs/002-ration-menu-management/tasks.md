@@ -18,9 +18,9 @@
 
 **Purpose**: Project initialization - minimal setup needed to start implementing user stories
 
-- [X] T001 Verify Next.js 15.1.6, TypeScript 5, and design token system from 001-design-token-system are operational
-- [X] T002 Create directory structure: src/domain/models/, src/domain/repositories/, src/infrastructure/repositories/, src/infrastructure/storage/, src/application/contexts/, src/application/hooks/
-- [X] T003 Create directory structure: app/components/, app/create-ration/, tests/integration/rations/, tests/unit/rations/
+- [x] T001 Verify Next.js 15.1.6, TypeScript 5, and design token system from 001-design-token-system are operational
+- [x] T002 Create directory structure: src/domain/models/, src/domain/repositories/, src/infrastructure/repositories/, src/infrastructure/storage/, src/application/contexts/, src/application/hooks/
+- [x] T003 Create directory structure: app/components/, app/create-ration/, tests/integration/rations/, tests/unit/rations/
 
 ---
 
@@ -30,10 +30,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [X] T004 [P] Create RationsType enum in src/domain/models/RationsType.ts with 7 ration type values (lácteos, cereales..., frutas, hortalizas, frutas secas y grasa, bebidas, otros)
-- [X] T005 [P] Create Ration interface in src/domain/models/Ration.ts with fields: id, type, name, gramsToCarbohydrate, bloodGlucoseIndex (optional), weight, rations, createdAt
-- [X] T006 [P] Create CreateRationDTO type in src/domain/models/Ration.ts as Omit<Ration, 'id' | 'createdAt'>
-- [X] T007 [P] Create RationRepository interface in src/domain/repositories/RationRepository.ts with methods: save(data: CreateRationDTO), findAll(), findById(id: string), delete(id: string)
+- [x] T004 [P] Create RationsType enum in src/domain/models/RationsType.ts with 7 ration type values (lácteos, cereales..., frutas, hortalizas, frutas secas y grasa, bebidas, otros)
+- [x] T005 [P] Create Ration interface in src/domain/models/Ration.ts with fields: id, type, name, gramsToCarbohydrate, bloodGlucoseIndex (optional), weight, rations, createdAt
+- [x] T006 [P] Create CreateRationDTO type in src/domain/models/Ration.ts as Omit<Ration, 'id' | 'createdAt'>
+- [x] T007 [P] Create RationRepository interface in src/domain/repositories/RationRepository.ts with methods: save(data: CreateRationDTO), findAll(), findById(id: string), delete(id: string)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -49,21 +49,21 @@
 
 ### Implementation for User Story 3
 
-- [X] T008 [P] [US3] Create LocalStorageAdapter class in src/infrastructure/storage/LocalStorageAdapter.ts with methods: isAvailable(), getItem<T>(key), setItem<T>(key, value), removeItem(key)
-- [X] T009 [P] [US3] Add storage key prefix 'sdd-rations-calculator:' in LocalStorageAdapter to namespace localStorage keys
-- [X] T010 [P] [US3] Implement try-catch error handling in LocalStorageAdapter for QuotaExceededError and disabled localStorage scenarios
-- [X] T011 [US3] Create LocalStorageRationRepository class in src/infrastructure/repositories/LocalStorageRationRepository.ts implementing RationRepository interface
-- [X] T012 [US3] Implement save(data: CreateRationDTO) method in LocalStorageRationRepository: generate UUID with crypto.randomUUID(), add createdAt timestamp, append to array, persist to localStorage
-- [X] T013 [US3] Implement findAll() method in LocalStorageRationRepository: retrieve from localStorage, deserialize JSON, parse createdAt strings to Date objects, sort by createdAt DESC (newest first)
-- [X] T014 [US3] Implement findById(id: string) method in LocalStorageRationRepository: retrieve all rations, find by id, return ration or null
-- [X] T015 [US3] Implement delete(id: string) method in LocalStorageRationRepository: filter out ration by id, persist updated array, return true if deleted or false if not found
-- [X] T016 [US3] Add serialization helper method serializeRations(rations: Ration[]) that converts Date objects to ISO strings for localStorage
-- [X] T017 [US3] Add deserialization helper method deserializeRations(data: any[]) that parses ISO strings back to Date objects
-- [X] T018 [US3] Create RationRepositoryContext in src/application/contexts/RationRepositoryContext.tsx with React Context and Provider component
-- [X] T019 [US3] Implement useRationRepository() custom hook in RationRepositoryContext.tsx that returns repository instance from context
-- [X] T020 [US3] Instantiate LocalStorageRationRepository in RationRepositoryProvider and provide via context
-- [X] T021 [US3] Add RationRepositoryProvider to app/layout.tsx wrapping children to make repository available throughout app
-- [X] T022 [US3] Handle localStorage errors gracefully: if isAvailable() returns false, log warning and return empty array from findAll()
+- [x] T008 [P] [US3] Create LocalStorageAdapter class in src/infrastructure/storage/LocalStorageAdapter.ts with methods: isAvailable(), getItem<T>(key), setItem<T>(key, value), removeItem(key)
+- [x] T009 [P] [US3] Add storage key prefix 'sdd-rations-calculator:' in LocalStorageAdapter to namespace localStorage keys
+- [x] T010 [P] [US3] Implement try-catch error handling in LocalStorageAdapter for QuotaExceededError and disabled localStorage scenarios
+- [x] T011 [US3] Create LocalStorageRationRepository class in src/infrastructure/repositories/LocalStorageRationRepository.ts implementing RationRepository interface
+- [x] T012 [US3] Implement save(data: CreateRationDTO) method in LocalStorageRationRepository: generate UUID with crypto.randomUUID(), add createdAt timestamp, append to array, persist to localStorage
+- [x] T013 [US3] Implement findAll() method in LocalStorageRationRepository: retrieve from localStorage, deserialize JSON, parse createdAt strings to Date objects, sort by createdAt DESC (newest first)
+- [x] T014 [US3] Implement findById(id: string) method in LocalStorageRationRepository: retrieve all rations, find by id, return ration or null
+- [x] T015 [US3] Implement delete(id: string) method in LocalStorageRationRepository: filter out ration by id, persist updated array, return true if deleted or false if not found
+- [x] T016 [US3] Add serialization helper method serializeRations(rations: Ration[]) that converts Date objects to ISO strings for localStorage
+- [x] T017 [US3] Add deserialization helper method deserializeRations(data: any[]) that parses ISO strings back to Date objects
+- [x] T018 [US3] Create RationRepositoryContext in src/application/contexts/RationRepositoryContext.tsx with React Context and Provider component
+- [x] T019 [US3] Implement useRationRepository() custom hook in RationRepositoryContext.tsx that returns repository instance from context
+- [x] T020 [US3] Instantiate LocalStorageRationRepository in RationRepositoryProvider and provide via context
+- [x] T021 [US3] Add RationRepositoryProvider to app/layout.tsx wrapping children to make repository available throughout app
+- [x] T022 [US3] Handle localStorage errors gracefully: if isAvailable() returns false, log warning and return empty array from findAll()
 
 **Checkpoint**: Repository pattern fully implemented - can now save and retrieve rations with localStorage, abstraction allows future API swap
 
@@ -77,21 +77,21 @@
 
 ### Implementation for User Story 1
 
-- [X] T023 [P] [US1] Create create-ration page route in app/create-ration/page.tsx with 'use client' directive
-- [X] T024 [P] [US1] Add form state management with useState hook in create-ration page: formData (CreateRationDTO) and errors (Record<string, string>)
-- [X] T025 [US1] Implement form JSX in create-ration page: dropdown for type (all 7 RationsType values with Spanish labels), text input for name, number inputs for gramsToCarbohydrate, weight, rations, optional number input for bloodGlucoseIndex
-- [X] T026 [US1] Add onChange handlers for each form field to update formData state
-- [X] T027 [US1] Implement validate() function in create-ration page: check name is non-empty (trimmed), gramsToCarbohydrate > 0, weight > 0, rations > 0, bloodGlucoseIndex (if provided) is 0-100
-- [X] T028 [US1] Add field-level error message display below each input field (red text showing errors[fieldName])
-- [X] T029 [US1] Implement handleSubmit(e: FormEvent) in create-ration page: preventDefault, call validate(), if valid call repository.save(formData), use router.push('/') to navigate home
-- [X] T030 [US1] Add router import from 'next/navigation' and useRouter hook in create-ration page
-- [X] T031 [US1] Add useRationRepository hook in create-ration page to get repository instance
-- [X] T032 [US1] Add Cancel button in form that calls router.push('/') to return to home without saving
-- [X] T033 [US1] Style form with TailwindCSS: max-w-2xl container, space-y-4 between fields, proper labels, padding, responsive design
-- [X] T034 [US1] Add form title "Create Ration" with text-2xl font-bold mb-6
-- [X] T035 [US1] Add "Save Ration" submit button with bg-blue-500 text-white px-6 py-3 rounded styling
-- [X] T036 [US1] Implement loading state: disable submit button while saving (use useState for isSubmitting flag)
-- [X] T037 [US1] Add error handling: if repository.save() throws error, display user-friendly message (e.g., "Storage full - please delete some rations")
+- [x] T023 [P] [US1] Create create-ration page route in app/create-ration/page.tsx with 'use client' directive
+- [x] T024 [P] [US1] Add form state management with useState hook in create-ration page: formData (CreateRationDTO) and errors (Record<string, string>)
+- [x] T025 [US1] Implement form JSX in create-ration page: dropdown for type (all 7 RationsType values with Spanish labels), text input for name, number inputs for gramsToCarbohydrate, weight, rations, optional number input for bloodGlucoseIndex
+- [x] T026 [US1] Add onChange handlers for each form field to update formData state
+- [x] T027 [US1] Implement validate() function in create-ration page: check name is non-empty (trimmed), gramsToCarbohydrate > 0, weight > 0, rations > 0, bloodGlucoseIndex (if provided) is 0-100
+- [x] T028 [US1] Add field-level error message display below each input field (red text showing errors[fieldName])
+- [x] T029 [US1] Implement handleSubmit(e: FormEvent) in create-ration page: preventDefault, call validate(), if valid call repository.save(formData), use router.push('/') to navigate home
+- [x] T030 [US1] Add router import from 'next/navigation' and useRouter hook in create-ration page
+- [x] T031 [US1] Add useRationRepository hook in create-ration page to get repository instance
+- [x] T032 [US1] Add Cancel button in form that calls router.push('/') to return to home without saving
+- [x] T033 [US1] Style form with TailwindCSS: max-w-2xl container, space-y-4 between fields, proper labels, padding, responsive design
+- [x] T034 [US1] Add form title "Create Ration" with text-2xl font-bold mb-6
+- [x] T035 [US1] Add "Save Ration" submit button with bg-blue-500 text-white px-6 py-3 rounded styling
+- [x] T036 [US1] Implement loading state: disable submit button while saving (use useState for isSubmitting flag)
+- [x] T037 [US1] Add error handling: if repository.save() throws error, display user-friendly message (e.g., "Storage full - please delete some rations")
 
 **Checkpoint**: Create flow complete - users can now add rations via form, data persists to localStorage
 
@@ -105,28 +105,28 @@
 
 ### Implementation for User Story 2
 
-- [X] T038 [P] [US2] Create useInfiniteScroll custom hook in src/application/hooks/useInfiniteScroll.ts with generic type parameter <T>
-- [X] T039 [US2] Implement useInfiniteScroll logic: useState for displayedItems and hasMore, useRef for loadMoreRef, Intersection Observer setup in useEffect
-- [X] T040 [US2] Configure Intersection Observer in useInfiniteScroll with threshold: 0.1, observe loadMoreRef, disconnect on cleanup
-- [X] T041 [US2] Implement loadMore() function in useInfiniteScroll: slice next batchSize items from source array, append to displayedItems, set hasMore to false when no more items
-- [X] T042 [US2] Return { displayedItems, hasMore, loadMoreRef } from useInfiniteScroll hook
-- [X] T043 [P] [US2] Create RationCard component in app/components/RationCard.tsx accepting ration: Ration prop
-- [X] T044 [US2] Implement RationCard JSX: display name (text-lg font-semibold), type (text-sm opacity-80), weight, rations, gramsToCarbohydrate in 2-column grid
-- [X] T045 [US2] Add conditional rendering in RationCard: show bloodGlucoseIndex only if defined (e.g., "IG: {bloodGlucoseIndex}")
-- [X] T046 [US2] Style RationCard with TailwindCSS: p-4 rounded-lg mb-4, semantic category color as background (US4 will add color mapping)
-- [X] T047 [P] [US2] Create EmptyState component in app/components/EmptyState.tsx with message "No rations yet" and call-to-action button
-- [X] T048 [US2] Add Link component in EmptyState linking to /create-ration with button styled bg-blue-500 text-white px-6 py-3 rounded
-- [X] T049 [US2] Update app/page.tsx home page with 'use client' directive
-- [X] T050 [US2] Add useState for rations array in home page, useEffect to load rations on mount
-- [X] T051 [US2] Call repository.findAll() in useEffect and setRations with result
-- [X] T052 [US2] Use useInfiniteScroll hook in home page with rations array and batchSize of 10
-- [X] T053 [US2] Implement conditional rendering in home page: if rations.length === 0 show EmptyState, else show ration list
-- [X] T054 [US2] Render displayedItems.map(ration => <RationCard key={ration.id} ration={ration} />) in home page
-- [X] T055 [US2] Add loading indicator div with ref={loadMoreRef} at bottom of list: "Loading more..." with text-center py-4, only show if hasMore is true
-- [X] T056 [US2] Add page header in home page: flex justify-between with h1 "My Rations" (text-2xl font-bold) and Link to /create-ration with "+ Create" button
-- [X] T057 [US2] Style home page container with p-4 padding
-- [X] T058 [US2] Add useRationRepository hook in home page to get repository instance
-- [X] T059 [US2] Implement reload mechanism: expose loadRations function, call after navigation from create page (or use router events)
+- [x] T038 [P] [US2] Create useInfiniteScroll custom hook in src/application/hooks/useInfiniteScroll.ts with generic type parameter <T>
+- [x] T039 [US2] Implement useInfiniteScroll logic: useState for displayedItems and hasMore, useRef for loadMoreRef, Intersection Observer setup in useEffect
+- [x] T040 [US2] Configure Intersection Observer in useInfiniteScroll with threshold: 0.1, observe loadMoreRef, disconnect on cleanup
+- [x] T041 [US2] Implement loadMore() function in useInfiniteScroll: slice next batchSize items from source array, append to displayedItems, set hasMore to false when no more items
+- [x] T042 [US2] Return { displayedItems, hasMore, loadMoreRef } from useInfiniteScroll hook
+- [x] T043 [P] [US2] Create RationCard component in app/components/RationCard.tsx accepting ration: Ration prop
+- [x] T044 [US2] Implement RationCard JSX: display name (text-lg font-semibold), type (text-sm opacity-80), weight, rations, gramsToCarbohydrate in 2-column grid
+- [x] T045 [US2] Add conditional rendering in RationCard: show bloodGlucoseIndex only if defined (e.g., "IG: {bloodGlucoseIndex}")
+- [x] T046 [US2] Style RationCard with TailwindCSS: p-4 rounded-lg mb-4, semantic category color as background (US4 will add color mapping)
+- [x] T047 [P] [US2] Create EmptyState component in app/components/EmptyState.tsx with message "No rations yet" and call-to-action button
+- [x] T048 [US2] Add Link component in EmptyState linking to /create-ration with button styled bg-blue-500 text-white px-6 py-3 rounded
+- [x] T049 [US2] Update app/page.tsx home page with 'use client' directive
+- [x] T050 [US2] Add useState for rations array in home page, useEffect to load rations on mount
+- [x] T051 [US2] Call repository.findAll() in useEffect and setRations with result
+- [x] T052 [US2] Use useInfiniteScroll hook in home page with rations array and batchSize of 10
+- [x] T053 [US2] Implement conditional rendering in home page: if rations.length === 0 show EmptyState, else show ration list
+- [x] T054 [US2] Render displayedItems.map(ration => <RationCard key={ration.id} ration={ration} />) in home page
+- [x] T055 [US2] Add loading indicator div with ref={loadMoreRef} at bottom of list: "Loading more..." with text-center py-4, only show if hasMore is true
+- [x] T056 [US2] Add page header in home page: flex justify-between with h1 "My Rations" (text-2xl font-bold) and Link to /create-ration with "+ Create" button
+- [x] T057 [US2] Style home page container with p-4 padding
+- [x] T058 [US2] Add useRationRepository hook in home page to get repository instance
+- [x] T059 [US2] Implement reload mechanism: expose loadRations function, call after navigation from create page (or use router events)
 
 **Checkpoint**: View and infinite scroll complete - users can now see all their rations with smooth scrolling performance
 
@@ -140,13 +140,13 @@
 
 ### Implementation for User Story 4
 
-- [X] T060 [P] [US4] Create getCategoryColorClass utility function in app/components/RationCard.tsx that maps RationsType to Tailwind bg-category-* classes
-- [X] T061 [US4] Implement color mapping in getCategoryColorClass: RationsType.lacteal → 'bg-category-lacteal', cereals_flours_pulses_legumes_tubers → 'bg-category-cereals-flours-pulses-legumes-tubers', fruits → 'bg-category-fruits', vegetables → 'bg-category-vegetables', oily_and_dry_fruit → 'bg-category-oily-dry-fruits', drinks → 'bg-category-drinks', others → 'bg-category-others'
-- [X] T062 [US4] Apply getCategoryColorClass(ration.type) to RationCard container div className (replace placeholder background)
-- [X] T063 [US4] Verify design token Tailwind classes are available: check that category-lacteal, category-fruits, etc. are generated by design token build from 001-design-token-system
-- [X] T064 [US4] Test color contrast: verify all 7 category colors meet WCAG AA (4.5:1 contrast ratio) in both light and dark themes (already validated in 001-design-token-system)
-- [X] T065 [US4] Add visual distinction: ensure each category color is perceptually different from others for easy identification
-- [X] T066 [US4] Update RationCard styling: adjust text color if needed for contrast on colored backgrounds (e.g., text-white for dark category colors)
+- [x] T060 [P] [US4] Create getCategoryColorClass utility function in app/components/RationCard.tsx that maps RationsType to Tailwind bg-category-\* classes
+- [x] T061 [US4] Implement color mapping in getCategoryColorClass: RationsType.lacteal → 'bg-category-lacteal', cereals_flours_pulses_legumes_tubers → 'bg-category-cereals-flours-pulses-legumes-tubers', fruits → 'bg-category-fruits', vegetables → 'bg-category-vegetables', oily_and_dry_fruit → 'bg-category-oily-dry-fruits', drinks → 'bg-category-drinks', others → 'bg-category-others'
+- [x] T062 [US4] Apply getCategoryColorClass(ration.type) to RationCard container div className (replace placeholder background)
+- [x] T063 [US4] Verify design token Tailwind classes are available: check that category-lacteal, category-fruits, etc. are generated by design token build from 001-design-token-system
+- [x] T064 [US4] Test color contrast: verify all 7 category colors meet WCAG AA (4.5:1 contrast ratio) in both light and dark themes (already validated in 001-design-token-system)
+- [x] T065 [US4] Add visual distinction: ensure each category color is perceptually different from others for easy identification
+- [x] T066 [US4] Update RationCard styling: adjust text color if needed for contrast on colored backgrounds (e.g., text-white for dark category colors)
 
 **Checkpoint**: Color coding complete - ration cards now display with semantic category colors from design system, enhancing visual organization
 
@@ -156,18 +156,18 @@
 
 **Purpose**: Final refinements, error handling, and documentation
 
-- [X] T067 [P] Add form field validation messages for create form: "Name is required", "Must be greater than 0", "Blood glucose index must be between 0-100"
-- [X] T068 [P] Implement localStorage quota error handling: show toast/notification when QuotaExceededError occurs with message "Storage full - please delete some rations"
-- [X] T069 [P] Add loading skeleton in home page: show placeholder cards while rations are loading from localStorage
-- [X] T070 [P] Implement max name length validation: limit to 200 characters with error message and character counter
-- [X] T071 [P] Add TypeScript strict type checking: verify all files compile with no type errors
-- [X] T072 [P] Add responsive design improvements: ensure forms and cards work well on mobile (320px width) and tablet (768px width)
-- [X] T073 Add accessibility improvements: proper ARIA labels on form inputs, keyboard navigation support, focus states
+- [x] T067 [P] Add form field validation messages for create form: "Name is required", "Must be greater than 0", "Blood glucose index must be between 0-100"
+- [x] T068 [P] Implement localStorage quota error handling: show toast/notification when QuotaExceededError occurs with message "Storage full - please delete some rations"
+- [x] T069 [P] Add loading skeleton in home page: show placeholder cards while rations are loading from localStorage
+- [x] T070 [P] Implement max name length validation: limit to 200 characters with error message and character counter
+- [x] T071 [P] Add TypeScript strict type checking: verify all files compile with no type errors
+- [x] T072 [P] Add responsive design improvements: ensure forms and cards work well on mobile (320px width) and tablet (768px width)
+- [x] T073 Add accessibility improvements: proper ARIA labels on form inputs, keyboard navigation support, focus states
 - [ ] T074 Add success feedback: show brief confirmation message after creating ration (e.g., toast "Ration saved successfully")
-- [X] T075 [P] Update README.md with quickstart instructions: how to run app, create rations, view list
+- [x] T075 [P] Update README.md with quickstart instructions: how to run app, create rations, view list
 - [ ] T076 Add error boundary: wrap app in ErrorBoundary component to catch and display React errors gracefully
-- [X] T077 Run quickstart.md validation: follow developer workflow guide, verify all steps work correctly and timing estimates are accurate
-- [X] T078 Final validation: create 100+ rations, test infinite scroll performance, verify localStorage persistence across browser sessions, test all 7 ration types with colors
+- [x] T077 Run quickstart.md validation: follow developer workflow guide, verify all steps work correctly and timing estimates are accurate
+- [x] T078 Final validation: create 100+ rations, test infinite scroll performance, verify localStorage persistence across browser sessions, test all 7 ration types with colors
 
 ---
 
@@ -210,28 +210,33 @@
 ### Within Each User Story
 
 **User Story 3 (Repository - Phase 3)**:
+
 - T008-T010 (LocalStorageAdapter) can run in parallel
 - T011-T017 (LocalStorageRationRepository) sequential, depend on T008
 - T018-T021 (Context and Provider) can run in parallel after T011
 - T022 is final polish
 
 **User Story 1 (Create - Phase 4)**:
+
 - T023-T024 (page setup and state) can run in parallel
 - T025-T028 (form fields and validation) sequential after T024
 - T029-T032 (submit logic and routing) sequential after T027
 - T033-T037 (styling and UX) can run in parallel after core functionality
 
 **User Story 2 (View - Phase 5)**:
+
 - T038-T042 (useInfiniteScroll hook) sequential
 - T043-T046 (RationCard component) can run in parallel with hook
 - T047-T048 (EmptyState component) can run in parallel
 - T049-T059 (home page integration) sequential after components and hook
 
 **User Story 4 (Colors - Phase 6)**:
+
 - T060-T062 (color mapping) sequential
 - T063-T066 (verification and polish) can run in parallel after T062
 
 **Polish (Phase 7)**:
+
 - T067-T072 (parallel improvements) can all run in parallel
 - T073-T076 sequential polish tasks
 - T077-T078 final validation sequential
@@ -241,26 +246,31 @@
 **Phase 2 (Foundational)**: All 4 tasks (T004-T007) can run in parallel - different files, pure type definitions
 
 **Phase 3 (US3 - Repository)**:
+
 - Batch 1 (parallel): T008, T009, T010 - LocalStorageAdapter methods
 - Batch 2 (sequential): T011-T017 - Repository implementation
 - Batch 3 (parallel): T018, T019, T020 - Context setup
 - Batch 4 (sequential): T021, T022 - Integration and error handling
 
 **Phase 4 (US1 - Create)**:
+
 - Batch 1 (parallel): T023, T024 - Page setup
 - Batch 2 (parallel after validation): T033, T034, T035, T036 - Styling tasks
 - Core form logic (T025-T032) mostly sequential
 
 **Phase 5 (US2 - View)**:
+
 - Parallel track 1: T038-T042 (infinite scroll hook)
 - Parallel track 2: T043-T046 (RationCard component)
 - Parallel track 3: T047-T048 (EmptyState component)
 - Then merge: T049-T059 (integration)
 
 **Phase 6 (US4 - Colors)**:
+
 - Sequential implementation, but T063-T066 can be parallel verification
 
 **Phase 7 (Polish)**:
+
 - T067-T072: All parallel (different concerns)
 - T073-T076: Sequential polish
 - T077-T078: Sequential validation
@@ -316,7 +326,7 @@ Developer C: Phase 6 - User Story 4 (Colors) - T060 through T066
 ### MVP First (User Stories 3 + 1 Only)
 
 1. Complete Phase 1: Setup (T001-T003) → ~15 minutes
-2. Complete Phase 2: Foundational (T004-T007) → ~30 minutes  
+2. Complete Phase 2: Foundational (T004-T007) → ~30 minutes
 3. Complete Phase 3: User Story 3 Repository (T008-T022) → ~1.5 hours
 4. Complete Phase 4: User Story 1 Create (T023-T037) → ~1.5 hours
 5. **STOP and VALIDATE**: Can create rations, save to localStorage, data persists
@@ -347,11 +357,12 @@ With 3 developers available:
    - Developer A: User Story 1 (Create) - Phase 4
    - Developer B: User Story 2 (View) - Phase 5 (can seed localStorage manually)
    - Developer C: Helps with testing and polish
-3. **Week 2**: 
+3. **Week 2**:
    - Developer A or B: User Story 4 (Colors) - Phase 6
    - Team: Polish together - Phase 7
 
 **Timeline Estimate**:
+
 - Setup + Foundational: 0.5 day
 - Repository (US3): 1 day
 - Create (US1): 1 day (parallel with View)

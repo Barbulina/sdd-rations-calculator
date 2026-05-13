@@ -7,9 +7,7 @@ import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { ReactNode } from "react";
 import { useMenuList } from "@/src/application/hooks/useMenuList";
-import {
-  MenuRepositoryProvider,
-} from "@/src/application/contexts/MenuRepositoryContext";
+import { MenuRepositoryProvider } from "@/src/application/contexts/MenuRepositoryContext";
 import type { MenuRepository } from "@/src/domain/repositories/MenuRepository";
 import { MenuType } from "@/src/domain/models/MenuType";
 import { MenuBuilder } from "../../shared/MenuBuilder";

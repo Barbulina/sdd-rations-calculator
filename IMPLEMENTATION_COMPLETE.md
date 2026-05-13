@@ -27,49 +27,49 @@
 
 ### Core Infrastructure
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `src/infrastructure/design-tokens/tokens.json` | Single source of truth (37 tokens) | ✅ Complete |
-| `src/infrastructure/design-tokens/validate-schema.ts` | JSON schema validation | ✅ Complete |
-| `src/infrastructure/design-tokens/validate-contrast.ts` | WCAG AA contrast validation | ✅ Complete |
-| `src/infrastructure/design-tokens/build-tokens.ts` | Build orchestration script | ✅ Complete |
-| `src/infrastructure/design-tokens/style-dictionary.config.js` | Transformation configuration | ✅ Complete |
-| `src/infrastructure/design-tokens/tailwind-tokens.js` | Generated Tailwind tokens | ✅ Auto-generated |
-| `src/infrastructure/design-tokens/css-variables.css` | Generated CSS custom properties | ✅ Auto-generated |
+| File                                                          | Purpose                            | Status            |
+| ------------------------------------------------------------- | ---------------------------------- | ----------------- |
+| `src/infrastructure/design-tokens/tokens.json`                | Single source of truth (37 tokens) | ✅ Complete       |
+| `src/infrastructure/design-tokens/validate-schema.ts`         | JSON schema validation             | ✅ Complete       |
+| `src/infrastructure/design-tokens/validate-contrast.ts`       | WCAG AA contrast validation        | ✅ Complete       |
+| `src/infrastructure/design-tokens/build-tokens.ts`            | Build orchestration script         | ✅ Complete       |
+| `src/infrastructure/design-tokens/style-dictionary.config.js` | Transformation configuration       | ✅ Complete       |
+| `src/infrastructure/design-tokens/tailwind-tokens.js`         | Generated Tailwind tokens          | ✅ Auto-generated |
+| `src/infrastructure/design-tokens/css-variables.css`          | Generated CSS custom properties    | ✅ Auto-generated |
 
 ### Type Safety
 
-| File | Purpose | Status |
-|------|---------|--------|
+| File                                                    | Purpose                     | Status      |
+| ------------------------------------------------------- | --------------------------- | ----------- |
 | `src/infrastructure/design-tokens/tailwind-tokens.d.ts` | TypeScript type definitions | ✅ Complete |
-| `tsconfig.json` | Strict mode configuration | ✅ Complete |
+| `tsconfig.json`                                         | Strict mode configuration   | ✅ Complete |
 
 ### Application Integration
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `tailwind.config.ts` | Tailwind CSS with token imports | ✅ Complete |
-| `app/providers.tsx` | ThemeProvider wrapper | ✅ Complete |
-| `app/components/ThemeToggle.tsx` | Light/dark mode toggle | ✅ Complete |
-| `app/design-tokens/page.tsx` | Token specimen page | ✅ Complete |
-| `app/layout.tsx` | Root layout with theme support | ✅ Complete |
+| File                             | Purpose                         | Status      |
+| -------------------------------- | ------------------------------- | ----------- |
+| `tailwind.config.ts`             | Tailwind CSS with token imports | ✅ Complete |
+| `app/providers.tsx`              | ThemeProvider wrapper           | ✅ Complete |
+| `app/components/ThemeToggle.tsx` | Light/dark mode toggle          | ✅ Complete |
+| `app/design-tokens/page.tsx`     | Token specimen page             | ✅ Complete |
+| `app/layout.tsx`                 | Root layout with theme support  | ✅ Complete |
 
 ### Documentation
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `docs/design-tokens.md` | Comprehensive token documentation | ✅ Complete |
-| `README.md` | Project overview with design tokens | ✅ Complete |
-| `specs/001-design-token-system/quickstart.md` | Designer/developer workflows | ✅ Exists |
+| File                                          | Purpose                             | Status      |
+| --------------------------------------------- | ----------------------------------- | ----------- |
+| `docs/design-tokens.md`                       | Comprehensive token documentation   | ✅ Complete |
+| `README.md`                                   | Project overview with design tokens | ✅ Complete |
+| `specs/001-design-token-system/quickstart.md` | Designer/developer workflows        | ✅ Exists   |
 
 ### Testing
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `tests/integration/design-tokens/token-schema.test.ts` | Schema validation tests | ✅ Complete |
-| `tests/integration/design-tokens/contrast-validation.test.ts` | WCAG AA compliance tests | ✅ Complete |
-| `tests/integration/design-tokens/spacing-grid.test.ts` | 8px grid validation tests | ✅ Complete |
-| `tests/integration/design-tokens/transformation.test.ts` | Build output validation tests | ✅ Complete |
+| File                                                          | Purpose                       | Status      |
+| ------------------------------------------------------------- | ----------------------------- | ----------- |
+| `tests/integration/design-tokens/token-schema.test.ts`        | Schema validation tests       | ✅ Complete |
+| `tests/integration/design-tokens/contrast-validation.test.ts` | WCAG AA compliance tests      | ✅ Complete |
+| `tests/integration/design-tokens/spacing-grid.test.ts`        | 8px grid validation tests     | ✅ Complete |
+| `tests/integration/design-tokens/transformation.test.ts`      | Build output validation tests | ✅ Complete |
 
 ---
 
@@ -78,6 +78,7 @@
 ### Implemented Tokens: 37 (Light Theme)
 
 **Category Colors** (7 tokens):
+
 - `category-lacteal` (#6750A4) - M3 Primary 40
 - `category-cereals-flours-pulses-legumes-tubers` (#625B71) - M3 Secondary 40
 - `category-fruits` (#7D5260) - M3 Tertiary 40
@@ -87,23 +88,27 @@
 - `category-others` (#49454F) - M3 Surface Variant
 
 **State Colors** (4 tokens):
+
 - `state-offline` (#BF360C) - Deep Orange 900 (5.5:1 contrast)
 - `state-syncing` (#01579B) - Blue 900 (7.2:1 contrast - AAA)
 - `state-sync-error` (#D32F2F) - Red 700 (4.9:1 contrast)
 - `state-online` (#1B5E20) - Green 900 (7.7:1 contrast - AAA)
 
 **Feedback Colors** (4 tokens):
+
 - `feedback-success` (#2E7D32) - Green 800 (5.0:1 contrast)
 - `feedback-warning` (#BF360C) - Deep Orange 900 (5.5:1 contrast)
 - `feedback-error` (#C62828) - Red 800 (5.5:1 contrast)
 - `feedback-info` (#1565C0) - Blue 800 (4.7:1 contrast)
 
 **Typography** (12 tokens):
+
 - `heading-1` through `heading-6` (57px to 24px)
 - `body-large`, `body-medium`, `body-small` (16px to 12px)
 - `label-large`, `label-medium`, `label-small` (14px to 11px)
 
 **Spacing** (10 tokens):
+
 - `space-0` (0px), `space-1` (8px), `space-2` (16px), `space-3` (24px)
 - `space-4` (32px), `space-5` (40px), `space-6` (48px)
 - `space-8` (64px), `space-10` (80px), `space-12` (96px)
@@ -111,6 +116,7 @@
 ### Not Implemented: Dark Theme Variants
 
 **Missing**: 15 dark theme color tokens
+
 - 7 category colors (dark)
 - 4 state colors (dark)
 - 4 feedback colors (dark)
@@ -123,23 +129,23 @@
 
 ### Contrast Validation: ✅ ALL PASS
 
-| Token | Light Value | Contrast Ratio | WCAG Level | Status |
-|-------|-------------|----------------|------------|--------|
-| category-lacteal | #6750A4 | 6.3:1 | AA | ✅ Pass |
-| category-cereals-flours-pulses-legumes-tubers | #625B71 | 6.3:1 | AA | ✅ Pass |
-| category-fruits | #7D5260 | 6.3:1 | AA | ✅ Pass |
-| category-vegetables | #386A20 | 6.3:1 | AA | ✅ Pass |
-| category-oily-dry-fruits | #6C5D3D | 6.3:1 | AA | ✅ Pass |
-| category-drinks | #0061A4 | 6.3:1 | AA | ✅ Pass |
-| category-others | #49454F | 9.1:1 | **AAA** | ✅ Pass |
-| state-offline | #BF360C | 5.5:1 | AA | ✅ Pass |
-| state-syncing | #01579B | 7.2:1 | **AAA** | ✅ Pass |
-| state-sync-error | #D32F2F | 4.9:1 | AA | ✅ Pass |
-| state-online | #1B5E20 | 7.7:1 | **AAA** | ✅ Pass |
-| feedback-success | #2E7D32 | 5.0:1 | AA | ✅ Pass |
-| feedback-warning | #BF360C | 5.5:1 | AA | ✅ Pass |
-| feedback-error | #C62828 | 5.5:1 | AA | ✅ Pass |
-| feedback-info | #1565C0 | 4.7:1 | AA | ✅ Pass |
+| Token                                         | Light Value | Contrast Ratio | WCAG Level | Status  |
+| --------------------------------------------- | ----------- | -------------- | ---------- | ------- |
+| category-lacteal                              | #6750A4     | 6.3:1          | AA         | ✅ Pass |
+| category-cereals-flours-pulses-legumes-tubers | #625B71     | 6.3:1          | AA         | ✅ Pass |
+| category-fruits                               | #7D5260     | 6.3:1          | AA         | ✅ Pass |
+| category-vegetables                           | #386A20     | 6.3:1          | AA         | ✅ Pass |
+| category-oily-dry-fruits                      | #6C5D3D     | 6.3:1          | AA         | ✅ Pass |
+| category-drinks                               | #0061A4     | 6.3:1          | AA         | ✅ Pass |
+| category-others                               | #49454F     | 9.1:1          | **AAA**    | ✅ Pass |
+| state-offline                                 | #BF360C     | 5.5:1          | AA         | ✅ Pass |
+| state-syncing                                 | #01579B     | 7.2:1          | **AAA**    | ✅ Pass |
+| state-sync-error                              | #D32F2F     | 4.9:1          | AA         | ✅ Pass |
+| state-online                                  | #1B5E20     | 7.7:1          | **AAA**    | ✅ Pass |
+| feedback-success                              | #2E7D32     | 5.0:1          | AA         | ✅ Pass |
+| feedback-warning                              | #BF360C     | 5.5:1          | AA         | ✅ Pass |
+| feedback-error                                | #C62828     | 5.5:1          | AA         | ✅ Pass |
+| feedback-info                                 | #1565C0     | 4.7:1          | AA         | ✅ Pass |
 
 **Minimum Ratio**: 4.7:1 (feedback-info)  
 **Maximum Ratio**: 9.1:1 (category-others)  
@@ -187,17 +193,17 @@ npm run build
 
 ## Success Criteria Achievement
 
-| Criterion | Requirement | Status |
-|-----------|-------------|--------|
-| **SC-001** | 95% user identification of category colors | ✅ 7 distinct hues |
-| **SC-002** | 100% WCAG AA compliance | ✅ 15/15 pass (4.7:1 to 9.1:1) |
-| **SC-003** | Designer workflow < 5 minutes | ✅ Documented in quickstart.md |
-| **SC-004** | 90% utility class coverage | ✅ Tailwind classes generated |
-| **SC-005** | Light/dark theme support | ⚠️ Infrastructure ready, dark variants missing |
-| **SC-006** | 44px touch targets | ✅ space-5 (40px) + padding = 44px |
-| **SC-007** | Readable typography (14px+ mobile) | ✅ body-medium 14px minimum |
-| **SC-008** | Zero manual intervention | ✅ Automated build pipeline |
-| **SC-009** | Documentation clarity | ✅ docs/design-tokens.md (comprehensive) |
+| Criterion  | Requirement                                | Status                                         |
+| ---------- | ------------------------------------------ | ---------------------------------------------- |
+| **SC-001** | 95% user identification of category colors | ✅ 7 distinct hues                             |
+| **SC-002** | 100% WCAG AA compliance                    | ✅ 15/15 pass (4.7:1 to 9.1:1)                 |
+| **SC-003** | Designer workflow < 5 minutes              | ✅ Documented in quickstart.md                 |
+| **SC-004** | 90% utility class coverage                 | ✅ Tailwind classes generated                  |
+| **SC-005** | Light/dark theme support                   | ⚠️ Infrastructure ready, dark variants missing |
+| **SC-006** | 44px touch targets                         | ✅ space-5 (40px) + padding = 44px             |
+| **SC-007** | Readable typography (14px+ mobile)         | ✅ body-medium 14px minimum                    |
+| **SC-008** | Zero manual intervention                   | ✅ Automated build pipeline                    |
+| **SC-009** | Documentation clarity                      | ✅ docs/design-tokens.md (comprehensive)       |
 
 **Overall**: 8/9 success criteria met (89%)  
 **Blocker**: SC-005 requires dark theme color variants to be added to tokens.json
@@ -222,11 +228,11 @@ npm run build
 ### State Indicators (Offline/Online)
 
 ```tsx
-const statusClass = isOnline ? 'bg-state-online' : 'bg-state-offline';
+const statusClass = isOnline ? "bg-state-online" : "bg-state-offline";
 
 <span className={`${statusClass} text-white px-space-2 py-space-1 rounded`}>
-  {isOnline ? 'Online' : 'Offline'}
-</span>
+  {isOnline ? "Online" : "Offline"}
+</span>;
 ```
 
 ### Feedback States (Success/Warning/Error/Info)
@@ -377,6 +383,7 @@ npm run test:tokens
 ```
 
 **Test Coverage**:
+
 - ✅ Schema validation (10 tests)
 - ✅ Contrast validation (10 tests)
 - ✅ Spacing grid alignment (12 tests)
@@ -413,15 +420,15 @@ npm run test:tokens
 
 Before merging to main:
 
-- [X] All 73 tasks complete
-- [X] Integration tests passing
-- [X] WCAG AA compliance verified
-- [X] Documentation complete (docs/design-tokens.md)
-- [X] README updated
-- [X] Theme toggle functional
+- [x] All 73 tasks complete
+- [x] Integration tests passing
+- [x] WCAG AA compliance verified
+- [x] Documentation complete (docs/design-tokens.md)
+- [x] README updated
+- [x] Theme toggle functional
 - [ ] Dark theme variants added (optional - can be follow-up PR)
-- [X] Specimen page demonstrates all tokens
-- [X] Build scripts tested (`npm run tokens:build`)
+- [x] Specimen page demonstrates all tokens
+- [x] Build scripts tested (`npm run tokens:build`)
 
 ---
 
@@ -432,6 +439,7 @@ Before merging to main:
 **Next Action**: Add dark theme color variants to Specify workspace
 
 **Workflow**:
+
 1. Duplicate light theme tokens in Specify
 2. Adjust to M3 tone 80 (dark mode palette)
 3. Export `tokens.json` with both themes
@@ -444,6 +452,7 @@ Before merging to main:
 **Next Action**: Integrate design tokens into feature components
 
 **Usage**:
+
 1. Import Tailwind classes: `className="bg-category-lacteal p-space-4"`
 2. Avoid hardcoded values: ~~`className="p-8"`~~ → `className="p-space-2"`
 3. Use TypeScript types for autocomplete (import from `tailwind-tokens.d.ts`)
@@ -457,6 +466,7 @@ Before merging to main:
 **Design Token System: ✅ PRODUCTION READY**
 
 All core functionality implemented and validated. The system provides:
+
 - ✅ 37 design tokens (light theme) with WCAG AA compliance
 - ✅ Automated build pipeline with validation
 - ✅ Tailwind CSS integration with type safety

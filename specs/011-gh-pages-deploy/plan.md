@@ -21,16 +21,16 @@ Configure a GitHub Actions CI/CD pipeline that builds the Next.js app as a fully
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Status | Notes |
-|---|---|---|
+| Principle                              | Status  | Notes                                                                                                                                                            |
+| -------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | I. Architectural Integrity (Hexagonal) | ✅ PASS | CI/CD touches no src/ domain code. `next.config.ts` change is infrastructure-only. `generateStaticParams` in page component is framework glue, not domain logic. |
-| II. Testing Strategy (Builder Pattern) | ✅ N/A | No new domain entities. Existing test suite runs in CI. |
-| III. Methodology (TDD) | ✅ N/A | No new application logic. CI YAML is configuration, not testable code. |
-| IV. Design Tokens (M3) | ✅ N/A | No UI changes. |
-| V. Offline-First | ✅ PASS | Static export is the correct hosting strategy for an offline-first app — no server dependency. |
-| VI. Quality Assurance | ✅ PASS | Tests run in CI before deploy. Failed builds block deployment (SC-003). |
+| II. Testing Strategy (Builder Pattern) | ✅ N/A  | No new domain entities. Existing test suite runs in CI.                                                                                                          |
+| III. Methodology (TDD)                 | ✅ N/A  | No new application logic. CI YAML is configuration, not testable code.                                                                                           |
+| IV. Design Tokens (M3)                 | ✅ N/A  | No UI changes.                                                                                                                                                   |
+| V. Offline-First                       | ✅ PASS | Static export is the correct hosting strategy for an offline-first app — no server dependency.                                                                   |
+| VI. Quality Assurance                  | ✅ PASS | Tests run in CI before deploy. Failed builds block deployment (SC-003).                                                                                          |
 
 **Gate result**: ✅ No violations. Proceed to implementation.
 

@@ -21,16 +21,16 @@ Replace the home page (`app/page.tsx`) to display the user's saved menus as card
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Status | Notes |
-|-----------|--------|-------|
-| **I. Architectural Integrity** — Domain layer isolated | ✅ PASS | No new domain entities. `Menu` model and `MenuRepository` interface already exist. New code is confined to application layer (hook) and UI layer (components/page). |
-| **II. Testing Strategy** — Builder Pattern in tests | ✅ PASS | `MenuBuilder` and `MenuItemBuilder` already created in Feature 004 (`tests/unit/menu-builder/`). Will reuse. |
-| **III. Methodology** — TDD mandatory | ✅ PASS | Tests will be written before implementation per Red-Green-Refactor cycle. |
-| **IV. Design & Implementation** — Design tokens, no hardcoded values | ✅ PASS | Will use existing Tailwind design tokens. No hardcoded hex or pixel values. |
-| **V. Availability & Resilience** — Offline First | ✅ PASS | `LocalStorageMenuRepository` already offline-capable. No new network calls. |
-| **VI. Quality Assurance** — Integration + E2E tests | ✅ PASS | Unit tests for hook, integration tests for components, Playwright for critical flows. |
+| Principle                                                            | Status  | Notes                                                                                                                                                               |
+| -------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **I. Architectural Integrity** — Domain layer isolated               | ✅ PASS | No new domain entities. `Menu` model and `MenuRepository` interface already exist. New code is confined to application layer (hook) and UI layer (components/page). |
+| **II. Testing Strategy** — Builder Pattern in tests                  | ✅ PASS | `MenuBuilder` and `MenuItemBuilder` already created in Feature 004 (`tests/unit/menu-builder/`). Will reuse.                                                        |
+| **III. Methodology** — TDD mandatory                                 | ✅ PASS | Tests will be written before implementation per Red-Green-Refactor cycle.                                                                                           |
+| **IV. Design & Implementation** — Design tokens, no hardcoded values | ✅ PASS | Will use existing Tailwind design tokens. No hardcoded hex or pixel values.                                                                                         |
+| **V. Availability & Resilience** — Offline First                     | ✅ PASS | `LocalStorageMenuRepository` already offline-capable. No new network calls.                                                                                         |
+| **VI. Quality Assurance** — Integration + E2E tests                  | ✅ PASS | Unit tests for hook, integration tests for components, Playwright for critical flows.                                                                               |
 
 **Gate result**: ✅ ALL PASS — proceed to Phase 0 research.
 

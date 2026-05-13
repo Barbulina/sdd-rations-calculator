@@ -31,7 +31,9 @@ class LocalStorageCustomAlimentRepository implements CustomAlimentRepository {
 
 // Application layer depends on the interface
 export function useCustomAliments() {
-  const repository: CustomAlimentRepository = useContext(CustomAlimentRepositoryContext);
+  const repository: CustomAlimentRepository = useContext(
+    CustomAlimentRepositoryContext,
+  );
   // ... use repository methods
 }
 ```
@@ -41,15 +43,17 @@ export function useCustomAliments() {
 Integration tests verify implementations against these contracts:
 
 ```typescript
-describe('CustomAlimentRepository contract', () => {
+describe("CustomAlimentRepository contract", () => {
   let repository: CustomAlimentRepository;
 
   beforeEach(() => {
     repository = new LocalStorageCustomAlimentRepository(adapter);
   });
 
-  it('should save and retrieve custom aliment', async () => {
-    const dto: CreateCustomAlimentDTO = { /* ... */ };
+  it("should save and retrieve custom aliment", async () => {
+    const dto: CreateCustomAlimentDTO = {
+      /* ... */
+    };
     const saved = await repository.save(dto);
     const retrieved = await repository.findById(saved.id);
     expect(retrieved).toEqual(saved);

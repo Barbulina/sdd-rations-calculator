@@ -16,16 +16,16 @@ Feature 005 is entirely read/delete — it does not introduce new domain entitie
 
 The core entity. Stored in localStorage, loaded and displayed on the home page.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | `string` (UUID) | Unique identifier |
-| `name` | `string` | Menu name (1–200 chars, trimmed) |
-| `type` | `MenuType` | Meal type (BREAKFAST, LUNCH, DINNER, SNACK) |
-| `items` | `MenuItem[]` | Aliment items with weight and rations |
-| `totalWeight` | `number` | Sum of all item weights in grams |
-| `totalRations` | `number` | Sum of all item ration counts |
-| `createdAt` | `Date` | Creation timestamp |
-| `updatedAt` | `Date \| undefined` | Last update timestamp (optional) |
+| Field          | Type                | Description                                 |
+| -------------- | ------------------- | ------------------------------------------- |
+| `id`           | `string` (UUID)     | Unique identifier                           |
+| `name`         | `string`            | Menu name (1–200 chars, trimmed)            |
+| `type`         | `MenuType`          | Meal type (BREAKFAST, LUNCH, DINNER, SNACK) |
+| `items`        | `MenuItem[]`        | Aliment items with weight and rations       |
+| `totalWeight`  | `number`            | Sum of all item weights in grams            |
+| `totalRations` | `number`            | Sum of all item ration counts               |
+| `createdAt`    | `Date`              | Creation timestamp                          |
+| `updatedAt`    | `Date \| undefined` | Last update timestamp (optional)            |
 
 **Source**: `src/domain/models/Menu.ts`
 
@@ -51,12 +51,13 @@ Not displayed directly on the list cards. Used only for total calculations alrea
 
 Not a domain entity — pure client-side filter state managed inside `useMenuList`.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `nameFilter` | `string` | `""` | Partial case-insensitive match against `menu.name` |
-| `typeFilter` | `MenuType \| null` | `null` | Exact match against `menu.type`; null means "All types" |
+| Field        | Type               | Default | Description                                             |
+| ------------ | ------------------ | ------- | ------------------------------------------------------- |
+| `nameFilter` | `string`           | `""`    | Partial case-insensitive match against `menu.name`      |
+| `typeFilter` | `MenuType \| null` | `null`  | Exact match against `menu.type`; null means "All types" |
 
 **Filter logic** (AND): A menu appears in the filtered list if and only if:
+
 - `nameFilter === ""` OR `menu.name.toLowerCase().includes(nameFilter.toLowerCase())`
 - `typeFilter === null` OR `menu.type === typeFilter`
 
@@ -64,13 +65,13 @@ Not a domain entity — pure client-side filter state managed inside `useMenuLis
 
 What each `MenuCard` component receives as props. Derived from `Menu` in the hook; no transformation object is needed — props are passed directly.
 
-| Displayed Field | Derived From | Format |
-|-----------------|-------------|--------|
-| Name | `menu.name` | As-is |
-| Type label | `menu.type` via `MENU_TYPE_LABELS` | "Breakfast", "Lunch", "Dinner", "Snack" |
-| Creation date | `menu.createdAt` | `toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })` |
-| Total rations | `menu.totalRations` | Fixed 2 decimal places (`.toFixed(2)`) |
-| Total weight | `menu.totalWeight` | Integer grams (`Math.round()`) |
+| Displayed Field | Derived From                       | Format                                                                             |
+| --------------- | ---------------------------------- | ---------------------------------------------------------------------------------- |
+| Name            | `menu.name`                        | As-is                                                                              |
+| Type label      | `menu.type` via `MENU_TYPE_LABELS` | "Breakfast", "Lunch", "Dinner", "Snack"                                            |
+| Creation date   | `menu.createdAt`                   | `toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })` |
+| Total rations   | `menu.totalRations`                | Fixed 2 decimal places (`.toFixed(2)`)                                             |
+| Total weight    | `menu.totalWeight`                 | Integer grams (`Math.round()`)                                                     |
 
 ---
 
@@ -80,28 +81,28 @@ The new hook `useMenuList` encapsulates all list state. It is the only place whe
 
 ### State
 
-| State | Type | Description |
-|-------|------|-------------|
-| `menus` | `Menu[]` | All menus from repository, sorted by `createdAt` desc |
-| `isLoading` | `boolean` | True while `getAll()` is in-flight |
-| `error` | `string \| null` | Error message if `getAll()` or `delete()` fails |
-| `nameFilter` | `string` | Current name search text |
-| `typeFilter` | `MenuType \| null` | Current type selection; null = All |
+| State        | Type               | Description                                           |
+| ------------ | ------------------ | ----------------------------------------------------- |
+| `menus`      | `Menu[]`           | All menus from repository, sorted by `createdAt` desc |
+| `isLoading`  | `boolean`          | True while `getAll()` is in-flight                    |
+| `error`      | `string \| null`   | Error message if `getAll()` or `delete()` fails       |
+| `nameFilter` | `string`           | Current name search text                              |
+| `typeFilter` | `MenuType \| null` | Current type selection; null = All                    |
 
 ### Derived State
 
-| Derived | Type | Description |
-|---------|------|-------------|
-| `filteredMenus` | `Menu[]` | Result of applying nameFilter + typeFilter to `menus` |
-| `hasMenus` | `boolean` | `menus.length > 0` (used for empty state vs no-results distinction) |
+| Derived         | Type      | Description                                                         |
+| --------------- | --------- | ------------------------------------------------------------------- |
+| `filteredMenus` | `Menu[]`  | Result of applying nameFilter + typeFilter to `menus`               |
+| `hasMenus`      | `boolean` | `menus.length > 0` (used for empty state vs no-results distinction) |
 
 ### Actions
 
-| Action | Signature | Description |
-|--------|-----------|-------------|
-| `deleteMenu` | `(id: string) => Promise<void>` | Shows `window.confirm()`, calls `repository.delete(id)`, removes from local state |
-| `setNameFilter` | `(name: string) => void` | Updates nameFilter |
-| `setTypeFilter` | `(type: MenuType \| null) => void` | Updates typeFilter |
+| Action          | Signature                          | Description                                                                       |
+| --------------- | ---------------------------------- | --------------------------------------------------------------------------------- |
+| `deleteMenu`    | `(id: string) => Promise<void>`    | Shows `window.confirm()`, calls `repository.delete(id)`, removes from local state |
+| `setNameFilter` | `(name: string) => void`           | Updates nameFilter                                                                |
+| `setTypeFilter` | `(type: MenuType \| null) => void` | Updates typeFilter                                                                |
 
 ---
 

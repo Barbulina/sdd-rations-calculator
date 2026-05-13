@@ -7,14 +7,17 @@ This directory contains the aliment catalog feature, which provides a pre-define
 The aliment catalog follows the repository pattern with three layers:
 
 ### Domain Layer
+
 - **AlimentInfo** (`src/domain/models/AlimentInfo.ts`): Interface defining food aliment structure
 - **AlimentCatalog** (`src/domain/models/AlimentCatalog.ts`): Constant array with 365+ pre-defined aliments
 - **AlimentInfoRepository** (`src/domain/repositories/AlimentInfoRepository.ts`): Interface for repository operations
 
 ### Infrastructure Layer
+
 - **InMemoryAlimentInfoRepository** (`src/infrastructure/repositories/InMemoryAlimentInfoRepository.ts`): In-memory implementation providing read-only access to the catalog
 
 ### Application Layer
+
 - **AlimentInfoRepositoryContext** (`src/application/contexts/AlimentInfoRepositoryContext.tsx`): React Context for dependency injection
 
 ## Data Structure
@@ -23,10 +26,10 @@ Each `AlimentInfo` entry contains:
 
 ```typescript
 interface AlimentInfo {
-  name: string;                    // e.g., "manzana"
-  gramsToCarbohydrate: number;     // Grams containing 10g of carbs
-  bloodGlucoseIndex?: number;      // Glycemic index (0-100)
-  type: RationsType;               // Category (lacteal, fruits, etc.)
+  name: string; // e.g., "manzana"
+  gramsToCarbohydrate: number; // Grams containing 10g of carbs
+  bloodGlucoseIndex?: number; // Glycemic index (0-100)
+  type: RationsType; // Category (lacteal, fruits, etc.)
 }
 ```
 
@@ -74,7 +77,7 @@ export function AlimentList() {
 ### 2. Filter by Category
 
 ```typescript
-import { RationsType } from '@/src/domain/models/RationsType';
+import { RationsType } from "@/src/domain/models/RationsType";
 
 // Get only fruits
 const fruits = await repository.findByType(RationsType.fruits);
@@ -84,7 +87,7 @@ const fruits = await repository.findByType(RationsType.fruits);
 
 ```typescript
 // Search for "manzana" (partial, case-insensitive)
-const results = await repository.search('manzana');
+const results = await repository.search("manzana");
 // Returns: manzana, manzana asada
 ```
 
@@ -92,7 +95,7 @@ const results = await repository.search('manzana');
 
 ```typescript
 // Get specific aliment by exact name
-const apple = await repository.findByName('manzana');
+const apple = await repository.findByName("manzana");
 ```
 
 ## Repository Interface
@@ -164,40 +167,44 @@ export function AlimentAutocomplete() {
 Users can now create custom aliments that supplement the pre-defined catalog.
 
 ### Domain Layer
+
 - **CustomAliment** (`src/domain/models/CustomAliment.ts`): Custom aliment entity with validation
 - **CustomAlimentRepository** (`src/domain/repositories/CustomAlimentRepository.ts`): Repository interface for custom aliments
 - **CompositeAlimentRepository** (`src/domain/repositories/CompositeAlimentRepository.ts`): Merges catalog and custom aliments
 
 ### Infrastructure Layer
+
 - **LocalStorageCustomAlimentRepository** (`src/infrastructure/repositories/LocalStorageCustomAlimentRepository.ts`): localStorage-based persistence
 
 ### Application Layer
+
 - **CustomAlimentRepositoryContext** (`src/application/contexts/CustomAlimentRepositoryContext.tsx`): Dependency injection for custom repository
 - **useCompositeAliments** (`src/application/hooks/useCompositeAliments.ts`): Hook for accessing merged catalog
 
 ### UI Components
+
 - `/aliment-browser/create` - Create custom aliment page
 - `/aliment-browser` - Browse merged catalog with "Custom" badges
 
 ### Creating Custom Aliments
 
 ```typescript
-'use client';
+"use client";
 
-import { useCustomAlimentRepository } from '@/src/application/contexts/CustomAlimentRepositoryContext';
-import { RationsType } from '@/src/domain/models/RationsType';
+import { useCustomAlimentRepository } from "@/src/application/contexts/CustomAlimentRepositoryContext";
+import { RationsType } from "@/src/domain/models/RationsType";
 
 export function CreateCustomAliment() {
   const repository = useCustomAlimentRepository();
 
   const handleSubmit = async () => {
     const newAliment = await repository.save({
-      name: 'Homemade Granola',
+      name: "Homemade Granola",
       type: RationsType.cereals_flours_pulses_legumes_tubers,
       gramsToCarbohydrate: 15,
       bloodGlucoseIndex: 55,
     });
-    
+
     // Aliment is automatically assigned:
     // - id (UUID)
     // - createdAt (timestamp)
@@ -246,7 +253,7 @@ const repository = useCustomAlimentRepository();
 
 // Create
 const aliment = await repository.save({
-  name: 'Custom Food',
+  name: "Custom Food",
   type: RationsType.others,
   gramsToCarbohydrate: 20,
 });
@@ -254,12 +261,12 @@ const aliment = await repository.save({
 // Read
 const all = await repository.findAll(); // Sorted by createdAt DESC
 const found = await repository.findById(aliment.id);
-const search = await repository.search('custom');
+const search = await repository.search("custom");
 
 // Update
 const updated = await repository.update({
   id: aliment.id,
-  name: 'Updated Name',
+  name: "Updated Name",
   gramsToCarbohydrate: 25,
 });
 
@@ -273,6 +280,7 @@ const count = await repository.count();
 ### Data Persistence
 
 Custom aliments are stored in localStorage:
+
 - **Key**: `sdd-rations-calculator:custom-aliments`
 - **Format**: JSON array of CustomAliment objects
 - **Quota**: ~5-10MB (sufficient for hundreds of custom aliments)
@@ -281,9 +289,9 @@ Custom aliments are stored in localStorage:
 ### Testing
 
 ```typescript
-import { LocalStorageCustomAlimentRepository } from '@/src/infrastructure/repositories/LocalStorageCustomAlimentRepository';
+import { LocalStorageCustomAlimentRepository } from "@/src/infrastructure/repositories/LocalStorageCustomAlimentRepository";
 
-describe('CustomAlimentRepository', () => {
+describe("CustomAlimentRepository", () => {
   let repository: LocalStorageCustomAlimentRepository;
 
   beforeEach(() => {
@@ -291,9 +299,9 @@ describe('CustomAlimentRepository', () => {
     repository = new LocalStorageCustomAlimentRepository();
   });
 
-  it('should save custom aliment with generated ID', async () => {
+  it("should save custom aliment with generated ID", async () => {
     const saved = await repository.save({
-      name: 'Test',
+      name: "Test",
       type: RationsType.fruits,
       gramsToCarbohydrate: 100,
     });
@@ -321,20 +329,20 @@ describe('CustomAlimentRepository', () => {
 ## Testing
 
 ```typescript
-import { InMemoryAlimentInfoRepository } from '@/src/infrastructure/repositories/InMemoryAlimentInfoRepository';
+import { InMemoryAlimentInfoRepository } from "@/src/infrastructure/repositories/InMemoryAlimentInfoRepository";
 
-describe('AlimentInfoRepository', () => {
+describe("AlimentInfoRepository", () => {
   const repository = new InMemoryAlimentInfoRepository();
 
-  it('should find all aliments', async () => {
+  it("should find all aliments", async () => {
     const all = await repository.findAll();
     expect(all.length).toBeGreaterThan(300);
   });
 
-  it('should search case-insensitively', async () => {
-    const results = await repository.search('MANZANA');
+  it("should search case-insensitively", async () => {
+    const results = await repository.search("MANZANA");
     expect(results.length).toBeGreaterThan(0);
-    expect(results[0].name.toLowerCase()).toContain('manzana');
+    expect(results[0].name.toLowerCase()).toContain("manzana");
   });
 });
 ```

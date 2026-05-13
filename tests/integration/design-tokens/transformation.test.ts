@@ -101,13 +101,14 @@ describe("Style Dictionary Transformation", () => {
     const tailwindTokens = await import(TAILWIND_TOKENS_PATH);
     const tokens = tailwindTokens.default;
 
-    const lactealSource =
-      (sourceTokens as any)["category-colors"]["category-lacteal"].value;
+    const lactealSource = (sourceTokens as any)["category-colors"][
+      "category-lacteal"
+    ].value;
     const lactealTransformed = tokens["CategoryColorsCategoryLacteal"];
     expect(lactealTransformed.toLowerCase()).toBe(lactealSource.toLowerCase());
 
-    const offlineSource =
-      (sourceTokens as any)["state-colors"]["state-offline"].value;
+    const offlineSource = (sourceTokens as any)["state-colors"]["state-offline"]
+      .value;
     const offlineTransformed = tokens["StateColorsStateOffline"];
     expect(offlineTransformed.toLowerCase()).toBe(offlineSource.toLowerCase());
   });
@@ -135,9 +136,13 @@ describe("Style Dictionary Transformation", () => {
 
   it("css-variables.css contains color custom properties", () => {
     const cssContent = readFileSync(CSS_VARIABLES_PATH, "utf-8");
-    expect(cssContent.includes("--category-colors-category-lacteal")).toBe(true);
+    expect(cssContent.includes("--category-colors-category-lacteal")).toBe(
+      true,
+    );
     expect(cssContent.includes("--state-colors-state-offline")).toBe(true);
-    expect(cssContent.includes("--feedback-colors-feedback-success")).toBe(true);
+    expect(cssContent.includes("--feedback-colors-feedback-success")).toBe(
+      true,
+    );
   });
 
   it("Transformation preserves all 37 tokens", async () => {
@@ -156,7 +161,9 @@ describe("Style Dictionary Transformation", () => {
   it("feedback-warning transformed value is #BF360C", async () => {
     const tailwindTokens = await import(TAILWIND_TOKENS_PATH);
     const tokens = tailwindTokens.default;
-    expect(tokens["FeedbackColorsFeedbackWarning"].toUpperCase()).toBe("#BF360C");
+    expect(tokens["FeedbackColorsFeedbackWarning"].toUpperCase()).toBe(
+      "#BF360C",
+    );
   });
 
   it("space-5 transformed value is 2.5rem", async () => {

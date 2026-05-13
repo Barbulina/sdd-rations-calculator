@@ -5,7 +5,10 @@ interface MenuDetailSummaryProps {
   totalWeight: number;
 }
 
-export function MenuDetailSummary({ totalRations, totalWeight }: MenuDetailSummaryProps) {
+export function MenuDetailSummary({
+  totalRations,
+  totalWeight,
+}: MenuDetailSummaryProps) {
   return (
     <div className="flex gap-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg mt-4">
       <div>

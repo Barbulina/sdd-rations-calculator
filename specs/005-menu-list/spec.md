@@ -5,7 +5,7 @@
 **Status**: Draft  
 **Input**: User description: "Como usuario quiero ver la lista de menús que he creado en la página principal, con tarjeta que muestre nombre, tipo, fecha, total de raciones y peso. También quiero poder eliminar un menú de la lista. Y quiero un filtro para poder buscar por nombre de menu y un selector para filtrar por tipo de menú"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - View Saved Menus List (Priority: P1)
 
@@ -79,7 +79,7 @@ As a user, I want to filter menus by meal type so I can quickly see all menus of
 - What happens when a menu was created with incomplete data? The card degrades gracefully, showing all available data.
 - What happens when the user clicks delete very quickly multiple times? Only one deletion is processed.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -112,7 +112,7 @@ As a user, I want to filter menus by meal type so I can quickly see all menus of
 - Meal type labels are displayed in English: Breakfast, Lunch, Dinner, Snack
 - Filter state is not persisted between page visits (resets on navigation)
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

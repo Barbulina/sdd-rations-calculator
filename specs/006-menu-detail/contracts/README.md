@@ -23,17 +23,17 @@ app/components/MenuCard.tsx (MODIFIED)
 
 ## New Files
 
-| File | Purpose |
-|------|---------|
-| `src/application/hooks/useMenuDetail.ts` | Core hook: load, edit name/type, add/remove items |
-| `app/menu/[id]/page.tsx` | Detail page — renders all sub-components |
-| `app/components/menu-detail/MenuItemRow.tsx` | Single aliment row with remove button |
-| `app/components/menu-detail/MenuDetailSummary.tsx` | Totals display |
+| File                                               | Purpose                                           |
+| -------------------------------------------------- | ------------------------------------------------- |
+| `src/application/hooks/useMenuDetail.ts`           | Core hook: load, edit name/type, add/remove items |
+| `app/menu/[id]/page.tsx`                           | Detail page — renders all sub-components          |
+| `app/components/menu-detail/MenuItemRow.tsx`       | Single aliment row with remove button             |
+| `app/components/menu-detail/MenuDetailSummary.tsx` | Totals display                                    |
 
 ## Modified Files
 
-| File | Change |
-|------|--------|
+| File                          | Change                                  |
+| ----------------------------- | --------------------------------------- |
 | `app/components/MenuCard.tsx` | Add clickable link area to `/menu/[id]` |
 
 ## Key Decisions (see research.md)

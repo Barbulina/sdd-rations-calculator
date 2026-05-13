@@ -23,16 +23,16 @@ Enable users to create custom aliment entries to supplement the pre-defined cata
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Compliance | Notes |
-|-----------|------------|-------|
-| **I. Architectural Integrity** | ✅ PASS | Hexagonal architecture maintained: Domain models (`CustomAliment`) in `src/domain/models/`, repository interface in `src/domain/repositories/CustomAlimentRepository.ts`, infrastructure implementation in `src/infrastructure/repositories/LocalStorageCustomAlimentRepository.ts`, UI in `app/aliment-browser/create/`. Domain remains isolated. |
-| **II. Testing Strategy** | ✅ PASS | Builder pattern for `CustomAliment` entities in tests (follow existing `RationBuilder` pattern from 002). Decouples tests from constructor changes. Builder: `tests/unit/custom-aliments/CustomAlimentBuilder.ts`. |
-| **III. Test-First Methodology** | ✅ PASS | TDD workflow documented in research.md & quickstart.md. Vitest + Playwright installation/config complete. Red-Green-Refactor cycle enforced. Unit tests (domain), integration tests (repository), E2E tests (form flow). |
-| **IV. Design & Implementation** | ✅ PASS | All UI values from existing design tokens (`tokens.json`). Reuse category color tokens, spacing, typography. No hardcoded colors/spacing. Mobile-first responsive form following M3 guidelines. |
-| **V. Availability & Resilience** | ✅ PASS | Offline-first: localStorage via Repository Pattern. Form works offline. Custom aliments persist locally. No network dependency. Quota overflow handling implemented. |
-| **VI. Quality Assurance** | ✅ PASS | Integration tests for `CustomAlimentRepository` contract verify localStorage operations. E2E tests (Playwright) for create flow, validation, merge with catalog. Test coverage: domain validation, repository CRUD, critical user flows. |
+| Principle                        | Compliance | Notes                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **I. Architectural Integrity**   | ✅ PASS    | Hexagonal architecture maintained: Domain models (`CustomAliment`) in `src/domain/models/`, repository interface in `src/domain/repositories/CustomAlimentRepository.ts`, infrastructure implementation in `src/infrastructure/repositories/LocalStorageCustomAlimentRepository.ts`, UI in `app/aliment-browser/create/`. Domain remains isolated. |
+| **II. Testing Strategy**         | ✅ PASS    | Builder pattern for `CustomAliment` entities in tests (follow existing `RationBuilder` pattern from 002). Decouples tests from constructor changes. Builder: `tests/unit/custom-aliments/CustomAlimentBuilder.ts`.                                                                                                                                 |
+| **III. Test-First Methodology**  | ✅ PASS    | TDD workflow documented in research.md & quickstart.md. Vitest + Playwright installation/config complete. Red-Green-Refactor cycle enforced. Unit tests (domain), integration tests (repository), E2E tests (form flow).                                                                                                                           |
+| **IV. Design & Implementation**  | ✅ PASS    | All UI values from existing design tokens (`tokens.json`). Reuse category color tokens, spacing, typography. No hardcoded colors/spacing. Mobile-first responsive form following M3 guidelines.                                                                                                                                                    |
+| **V. Availability & Resilience** | ✅ PASS    | Offline-first: localStorage via Repository Pattern. Form works offline. Custom aliments persist locally. No network dependency. Quota overflow handling implemented.                                                                                                                                                                               |
+| **VI. Quality Assurance**        | ✅ PASS    | Integration tests for `CustomAlimentRepository` contract verify localStorage operations. E2E tests (Playwright) for create flow, validation, merge with catalog. Test coverage: domain validation, repository CRUD, critical user flows.                                                                                                           |
 
 **GATE STATUS**: ✅ ALL PASS - Ready to proceed to Phase 2 (tasks.md)
 
@@ -93,7 +93,7 @@ tests/
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |

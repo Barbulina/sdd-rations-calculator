@@ -11,6 +11,7 @@
 **Purpose**: Abstract base representing any design decision encoded as a reusable value
 
 **Properties**:
+
 - `name` (string, required): Semantic identifier in kebab-case (e.g., `"category-lacteal"`, `"space-3"`)
 - `value` (string, required): Actual CSS-compatible value (e.g., `"#6750A4"`, `"24px"`, `"1.5rem"`)
 - `type` (enum, required): Token classification - `"color"`, `"dimension"`, `"typography"`, `"fontFamily"`, `"fontWeight"`, `"lineHeight"`, `"letterSpacing"`
@@ -19,12 +20,14 @@
 - `description` (string, optional): Human-readable explanation of token purpose and usage context
 
 **Validation Rules**:
+
 - `name` must match pattern: `^[a-z]+(-[a-z0-9]+)*$` (lowercase kebab-case)
 - `value` must be non-empty string
 - `type` must be one of supported W3C Design Token types
 - If `theme` is provided, must be `"light"` or `"dark"`
 
 **Relationships**:
+
 - **Extended by**: ColorToken, TypographyToken, SpacingToken (specializations with additional properties)
 - **Grouped in**: TokenCollection (aggregates related tokens)
 
@@ -35,6 +38,7 @@
 **Purpose**: Represents color values with Material Design 3 mapping and accessibility validation
 
 **Additional Properties** (beyond DesignToken):
+
 - `hexValue` (string, required): Hex color code including # (e.g., `"#6750A4"`)
 - `rgbValue` (object, required): RGB representation
   - `r` (number, 0-255): Red channel
@@ -54,10 +58,12 @@
   - `passesAALarge` (boolean): Whether token meets WCAG AA large text (3:1)
 
 **Inherited from DesignToken**:
+
 - `type` is always `"color"`
 - `category` is one of: `"category-color"`, `"state-color"`, `"feedback-color"`
 
 **Validation Rules** (in addition to base):
+
 - `hexValue` must match pattern: `^#[0-9A-Fa-f]{6}$` (6-digit hex)
 - `rgbValue.r`, `rgbValue.g`, `rgbValue.b` must be integers 0-255
 - `hslValue.h` must be 0-360, `hslValue.s` and `hslValue.l` must be 0-100
@@ -65,6 +71,7 @@
 - `contrastValidation.passesAA` must be `true` for all tokens (constitutional requirement)
 
 **Example**:
+
 ```json
 {
   "name": "category-lacteal",
@@ -94,6 +101,7 @@
 **Purpose**: Represents typography scale values following Material Design 3 type system
 
 **Additional Properties**:
+
 - `fontSize` (string, required): Font size with unit (e.g., `"24px"`, `"1.5rem"`)
 - `lineHeight` (string, required): Line height (e.g., `"32px"`, `"1.33"`, `"2rem"`)
 - `letterSpacing` (string, required): Letter spacing (e.g., `"0"`, `"0.15px"`, `"0.01em"`)
@@ -104,11 +112,13 @@
   - Values: `"display-large"`, `"display-medium"`, `"display-small"`, `"headline-large"`, `"headline-medium"`, `"headline-small"`, `"title-large"`, `"title-medium"`, `"title-small"`, `"body-large"`, `"body-medium"`, `"body-small"`, `"label-large"`, `"label-medium"`, `"label-small"`
 
 **Inherited from DesignToken**:
+
 - `type` is always `"typography"`
 - `category` is always `"type-scale"`
 - `theme` is `null` (typography doesn't change between light/dark themes)
 
 **Validation Rules**:
+
 - `fontSize` must match pattern: `^\d+(\.\d+)?(px|rem|em)$`
 - `fontWeight` must be 100-900 (multiples of 100 preferred)
 - `lineHeight` can be unitless number, px, rem, or em
@@ -116,6 +126,7 @@
 - Font size for body text must be ≥ 14px (mobile) or 16px (desktop) per accessibility requirements
 
 **Example**:
+
 ```json
 {
   "name": "heading-1",
@@ -141,18 +152,21 @@
 **Purpose**: Represents spacing values adhering to 8px grid system
 
 **Additional Properties**:
+
 - `pixelValue` (number, required): Spacing in pixels (e.g., `24` for 24px)
 - `remValue` (number, required): Spacing in rem units (e.g., `1.5` for 1.5rem assuming 16px root)
 - `gridFactor` (number, required): Multiple of 8px base unit (e.g., `3` for 24px = 8px × 3)
 - `isTouchTarget` (boolean, computed): Whether value meets 44px minimum touch target (>= 44px)
 
 **Inherited from DesignToken**:
+
 - `type` is always `"dimension"`
 - `category` is always `"spacing"`
 - `theme` is `null` (spacing doesn't change between themes)
 - `value` contains the rem representation (e.g., `"1.5rem"`)
 
 **Validation Rules**:
+
 - `pixelValue` must be non-negative integer
 - `pixelValue` must be multiple of 8 (divisible by 8 without remainder) - EXCEPT space-0 which is 0
 - `remValue` must equal `pixelValue / 16` (assuming 16px root font size)
@@ -160,6 +174,7 @@
 - For interactive elements, `pixelValue` should be >= 40 to allow 44px with padding (noted in description)
 
 **Example**:
+
 ```json
 {
   "name": "space-3",
@@ -182,6 +197,7 @@
 **Purpose**: Groups related tokens for organizational and semantic purposes
 
 **Properties**:
+
 - `id` (string, required): Unique identifier for collection (e.g., `"category-colors"`, `"spacing-scale"`)
 - `name` (string, required): Human-readable collection name (e.g., `"Aliment Category Colors"`)
 - `description` (string, required): Purpose and usage guidelines for the collection
@@ -192,20 +208,28 @@
   - `owner` (string): Designer/team responsible for collection
 
 **Validation Rules**:
+
 - `tokens` array must contain at least 1 token
 - All tokens in `tokens` array must share the same `category`
 - `id` must be unique across all collections
 
 **Example**:
+
 ```json
 {
   "id": "category-colors",
   "name": "Aliment Category Colors",
   "description": "Semantic colors for seven aliment categories, mapped to M3 color roles",
   "tokens": [
-    { /* category-lacteal ColorToken */ },
-    { /* category-cereals-flours-pulses-legumes-tubers ColorToken */ },
-    { /* ... 5 more category ColorTokens */ }
+    {
+      /* category-lacteal ColorToken */
+    },
+    {
+      /* category-cereals-flours-pulses-legumes-tubers ColorToken */
+    },
+    {
+      /* ... 5 more category ColorTokens */
+    }
   ],
   "metadata": {
     "version": "1.0.0",
@@ -230,6 +254,7 @@
 - `category-others` - Miscellaneous
 
 **M3 Role Mapping** (from research):
+
 - Lacteal: `primary` (Purple)
 - Cereals/etc: `secondary` (Teal)
 - Fruits: `tertiary` (Orange)
@@ -284,11 +309,13 @@
 ### Color Token Themes
 
 Each ColorToken has two instances: one for light theme, one for dark theme. They share the same `name` but differ in:
+
 - `theme` property value
 - `hexValue` (different M3 tone)
 - `m3Tone` (light uses 40-50, dark uses 80-90)
 
 **Relationship**: Paired by name for theme switching. Example:
+
 - Light: `{ name: "category-lacteal", theme: "light", hexValue: "#6750A4", m3Tone: 40 }`
 - Dark: `{ name: "category-lacteal", theme: "dark", hexValue: "#D0BCFF", m3Tone: 80 }`
 
@@ -297,6 +324,7 @@ Each ColorToken has two instances: one for light theme, one for dark theme. They
 Typography tokens define text size; spacing tokens provide layout dimensions. **Touch target rule**:
 
 For any interactive text element:
+
 - Minimum height = `fontSize` + `space-3` (padding-top) + `space-3` (padding-bottom)
 - Example: `body-large` (16px) + 24px padding = 40px height + 4px for border/focus ring = 44px ✅
 
@@ -321,12 +349,12 @@ For any interactive text element:
 
 Tokens are transformed into Tailwind utility classes following these patterns:
 
-| Token Category | Tailwind Class Pattern | Example |
-|----------------|------------------------|---------|
-| Category Colors | `bg-category-<name>`, `text-category-<name>` | `bg-category-lacteal`, `text-category-fruits` |
-| State Colors | `bg-state-<name>`, `text-state-<name>` | `bg-state-offline`, `border-state-syncing` |
-| Feedback Colors | `bg-feedback-<type>`, `text-feedback-<type>` | `bg-feedback-error`, `text-feedback-success` |
-| Typography | `text-heading-<level>`, `text-body-<size>`, `text-label-<size>` | `text-heading-1`, `text-body-medium` |
-| Spacing | `p-space-<factor>`, `m-space-<factor>`, `gap-space-<factor>` | `p-space-3`, `m-space-2`, `gap-space-4` |
+| Token Category  | Tailwind Class Pattern                                          | Example                                       |
+| --------------- | --------------------------------------------------------------- | --------------------------------------------- |
+| Category Colors | `bg-category-<name>`, `text-category-<name>`                    | `bg-category-lacteal`, `text-category-fruits` |
+| State Colors    | `bg-state-<name>`, `text-state-<name>`                          | `bg-state-offline`, `border-state-syncing`    |
+| Feedback Colors | `bg-feedback-<type>`, `text-feedback-<type>`                    | `bg-feedback-error`, `text-feedback-success`  |
+| Typography      | `text-heading-<level>`, `text-body-<size>`, `text-label-<size>` | `text-heading-1`, `text-body-medium`          |
+| Spacing         | `p-space-<factor>`, `m-space-<factor>`, `gap-space-<factor>`    | `p-space-3`, `m-space-2`, `gap-space-4`       |
 
 All classes automatically respect theme (light/dark) via CSS custom properties—no manual theme switching required in components.

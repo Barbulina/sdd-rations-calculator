@@ -4,15 +4,15 @@
  */
 
 export default {
-  source: ['src/infrastructure/design-tokens/tokens.json'],
+  source: ["src/infrastructure/design-tokens/tokens.json"],
   platforms: {
     css: {
-      transformGroup: 'css',
-      buildPath: 'src/infrastructure/design-tokens/',
+      transformGroup: "css",
+      buildPath: "src/infrastructure/design-tokens/",
       files: [
         {
-          destination: 'css-variables.css',
-          format: 'css/variables',
+          destination: "css-variables.css",
+          format: "css/variables",
           options: {
             outputReferences: true,
           },
@@ -20,12 +20,12 @@ export default {
       ],
     },
     js: {
-      transformGroup: 'js',
-      buildPath: 'src/infrastructure/design-tokens/',
+      transformGroup: "js",
+      buildPath: "src/infrastructure/design-tokens/",
       files: [
         {
-          destination: 'tailwind-tokens.cjs',
-          format: 'javascript/module-flat',
+          destination: "tailwind-tokens.cjs",
+          format: "javascript/module-flat",
         },
       ],
     },

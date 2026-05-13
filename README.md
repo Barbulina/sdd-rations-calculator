@@ -11,12 +11,14 @@ Offline-first Progressive Web App for calculating and managing food rations with
 ## Features
 
 ### ✅ Design Token System (001)
+
 - Material Design 3 color system with 7 category colors
 - WCAG AA contrast compliance
 - Light/dark theme support
 - Typography and spacing tokens
 
 ### ✅ Ration Management (002)
+
 - **Create Rations**: Form-based data entry with validation
 - **View Rations**: List view with infinite scroll (10 items per batch)
 - **Category Colors**: Visual differentiation using design tokens
@@ -28,7 +30,7 @@ Offline-first Progressive Web App for calculating and managing food rations with
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm
 
 ### Installation
@@ -79,17 +81,13 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 - ✅ **Category Colors** (7 aliment categories)
   - Lacteal, Cereals/Flours/Pulses/Legumes/Tubers, Fruits, Vegetables, Oily/Dry Fruits, Drinks, Others
   - Material Design 3 color roles with light/dark theme support
-  
 - ✅ **State Indicators** (4 states)
   - Offline, Syncing, Sync Error, Online
-  
 - ✅ **Feedback States** (4 types)
   - Success, Warning, Error, Info
-  
 - ✅ **Typography Scale** (12 tokens)
   - Headings 1-6, Body Large/Medium/Small, Label Large/Medium/Small
   - Material Design 3 type scale
-  
 - ✅ **Spacing Scale** (10 tokens)
   - 8px grid system (0px to 96px)
   - Touch target compliant (44px minimum)

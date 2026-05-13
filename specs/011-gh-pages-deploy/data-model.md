@@ -13,11 +13,11 @@ All data in the app continues to be stored in **browser localStorage** at runtim
 
 The following configuration artifacts are created/modified:
 
-| Artifact | Type | Location | Purpose |
-|---|---|---|---|
-| `deploy.yml` | GitHub Actions workflow | `.github/workflows/deploy.yml` | CI/CD pipeline definition |
-| `next.config.ts` | Build configuration | `next.config.ts` (project root) | Static export settings |
-| `page.tsx` (menu detail) | Next.js page | `app/menu/[id]/page.tsx` | `generateStaticParams` addition for static export compatibility |
+| Artifact                 | Type                    | Location                        | Purpose                                                         |
+| ------------------------ | ----------------------- | ------------------------------- | --------------------------------------------------------------- |
+| `deploy.yml`             | GitHub Actions workflow | `.github/workflows/deploy.yml`  | CI/CD pipeline definition                                       |
+| `next.config.ts`         | Build configuration     | `next.config.ts` (project root) | Static export settings                                          |
+| `page.tsx` (menu detail) | Next.js page            | `app/menu/[id]/page.tsx`        | `generateStaticParams` addition for static export compatibility |
 
 ## `next.config.ts` Configuration Delta
 
@@ -29,11 +29,11 @@ const nextConfig = {
 
 // After
 const nextConfig = {
-  output: 'export',                          // NEW: static export mode
-  basePath: '/sdd-rations-calculator',       // NEW: GitHub Pages sub-path
-  trailingSlash: true,                       // NEW: /route/ → route/index.html
-  images: { unoptimized: true },             // NEW: disable server-side image optimization
-  experimental: { turbo: {} },              // UNCHANGED
+  output: "export", // NEW: static export mode
+  basePath: "/sdd-rations-calculator", // NEW: GitHub Pages sub-path
+  trailingSlash: true, // NEW: /route/ → route/index.html
+  images: { unoptimized: true }, // NEW: disable server-side image optimization
+  experimental: { turbo: {} }, // UNCHANGED
 };
 ```
 
