@@ -1,10 +1,9 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
 
 interface WeightInputDialogProps {
   isOpen: boolean;
   alimentName: string;
+  gramsToCarbohydrate?: number;
   onAdd: (weight: number) => void;
   onCancel: () => void;
 }
@@ -12,6 +11,7 @@ interface WeightInputDialogProps {
 export function WeightInputDialog({
   isOpen,
   alimentName,
+  gramsToCarbohydrate,
   onAdd,
   onCancel,
 }: WeightInputDialogProps) {
@@ -20,14 +20,12 @@ export function WeightInputDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-focus input when dialog opens
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isOpen]);
 
-  // Reset state when dialog opens
   useEffect(() => {
     if (isOpen) {
       setWeight("");
@@ -36,7 +34,6 @@ export function WeightInputDialog({
     }
   }, [isOpen]);
 
-  // Validate weight
   const validateWeight = (value: string): boolean => {
     const numValue = parseFloat(value);
 
@@ -54,86 +51,82 @@ export function WeightInputDialog({
     return true;
   };
 
-  // Handle weight change
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setWeight(value);
-    validateWeight(value);
+    if (value) validateWeight(value);
+    else setError("");
   };
 
-  // Handle submit
   const handleSubmit = () => {
-    if (isSubmitting) return; // Prevent double submit
+    if (isSubmitting) return;
 
     if (validateWeight(weight)) {
       setIsSubmitting(true);
       const numValue = parseFloat(weight);
       onAdd(numValue);
-      // Note: Dialog will be closed by parent, which resets isSubmitting via useEffect
     }
   };
 
-  // Handle Enter key on input only
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      e.stopPropagation(); // Prevent event bubbling
       handleSubmit();
     } else if (e.key === "Escape") {
       e.preventDefault();
-      e.stopPropagation();
       onCancel();
     }
   };
 
-  // Handle backdrop click
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onCancel();
     }
   };
 
-  const isValid = weight !== "" && !error;
+  const isValid = weight !== "" && !error && parseFloat(weight) > 0;
+  const numWeight = parseFloat(weight);
+  const previewRations =
+    !isNaN(numWeight) && gramsToCarbohydrate && gramsToCarbohydrate > 0
+      ? numWeight / gramsToCarbohydrate
+      : null;
 
   if (!isOpen) return null;
 
   return (
     <div
       data-testid="dialog-backdrop"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
       onClick={handleBackdropClick}
     >
       <div
         role="dialog"
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md mx-4"
+        className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 w-full max-w-md mx-4 animate-fade-in-scale"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => {
           if (e.key === "Escape") onCancel();
         }}
       >
-        {/* Title */}
         <h2
           id="dialog-title"
-          className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100"
+          className="text-lg font-semibold text-gray-900 dark:text-gray-100"
         >
           Add {alimentName}
         </h2>
 
-        {/* Description */}
         <p
           id="dialog-description"
-          className="text-sm text-gray-600 dark:text-gray-400 mb-4"
+          className="text-sm text-gray-500 dark:text-gray-400 mt-1 mb-5"
         >
           Enter the weight in grams (1-10000g)
         </p>
 
-        {/* Weight Input */}
         <div className="mb-4">
           <label
             htmlFor="weight-input"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
             Weight (grams)
           </label>
@@ -146,26 +139,36 @@ export function WeightInputDialog({
             value={weight}
             onChange={handleWeightChange}
             onKeyDown={handleInputKeyDown}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+            className={`w-full px-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-lg ${
               error
                 ? "border-red-500 focus:ring-red-500"
                 : "border-gray-300 dark:border-gray-600 focus:ring-blue-500"
-            } bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100`}
+            }`}
             placeholder="150"
+            inputMode="numeric"
           />
           {error && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">
               {error}
             </p>
           )}
+
+          {previewRations !== null && previewRations > 0 && (
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              ≈{" "}
+              <span className="font-semibold text-gray-900 dark:text-gray-100">
+                {previewRations.toFixed(2)}
+              </span>{" "}
+              rations
+            </p>
+          )}
         </div>
 
-        {/* Buttons */}
         <div className="flex gap-3 justify-end">
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition font-medium"
+            className="px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition active:scale-[0.98]"
           >
             Cancel
           </button>
@@ -173,13 +176,13 @@ export function WeightInputDialog({
             type="button"
             onClick={handleSubmit}
             disabled={!isValid || isSubmitting}
-            className={`px-4 py-2 rounded-md font-medium transition ${
+            className={`px-4 py-2.5 text-sm font-medium rounded-lg transition active:scale-[0.98] ${
               isValid && !isSubmitting
                 ? "bg-blue-500 text-white hover:bg-blue-600"
                 : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed"
             }`}
           >
-            {isSubmitting ? "Adding..." : "Add"}
+            {isSubmitting ? "Adding..." : "Add to menu"}
           </button>
         </div>
       </div>

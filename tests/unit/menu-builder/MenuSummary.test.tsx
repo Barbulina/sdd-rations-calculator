@@ -7,13 +7,13 @@ describe("MenuSummary", () => {
     it("should render summary component", () => {
       render(<MenuSummary totalWeight={150} totalRations={1.0} />);
 
-      expect(screen.getByText(/total/i)).toBeInTheDocument();
+      expect(screen.getByText("Total")).toBeInTheDocument();
     });
 
-    it('should display "Total" or "Totals" heading', () => {
+    it('should display "Total" heading', () => {
       render(<MenuSummary totalWeight={150} totalRations={1.0} />);
 
-      expect(screen.getByText(/total/i)).toBeInTheDocument();
+      expect(screen.getByText("Total")).toBeInTheDocument();
     });
   });
 
@@ -62,8 +62,7 @@ describe("MenuSummary", () => {
     it('should display rations with "rations" label', () => {
       render(<MenuSummary totalWeight={150} totalRations={1.0} />);
 
-      const rationsText = screen.getAllByText(/rations?/i);
-      expect(rationsText.length).toBeGreaterThan(0);
+      expect(screen.getByText(/total rations/i)).toBeInTheDocument();
     });
 
     it("should handle decimal rations correctly", () => {
@@ -81,8 +80,7 @@ describe("MenuSummary", () => {
     it("should have label for rations", () => {
       render(<MenuSummary totalWeight={150} totalRations={1.0} />);
 
-      const rationsLabel = screen.getAllByText(/rations?/i);
-      expect(rationsLabel.length).toBeGreaterThan(0);
+      expect(screen.getByText(/total rations/i)).toBeInTheDocument();
     });
   });
 

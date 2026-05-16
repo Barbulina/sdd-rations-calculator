@@ -68,14 +68,14 @@ describe("AutocompleteSearch", () => {
     it("should render search input", () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       expect(searchInput).toBeInTheDocument();
     });
 
     it("should render search input with correct type", () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       expect(searchInput).toHaveAttribute("type", "text");
     });
 
@@ -97,7 +97,7 @@ describe("AutocompleteSearch", () => {
         await Promise.resolve();
       });
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
 
       // Type quickly
       fireEvent.change(searchInput, { target: { value: "man" } });
@@ -123,7 +123,7 @@ describe("AutocompleteSearch", () => {
         await Promise.resolve();
       });
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
 
       // Type first letter
       fireEvent.change(searchInput, { target: { value: "m" } });
@@ -156,7 +156,7 @@ describe("AutocompleteSearch", () => {
     it("should filter aliments by name (case-insensitive)", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -170,7 +170,7 @@ describe("AutocompleteSearch", () => {
     it("should filter by partial name match", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "man");
 
       await waitFor(() => {
@@ -181,7 +181,7 @@ describe("AutocompleteSearch", () => {
     it("should be case-insensitive", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "MANZANA");
 
       await waitFor(() => {
@@ -192,7 +192,7 @@ describe("AutocompleteSearch", () => {
     it("should show multiple matching results", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "a"); // All aliments contain 'a'
 
       await waitFor(() => {
@@ -207,7 +207,7 @@ describe("AutocompleteSearch", () => {
     it("should highlight first item on ArrowDown", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "a");
 
       await waitFor(() => {
@@ -225,7 +225,7 @@ describe("AutocompleteSearch", () => {
     it("should move down on multiple ArrowDown presses", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "a");
 
       await waitFor(() => {
@@ -244,7 +244,7 @@ describe("AutocompleteSearch", () => {
     it("should move up on ArrowUp", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "a");
 
       await waitFor(() => {
@@ -265,7 +265,7 @@ describe("AutocompleteSearch", () => {
     it("should wrap to last item on ArrowUp from first", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "a");
 
       await waitFor(() => {
@@ -284,7 +284,7 @@ describe("AutocompleteSearch", () => {
     it("should wrap to first item on ArrowDown from last", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "a");
 
       await waitFor(() => {
@@ -307,7 +307,7 @@ describe("AutocompleteSearch", () => {
     it("should select highlighted item on Enter", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -327,7 +327,7 @@ describe("AutocompleteSearch", () => {
     it("should close dropdown on Escape", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -346,7 +346,7 @@ describe("AutocompleteSearch", () => {
     it("should display aliment name", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -357,18 +357,18 @@ describe("AutocompleteSearch", () => {
     it("should display grams to carbohydrate", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
-        expect(screen.getByText(/150g/)).toBeInTheDocument();
+        expect(screen.getByText(/150g \/ ration/)).toBeInTheDocument();
       });
     });
 
     it("should display glycemic index", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -379,7 +379,7 @@ describe("AutocompleteSearch", () => {
     it("should display category badge", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -390,7 +390,7 @@ describe("AutocompleteSearch", () => {
     it("should display different category for different aliment", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "pan");
 
       await waitFor(() => {
@@ -403,7 +403,7 @@ describe("AutocompleteSearch", () => {
     it("should call onSelectAliment when suggestion is clicked", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -425,7 +425,7 @@ describe("AutocompleteSearch", () => {
     it("should close dropdown after selection", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -444,7 +444,7 @@ describe("AutocompleteSearch", () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
       const searchInput = screen.getByPlaceholderText(
-        /buscar alimento/i,
+        /search foods/i,
       ) as HTMLInputElement;
       await userEvent.type(searchInput, "manzana");
 
@@ -465,40 +465,34 @@ describe("AutocompleteSearch", () => {
     it('should show "No aliments found" when no results', async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "xyz123notfound");
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/no se encontraron alimentos/i),
-        ).toBeInTheDocument();
+        expect(screen.getByText(/no foods found/i)).toBeInTheDocument();
       });
     });
 
     it("should not show empty state when results exist", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
         expect(screen.getByText("Manzana Golden")).toBeInTheDocument();
       });
 
-      expect(
-        screen.queryByText(/no se encontraron alimentos/i),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/no foods found/i)).not.toBeInTheDocument();
     });
 
     it("should not show empty state when search is empty", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       expect(searchInput).toHaveValue("");
 
-      expect(
-        screen.queryByText(/no se encontraron alimentos/i),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/no foods found/i)).not.toBeInTheDocument();
     });
   });
 
@@ -506,28 +500,28 @@ describe("AutocompleteSearch", () => {
     it("should have combobox role on input", () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       expect(searchInput).toHaveAttribute("role", "combobox");
     });
 
     it("should have aria-autocomplete attribute", () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       expect(searchInput).toHaveAttribute("aria-autocomplete", "list");
     });
 
     it("should have aria-expanded=false when closed", () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       expect(searchInput).toHaveAttribute("aria-expanded", "false");
     });
 
     it("should have aria-expanded=true when open", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
@@ -538,7 +532,7 @@ describe("AutocompleteSearch", () => {
     it("should have aria-activedescendant when item is highlighted", async () => {
       render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
 
-      const searchInput = screen.getByPlaceholderText(/buscar alimento/i);
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
       await userEvent.type(searchInput, "manzana");
 
       await waitFor(() => {
