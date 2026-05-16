@@ -168,6 +168,22 @@ describe("useMenuList — filter logic (T003)", () => {
     expect(result.current.filteredMenus[0].id).toBe("id-lunch");
   });
 
+  it("nameFilter is accent-insensitive", async () => {
+    const accionMenu = new MenuBuilder()
+      .withId("id-accion")
+      .withName("Acción Menu")
+      .withType(MenuType.BREAKFAST)
+      .withCreatedAt(new Date("2026-05-10T08:00:00.000Z"))
+      .build();
+    vi.mocked(mockRepository.getAll).mockResolvedValue([accionMenu]);
+
+    const { result } = renderHook(() => useMenuList(), { wrapper });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    act(() => result.current.setNameFilter("accion"));
+    expect(result.current.filteredMenus).toHaveLength(1);
+    expect(result.current.filteredMenus[0].id).toBe("id-accion");
+  });
+
   it("nameFilter empty string shows all menus", async () => {
     const { result } = renderHook(() => useMenuList(), { wrapper });
     await waitFor(() => expect(result.current.isLoading).toBe(false));

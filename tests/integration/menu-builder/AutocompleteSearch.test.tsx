@@ -201,6 +201,17 @@ describe("AutocompleteSearch", () => {
         expect(screen.getByText("Pan integral")).toBeInTheDocument();
       });
     });
+
+    it("should find aliments despite missing accents in query", async () => {
+      render(<AutocompleteSearch onSelectAliment={onSelectAliment} />);
+
+      const searchInput = screen.getByPlaceholderText(/search foods/i);
+      await userEvent.type(searchInput, "platano");
+
+      await waitFor(() => {
+        expect(screen.getByText("Plátano")).toBeInTheDocument();
+      });
+    });
   });
 
   describe("keyboard navigation", () => {

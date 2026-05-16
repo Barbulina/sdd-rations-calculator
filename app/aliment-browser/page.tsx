@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { AlimentInfo } from "@/src/domain/models/AlimentInfo";
 import { RationsType } from "@/src/domain/models/RationsType";
 import { useCompositeAliments } from "@/src/application/hooks/useCompositeAliments";
+import { searchByName } from "@/src/application/utils/search";
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
 import { PageHeader } from "@/app/components/PageHeader";
 import { Input } from "@/app/components/ui/Input";
@@ -52,8 +53,7 @@ export default function AlimentBrowserPage() {
 
     // Filter by search query
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      results = results.filter((a) => a.name.toLowerCase().includes(query));
+      results = searchByName(results, searchQuery);
     }
 
     setFilteredAliments(results);
