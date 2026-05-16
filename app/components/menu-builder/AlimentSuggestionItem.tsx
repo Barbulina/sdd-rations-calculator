@@ -1,12 +1,15 @@
-"use client";
-
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
+import {
+  getCategoryColorVar,
+  getCategoryLabel,
+} from "@/app/lib/categoryColors";
 
 interface AlimentSuggestionItemProps {
   aliment: UnifiedAliment;
   isHighlighted: boolean;
   onClick: () => void;
   id: string;
+  style?: React.CSSProperties;
 }
 
 export function AlimentSuggestionItem({
@@ -14,16 +17,11 @@ export function AlimentSuggestionItem({
   isHighlighted,
   onClick,
   id,
+  style,
 }: AlimentSuggestionItemProps) {
-  // Check if it's a custom aliment
   const isCustom = "isCustom" in aliment && aliment.isCustom;
-
-  // Format category name (remove underscores and capitalize)
-  const categoryName = aliment.type
-    .replace(/_/g, " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const categoryColor = getCategoryColorVar(aliment.type);
+  const categoryLabel = getCategoryLabel(aliment.type);
 
   return (
     <li
@@ -31,13 +29,19 @@ export function AlimentSuggestionItem({
       role="option"
       aria-selected={isHighlighted}
       onClick={onClick}
-      className={`px-4 py-3 cursor-pointer border-b border-gray-200 dark:border-gray-700 last:border-b-0 ${
+      style={style}
+      className={`px-4 py-3 cursor-pointer border-b border-gray-200 dark:border-gray-700 last:border-b-0 transition-all duration-150 ${
         isHighlighted
           ? "bg-blue-50 dark:bg-blue-900/30"
           : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
       }`}
     >
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center gap-3">
+        <span
+          className="w-2.5 h-2.5 rounded-full shrink-0"
+          style={{ backgroundColor: categoryColor }}
+          aria-hidden="true"
+        />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
@@ -49,18 +53,22 @@ export function AlimentSuggestionItem({
               </span>
             )}
           </div>
-          <div className="flex items-center gap-3 mt-1 text-sm text-gray-600 dark:text-gray-400">
-            <span>{aliment.gramsToCarbohydrate}g</span>
+          <div className="flex items-center gap-3 mt-0.5 text-sm text-gray-500 dark:text-gray-400">
+            <span>{aliment.gramsToCarbohydrate}g / ration</span>
             {aliment.bloodGlucoseIndex !== undefined && (
               <span>GI: {aliment.bloodGlucoseIndex}</span>
             )}
           </div>
         </div>
-        <div className="flex-shrink-0">
-          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 whitespace-nowrap">
-            {categoryName}
-          </span>
-        </div>
+        <span
+          className="shrink-0 inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full whitespace-nowrap"
+          style={{
+            backgroundColor: `${categoryColor}18`,
+            color: categoryColor,
+          }}
+        >
+          {categoryLabel}
+        </span>
       </div>
     </li>
   );

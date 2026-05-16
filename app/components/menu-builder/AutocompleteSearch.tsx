@@ -135,7 +135,7 @@ export function AutocompleteSearch({
         value={searchTerm}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        placeholder="Buscar alimento..."
+        placeholder="Search foods..."
         role="combobox"
         aria-autocomplete="list"
         aria-expanded={isOpen}
@@ -148,7 +148,7 @@ export function AutocompleteSearch({
       {isOpen && (
         <ul
           role="listbox"
-          className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+          className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto animate-slide-down"
         >
           {filteredAliments.length > 0 ? (
             filteredAliments.map((aliment, index) => (
@@ -158,11 +158,12 @@ export function AutocompleteSearch({
                 isHighlighted={index === highlightedIndex}
                 onClick={() => handleSelect(aliment)}
                 id={`suggestion-${index}`}
+                style={{ animationDelay: `${index * 30}ms` }}
               />
             ))
           ) : (
             <li className="px-4 py-3 text-gray-500 dark:text-gray-400 text-center">
-              No se encontraron alimentos
+              No foods found
             </li>
           )}
         </ul>

@@ -54,32 +54,32 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
     null,
   );
 
-  // ── Loading ────────────────────────────────────────────────────────────
   if (isLoading) {
     return (
-      <main className="min-h-screen p-4">
-        <div className="container mx-auto max-w-2xl">
+      <div className="min-h-screen">
+        <PageHeader title="Menu Detail" backHref="/" />
+        <main className="max-w-2xl mx-auto px-4 pt-6 pb-8">
           <div className="text-center py-16 text-gray-500 dark:text-gray-400">
             Loading menu...
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     );
   }
 
-  // ── Not found ──────────────────────────────────────────────────────────
   if (notFound || !menu) {
     return (
-      <main className="min-h-screen p-4">
-        <div className="container mx-auto max-w-2xl text-center py-16">
+      <div className="min-h-screen">
+        <PageHeader title="Menu Detail" backHref="/" />
+        <main className="max-w-2xl mx-auto px-4 pt-6 pb-8 text-center py-16">
           <p className="text-gray-500 dark:text-gray-400 mb-4">
             Menu not found.
           </p>
           <Link href="/" className="text-blue-500 hover:underline">
-            ← Back to My Menus
+            &larr; Back to My Menus
           </Link>
-        </div>
-      </main>
+        </main>
+      </div>
     );
   }
 
@@ -90,24 +90,22 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
   });
 
   return (
-    <main className="min-h-screen p-4">
-      <div className="container mx-auto max-w-2xl">
-        <PageHeader title="Menu Detail" backHref="/" />
+    <div className="min-h-screen">
+      <PageHeader title="Menu Detail" backHref="/" />
 
-        {/* Error */}
+      <main className="max-w-2xl mx-auto px-4 pt-6 pb-8">
         {error && (
-          <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
+          <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-sm">
             {error}
           </div>
         )}
 
-        {/* Edit: Name + Type */}
-        <section className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4 mb-4">
-          <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">
+        {/* Edit Menu Info */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 mb-4">
+          <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
             Created: {formattedDate}
           </p>
 
-          {/* Name */}
           <div className="mb-3">
             <label
               htmlFor="menu-name"
@@ -130,7 +128,6 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
             )}
           </div>
 
-          {/* Type */}
           <div className="mb-4">
             <label
               htmlFor="menu-type"
@@ -152,15 +149,44 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
           </div>
 
           <Button onClick={saveChanges} disabled={isSaving}>
-            {isSaving ? "Saving..." : "Save changes"}
+            {isSaving ? (
+              <span className="flex items-center gap-2">
+                <svg
+                  className="animate-spin h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                Saving...
+              </span>
+            ) : (
+              "Save changes"
+            )}
           </Button>
-        </section>
+        </div>
 
-        {/* Aliments list */}
-        <section className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4 mb-4">
-          <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-3">
+        {/* Aliments List */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 mb-4">
+          <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
             Aliments
           </h2>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">
+            {menu.items.length} item{menu.items.length !== 1 ? "s" : ""}
+          </p>
           {menu.items.map((item) => (
             <MenuItemRow
               key={item.id}
@@ -169,17 +195,18 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
               isLast={menu.items.length === 1}
             />
           ))}
-        </section>
+        </div>
 
         {/* Summary */}
         <MenuDetailSummary
           totalRations={menu.totalRations}
           totalWeight={menu.totalWeight}
+          items={menu.items}
         />
 
-        {/* Add aliment */}
-        <section className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4 mb-4">
-          <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-3">
+        {/* Add Aliment */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 mb-4">
+          <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
             Add Aliment
           </h2>
           <AutocompleteSearch
@@ -187,7 +214,7 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
               setPendingAliment(aliment)
             }
           />
-        </section>
+        </div>
 
         <WeightInputDialog
           isOpen={!!pendingAliment}
@@ -198,6 +225,7 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
                 : ""
               : ""
           }
+          gramsToCarbohydrate={pendingAliment?.gramsToCarbohydrate}
           onAdd={(weightGrams: number) => {
             if (!pendingAliment) return;
             const item: MenuItem = {
@@ -211,7 +239,7 @@ export default function MenuDetailClient({ params }: MenuDetailClientProps) {
           }}
           onCancel={() => setPendingAliment(null)}
         />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }

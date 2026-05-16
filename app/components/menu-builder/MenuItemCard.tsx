@@ -1,6 +1,8 @@
-"use client";
-
 import type { MenuItem } from "@/specs/004-menu-builder/contracts/types";
+import {
+  getCategoryColorVar,
+  getCategoryLabel,
+} from "@/app/lib/categoryColors";
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -14,13 +16,8 @@ export function MenuItemCard({
   onRemove,
 }: MenuItemCardProps) {
   const isCustom = "isCustom" in item.aliment && item.aliment.isCustom;
-
-  // Format category name
-  const categoryName = item.aliment.type
-    .replace(/_/g, " ")
-    .split(" ")
-    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const categoryColor = getCategoryColorVar(item.aliment.type);
+  const categoryLabel = getCategoryLabel(item.aliment.type);
 
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -32,20 +29,31 @@ export function MenuItemCard({
   return (
     <div
       data-testid={`menu-item-card-${item.id}`}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 transition-all duration-200 hover:shadow-md"
+      style={{ borderLeftColor: categoryColor, borderLeftWidth: 4 }}
     >
-      {/* Header */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">
             {item.aliment.name}
           </h3>
           <div className="flex items-center gap-2 mt-1">
-            <span className="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200">
-              {categoryName}
+            <span
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full"
+              style={{
+                backgroundColor: `${categoryColor}18`,
+                color: categoryColor,
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ backgroundColor: categoryColor }}
+                aria-hidden="true"
+              />
+              {categoryLabel}
             </span>
             {isCustom && (
-              <span className="inline-block px-2 py-0.5 text-xs font-medium rounded bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200">
+              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200">
                 Custom
               </span>
             )}
@@ -54,7 +62,7 @@ export function MenuItemCard({
         <button
           onClick={() => onRemove(item.id)}
           aria-label={`Remove ${item.aliment.name}`}
-          className="ml-2 p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition"
+          className="ml-2 p-1.5 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,17 +81,16 @@ export function MenuItemCard({
         </button>
       </div>
 
-      {/* Aliment Data */}
-      <div className="grid grid-cols-2 gap-3 mb-3 text-sm">
+      <div className="grid grid-cols-2 gap-3 mb-3 text-sm text-gray-500 dark:text-gray-400">
         <div>
-          <span className="text-gray-600 dark:text-gray-400">1 ration = </span>
+          1 ration ={" "}
           <span className="font-medium text-gray-900 dark:text-gray-100">
             {item.aliment.gramsToCarbohydrate}g
           </span>
         </div>
         {item.aliment.bloodGlucoseIndex !== undefined && (
           <div>
-            <span className="text-gray-600 dark:text-gray-400">GI: </span>
+            GI:{" "}
             <span className="font-medium text-gray-900 dark:text-gray-100">
               {item.aliment.bloodGlucoseIndex}
             </span>
@@ -91,12 +98,11 @@ export function MenuItemCard({
         )}
       </div>
 
-      {/* Weight Input and Rations */}
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label
             htmlFor={`weight-${item.id}`}
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1"
           >
             Weight (g)
           </label>
@@ -107,19 +113,16 @@ export function MenuItemCard({
             max="10000"
             value={item.weightGrams}
             onChange={handleWeightChange}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           />
         </div>
         <div>
-          <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <span className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
             Rations
           </span>
-          <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-md">
+          <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg">
             <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               {item.rations.toFixed(2)}
-            </span>
-            <span className="text-sm text-gray-600 dark:text-gray-400 ml-1">
-              rations
             </span>
           </div>
         </div>

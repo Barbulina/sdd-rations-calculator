@@ -57,9 +57,7 @@ describe("WeightInputDialog", () => {
         />,
       );
 
-      expect(
-        screen.getByRole("button", { name: /add|añadir/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
     });
 
     it("should render Cancel button", () => {
@@ -106,7 +104,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "0");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       expect(addButton).toBeDisabled();
     });
 
@@ -124,7 +122,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "-10");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       expect(addButton).toBeDisabled();
     });
 
@@ -142,7 +140,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "10001");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       expect(addButton).toBeDisabled();
     });
 
@@ -160,7 +158,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "1");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       expect(addButton).not.toBeDisabled();
     });
 
@@ -178,7 +176,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "10000");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       expect(addButton).not.toBeDisabled();
     });
 
@@ -196,7 +194,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "150");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       expect(addButton).not.toBeDisabled();
     });
 
@@ -258,7 +256,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "150");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       fireEvent.click(addButton);
 
       expect(onAdd).toHaveBeenCalledTimes(1);
@@ -280,7 +278,7 @@ describe("WeightInputDialog", () => {
       await userEvent.clear(input);
       await userEvent.type(input, "0");
 
-      const addButton = screen.getByRole("button", { name: /add|añadir/i });
+      const addButton = screen.getByRole("button", { name: /add/i });
       fireEvent.click(addButton);
 
       expect(onAdd).not.toHaveBeenCalled();
