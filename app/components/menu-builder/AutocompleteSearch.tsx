@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useCompositeAliments } from "@/src/application/hooks/useCompositeAliments";
+import { searchByName } from "@/src/application/utils/search";
 import type { UnifiedAliment } from "@/src/domain/repositories/CompositeAlimentRepository";
 import { AlimentSuggestionItem } from "./AlimentSuggestionItem";
 
@@ -57,9 +58,7 @@ export function AutocompleteSearch({
 
   // Filter aliments based on debounced search term
   const filteredAliments = debouncedSearchTerm.trim()
-    ? aliments.filter((aliment) =>
-        aliment.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
-      )
+    ? searchByName(aliments, debouncedSearchTerm)
     : [];
 
   // Show dropdown when there are filtered results

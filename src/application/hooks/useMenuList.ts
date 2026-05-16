@@ -9,6 +9,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useMenuRepository } from "@/src/application/contexts/MenuRepositoryContext";
+import { searchByName } from "@/src/application/utils/search";
 import type { Menu } from "@/specs/004-menu-builder/contracts/types";
 import { MenuType } from "@/src/domain/models/MenuType";
 
@@ -45,13 +46,10 @@ export function useMenuList() {
 
   // T006: client-side filtered list (AND logic)
   const filteredMenus = useMemo(() => {
-    return menus
-      .filter(
-        (m) =>
-          nameFilter === "" ||
-          m.name.toLowerCase().includes(nameFilter.toLowerCase()),
-      )
-      .filter((m) => typeFilter === null || (m.type as unknown) === typeFilter);
+    const byName = nameFilter.trim() ? searchByName(menus, nameFilter) : menus;
+    return byName.filter(
+      (m) => typeFilter === null || (m.type as unknown) === typeFilter,
+    );
   }, [menus, nameFilter, typeFilter]);
 
   // T007: delete with confirmation guard
